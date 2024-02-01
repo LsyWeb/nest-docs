@@ -4,27 +4,27 @@ post 请求的数据是通过 @Body 装饰器来取，并且要有一个 dto cla
 
 （dto 是 data transfer object，数据传输对象的意思）
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-1.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第20章-2.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-2.png)
 
 我们用 postman 来发个 post 请求。
 
 (postman 在这里下载： <https://www.postman.com/downloads>)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-3.png)
 
 content-type 指定为 json。
 
 点击 send，就可以看到服务端接收到了数据，并且把它转为了 dto 类的对象：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-4.png)
 
 但如果我们 age 传一个浮点数，服务端也能正常接收：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-5.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-6.png)
 
 因为它也是 number。
 
@@ -42,27 +42,27 @@ content-type 指定为 json。
 
 然后在 @Body 里添加这个 pipe：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-7.png)
 
 在 dto 这里，用 class-validator 包的 @IsInt 装饰器标记一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-8.png)
 
 再次请求，你就会发现它检查出了参数里的错误：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-9.png)
 
 那它是怎么实现的呢？
 
 [class-validator](https://www.npmjs.com/package/class-validator) 包提供了基于装饰器声明的规则对对象做校验的功能：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-10.png)
 
 而 [class-transformer](https://www.npmjs.com/package/class-transformer) 则是把一个普通对象转换为某个 class 的实例对象的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-11.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-12.png)
 
 这两者一结合，那 ValidationPipe 是怎么实现的不就想明白了么：
 
@@ -93,7 +93,7 @@ export class MyValidationPipe implements PipeTransform<any> {
 
 pipe 里拿到的 metatype 就是这部分：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-13.png)
 
 如果没有声明这部分，那就没法转换和验证，直接返回 value。
 
@@ -103,13 +103,13 @@ pipe 里拿到的 metatype 就是这部分：
 
 我们来用下看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-14.png)
 
 替换为我们自己实现的 MyValidationPipe。
 
 再次请求下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-15.png)
 
 确实检查出了错误。
 
@@ -117,49 +117,49 @@ pipe 里拿到的 metatype 就是这部分：
 
 pipe 里也是可以注入依赖的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-16.png)
 
 比如，我们指定 @Inject 注入 token 为 validation\_options 的对象。
 
 因为标记了 @Optional，没找到对应的 provider 也不会报错：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-17.png)
 
 但当我们在 module 里添加了这个 provider：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-18.png)
 
 就可以正常注入了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-19.png)
 
 当然，这种方式就不能用 new 的方式了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-20.png)
 
 直接指定 class，让 Nest 去创建对象放到 ioc 容器里。
 
 如果是全局的 pipe，要通过这种方式来创建才能注入依赖：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-21.png)
 
 这就和我们之前创建全局 interceptor 一样。
 
 同理，其余的 filter、guard 也可以通过这种方式声明为全局生效的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-22.png)
 
 现在我们就可以把 handler 里的 ValidationPipe 去掉了
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-23.png)
 
 再次访问，它依然是生效的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-24.png)
 
 当然，这里我们没有注入什么依赖，所以这种方式也可以：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-25.png)
 
 会用 ValidationPipe 之后，我们回过头来再看看 class-validator 都支持哪些验证方式：
 
@@ -192,11 +192,11 @@ export class Ppp {
 
 然后添加一个 post 的 handler：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-26.png)
 
 在 postman 里发送 post 请求。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-27.png)
 ```json
 {
     "title": "aaaaaaaaaaaaaaa",
@@ -211,15 +211,15 @@ export class Ppp {
 
 当参数不正确，ValidationPipe 就会返回 class-validator 的报错：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第20章-28.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-28.png)
 
 这个错误消息也是可以定制的：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第20章-29.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-29.png)
 
 添加一个 options 对象，传入 message 函数，打印下它的参数：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第20章-30.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-30.png)
 
 可以拿到对象、属性名、属性值、class 名等各种信息，然后你可以返回自定义的 message：
 ```typescript
@@ -232,7 +232,7 @@ title: string;
 ```
 再次访问，返回的就是自定义的错误消息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第20章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第20章-31.png)
 
 更多的装饰器可以看 [class-validator 文档](https://www.npmjs.com/package/class-validator)，这里就不展开了。
 

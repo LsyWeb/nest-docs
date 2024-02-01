@@ -7,7 +7,7 @@ mkdir prisma-client-api2
 cd prisma-client-api2
 npm init -y
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-1.png)
 
 进入项目，执行 init 命令：
 
@@ -15,22 +15,22 @@ npm init -y
 npx prisma init
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-2.png)
 
 生成了 .env 和 schema 文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-3.png)
 
 然后改下 .env 文件的数据库连接信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-4.png)
 
 ```
 DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
 ```
 改一下 datasource 的 provider 为 mysql，并且添加 model
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-5.png)
 
 ```prisma
 generator client {
@@ -66,24 +66,24 @@ model Employee {
 npx prisma migrate reset
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-6.png)
 
 然后用 migrate dev 创建新的迁移：
 
 ```
 npx prisma migrate dev --name aaa
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-7.png)
 
 生成了 client 代码，还有 sql 文件。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-8.png)
 
 数据库中也多了这 2 个表：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-9.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-10.png)
 
 然后来写下 client 的 crud 代码。
 
@@ -174,7 +174,7 @@ test1();
 ```
 插入关联 model 的数据的时候，也是用 create 指定：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-11.png)
 
 测试下：
 
@@ -182,19 +182,19 @@ test1();
 npx ts-node ./src/index.ts
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-12.png)
 
 在 mysql workbench 里看下结果：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-13.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-14.png)
 
 确实，数据都被正确插入了。
 
 当然，你也可以用这种写法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-15.png)
 
 ```javascript
 async function test2() {
@@ -224,13 +224,13 @@ async function test2() {
 ```
 跑一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-16.png)
 
 效果一样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-17.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-18.png)
 
 那如何关联查询呢？
 
@@ -283,7 +283,7 @@ include 还可以指定 where 等查询的参数，进一步过滤。
 
 可以看到，都能正确查出关联数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-19.png)
 
 再就是关联更新：
 
@@ -314,23 +314,23 @@ test4();
 
 跑一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-20.png)
 
 在 mysql workbench 里可以看到，id 为 1 的 department 更新了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-21.png)
 
 关联插入了一条 employee 的记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-22.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-23.png)
 
 更新 department 的时候，除了可以插入 empolyee 的数据，也可以和别的 empolyee 建立关联。
 
 比如 id 为 4 的 empolyee：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-24.png)
 
 现在他关联的是 id 为 2 的 department。
 
@@ -357,15 +357,15 @@ async function test5() {
 }
 test5();
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-25.png)
 
 跑一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-26.png)
 
 刷新可以看到，id 为 4 的 employee 关联的 department 就变了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-27.png)
 
 如果是某个 id 的数据存在就 connect，不存在就 create 呢？
 
@@ -399,19 +399,19 @@ test6();
 ```
 第一次跑，执行的是 insert：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-28.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-29.png)
 
 第二次跑，就是 update 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-30.png)
 
 也就是说，update 的时候可以通过 create、connect、connectOrCreate 来插入新的关联 model 的记录或者关联已有的记录。
 
 当然，create 的时候也可以这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-31.png)
 
 效果一样，就不一个个测试了。
 
@@ -432,9 +432,9 @@ async function test7() {
 test7();
 ```
  
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-32.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-33.png)
 
 这就是多个 model 关联时的 CRUD。
 
@@ -449,7 +449,7 @@ async function test8() {
 }
 test8();
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第118章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第118章-34.png)
 
 这样，当上面的 api 都不能满足需求的时候，你就可以直接执行 sql。
 

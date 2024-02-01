@@ -1,6 +1,6 @@
 ﻿文章都会有个阅读量，那这个阅读量是怎么计数的呢？
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-1.png)
 
 有同学说，很简单啊，这不就是文章表里加个 views 的字段，然后每次刷新页面都加一么？
 
@@ -29,7 +29,7 @@
 nest new article-views -p npm
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-2.png)
 
 创建个 nest 项目。
 
@@ -77,11 +77,11 @@ export class AppModule {}
 CREATE DATABASE article-views DEFAULT CHARACTER SET utf8mb4;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-3.png)
 
 刷新可以看到这个 database
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-4.png)
 
 然后建个文章和用户的模块：
 
@@ -90,7 +90,7 @@ nest g resource user --no-spec
 nest g resource article --no-spec
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-5.png)
 
 添加 user 和 article 的 entity
 
@@ -155,17 +155,17 @@ export class Article {
 ```
 在 entities 引入：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-6.png)
 
 可以看到 typeorm 自动创建了这两个表：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-7.png)
 
 然后插入一些数据：
 
 在 AppController 创建 init-data 的路由，然后注入 EntityManager：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-8.png)
 
 ```javascript
 @InjectEntityManager()
@@ -203,18 +203,18 @@ export class Article {
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-9.png)
 
 
 可以看到 4 条 insert 语句：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-10.png)
 
 在 mysql workbench 里也可以看到两个表都插入了数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-11.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-12.png)
 
 然后先实现登录：
 
@@ -226,7 +226,7 @@ npm install express-session @types/express-session
 ```
 在 main.ts 里启用：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-13.png)
 
 ```javascript
 import { NestFactory } from '@nestjs/core';
@@ -269,9 +269,9 @@ export class LoginUserDto {
 ```
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-14.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-15.png)
 
 然后在 UserService 实现登录逻辑：
 
@@ -316,15 +316,15 @@ async login(@Body() loginUserDto: LoginUserDto, @Session() session) {
 
 当用户不存在时：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-16.png)
 
 当密码错误时：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-17.png)
 
 登录成功时：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-18.png)
 
 然后在 ArticleController 添加一个查询文章的接口：
 
@@ -348,7 +348,7 @@ async findOne(id: number) {
 ```
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-19.png)
 
 然后我们在 ArticleController 加一个阅读的接口：
 
@@ -373,15 +373,15 @@ async view(id: number) {
 ```
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-20.png)
 
 数据库里阅读量确实更新了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-21.png)
 
 再次查询出来的就是新的阅读量：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-22.png)
 
 这样是能实现功能，但有前面我们讲到的两个问题：
 
@@ -404,7 +404,7 @@ nest g module redis
 nest g service redis
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-23.png)
 
 在 RedisModule 创建连接 redis 的 provider，导出 RedisService，并把这个模块标记为 @Global 模块
 
@@ -516,15 +516,15 @@ async view(id: number) {
 
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-24.png)
 
 服务端打印了 3 条 sql：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-25.png)
 
 redis 里也有了这个 hash 的结构：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-26.png)
 
 为什么是 3 条呢？
 
@@ -532,7 +532,7 @@ redis 里也有了这个 hash 的结构：
 
 我们可以优化一下，把 save 换成 update：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-27.png)
 
 ```javascript
 await this.entityManager.update(Article, {  id }, {
@@ -541,33 +541,33 @@ await this.entityManager.update(Article, {  id }, {
 ```
 然后把 redis 那条数据删掉：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-28.png)
 
 重新跑一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-29.png)
 
 现在就只有一条 select、一条 update 了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-30.png)
 
 然后多刷新几次：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-31.png)
 
 没发送 sql，还是之前那两条：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-32.png)
 
 因为这时候查的是 redis。
 
 redis 里数据更新了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-33.png)
 
 但是数据库里的 viewCount 还是 8
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-34.png)
 
 这样一重启 redis 数据就没了。
 
@@ -583,14 +583,14 @@ npm install --save @nestjs/schedule
 
 在 AppModule 引入下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-35.png)
 
 然后创建一个 service：
 ```
 nest g module task
 nest g service task
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-36.png)
 
 定义个方法，通过 @Cron 声明每 10s 执行一次：
 
@@ -609,7 +609,7 @@ export class TasksService {
 ```
 然后就可以看到控制台会每 10s 打印一次
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-37.png)
 
 我们在 TaskModule 引入 ArticleModule：
 
@@ -628,7 +628,7 @@ export class TaskModule {}
 ```
 并且在 ArticleModule 导出 ArticleService
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-38.png)
 
 然后在 TaskService 里注入 articleService 
 ```javascript
@@ -655,7 +655,7 @@ export class TaskService {
 
 先在 RedisService 添加一个 keys 方法，用来查询 key：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-39.png)
 
 ```javascript
 async keys(pattern: string) {
@@ -673,16 +673,16 @@ async flushRedisToDB() {
 
 我们先打印下 keys。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-40.png)
 
 现在只有一个 key，我们再访问下另一篇文章
 
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-41.png)
 
 现在就有 2 个 key 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-42.png)
 
 我们把所有的 key 对应的值存入数据库：
 
@@ -710,27 +710,27 @@ async flushRedisToDB() {
 
 测试下：
   
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-43.png)
 
 刷新几次 view 接口，redis 里阅读量增加了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-44.png)
 
 但是数据库里没变：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-45.png)
 
 过了一会，控制台打印了 2 条 update 语句：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-46.png)
 
 数据库里的数据就更新了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-47.png)
 
 接下来只要把定时任务的执行时间改为 4 点就好了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-48.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-48.png)
 
 ```javascript
 @Cron(CronExpression.EVERY_DAY_AT_4AM)
@@ -743,7 +743,7 @@ async flushRedisToDB() {
 
 我们可以在用户访问文章的时候在 redis 存一个 10 分钟过期的标记，有这个标记的时候阅读量不增加。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-49.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-49.png)
 
 ```javascript
 await this.redisService.set(`user_${userId}_article_${id}`, 1, 3);
@@ -770,25 +770,25 @@ async view(@Param('id') id: string, @Session() session, @Req() req) {
 
 试试看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-50.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-50.png)
 
 可以看到，现在就不是每次刷新都增加阅读量了，而是 3s 之后再刷新才增加。
 
 在 redis 里可以看到这个 key：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-51.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-51.png)
 
 只不过现在没登录，用的是 ip，而本地访问的时候获取的 ip 就是 ::1 这样的，线上就能拿到具体的 ip 了。
 
 然后我们登录下再访问：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-52.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-52.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-53.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-53.png)
 
 这时用的就是用户 id 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第76章-54.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第76章-54.png)
 
 这样就实现了真实的阅读量计数。
 

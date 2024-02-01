@@ -2,7 +2,7 @@
 
 新建目录，npm init -y 创建 package.json
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-1.png)
 
 然后安装 express 和 multer 还有 cors 包：
 
@@ -73,37 +73,37 @@ app.use 使用中间件 cors 来处理跨域。
 
 然后用 node 把 server 跑起来，并且用 http-server 把静态服务跑起来：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-2.png)
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-3.png)
 
 这时候在 devtools 可以看到 aaa 请求的 body 是多个 boundary 分隔的格式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-4.png)
 
 而分隔符是在 Content-Type 指定的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-5.png)
 
 这就是 form-data 的传输格式。
 
 然后去服务端看看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-6.png)
 
 req.file 可以拿到文件字段，其余非文件字段在 req.body。
 
 并且服务端多了 uploads 目录，下面就保存着我们上传的文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-7.png)
 
 单文件上传我们会了，那多文件上传呢？
 
 再添加一个路由处理多文件的上传：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-8.png)
 
 bbb 路由通过 array 方法来取上传的文件，并且指定最大数量的限制。
 
@@ -154,15 +154,15 @@ onchange 的时候取出每个 file，通过 append 方法添加到 bbb 字段�
 
 我们传下试试：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-9.png)
 
 node 服务的 req.files 接收到了多个文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-10.png)
 
 并且 uploads 目录下也多了俩文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-11.png)
 
 这就是多文件上传。
 
@@ -172,7 +172,7 @@ node 服务的 req.files 接收到了多个文件：
 
 我们添加一个错误处理中间件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-12.png)
 
 在 express 里，约定有 4 个参数的中间件为错误处理中间件。
 
@@ -180,11 +180,11 @@ node 服务的 req.files 接收到了多个文件：
 
 我们多传几个文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-13.png)
 
 可以看到服务端打印了报错：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-14.png)
 
 这样我们只要返回对应的响应就好了：
 
@@ -201,9 +201,9 @@ app.post('/bbb', upload.array('bbb', 2), function (req, res, next) {
 
 这样再次上传超过 2 个文件，就会收到服务端的 400 的响应，提示文件上传过多：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-15.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-16.png)
 
 更复杂一点的情况，如果多个字段都会上传文件，而且限制也都不同呢？
 
@@ -244,11 +244,11 @@ async function formData3() {
 
 浏览器里再次上传：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-17.png)
 
 服务端收到了 aaa 和 bbb 的文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-18.png)
 
 此外，如果我们并不知道有哪些字段是 file 呢？
 
@@ -280,7 +280,7 @@ async function formData4() {
 
 再次上传 4 个文件，可以看到服务端接收到了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-19.png)
 
 只不过这时候不是 key、value 的形式了，需要自己遍历数组来查找。
 
@@ -288,7 +288,7 @@ async function formData4() {
 
 之前是通过 dest 指定了保存的目录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-20.png)
 
 现在这样写：
 
@@ -316,20 +316,20 @@ const storage = multer.diskStorage({
 
 file 对象就是之前打印的那种：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-21.png)
 
 我们用时间戳 Date.now() 加上Math.random() 乘以 10 的 9 次方，然后取整，之后加上原来的文件名。
 
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-22.png)
 
 然后浏览器再次上传：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-23.png)
 
 就可以看到目录和文件名都修改了：
-![](http://static.liushuaiyang.com/nest-docs/image/第23章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第23章-24.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/multer-test)。
 

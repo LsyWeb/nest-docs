@@ -4,7 +4,7 @@
 
 repl 是 read-eval-paint-loop，也就是这个：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-1.png)
 
 Nest 能不能这样来测试呢？
 
@@ -16,24 +16,24 @@ Nest 能不能这样来测试呢？
 nest new repl-test
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-2.png)
 
 然后创建两个模块：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-3.png)
 
 把服务跑起来：
 
 ```
 npm run start:dev
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-4.png)
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-5.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-6.png)
 
 我们前面都是这么测试接口的。
 
@@ -62,7 +62,7 @@ npm run start:dev -- --entryFile repl
 
 也就是会传给 nest start
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-7.png)
 
 当然，你直接执行 nest start 也可以：
 
@@ -72,11 +72,11 @@ nest start --watch --entryFile repl
 
 跑起来后，执行 debug()，会打印所有的 module 和 module 下的 controllers 和 providers。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-8.png)
 
 而且，你可以 get() 来取对应的 providers 或者 controllers 调用：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-9.png)
 
 get、post 方法都可以调用。
 
@@ -84,11 +84,11 @@ get、post 方法都可以调用。
 
 那我们加一些：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-10.png)
 
 然后添加 ValidationPipe：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-11.png)
 
 安装校验相关的包：
 
@@ -117,7 +117,7 @@ npm run start:dev
 ```
 然后 postman 里测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-12.png)
 
 可以看到，ValidationPipe 生效了。
 
@@ -131,7 +131,7 @@ npm run start:dev -- --entryFile repl
 
 可以看到，并没有触发 pipe：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-13.png)
 
 也就是说，它只是单纯的传参调用这个函数，不会解析装饰器。
 
@@ -139,11 +139,11 @@ npm run start:dev -- --entryFile repl
 
 但是测试 service 很不错：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-14.png)
 
 比如测试某个项目的 UserService 的 login 方法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-15.png)
 
 就很方便。
 
@@ -151,23 +151,23 @@ npm run start:dev -- --entryFile repl
 
 debug() 可以查看全部的 module 或者某个 module 下的 cotrollers、providers：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-16.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-17.png)
 
 methods() 可以查看某个 controller 或者 provider 的方法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-18.png)
 
 get() 或者 $() 可以拿到某个 controller 或者 provider 调用它的方法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-19.png)
 
 常用的 api 就这些。
 
 此外，按住上下键可以在历史命令中导航：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-20.png)
 
 但有个问题。
 
@@ -192,15 +192,15 @@ bootstrap();
 ```
 再跑的时候也是有历史的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-21.png)
 
 其实就是 nest 会把历史命令写入文件里，下一次跑就可以用它恢复历史了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-22.png)
 
 你还可以把这个命令配到 npm scripts 里：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第82章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第82章-23.png)
 
 然后直接 npm run repl:dev 来跑。
 

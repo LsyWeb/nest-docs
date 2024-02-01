@@ -1,5 +1,7 @@
 # Nest 通关秘籍
 
+[文档地址](https://nest-docs.liushuaiyang.com)
+
 ## 你将获得
 - 全面掌握 Nest，深入实现原理；
 - 10+ 后端数据库、中间件使用指南；

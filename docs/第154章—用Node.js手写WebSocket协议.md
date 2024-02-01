@@ -8,7 +8,7 @@ HTTP 的协议格式我们很清楚，就是 header、body 这些。
 
 WebSocket 严格来说和 HTTP 没什么关系，是另外一种协议格式。但是需要一次从 HTTP 到 WebSocket 的切换过程。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-1.png)
 
 切换过程详细来说是这样的：
 
@@ -54,25 +54,25 @@ function hashKey(key) {
 
 这个字符串 258EAFA5-E914-47DA-95CA-C5AB0DC85B11 是固定的，不信你搜搜看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-2.png)
 
 随便找个有 websocket 的网站，比如知乎就有：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-3.png)
 
 过滤出 ws 类型的请求，看看这几个 header，是不是就是前面说的那些。
 
 这个 Sec-WebSocket-Key 是 wk60yiym2FEwCAMVZE3FgQ==
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-4.png)
 
 而响应的 Sec-WebSocket-Accept 是 XRfPnS+8xl11QWZherej/dkHPHM=
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-5.png)
 
 我们算算看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-6.png)
 
 是不是一毛一样！
 
@@ -82,17 +82,17 @@ function hashKey(key) {
 
 勾选 message 这一栏可以看到传输的消息，可以是文本、可以是二进制：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-7.png)
 
 全新的协议？那具体是什么样的协议呢？
 
 这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-8.png)
 
 大家习惯的 http 协议是 key:value 的 header 带个 body 的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-9.png)
 
 它是文本协议，每个 header 都是容易理解的字符。
 
@@ -100,7 +100,7 @@ function hashKey(key) {
 
 而 websocket 是二进制协议，一个字节可以用来存储很多信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-10.png)
 
 比如协议的第一个字节，就存储了 FIN（结束标志）、opcode（内容类型是 binary 还是 text） 等信息。
 
@@ -112,7 +112,7 @@ function hashKey(key) {
 
 我们看到的 weboscket 的 message 的收发，其实底层都是拼成这样的格式。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-11.png)
 
 只是浏览器帮我们解析了这种格式的协议数据。
 
@@ -157,7 +157,7 @@ class MyWebsocket extends EventEmitter {
 
 返回的 header 前面已经见过了，就是要对 sec-websocket-key 做下处理。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-12.png)
 
 ```javascript
 server.on('upgrade', (req, socket) => {
@@ -211,7 +211,7 @@ ws.on('close', (code, reason) => {
 });
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-13.png)
 
 然后新建这样一个 index.html：
 
@@ -251,17 +251,17 @@ npx http-server .
 
 这时打开 devtools 你就会发现协议切换成功了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-14.png)
 
 这 3 个 header 还有 101 状态码都是我们返回的。
 
 message 里也可以看到发送的消息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-15.png)
 
 再去服务端看看，也收到了这个消息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-16.png)
 
 只不过是 Buffer 的，也就是二进制的。
 
@@ -269,13 +269,13 @@ message 里也可以看到发送的消息：
 
 这一部分还是比较麻烦的，我们一点点来看。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-17.png)
 
 我们需要第一个字节的后四位，也就是 opcode。
 
 这样写：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-18.png)
 
 ```javascript
 const byte1 = bufferData.readUInt8(0);
@@ -287,13 +287,13 @@ let opcode = byte1 & 0x0f;
 
 然后再处理第二个字节：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-19.png)
 
 第一位是 mask 标志位，后 7 位是 payload 长度。
 
 可以这样取：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-20.png)
 
 ```javascript
 const byte2 = bufferData.readUInt8(1);
@@ -310,7 +310,7 @@ let payloadLength = parseInt(str2.substring(1), 2);
 
 有同学可能问了，后面咋还有俩 payload 长度呢？
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-21.png)
 
 这是因为数据不一定有多长，可能需要 16 位存长度，可能需要 32 位。
 
@@ -324,7 +324,7 @@ let payloadLength = parseInt(str2.substring(1), 2);
 
 用代码写出来就是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-22.png)
 
 ```javascript
 let payloadLength = parseInt(str2.substring(1), 2);
@@ -345,19 +345,19 @@ if (payloadLength === 126) {
 
 如果是 127，那就从第 3 个字节开始，读取 8 个字节也就是 64 位的长度，用 buffer.readBigUInt64BE 方法。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-23.png)
 
 这样就拿到了 payload 的长度，然后再用这个长度去截取内容就好了。
 
 但在读取数据之前，还有个 mask 要处理，这个是用来给内容解密的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-24.png)
 
 读 4 个字节，就是 mask key。
 
 再后面的就可以根据 payload 长度读出来。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-25.png)
 ```javascript
 let realData = null;
 
@@ -400,7 +400,7 @@ const OPCODES = {
 
 我们只处理文本和二进制就好了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-26.png)
 
 ```javascript
 handleRealData(opcode, realDataBuffer) {
@@ -425,17 +425,17 @@ handleRealData(opcode, realDataBuffer) {
 
 之前我们已经能拿到 weboscket 协议内容的 buffer 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-27.png)
 
 而现在我们能正确解析出其中的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-28.png)
 
 至此，我们 websocket 协议的解析成功了！
 
 这样的协议格式的数据叫做 frame，也就是帧：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-29.png)
 
 解析可以了，接下来我们再实现数据的发送。
 
@@ -443,7 +443,7 @@ handleRealData(opcode, realDataBuffer) {
 
 定义这样一个 send 方法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-30.png)
 ```javascript
 send(data) {
     let opcode;
@@ -469,7 +469,7 @@ doSend(opcode, bufferDatafer) {
 
 然后构造 websocket 的 frame：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-31.png)
 ```javascript
 function encodeMessage(opcode, payload) {
   //payload.length < 126
@@ -490,7 +490,7 @@ function encodeMessage(opcode, payload) {
 
 第一个字节是 opcode，我们把第一位置 1 ，通过按位或的方式。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-32.png)
 
 服务端给客户端回消息不需要 mask，所以第二个字节就是 payload 长度。
 
@@ -509,12 +509,12 @@ bufferData.writeUInt8(byte2, 1);
 
 我们试一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-33.png)
 
 收到客户端消息后，每两秒回一个消息。
 
 
-![](http://static.liushuaiyang.com/nest-docs/image/第154章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第154章-34.png)
 
 收发消息都成功了！
 

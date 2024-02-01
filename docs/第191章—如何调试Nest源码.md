@@ -4,24 +4,24 @@
 
 其实不是的，这部分是编译后的代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-1.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-2.png)
 
 我们新建个 Nest 项目：
 
 ```
 nest new debug-nest-source
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-3.png)
 
 点击 debug 面板的 create a launch.json file按钮：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-4.png)
 
 输入 npm，选择 launch via npm，创建一个调试 npm scripts 的配置：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-5.png)
 
 改为这样：
 
@@ -48,21 +48,21 @@ nest new debug-nest-source
 
 不然，日志会输出在 debug console。颜色等都不一样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-6.png)
 
 在 AppController 的 getHello 打个断点：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-7.png)
 
 点击 debug 启动：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-8.png)
 
 然后浏览器重新访问 http://localhost:3000
 
 这时候代码就会在断点处断住：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-9.png)
 
 这样就可以断点调试 Nest 项目了。
 
@@ -70,9 +70,9 @@ nest new debug-nest-source
 
 因为现在调用栈里的 Nest 源码部分都是编译后的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-10.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-11.png)
 
 我们想调试 Nest 的 ts 源码，这就需要用到 sourcemap 了。
 
@@ -87,49 +87,49 @@ git clone --depth=1 --single-branch https://github.com/nestjs/nest
 
 看下 npm scripts：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-12.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-13.png)
 
 可以看到它做的事情就是 tsc 编译代码，然后把编译后的文件移动到 node_modules/@nestjs 目录下。
 
 move 的具体实现可以看 tools/gulp/tasks/move.ts 的代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-14.png)
 
 所以，执行 npm run build，你就会在 node_modules/@nestjs 下看到这样的代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-15.png)
 
 只包含了 js 和 ts，没有 sourcemap：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-16.png)
 
 生成 sourcemap 需要改下 tsc 编译配置，也就是 packages/tsconfig.build.json 文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-17.png)
 
 设置 sourceMap 为 true 也就是生成 sourcemap，但默认的 sourcemap 里不包含内联的源码，也就是 sourcesContent 部分，需要设置 inlineSources 来包含。
 
 再次执行 npm run build，就会生成带有 sourcemap 的代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-18.png)
 
 并且 sourcemap 是内联了源码的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-19.png)
 
 然后我们跑一下 Nest 的项目，直接跑 samples 目录下的项目即可，这是 Nest 内置的一些案例项目：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-20.png)
 
 创建一个调试配置：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-21.png)
 
 改成这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-22.png)
 
 ```json
 {
@@ -158,23 +158,23 @@ resolveSourceMapLocations 是从哪里找 sourcemap，默认排除掉了 node_mo
 
 在 sample/01-cats-app 的 src/cats/cats.controller.ts 打个断点：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-23.png)
 
 然后点击 debug 调试：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-24.png)
 
 如果提示端口被占用，你需要先 kill 掉之前的进程再跑：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-25.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-26.png)
 
 浏览器访问 http://localhost:3000/cats
 
 断住之后你看下调用栈：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-27.png)
 
 这时候 sourcemap 就生效了，可以看到调用栈中的就是 Nest 的 ts 源码。
 
@@ -184,17 +184,17 @@ resolveSourceMapLocations 是从哪里找 sourcemap，默认排除掉了 node_mo
 
 点击这个调用栈：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第191章-28.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-28.png)
 
 可以看到它先创建了所有的 pipes、interceptors、guards 的实例，然后封装了调用 pipe 和 guard 的函数：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-29.png)
 
 下面调用 hander 的时候，先调用 guard、再调用 interceptor，然后调用 handler，并且 handler 里会先用 pipe 处理参数：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-30.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第191章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第191章-31.png)
 
 这就是 AOP 机制的源码。
 

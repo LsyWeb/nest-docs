@@ -10,7 +10,7 @@
 nest new nest-prisma-test
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-1.png)
 
 进入项目，安装 prisma
 
@@ -22,9 +22,9 @@ npm install prisma --save-dev
 ```
 npx prisma init
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-2.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-3.png)
 
 改下 .env 的配置：
 
@@ -43,7 +43,7 @@ datasource db {
 
 然后创建 model：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-4.png)
 
 ```
 generator client {
@@ -80,24 +80,24 @@ model Employee {
 ```
 npx prisma migrate reset 
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-5.png)
 
 然后创建新的 migration:
 
 ```
 npx prisma migrate dev --name init
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-6.png)
 
 这时候数据库就就有这两个表了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-7.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-8.png)
 
 外键约束也创建好了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-9.png)
 
 并且 migrate dev 还会生成 client 代码，接下来我们就可以直接来做 CRUD 了。
 
@@ -108,7 +108,7 @@ npx prisma migrate dev --name init
 ```
 nest g service prisma --flat --no-spec
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-10.png)
 
 改下 PrismaService，继承 PrismaClient，这样它就有 crud 的 api 了：
 
@@ -144,13 +144,13 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 ```
 nest g service department --flat --no-spec
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-11.png)
 
 ```
 nest g service employee --flat --no-spec
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-12.png)
 
 这俩 service 里注入 PrismaService，不就可以 CRUD 了么？
 
@@ -183,7 +183,7 @@ export class DepartmentService {
 
 输入 Prisma.Deparment 就会提示出来
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-13.png)
 
 还有 EmployeeService：
 
@@ -213,7 +213,7 @@ export class EmployeeService {
 
 然后在 AppController 里注入这俩 service：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-14.png)
 
 声明一个 create 的路由，里面创建一个 department，再创建一个 employee。
 
@@ -267,17 +267,17 @@ npm run start:dev
 ```
 浏览器访问下 http://localhost:3000/create
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-15.png)
 
 生成了 2 条 insert 语句：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-16.png)
 
 在 mysql workbench 里也可以看到插入的 2 条记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-17.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第119章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第119章-18.png)
 
 这样，prisma 和 nest 的集成就完成了。
 

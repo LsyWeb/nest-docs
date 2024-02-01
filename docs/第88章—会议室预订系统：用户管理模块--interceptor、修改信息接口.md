@@ -1,6 +1,6 @@
 ﻿用户管理模块我们实现了登录、注册、认证鉴权，还剩下一些列表、更新等接口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-1.png)
 
 这节把修改密码、修改信息的接口写完。
 
@@ -9,7 +9,7 @@
 ```
 nest g interceptor format-response --flat
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-2.png)
 
 使用 map 操作符来修改响应：
 
@@ -36,32 +36,32 @@ export class FormatResponseInterceptor implements NestInterceptor {
 ```
 全局启用它：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-3.png)
 
 这时候访问 http://localhost:3000 ，可以看到响应格式变了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-4.png)
 
 这里我用了一个 [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?utm_source=ext_sidebar&hl=zh-CN) 的 chrome 插件来格式化。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-5.png)
 
 然后再试下其它接口：
 
 响应格式确实变了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-6.png)
 
 抛出的异常还是由内置的 Exception Filter 来处理，返回响应：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-7.png)
 
 然后再加一个接口访问记录的 interceptor：
 
 ```
 nest g interceptor invoke-record --flat
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-8.png)
 
 记录下访问的 ip、user agent、请求的 controller、method，接口耗时、响应内容，当前登录用户等信息。
 
@@ -112,17 +112,17 @@ export class InvokeRecordInterceptor implements NestInterceptor {
 ```
 全局启用这个 interceptor：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-9.png)
 
 试一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-10.png)
 
 访问管理员的登录的接口。
 
 可以看到控制台打印了请求的路径、请求方法、controller、handler 等信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-11.png)
 
 这里因为是本地访问，所以是 ::1 的 ip，相当于 localhost。
 
@@ -130,37 +130,37 @@ user 因为当前还没有，所以是 undefined
 
 响应之后打印了接口耗时以及接口返回的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-12.png)
 
 我们拿着个 access_token 放在 header 来访问 /aaa 接口试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-13.png)
 
 可以看到，请求之前打印了访问的 controller、handler、user等信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-14.png)
 
 响应之后打印了接口耗时和响应内容等信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-15.png)
 
 为什么 interceptor 里能拿到 user 信息呢？
 
 因为这是在 LoginGuard 里从 jwt 取出来放到  request.user 的，而 Guard 在 interceptor 之前调用：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-16.png)
 
 然后实现普通用户和管理员修改密码、修改信息的接口。
 
 涉及到这 4 个页面：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-17.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-18.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-19.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-20.png)
 
 分别是 /user/update_password 和 /user/admin/update_password、/user/update、/user/admin/update
 
@@ -194,13 +194,13 @@ async findUserDetailById(userId: number) {
 ```
 我们测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-21.png)
 
 登录用户端，拿到 access_token。
 
 然后加到 header 里访问 /user/info
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-22.png)
 
 成功拿到了 user 的信息。
 
@@ -252,15 +252,15 @@ async info(@UserInfo('userId') userId: number) {
 ```
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-23.png)
 
 现在返回的内容就是合理的了。
 
 然后实现修改密码的接口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-24.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-25.png)
 
 管理员和用户修改密码的页面是一样的，我们就用一个接口就好了。
 
@@ -313,17 +313,17 @@ export class UpdateUserPasswordDto {
 
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-26.png)
 
 登录用户端，拿到 access_token，然后访问 /user/update_password 和 /user/admin/update_password 接口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-27.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-28.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-29.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-30.png)
 
 都能正常接收到数据。
 
@@ -378,47 +378,47 @@ async updatePassword(userId: number, passwordDto: UpdateUserPasswordDto) {
 
 登录 lisi 账号，拿到 access_token
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-31.png)
 
 数据库中可以查到 lisi 的邮箱：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-32.png)
 
 带上 access_token 访问更新密码接口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-33.png)
 
 先手动去 redis 里添加 update_password_captcha_yy@yy.com 的 key，值为 123123（注意，我们现在用的是 redis 的 db1）
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-34.png)
 
 半小时过期。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-35.png)
 
 然后再试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-36.png)
 
 修改成功。
 
 数据库里看不到具体的密码，但也能看出确实变了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-37.png)
 
 之前是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-38.png)
 
 然后我们登录下试试就知道了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-39.png)
 
 用之前的密码登录，会提示密码错误。
 
 换成新密码就好了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-40.png)
 
 然后再加上这个发送邮箱验证码的接口：
 ```javascript
@@ -440,9 +440,9 @@ async updatePasswordCaptcha(@Query('address') address: string) {
 
 然后还有修改个人信息的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-41.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-42.png)
 
 对应 /user/udpate 和 /user/admin/update 接口。
 
@@ -524,25 +524,25 @@ async update(userId: number, updateUserDto: UpdateUserDto) {
 
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-43.png)
 
 登录 lisi 账号拿到 token
 
 带上 token 访问 /user/update 接口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-44.png)
 
 提示验证码失效，在 redis 里添加 update_user_captcha_yy@yy.com 的 key，值为 123456
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-45.png)
 
 然后再试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-46.png)
 
 用户信息修改成功了，在数据库里也可以看到确实修改了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第88章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第88章-47.png)
 
 这样，修改接口就完成了。
 

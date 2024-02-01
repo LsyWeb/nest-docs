@@ -1,12 +1,12 @@
 ﻿上节我们实现了注册和登录，有的接口只有登录可以访问，会在 Guard 里做身份验证（Authentication）。
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-1.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-1.png)
 
 但有的接口，不只需要登录，可能还需要一定的权限，这时就需要鉴权（Authorization）。
 
 比如管理员登录后，可以调用用户管理的接口，但普通用户登录后就不可以。
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-2.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-2.png)
 
 也就是说，身份验证通过之后还需要再做一步权限的校验，也就是鉴权。
 
@@ -16,7 +16,7 @@
 
 最简单的方式自然是直接给用户分配权限：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-3.png)
 
 比如用户 1 有权限 A、B、C，用户 2 有权限 A，用户 3 有权限 A、B。
 
@@ -31,11 +31,11 @@
 ```sql
 CREATE DATABASE acl_test DEFAULT CHARACTER SET utf8mb4;
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-4.png)
 
 刷新可以看到这个 database：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-5.png)
 
 创建个 nest 项目：
 
@@ -43,7 +43,7 @@ CREATE DATABASE acl_test DEFAULT CHARACTER SET utf8mb4;
 nest new acl-test -p npm
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-6.png)
 
 安装 typeorm 的依赖：
 
@@ -90,7 +90,7 @@ export class AppModule {}
 nest g resource user
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-7.png)
 
 添加 User 和 Permission 的 Entity：
 
@@ -152,7 +152,7 @@ permission 有 id、name、desc、createTime、updateTime 5 个字段，desc 字
 
 然后在 User 里加入和 Permission 的关系，也就是多对多：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-8.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-8.png)
 
 ```javascript
 @ManyToMany(() => Permission)
@@ -168,26 +168,26 @@ permissions: Permission[]
 
 然后在 TypeOrm.forRoot 的 entities 数组加入这俩 entity：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-9.png)
 
 把 Nest 服务跑起来试试：
 
 ```
 npm run start:dev
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-10.png)
 
 可以看到生成了 user、permission、user_permission_relation 这 3 个表。
 
 并且中间表 user_permission_relation 还有 userId、permissionId 两个外键。
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-11.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-11.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-12.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-12.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-13.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-13.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-14.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-14.png)
 
 可以看到，3个表生成的都是对的，并且中间表的两个外键也都是主表删除或者更新时，从表级联删除或者更新。
 
@@ -285,11 +285,11 @@ async initData() {
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-15.png)
 
 服务端打印了一堆 sql，包了一层事务：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-16.png)
 
 分别向 user、permission、user_permission_relation 中插入了数据。
 
@@ -297,15 +297,15 @@ async initData() {
 
 permission 表插入了 8 条权限记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-17.png)
 
 user 表插入了 2 条用户记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-18.png)
 
 中间表插入了 8 条记录，两个用户各拥有 4 个权限：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-19.png)
 
 然后我们再实现登录的接口，这次通过 session + cookie 的方式。
 
@@ -383,19 +383,19 @@ export class LoginUserDto {
 
 全局启用 ValidationPipe：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-20.png)
 
 然后在 postman 里测试下：
 
 ValidationPipe 不通过的时候，会返回错误信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-21.png)
 
 ValidationPipe 通过之后，就会执行 handler 里的方法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-22.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-23.png)
 
 接下来实现查询数据库的逻辑，在 UserService 添加 login 方法：
 
@@ -436,16 +436,16 @@ async login(@Body() loginUser: LoginUserDto, @Session() session){
 再用 postman 登录下：
 
 用户不存在：
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-24.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-24.png)
 
 密码错误：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-25.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-25.png)
 
 登录成功：
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-26.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-26.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-27.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-27.png)
 
 登录成功之后会返回 cookie，之后只要带上这个 cookie 就可以查询到服务端的对应的 session，从而取出 user 信息。
 
@@ -454,16 +454,16 @@ async login(@Body() loginUser: LoginUserDto, @Session() session){
 nest g resource aaa 
 nest g resource bbb 
 ```
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-28.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-28.png)
 
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-29.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-29.png)
 
 现在这些接口可以直接访问：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-30.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-30.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-31.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-31.png)
 
 而实际上这些接口是要控制权限的。
 
@@ -510,37 +510,37 @@ export class LoginGuard implements CanActivate {
 
 因为默认的 session 里没有 user 的类型，所以需要扩展下：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-32.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-32.png)
 
 利用同名 interface 会自动合并的特点来扩展 Session。
 
 然后给接口都加上这个 Guard：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-33.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-33.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-34.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-34.png)
 
 再访问下：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-35.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-35.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-36.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-36.png)
 
 在 postman 里带上 cookie 访问：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-37.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-37.png)
 
 你访问登录接口之后，服务端返回 set-cookie 的 header，postman 会自动带上 cookie，不需要手动带：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-38.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-38.png)
 
 行为和浏览器里一致。
 
 这时候再访问 aaa、bbb 的接口，就可以访问了：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-39.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-39.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-40.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-40.png)
 
 但是这样还不够，我们还需要再做登录用户的权限控制，所以再写个 PermissionGuard:
 
@@ -551,7 +551,7 @@ nest g guard permission --no-spec --flat
 因为 PermissionGuard 里需要用到 UserService 来查询数据库，所以把它移动到 UserModule 里：
 
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-41.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-41.png)
 
 注入 UserService：
 
@@ -598,25 +598,25 @@ export class UserModule {}
 
 我们在 AaaModule 里引入这个 UserModule：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-42.png)
 
 然后在 /aaa 的 handler 里添加 PermissionGuard：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-43.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-43.png)
 
 postman 访问下：
 
 首先重新登录，post 方式请求 /user/login：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-44.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-44.png)
 
 然后 get 访问 /aaa，postman 会自动带上 cookie。
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-45.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-45.png)
 
 服务端打印了 UserService：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-46.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-46.png)
 
 说明在 PermissionGuard 里成功注入了 UserService。
 
@@ -679,15 +679,15 @@ export class PermissionGuard implements CanActivate {
 
 先登录，拿到 cookie：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-47.png)
 
 然后请求 /aaa 接口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-48.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-48.png)
 
 服务端打印了当前用户的权限信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-49.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-49.png)
 
 然后我们就根据当前 handler 需要的权限来判断是否返回 true 就可以了。
 
@@ -695,13 +695,13 @@ export class PermissionGuard implements CanActivate {
 
 很明显是通过 metadata。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-50.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-50.png)
 
 给 /aaa 接口声明需要 query_aaa 的 permission。
 
 然后在 PermissionGuard 里通过 reflector 取出来：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-51.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-51.png)
 
 取出 handler 声明的 metadata，如果用户权限里包含需要的权限，就返回 true，否则抛出没有权限的异常。
 
@@ -748,18 +748,18 @@ export class PermissionGuard implements CanActivate {
 
 这次用光光的账号登录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-52.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-52.png)
 访问 /aaa，会提示没有权限：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-53.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-53.png)
 
 然后登录东东的账号：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-54.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-54.png)
 
 然后访问 /aaa：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第57章-55.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-55.png)
 
 东东是有 query_aaa 的权限的，就可以正常访问了。
 
@@ -767,7 +767,7 @@ export class PermissionGuard implements CanActivate {
 
 但是不知道同学们有没有发现一个问题：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-56.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-56.png)
 
 每次访问接口，都会触发这样 3 个表的关联查询。
 
@@ -793,7 +793,7 @@ npm install redis
 ```
 nest g module redis
 ```
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-57.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-57.png)
 
 然后新建一个 service：
 
@@ -801,7 +801,7 @@ nest g module redis
 nest g service redis --no-spec
 ```
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-58.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-58.png)
 
 然后在 RedisModule 里添加 redis 的 provider：
 
@@ -869,7 +869,7 @@ export class RedisService {
 
 然后在 PermissionGuard 里注入来用下：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-59.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-59.png)
 
 先查询 redis、没有再查数据库并存到 redis，有的话就直接用 redis 的缓存结果。
 
@@ -931,33 +931,33 @@ export class PermissionGuard implements CanActivate {
 
 这里如果你没跑 redis server，需要先通过 docker 把它跑起来。具体怎么跑可以翻一下 redis 入门那节
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-60.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-60.png)
 
 然后先登录：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-61.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-61.png)
 
 服务端打印了查询用户数据的 sql：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-62.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-62.png)
 
 然后再访问 /aaa
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-63.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-63.png)
 
 又打印了 2 条关联查询的 sql：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-64.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-64.png)
 
 我们去 RedisInsight 里看下：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第57章-65.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-65.png)
 
 可以看到这条缓存。
 
 这时候你刷新多少次，都不会再产生 sql 了：
 
-![2023-06-22 17.16.43.gif](http://static.liushuaiyang.com/nest-docs/image/第57章-66.png)
+![2023-06-22 17.16.43.gif](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第57章-66.png)
 
 这时候查的就是 redis 缓存。
 

@@ -17,11 +17,11 @@ of(1, 2, 3)
 
 用 node 跑一下，结果如下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-1.png)
 
 这里 node 能直接解析 esm 需要在 package.json 里设置 type 为 module：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-2.png)
 
 这就是 map、filter 的 operator 的作用。
 
@@ -46,7 +46,7 @@ numbers$
 
 scan 是计数，map 是转换，结果如下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-3.png)
 
 或者是节流、防抖：
 
@@ -117,25 +117,25 @@ tap operator 不会改变数据，只是额外执行一段逻辑。
 
 在 handler 上启用 interceptor：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-4.png)
 
 然后浏览器访问 <http://localhost:3000>
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-5.png)
 
 就会看到打印的耗时数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-6.png)
 
 或者全局启用这个 interceptor：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-7.png)
 
 路由级别和全局级别的 interceptor 还是有区别的，路由级别的可以注入依赖，而全局的不行：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-8.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-9.png)
 
 我们再来使用下别的 RxJS operator：
 
@@ -169,11 +169,11 @@ export class MapTestInterceptor implements NestInterceptor {
 
 在 controller 里引入下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-10.png)
 
 跑下试试：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-11.png)
 
 现在返回的数据就变成了这样。
 
@@ -214,13 +214,13 @@ export class TapTestInterceptor implements NestInterceptor {
 
 日志记录我们用的 nest 内置的 Logger，在 controller 返回响应的时候记录一些东西。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-12.png)
 
 浏览器访问这个接口，会打印日志：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-13.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-14.png)
 
 这里我们用的是 Nest 内置的 Logger，所以打印格式是这样的。
 
@@ -255,27 +255,27 @@ export class CatchErrorTestInterceptor implements NestInterceptor {
 
 在 controller 里用一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-15.png)
 
 浏览器访问下，可以看到返回 500 的错误：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-16.png)
 
 打印了两次错误：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-17.png)
 
 一次是我们在 interceptor 里打印的，一次是 exception filter 打印的。
 
 其实我们能看到这个 500 错误，就是内置的 exception filter 处理的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-18.png)
 
 对应的 Nest 源码如下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-19.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-20.png)
 
 ## timeout
 
@@ -316,25 +316,25 @@ timeout 操作符会在 3s 没收到消息的时候抛一个 TimeoutError。
 
 在 controller 里用一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-21.png)
 
 浏览器访问，3s 后返回 408 响应：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-22.png)
 
 就是在这里处理的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-23.png)
 
 不信可以抛一个其他的 exception 试一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-24.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-25.png)
 
 最后，再来看下全局的 interceptor：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-26.png)
 
 因为这种是手动 new 的，没法注入依赖。
 
@@ -342,23 +342,23 @@ timeout 操作符会在 3s 没收到消息的时候抛一个 TimeoutError。
 
 nest 提供了一个 token，用这个 token 在 AppModule 里声明的 interceptor，Nest 会把它作为全局 interceptor：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-27.png)
 
 在这个 interceptor 里我们注入了 appService：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-28.png)
 
 添加一个路由：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-29.png)
 
 访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-30.png)
 
 可以看到全局 interceptor 生效了，而且这个 hello world 就是注入的 appService 返回的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第18章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第18章-31.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/interceptor-test)。
 

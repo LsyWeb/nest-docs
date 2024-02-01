@@ -26,15 +26,15 @@ facebook 当时也遇到了这个问题，于是他们创造了一种新的接�
 
 比如想查询所有的学生，就可以这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-1.png)
 
 想再查询他们的年龄，就可以这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-2.png)
 
 想查询老师的名字和他教的学生，就可以这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-3.png)
 
 而这些都是在一个 http 接口里完成的！
 
@@ -53,7 +53,7 @@ mkdir graphql-crud-demo
 cd graphql-crud-demo
 npm init -y
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-4.png)
 
 安装用到的包：
 
@@ -156,7 +156,7 @@ resolver 是取对象类型对应的数据的，每个字段都可以写一个 a
 
 这样有了 schema 类型定义，有了取数据的 resovler，就可以跑起 graphql 服务了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-5.png)
 
 也就是这样：
 
@@ -176,23 +176,23 @@ console.log(`🚀  Server ready at: ${url}`);
 ```
 传入 schema 类型定义和取数据的 resolver，就可以用 node 把服务跑起来。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-6.png)
 
 有同学可能问了，node 可以直接解析 esm 模块么？
 
 可以的。只需要在 package.json 中声明 type 为 module：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-7.png)
 
 那所有的 .js 就都会作为 esm 模块解析：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-8.png)
 
 跑起来之后，浏览器访问一下：
 
 就可以看到这样的 sandbox，这里可以执行 graphql 的查询：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-9.png)
 
 （graphql 接口是监听 POST 请求的，用 get 请求这个 url 才会跑这个调试的工具）
 
@@ -207,17 +207,17 @@ query Query {
 }
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-10.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-11.png)
 
 这里 “光光” 那个学生是异步取的数据，resolver 会执行对应的异步函数，拿到最终数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-12.png)
 
 取老师的信息就可以这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-13.png)
 
 这样我们就实现了一个 graphql 接口！
 
@@ -227,7 +227,7 @@ query Query {
 
 比如 react 的 graphql 客户端是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-14.png)
 
 一个 gql 的 api 来写查询语言，一个 useQuery 的 api 来执行查询。
 
@@ -241,7 +241,7 @@ query Query {
 
 graphql 当然是支持的，这样写：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-15.png)
 
 ```
 type Query {
@@ -255,7 +255,7 @@ type Query {
 
 然后它对应的 resolver 就是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-16.png)
 
 ```javascript
 const resolvers = {
@@ -277,7 +277,7 @@ studentsbyTeacherName 字段的 resolver 是一个异步函数，里面执行了
 
 有参数的查询是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-17.png)
 
 传入老师的 name 参数为 111，返回查到的学生的 id、name 信息。
 
@@ -285,7 +285,7 @@ studentsbyTeacherName 字段的 resolver 是一个异步函数，里面执行了
 
 而服务端的 resolver 接收到的参数是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-18.png)
 
 其余的几个参数不用管，只要知道第二个参数就是客户端传过来的查询参数就好了。
 
@@ -299,7 +299,7 @@ studentsbyTeacherName 字段的 resolver 是一个异步函数，里面执行了
 
 在 schema 里添加这样一段类型定义：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-19.png)
 ```grqphql
 type Res {
     success: Boolean
@@ -380,11 +380,11 @@ const resolvers = {
 
 执行 addStudent，添加一个学生：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-20.png)
 
 然后再次查询所有的学生：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第167章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第167章-21.png)
 
 就可以查到刚来的小刚同学。
 

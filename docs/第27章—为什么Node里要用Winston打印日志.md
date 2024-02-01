@@ -16,7 +16,7 @@
 
 它是 Node 最流行的日志框架，[npm 官网](https://www.npmjs.com/package/winston)上可以看到每周千万级的下载量：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-1.png)
 
 那 winston 都有什么功能？怎么用呢？
 
@@ -28,7 +28,7 @@ cd winston-test
 npm init -y
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-2.png)
 
 先创建个项目。
 
@@ -69,7 +69,7 @@ transports：日志的传输方式
 
 在 package.json 里指定 type 为 module，也就是所有代码都是 es module 的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-3.png)
 
 这样代码里就可以直接用 import、export 这些语法了。
 
@@ -79,7 +79,7 @@ transports：日志的传输方式
 node index.js
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-4.png)
 
 可以看到控制台和文件里都有了打印的日志。
 
@@ -90,27 +90,27 @@ node index.js
 ```
 会在后面追加：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-5.png)
 
 那么问题来了，如果所有日志都写在一个文件里，那这个文件最终会不会特别大？
 
 不用担心，winston 支持按照大小自动分割文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-6.png)
 
 我们指定 maxsize 为 1024 字节，也就是 1kb。
 
 然后再跑几次：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-7.png)
 
 大概跑了 10 次左右，出现了第二个文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-8.png)
 
 而这时第一个日志文件刚好是 1kb：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-9.png)
 
 这就是根据大小自动分割日志文件的功能。
 
@@ -122,7 +122,7 @@ node index.js
 
 在 [winston 文档](https://github.com/winstonjs/winston/blob/HEAD/docs/transports.md#winston-core)里可以看到有很多 Transport：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-10.png)
 
 Console、File、Http、Stream 这几个 Transport 是内置的。
 
@@ -167,7 +167,7 @@ logger.debug(66666666);
 
 指定文件名里的日志格式包含分钟，所以不同的分钟打印的日志会写入不同文件里：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-11.png)
 
 这就达到了滚动日志的效果。
 
@@ -178,11 +178,11 @@ logger.debug(66666666);
 ```
 nest new winston-log-server
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-12.png)
 
 添加一个路由：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-13.png)
 ```javascript
 @Post('log')
 log(@Body() body) {
@@ -194,7 +194,7 @@ log(@Body() body) {
 ```
 npm run start:dev
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-14.png)
 
 然后改下 index.js
 
@@ -225,9 +225,9 @@ logger.debug(66666666);
 ```
 node ./index.js
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-15.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-16.png)
 
 nest 服务收到了传过来的日志。
 
@@ -259,19 +259,19 @@ logger.debug(66666666);
 
 效果就是只有一个 file 的 transport：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-17.png)
 
 再就是日志级别，winston 有 6 种级别的日志：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-18.png)
 
 从上往下，重要程度依次降低。
 
 比如当你指定 level 是 info 时，那 info、warn、error 的日志会输出，而 http、debug 这些不会。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-19.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-20.png)
 
 日志级别的功能虽然简单，但却是很实用的功能。
 
@@ -279,28 +279,28 @@ logger.debug(66666666);
 
 simple：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-21.png)
 
 json：
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-22.png)
 
 prettyPrint（比 json 的格式多了一些空格）：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-23.png)
 
 用 combine 组合 timestamp 和 json：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-24.png)
 
 或者再组合个 label：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-25.png)
 
 加上个标签，再搜索相关日志就方便多了。
 
 彩色：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-26.png)
 
 通过这些，就可以指定各种日志格式。
 
@@ -335,9 +335,9 @@ logger.debug(66666666);
 
 每个 transport 单独指定 format 就好了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-27.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-28.png)
 
 那如果我有的日志只想 console，而有的日志希望写入文件，而且配置都不同呢？
 
@@ -385,9 +385,9 @@ logger2.info('yyyy');
 
 然后分别用不同的 logger 来打印日志。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-29.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-30.png)
 
 这样，项目中有不同的日志需求的时候，就可以创建多个 logger 实例。
 
@@ -417,7 +417,7 @@ logger.debug(66666666);
 ```
 跑一下，可以看到错误日志被输出到了 error.log
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-31.png)
 
 除了 error 外，Promise 的未捕获异常也可以指定如何处理日志：
 
@@ -446,7 +446,7 @@ logger.error('东东东东东东东东');
 logger.debug(66666666);
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第27章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第27章-32.png)
 
 这些就是 winston 的主要功能了。
 

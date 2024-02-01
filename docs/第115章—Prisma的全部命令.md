@@ -6,7 +6,7 @@
 npx prisma -h
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-1.png)
 
 有这些：
 
@@ -37,7 +37,7 @@ cd prisma-all-command
 npm init -y
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-2.png)
 
 全局安装 prisma，这个是命令行工具的包：
 
@@ -47,7 +47,7 @@ npm install -g prisma
 ## prisma init
 首先来试一下 init 命令：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-3.png)
 
 这个就是创建 schema 文件的，可以指定连接的 database，或者指定 url。
 
@@ -56,32 +56,32 @@ npm install -g prisma
 ```
 prisma init
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-4.png)
 
 执行 init 命令后生成了 prisma/shcema.prisma 和 .env 文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-5.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-6.png)
 
 包含了 db provider，也就是连接的数据库，以及连接的 url：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-7.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-8.png)
 
 删掉这俩文件，重新生成。
 
 ```
 prisma init --datasource-provider mysql
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-9.png)
 
 这样生成的就是连接 mysql 的 provider 和 url 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-10.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-11.png)
 
 其实就是改这两处的字符串，prisma init 之后自己改也行。
 
@@ -92,13 +92,13 @@ prisma init --url mysql://root:guang@localhost:3306/prisma_test
 ```
 这次指定连接字符串。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-12.png)
 
 可以看到，provider 会根据你指定的 url 来识别，并且 .env 里的 url 就是我们传入的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-13.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-14.png)
 
 ## prisma db
 
@@ -106,7 +106,7 @@ prisma init --url mysql://root:guang@localhost:3306/prisma_test
 
 其实 init 命令的打印提示了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-15.png)
 
 你可以执行 prisma db pull 把数据库里的表同步到 schema 文件。
 
@@ -116,17 +116,17 @@ prisma init --url mysql://root:guang@localhost:3306/prisma_test
 prisma db pull
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-16.png)
 
 提示发现了 2 个 model 并写入了 schema 文件。
 
 现在连接的 prisma_test 数据库里是有这两个表的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-17.png)
 
 生成的 model 定义是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-18.png)
 
 其中，@@index 是定义索引，这里定义了 authorId 的外键索引。
 
@@ -136,13 +136,13 @@ prisma db pull
 prisma db -h
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-19.png)
 
 试下 prisma db push 命令：
 
 首先在 mysql workbench 里把这两个表删掉：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-20.png)
 
 然后执行 db push：
 
@@ -150,13 +150,13 @@ prisma db -h
 prisma db push
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-21.png)
 
 提示同步到了 database，并且生成了 client 代码。
 
 在 mysql workbench 里可以看到新的表：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-22.png)
 
 seed 命令是执行脚本插入初始数据到数据库。
 
@@ -171,7 +171,7 @@ npm install typescript ts-node @types/node --save-dev
 npx tsc --init
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-23.png)
 
 然后写下初始化脚本 prisma/seed.ts
 
@@ -213,7 +213,7 @@ main();
 ```
 在 package.json 添加 seed 命令的配置：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-24.png)
 
 ```json
 "prisma": {
@@ -226,13 +226,13 @@ main();
 prisma db seed
 ```
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第115章-25.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-25.png)
 
 在 mysql workbench 里可以看到数据被正确插入了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-26.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-27.png)
 
 其实 seed 命令就是把跑脚本的过程封装了一下，和直接用 ts-node 跑没啥区别。
 
@@ -253,11 +253,11 @@ prisma db execute --file prisma/test.sql --schema prisma/schema.prisma
 
 而 --schema 指定 schema 文件，主要是从中拿到数据库连接信息。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-28.png)
 
 然后去 mysql workbench 里看一下，确实 id 为 2 的 Post 数据没有了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-29.png)
 
 这就是 db 的 4 个命令。
 
@@ -267,7 +267,7 @@ mirgrate 是迁移的意思，在这里是指表的结构变化。
 
 prisma migrate 有这些子命令：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-30.png)
 
 我们分别来看一下。
 
@@ -283,17 +283,17 @@ prisma migrate dev --name init
 
 它会提示是否要 reset：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-31.png)
 
 选择是，会应用这次 mirgration，生成 sql 文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-32.png)
 
 并且会生成 client 代码，而且会自动执行 prisma db seed，插入初始化数据。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-33.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-34.png)
 
 这样就既创建了表，又插入了初始数据，还生成了 client。
 
@@ -303,13 +303,13 @@ prisma migrate dev --name init
 
 目录名是 “年月日时分秒_名字” 的格式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-35.png)
 
 那如果我们改一下 schema 文件，再次执行 migrate dev 呢？
 
 在 Post 的 model 定义里添加 tag 字段：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-36.png)
 
 ```
 tag       String  @default("")
@@ -319,23 +319,23 @@ tag       String  @default("")
 ```
 prisma migrate dev --name age-field
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-37.png)
 
 这次生成的 sql 只包含了修改表结构的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-38.png)
 
 在数据库中有个 _prisma_migrations 表，记录着数据库 migration 的历史：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-39.png)
 
 如果把这个表删掉，再次 mirgate dev 就会有前面的是否 reset 的提示了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-40.png)
 
 如果你想手动触发reset，可以用 reset 命令：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-41.png)
 
 它会清空数据然后执行所有 migration
 
@@ -343,11 +343,11 @@ prisma migrate dev --name age-field
 prisma migrate reset
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-42.png)
 
 会提示会丢失数据，确认后就会重置表，然后执行所有 migration：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-43.png)
 
 还会生成 client 代码，并且执行 prisma db seed 来初始化数据。
 
@@ -355,7 +355,7 @@ prisma migrate reset
 
 generate 命令只是用来生成 client 代码的，他并不会同步数据库：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-44.png)
 
 只是根据 schema 定义，在 node_modules/@prisma/client 下生成代码，用于 CRUD。
 
@@ -366,24 +366,24 @@ generate 命令只是用来生成 client 代码的，他并不会同步数据库
 ```
 prisma studio
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-45.png)
 
 选择一个 model：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-46.png)
 
 会展示它的所有数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-47.png)
 
 可以编辑记录：
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-48.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-48.png)
 
 删除记录：
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-49.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-49.png)
 
 新增记录：
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-50.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-50.png)
 
 不过一般我们都用 mysql workbench 来做。
 
@@ -391,7 +391,7 @@ prisma studio
 
 这个是用来检查 schema 文件是否有语法错误的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-51.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-51.png)
 
 比如我写错一个类型，然后执行 validate：
 
@@ -400,11 +400,11 @@ prisma validate
 ```
 会提示这里有错误：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-52.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-52.png)
 
 当然，我们安装了 prisma 的插件之后，可以直接在编辑器里看到这个错误：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-53.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-53.png)
 
 就和 eslint 差不多。
 
@@ -412,17 +412,17 @@ prisma validate
 
 这个是用来格式化 prisma 文件的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-54.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-54.png)
 
 当然，你安装了 prisma 的 vscode 插件之后，也可以直接用编辑器的 format：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-55.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-55.png)
 
 ## prisma version
 
 这个就是展示一些版本信息的，比较简单：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第115章-56.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第115章-56.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/prisma-all-command)
 

@@ -2,7 +2,7 @@
 
 虽然简单，它却是微服务体系必不可少的组件：
  
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-1.png)
 
 服务注册、发现、配置集中管理，都是用它来做。
 
@@ -14,7 +14,7 @@
 
 还可以像 TypeOrmModule、JwtModule 等这些，封装一个动态模块：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-2.png)
 
 下面我们就来写一下：
 
@@ -22,28 +22,28 @@
 nest new nest-etcd
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-3.png)
 
 进入项目，把服务跑起来：
 
 ```
 npm run start:dev
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-4.png)
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-5.png)
 
 nest 服务跑起来了。
 
 按照上节的步骤把 etcd 服务跑起来：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-6.png)
 
 然后我们加一个 etcd 的 provider：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-7.png)
 
 ```javascript
 import { Module } from '@nestjs/common';
@@ -76,7 +76,7 @@ export class AppModule {}
 ```
 在 AppController 里注入下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-8.png)
 
 ```javascript
 import { Controller, Get, Inject, Query } from '@nestjs/common';
@@ -116,13 +116,13 @@ export class AppController {
 
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-9.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-10.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-11.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-12.png)
 
 这样 etcd 就集成好了，很简单。
 
@@ -135,7 +135,7 @@ nest g module etcd
 nest g service etcd
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-13.png)
 
 在 EtcdModule 添加 etcd 的 provider：
 
@@ -232,15 +232,15 @@ export class EtcdService {
 nest g resource aaa
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-14.png)
 
 引入 EtcdModule：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-15.png)
 
 然后在 AaaController 注入 EtcdService，添加两个 handler：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-16.png)
 
 ```javascript
 @Inject(EtcdService)
@@ -259,9 +259,9 @@ async getConfig() {
 ```
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-17.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-18.png)
 
 没啥问题。
 
@@ -310,20 +310,20 @@ export class EtcdModule {
 
 然后 AaaModule 引入 EtcdModule 的方式也改下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-19.png)
 
 用起来是一样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-20.png)
 
 但是现在 etcd 的参数是动态传入的了，这就是动态模块的好处。
 
 当然，一般动态模块都有 forRootAsync，我们也加一下：
 
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-21.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-22.png)
 
 ```javascript
 export interface EtcdModuleAsyncOptions  {
@@ -361,7 +361,7 @@ static forRootAsync(options: EtcdModuleAsyncOptions): DynamicModule {
 
 现在就可以这样传入 options 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-23.png)
 
 ```javascript
 EtcdModule.forRootAsync({
@@ -385,7 +385,7 @@ npm install @nestjs/config
 ```
 在 AppModule 引入 ConfigModule：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-24.png)
 
 ```javascript
 ConfigModule.forRoot({
@@ -402,7 +402,7 @@ etcd_auth_password=guang
 ```
 然后在引入 EtcdModule 的时候，从 ConfigService 拿配置：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-25.png)
 
 ```javascript
 EtcdModule.forRootAsync({
@@ -421,7 +421,7 @@ EtcdModule.forRootAsync({
 ```
 测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第107章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第107章-26.png)
 
 功能正常。
 

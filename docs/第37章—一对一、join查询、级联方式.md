@@ -14,11 +14,11 @@
 
 这样两个表，分别存储用户信息，还有身份证信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-1.png)
 
 它们之间是一对一的关系，这时就可以用外键来表示。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-2.png)
 
 user 表的主键是 id、可以通过 id 来唯一标识一个 user。
 
@@ -32,15 +32,15 @@ user 表叫主表，使用外键引用它的 id\_card 表是从表。
 
 选中 hello-mysql 数据库，点击建表按钮：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-3.png)
 
 分别添加 id、name 列：
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第37章-4.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-4.png)
 
 点击 apply，建表 sql 如下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-5.png)
 
 你也可以直接用这个 sql 来建表：
 
@@ -54,7 +54,7 @@ CREATE TABLE `hello-mysql`.`user` (
 
 然后再建个 id\_card 表：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-6.png)
 
 id 为 INT 类型，设置 primary key、not null 的约束，然后设置 auto increment。
 
@@ -64,19 +64,19 @@ user\_id 为 INT 类型。
 
 然后添加外键：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-7.png)
 
 指定外键 user\_id 关联 user 表的 id。
 
 这里还要选择主表数据 update 或者 delete 的时候，从表怎么办：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-8.png)
 
 我们先用默认的。
 
 点击 apply，生成的建表 sql 是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-9.png)
 
 ```sql
 CREATE TABLE `id_card` (
@@ -101,9 +101,9 @@ CONSTRINT user\_id FOREIGN KEY 是给 user\_id 添加一个外键约束，然后
 
 然后就可以看到 user 和 id\_card 表了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-10.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-11.png)
 
 我们插入几条数据：
 
@@ -122,7 +122,7 @@ INSERT INTO `user` (`name`)
 		('陈十二'); 
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-12.png)
 
 查询一下：
 
@@ -130,7 +130,7 @@ INSERT INTO `user` (`name`)
 SELECT * FROM user;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-13.png)
 
 用户表数据成功插入了。
 
@@ -151,7 +151,7 @@ INSERT INTO id_card (card_name, user_id)
 	('610101199010101023',10);
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-14.png)
 
 查询一下：
 
@@ -159,7 +159,7 @@ INSERT INTO id_card (card_name, user_id)
 SELECT * FROM id_card;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-15.png)
 
 这样，一对一关系的数据就插入成功了。
 
@@ -173,15 +173,15 @@ SELECT * FROM user JOIN id_card ON user.id = id_card.user_id;
 
 这里用到了 JOIN ON，也就是连接 user 和 id\_card 表，关联方式是 user.id = id\_card.user\_id，也就是 id\_card 表中的外键关联 user 表的主键。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-16.png)
 
 点击左上角按钮，新建一条 sql：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-17.png)
 
 查询的结果是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-18.png)
 
 这里的两个 id 分别是 user 和 card 的 id，而且后面的 user\_id 也没必要展示。
 
@@ -195,7 +195,7 @@ SELECT user.id, name, id_card.id as card_id, card_name
 
 指定显示的列，并给 id\_card 表的 id 起个 card\_id 的别名。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-19.png)
 
 这就是多表关联查询，语法是 JOIN ON。
 
@@ -203,7 +203,7 @@ SELECT user.id, name, id_card.id as card_id, card_name
 
 比如这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-20.png)
 
 选中单元格，点击 delete 就可以把它置为 null。
 
@@ -211,7 +211,7 @@ SELECT user.id, name, id_card.id as card_id, card_name
 
 这时候再执行上面那条 sql 来查询，就可以看到少了两条记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-21.png)
 
 因为 JOIN ON 其实默认是 INNER JOIN ON，相当于这么写：
 
@@ -221,7 +221,7 @@ SELECT user.id, name, id_card.id as card_id, card_name
     INNER JOIN id_card ON user.id = id_card.user_id;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-22.png)
 
 INNER JOIN 是只返回两个表中能关联上的数据。
 
@@ -243,7 +243,7 @@ SELECT user.id, name, id_card.id as card_id, card_name
 
 当使用 RIGHT JOIN 时，会额外返回右表中没有关联的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-23.png)
 
 可以看到返回了所有 id\_card 的数据，没有关联 user 的记录 user 信息为 null。
 
@@ -255,7 +255,7 @@ SELECT user.id, name, id_card.id as card_id, card_name
     LEFT JOIN id_card ON user.id = id_card.user_id;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-24.png)
 
 一般情况，还是用默认的 JOIN ON 比较多，也就是 INNER JOIN。
 
@@ -267,11 +267,11 @@ SELECT user.id, name, id_card.id as card_id, card_name
 
 我们之前设置的是默认的 RESTICT：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-25.png)
 
 其实可选的值有 4 种：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-26.png)
 
 *   CASCADE： 主表主键更新，从表关联记录的外键跟着更新，主表记录删除，从表关联记录删除
 
@@ -285,98 +285,98 @@ SELECT user.id, name, id_card.id as card_id, card_name
 
 现在 user 表是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-27.png)
 
 右键选择 delete row：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-28.png)
 
 这时候会提示你更新失败，因为有外键的约束。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-29.png)
 
 点击 revert，回到之前的状态：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-30.png)
 
 然后更新 id 为 11，点击 apply：
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-31.png)
 
 同样会提示你更新失败，因为有外键的约束：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-32.png)
 
 这就是 **RESTIRCT 和 NO ACTION 的处理逻辑：只要从表有关联记录，就不能更新 id 或者删除记录。**
 
 我们手动把从表记录的关联去掉，也就是删除第一条记录的外键（按 delete 键）：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-33.png)
 
 点击 apply 应用这次改动。
 
 然后再试下主表的更新：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-34.png)
 
 这次就更新成功了！
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-35.png)
 
 再来试下删除：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-36.png)
 
 同样也成功了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-37.png)
 
 这就是 RESTRICT 或者 NO ACTION，只有当从表没有关联的记录的时候，才能更新主表记录的 id 或者删除它。
 
 我们再来试试 CASCADE：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-38.png)
 
 修改外键级联方式为 CASCADE，点击 apply。
 
 先看一下现在 id\_card 表的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-39.png)
 
 把 id 为 2 的 user 的 id 改为 22，点击 apply：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-40.png)
 
 再看下 id\_card 表的数据，你会发现 user\_id 跟着改了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-41.png)
 
 然后把 id 为 22 的 user 删除掉，点击 apply：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-42.png)
 
 再看下 id\_card 表会发现那条 user\_id 为 22 的记录也没了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-43.png)
 
 这就是级联方式为 **CASCADE 的处理逻辑：主表删除，从表关联记录也级联删除，主表 id 更新，从表关联记录也跟着更新。**
 
 然后再试下 set null：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-44.png)
 
 修改之后点击 apply。
 
 查询下现在的 id\_card 表的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-45.png)
 
 把 user 表中 id 为 5 的记录 id 改为 55，点击 apply：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-46.png)
 
 这时候 id\_card 中那条记录的外键被置为 null 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第37章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第37章-47.png)
 
 这就是 **set null 的处理逻辑：主表记录删除或者修改 id，从表关联记录外键置为 null。**
 

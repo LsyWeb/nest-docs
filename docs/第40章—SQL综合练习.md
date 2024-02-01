@@ -9,11 +9,11 @@ create database practice
 ```
 
 执行它：
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-1.png)
 
 点击刷新，就可以看到这个 database（也叫 schema）了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-2.png)
 
 执行 use practice 切换数据库：
 
@@ -21,7 +21,7 @@ create database practice
 use practice;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-3.png)
 
 然后创建 3 个表：
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 
 分别是顾客、订单、订单项。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-4.png)
 
 一个顾客有多个订单，一个订单有多个订单项，通过外键存储这种关联关系。
 
@@ -65,15 +65,15 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 
 上面还涉及到注释的语法，sql 里的注释用 -- 开头：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-5.png)
 
 执行建表 sql:
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-6.png)
 
 点击刷新，就可以看到这三个表了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-7.png)
 
 然后插入一些数据：
 
@@ -116,7 +116,7 @@ INSERT INTO `order_items` (`order_id`, `product_name`, `quantity`, `price`)
 
 执行这些 sql：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-8.png)
 
 然后查询下看看：
 
@@ -124,19 +124,19 @@ INSERT INTO `order_items` (`order_id`, `product_name`, `quantity`, `price`)
 select * from customers
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-9.png)
 
 ```sql
 select * from orders
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-10.png)
 
 ```sql
 select * from order_items
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-11.png)
 
 顾客、订单、订单项三个表都成功插入了数据。
 
@@ -157,7 +157,7 @@ SELECT customers.name, SUM(orders.total_amount) AS total_amount
 
 执行查询：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-12.png)
 
 成功查出了每个客户的订单总金额。
 
@@ -171,7 +171,7 @@ SELECT customers.name, SUM(orders.total_amount) AS total_amount
     ORDER BY total_amount DESC;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-13.png)
 
 如果想取前 3 的，可以用 LIMIT：
 
@@ -186,7 +186,7 @@ SELECT customers.name, SUM(orders.total_amount) AS total_amount
 
 从第 0 个开始取 3 个：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-14.png)
 
 ### 需求 2: 查询每个客户的订单总金额，并计算其占比
 
@@ -200,7 +200,7 @@ SELECT customers.name, SUM(orders.total_amount) AS total_amount,
     GROUP BY customers.id;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-15.png)
 
 当然，这里每次都算一遍总金额性能不好，可以先算出总金额，然后把数值传入。
 
@@ -221,7 +221,7 @@ SELECT customers.name, orders.order_date, orders.total_amount,
 
 内连接关联 3 个表，按照名字和下单日期排序。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-16.png)
 
 ### 需求 4：查询每个客户的订单总金额，并列出每个订单的商品清单，同时只显示客户名字姓“张”的客户的记录：
 
@@ -239,7 +239,7 @@ SELECT customers.name, orders.order_date, orders.total_amount,
 
 执行下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-17.png)
 
 ### 需求 5:查询每个客户的订单总金额，并列出每个订单的商品清单，同时只显示订单日期在2022年1月1日到2022年1月3日之间的记录
 
@@ -256,7 +256,7 @@ SELECT customers.name, orders.order_date,
     ORDER BY customers.name, orders.order_date;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-18.png)
 
 因为这里的 order\_date 是 date 类型，所以指定范围也只是用 2022-01-01 这种格式的。如果是 datetime，那就要用 2022-01-01 10:10:00 这种格式了。
 
@@ -288,7 +288,7 @@ GROUP\_CONCAT 函数是用于 group by 分组后，把多个值连接成一个�
 
 LIMIT 3 就相当于 LIMIT 0,3 也就是从 0 开始 3 条记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-19.png)
 
 ## 需求 7: 查询存在订单的客户
 
@@ -303,7 +303,7 @@ SELECT * FROM customers c
 
 如果从 orders 表中查出了当前 customer 的订单记录，EXISTS 就成立。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-20.png)
 
 当然，你也可以用 NO EXISTS 来查询没有下单过的客户：
 
@@ -314,7 +314,7 @@ SELECT * FROM customers c
     );
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-21.png)
 
 ## 需求 8: 将王磊的订单总金额打九折
 
@@ -326,7 +326,7 @@ SELECT * FROM orders
  WHERE customers.name = '王磊';
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-22.png)
 
 更新它们为 90%：
 
@@ -339,11 +339,11 @@ UPDATE orders o SET o.total_amount = o.total_amount * 0.9
 
 这里订单不止一条，所以用 IN 来指定一个集合。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-23.png)
 
 再查询下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第40章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第40章-24.png)
 
 确实减少了。
 

@@ -2,15 +2,15 @@
 
 比如路由找不到时返回 404：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-1.png)
 
 服务端报错时返回 500：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-2.png)
 
 参数的错误返回 400：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-3.png)
 
 这些都是 Exception Filter 做的事情。
 
@@ -23,7 +23,7 @@
 ```
 nest new exception-filter-test
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-4.png)
 
 把它跑起来：
 
@@ -31,34 +31,34 @@ nest new exception-filter-test
 npm run start:dev
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-5.png)
 
 浏览器访问 http://localhost:3000 可以看到 hello world，代表服务跑起来了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-6.png)
 
 然后在 controller 里抛个异常： 
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-7.png)
 
 ```javascript
 throw new HttpException('xxxx', HttpStatus.BAD_REQUEST)
 ```
 这个 HttpStatus 就是一些状态码的常量：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-8.png)
 
 这时候刷新页面，返回的就是 400 对应的响应：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-9.png)
 
 这个响应的格式是内置的 Exception Filter 生成的。
 
 当然，你也可以直接抛具体的异常：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-10.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-11.png)
 
 然后我们自己定义个 exception filter：
 
@@ -68,9 +68,9 @@ nest g filter hello --flat --no-spec
 
 --flat 是不生成 hello 目录，--no-spec 是不生成测试文件。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-12.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-13.png)
 
 @Catch 指定要捕获的异常，这里指定 BadRequestException。
 
@@ -89,24 +89,24 @@ export class HelloFilter implements ExceptionFilter {
 
 在 AppModule 里引入：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-14.png)
 
 ```javascript
 app.useGlobalFilters(new HelloFilter());
 ```
 如果你想局部启用，可以加在 handler 或者 controller 上：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-15.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-16.png)
 
 然后新建个调试配置文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-17.png)
 
 输入调试配置：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-18.png)
 
 ```json
 {
@@ -126,15 +126,15 @@ app.useGlobalFilters(new HelloFilter());
 ```
 把之前的服务关掉，点击调试启动：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-19.png)
 
 刷新页面，代码会在断点处断住：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-20.png)
 
 我们只要根据异常信息返回对应的响应就可以了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-21.png)
 
 ```javascript
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
@@ -160,17 +160,17 @@ export class HelloFilter implements ExceptionFilter {
 ```
 这样，抛异常时返回的响应就是自定义的了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-22.png)
 
 但我们只是 @Catch 了 BadRequestException
 
 如果抛的是其他异常，依然是原来的格式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-23.png)
 
 比如我抛一个 BadGatewayException。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-24.png)
 
 依然是默认格式。
 
@@ -178,13 +178,13 @@ export class HelloFilter implements ExceptionFilter {
 
 因为 BadRequestExeption、BadGateWayException 等都是它的子类。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-25.png)
 
 试一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-26.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-27.png)
 
 确实，现在所有的 HttpException 都会被处理了。
 
@@ -231,7 +231,7 @@ export class AaaDto {
 ```
 在 main.ts 启用 ValidationPipe：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-28.png)
 
 ```javascript
 app.useGlobalPipes(new ValidationPipe());
@@ -239,37 +239,37 @@ app.useGlobalPipes(new ValidationPipe());
 
 在 postman 里测试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-29.png)
 
 可以看到，提示的错误也不对了。
 
 因为我们自定义的 exception filter 会拦截所有 HttpException，但是没有对这种情况做支持。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-30.png)
 
 先不加这个 filter。
 
 这时候响应是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-31.png)
 
 我们对这种情况做下支持：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-32.png)
 
 启用自定义的 filter，然后打个断点：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-33.png)
 
 再次访问会在断点处断住：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-34.png)
 
 可以看到 ValidationPipe 的 response 格式是这样的。
 
 所以我们可以这样改：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-35.png)
 
 ```javascript
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
@@ -299,9 +299,9 @@ export class HelloFilter implements ExceptionFilter {
 
 再试下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-36.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-37.png)
 
 现在，ValidationPipe 的错误和其他的错误就都返回了正确的格式。
 
@@ -309,11 +309,11 @@ export class HelloFilter implements ExceptionFilter {
 
 这就需要改一下注册方式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-38.png)
 
 不用 useGlobalFilters 注册了，而是在 AppModule 里注册一个 token 为 APP_FILTER 的 provider：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-39.png)
 
 ```javascript
 {
@@ -327,13 +327,13 @@ Nest 会把所有 token 为 APP_FILTER 的 provider 注册为全局 Exception Fi
 
 其余的全局 Guard、Interceptor、Pipe 也是这样注册：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-40.png)
 
 这样注册的好处就是可以注入其他 provider 了：
 
 比如我注入了 AppService，然后调用它的 getHello 方法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-41.png)
 
 ```javascript
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException, Inject } from '@nestjs/common';
@@ -366,7 +366,7 @@ export class HelloFilter implements ExceptionFilter {
 ```
 可以看到，service 方法调用成功了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-42.png)
 
 此外，如果你想自定义 Exception 也是可以的。
 
@@ -403,7 +403,7 @@ export class UnloginFilter implements ExceptionFilter {
 
 在 AppModule 里注册这个全局 Filter：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-43.png)
 
 ```javascript
 {
@@ -413,11 +413,11 @@ export class UnloginFilter implements ExceptionFilter {
 ```
 之后在 AppController 里抛出这个异常：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-44.png)
 
 浏览器里访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第21章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第21章-45.png)
 
 可以看到，返回的是我们自定义的格式。
 

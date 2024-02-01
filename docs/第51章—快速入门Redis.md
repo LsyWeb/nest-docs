@@ -14,7 +14,7 @@ mysql 是通过硬盘来存储信息的，并且还要解析并执行 sql 语句
 
 内存和硬盘的速度差距还是很大的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-1.png)
 
 所以做后端服务的时候，我们不会只用 mysql，一般会结合内存数据库来做缓存，最常用的是 redis。
 
@@ -30,11 +30,11 @@ redis 是分为服务端和客户端的，它提供了一个 redis-cli 的命令
 
 在 docker desktop 搜索框搜索 redis，点击 run，把 redis 官方镜像下载并跑起来。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-2.png)
 
 它会让你填一些容器的信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-3.png)
 
 端口映射就是把主机的 6379 端口映射到容器内的 6379 端口，这样就能直接通过本机端口访问容器内的服务了。
 
@@ -42,13 +42,13 @@ redis 是分为服务端和客户端的，它提供了一个 redis-cli 的命令
 
 跑起来之后是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-4.png)
 
 容器内打印的日志说明 redis 服务跑起来了。
 
 files 里可以看到所有的容器内的文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-5.png)
 
 看到这个 mounted 的标志了没？
 
@@ -56,41 +56,41 @@ files 里可以看到所有的容器内的文件：
 
 我们在本地目录添加一个文件。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-6.png)
 
 在容器内的 data 目录就能访问到这个文件了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-7.png)
 
 同样，在容器内修改了 data 目录，那本机目录下也会修改。
 
 redis 服务跑起来之后，我们用 redis-cli 操作下。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-8.png)
 
 在 terminal 输入 redis-cli，进入交互模式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-9.png)
 
 我们在这里做下 string 相关的操作：
 
 [文档](https://redis.io/docs/data-types/strings/)里的命令有这么几个：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-10.png)
 
 set、get 都挺简单：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-11.png)
 
 incr 是用于递增的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-12.png)
 
 平时我们用的阅读量、点赞量等都是通过这个来计数的。
 
 当我存了几个 key 后，可以通过 keys 来查询有哪些 key:
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-13.png)
 
 keys 后加一个模式串来过滤，常用的是 '\*' 来查询所有 key。
 
@@ -102,41 +102,41 @@ keys 后加一个模式串来过滤，常用的是 '\*' 来查询所有 key。
 
 我用的是官方的 [RedisInsight](https://redis.com/redis-enterprise/redis-insight/#insight-form)，它号称是最好的 Redis GUI 工具：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-14.png)
 
 输入操作系统信息，还有邮箱、姓名、职业、手机号等信息，就可以下载安装包了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-15.png)
 
 安装后就是这个东西：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-16.png)
 
 点击 add database：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-17.png)
 
 连接信息用默认的就行：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-18.png)
 
 然后就可以看到新建的这个链接：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-19.png)
 
 点击它就可以可视化看到所有的 key 和值：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-20.png)
 
 同样也可以执行命令：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-21.png)
 
 然后我们继续看 list 类型的数据结构：
 
 文档中有这么几个命令：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-22.png)
 
 我们试一下：
 
@@ -146,44 +146,44 @@ keys 后加一个模式串来过滤，常用的是 '\*' 来查询所有 key。
 
 输入上面的命令，点击执行：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-23.png)
 
 然后回到浏览页面，点击刷新，就可以看到新的 key 和它的值：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-24.png)
 
 这就是一个列表的结构。
 
 lpush 是 left push 的意思，执行后会从左到右添加到列表中。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-25.png)
 
 rpush 是 right push 的意思，执行后会从右往左添加到列表中：
 
     rpush list1 444
     rpush list1 555
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-26.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-27.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-28.png)
 
 lpop 和 rpop 自然是从左边和从右边删除数据。
 
     lpop list1
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-29.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-30.png)
 
     rpop list1
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-31.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-32.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-33.png)
 
 如果想查看 list 数据呢？
 
@@ -195,13 +195,13 @@ lpop 和 rpop 自然是从左边和从右边删除数据。
 
     lrange list1 0 -1
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-34.png)
 
 输入一段 range，结尾下标为 -1 代表到最后。lrange list1 0 -1 就是查询 list1 的全部数据。
 
 接下来我们再来看看 set：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-35.png)
 
 set 的特点是无序并且元素不重复。
 
@@ -214,27 +214,27 @@ set 的特点是无序并且元素不重复。
     sadd set1 222
     sadd set1 333
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-36.png)
 
 刷新之后可以看到它只保留去重后的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-37.png)
 
 可以通过 sismember 判断是否是集合中的元素：
 
     sismember set1 111
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-38.png)
 
     sismember set1 444
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-39.png)
 
 set 只能去重、判断包含，不能对元素排序。
 
 如果排序、去重的需求，比如排行榜，可以用 sorted set，也就是 zset，：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-40.png)
 
 它每个元素是有一个分数的：
 
@@ -243,21 +243,21 @@ set 只能去重、判断包含，不能对元素排序。
     zadd zset1 3 xxx
     zadd zset1 6 yyyy
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-41.png)
 
 会按照分数来排序：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-42.png)
 
 通过 zrange 命令取数据，比如取排名前三的数据：
 
     zrange zset1 0 2
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-43.png)
 
 接下来是 hash：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-44.png)
 
 和我们用的 map 一样，比较容易理解：
 
@@ -267,13 +267,13 @@ set 只能去重、判断包含，不能对元素排序。
     hset hash1 key4 4
     hset hash1 key5 5
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-45.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-46.png)
 
     hget hash1 key3
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-47.png)
 
 再就是 geo 的数据结构，就是经纬度信息，根据距离计算周围的人用的。
 
@@ -283,24 +283,24 @@ set 只能去重、判断包含，不能对元素排序。
 
 用 loc 作为 key，分别添加 guangguang 和 dongdong 的经纬度
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-48.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-48.png)
 
 你会发现 redis 实际使用 zset 存储的，把经纬度转化为了二维平面的坐标：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-49.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-49.png)
 
 你可以用 geodist 计算两个坐标点的距离：
 
     geodist loc guangguang dogndong
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-50.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-50.png)
 
 用 georadius 搜索某个半径内的其他点，传入经纬度、半径和单位：
 
     georadius loc 15 37 100 km
     georadius loc 15 37 200 km
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-51.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-51.png)
 
 平时我们查找周围的人、周围的 xxx 都可以通过 redis 的 geo 数据结构实现。
 
@@ -310,15 +310,15 @@ set 只能去重、判断包含，不能对元素排序。
 
     expire dogn1 30
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-52.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-52.png)
 
 等到了过期时间就会自动删除：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-53.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-53.png)
 
 想查剩余过期时间使用 ttl：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-54.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-54.png)
 
 一些有时效的数据可以设置个过期时间。
 
@@ -340,13 +340,13 @@ redis 的数据结构就先介绍到这里。
 
 最后，还记得我们跑 redis 的 docker 镜像时指定了数据卷么：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-55.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-55.png)
 
 可以看到它确实把数据保存到了宿主机，这样就不怕再跑一个容器数据会丢了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-56.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-56.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第51章-57.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第51章-57.png)
 
 ## 总结
 

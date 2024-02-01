@@ -6,17 +6,17 @@
 
 就和我们用 Docker 时一样，mysql 也是分为后台守护进程和客户端两方面。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-1.png)
 
 我们会在命令行客户端或者 GUI 客户端里连接 MySQL，发送 SQL 语句来操作它。
 
 通过 Docker Desktop 查询下 MySQL 的镜像：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-2.png)
 
 点击 run，传入参数：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-3.png)
 
 这里端口 3306 就是 client 连接 mysql 的端口。
 
@@ -28,23 +28,23 @@
 
 之前我们也在 mysql 镜像的 dockerfile 里看到过这个 volume 声明：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-4.png)
 
 这里还要指定密码 MYSQL\_ROOT\_PASSWORD，也就是 client 连接 mysql server 的密码。
 
 如果不填，容器跑起来会有这样的提示：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-5.png)
 
 让你必须指定这三个环境变量中的一个。
 
 现在 mysql 容器就成功跑起来了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-6.png)
 
 mysql 镜像里带了 mysql 命令行工具，我们先用它连上 mysql server 操作下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-7.png)
 
 输入 mysql -u root -p 然后会让你输入密码，之后就进入 mysql 操作界面了。
 
@@ -58,39 +58,39 @@ GUI 客户端有很多，这里我们用 mysql 官方的 GUI 客户端： [MySQL
 
 （m1 芯片要选择 arm 的包）
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-8.png)
 
 它会让你登录，你可以点下面的 no thanks，直接开始下载：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-9.png)
 
 安装包下载后，点击安装。
 
 安装好后，打开 mysql workbench，点击这个 + 号：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-10.png)
 
 输入连接名，点击 store in keychain 输入密码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-11.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-12.png)
 
 之后你可以点击下 Test Connection 测试连接是否成功：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-13.png)
 
 然后点击 ok。
 
 之后点击这个连接，进入操作 mysql server 的界面：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-14.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-15.png)
 
 点击 schemas 就可以看到 mysql 现在已有的数据库和它下面的表、视图、存储过程、函数等：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-16.png)
 
 什么是视图、存储过程、函数之后再讲。
 
@@ -98,19 +98,19 @@ GUI 客户端有很多，这里我们用 mysql 官方的 GUI 客户端： [MySQL
 
 它会自动执行查询这个表全部数据的 sql：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-17.png)
 
 这就是这个表的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-18.png)
 
 点击第一个图标，会展示表的信息，比如多少列、多少行、占据了多大的空间等：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-19.png)
 
 点击第二个图标是修改表的列的定义的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-20.png)
 
 不要改这个数据库，我们新建一个来测试。
 
@@ -120,7 +120,7 @@ GUI 客户端有很多，这里我们用 mysql 官方的 GUI 客户端： [MySQL
 
 每个数据库下存储着很多表、视图、存储过程和函数。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-21.png)
 
 当然，我们最常用的还是表。
 
@@ -128,23 +128,23 @@ GUI 客户端有很多，这里我们用 mysql 官方的 GUI 客户端： [MySQL
 
 点击第一个，创建个 database（或者叫 schema）：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-22.png)
 
 输入名字，指定字符集，点击右下角的 apply。
 
 创建成功之后，就可以看到我们刚建的数据库了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-23.png)
 
 选中 hello-mysql 数据库，点击创建 table 的按钮，我们来建个表：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-24.png)
 
 输入表名 student。
 
 先建立 id 列：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-25.png)
 
 输入描述，选中 primary key、 auto increment 的约束。
 
@@ -156,7 +156,7 @@ primary key 自带了唯一（unique）和非空（not null）的约束。
 
 然后依次创建 name、age、sex、email、create\_time、status 列：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-26.png)
 
 分别是名字、年龄、性别、邮箱、创建时间、是否删除的意思。
 
@@ -168,7 +168,7 @@ name 和 create\_time 添加非空约束。
 
 mysql 的数据类型有很多：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-27.png)
 
 整数类的有：TINYINT、SMALLINT、MEDIUMINT、INT 和 BIGINT
 
@@ -206,7 +206,7 @@ mysql 的数据类型有很多：
 
 点击右下角的 apply，就会生成建表 sql：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-28.png)
 
 这就是建表语句的语法。
 
@@ -218,7 +218,7 @@ mysql 的数据类型有很多：
 
 创建成功之后点击第三个图标，就可以查询这个表的所有数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-29.png)
 
 你可以新增几行数据，每一行数据叫做一个记录（Record）。
 
@@ -228,17 +228,17 @@ mysql 的数据类型有很多：
 
 （status 也不用设置，因为我们指定了默认值了）
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-30.png)
 
 他会生成 insert 语句，这是向表中插入数据的语法：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-31.png)
 
 把它复制一下，之后我们用 insert 语句来插入数据吧，mysql workbench 这个可视化编辑功能不好用。
 
 点击 apply 之后，mysql 会执行 sql，这时候就可以看到这条记录被插入了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-32.png)
 
 因为我之前测试的时候插入过几条，所以 id 自增到了 5，status 默认设置了 0。
 
@@ -254,27 +254,27 @@ INSERT INTO `hello-mysql`.`student` (`name`, `age`, `sex`, `email`, `create_time
 
 在上面的输入框输入这几条 sql，选中它们，然后点击执行 sql 的按钮：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-33.png)
 
 下面是执行结果，可以看到都插入成功了，一共 3 行。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-34.png)
 
 然后再选中上面的查询 sql 来执行：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-35.png)
 
 下面也同样会展示查询 sql 的执行情况，一共返回了 4 行数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-36.png)
 
 新增学会了，修改和删除呢？
 
 我们同样可视化操作一下，然后看看 sql：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-37.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-38.png)
 
 修改和删除的 sql 分别是这样的：
 
@@ -345,16 +345,16 @@ SELECT * FROM `hello-mysql`.student;
 
 清空是 truncate：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-39.png)
 
 点击 review sql
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-40.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-41.png)
 
 删除是 drop：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-42.png)
 
 都很好理解。
 
@@ -362,7 +362,7 @@ SELECT * FROM `hello-mysql`.student;
 
 这些 sql 在 mysql 命令行里执行也是一样的。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-43.png)
 
 一般我们还是用 GUI 工具更多一些。
 
@@ -370,13 +370,13 @@ SELECT * FROM `hello-mysql`.student;
 
 可以先 use 数据库名 切换下数据库：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-44.png)
 
 这就像我们切到某个目录执行命令一样。
 
 在 mysql workbench 里也是这样，先选中 use xx 那行执行，然后再选中其他 sql 执行。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-45.png)
 
 有同学可能会问，之前 sql 不一直都大写么？咋这里用小写了？
 
@@ -386,11 +386,11 @@ sql 语句不区分大小写，用大写只是关键词更容易区分一些。
 
 之前是没数据的，现在就有数据了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-46.png)
 
 本地对应的目录也修改了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第35章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第35章-47.png)
 
 这样还会丢数据么？
 

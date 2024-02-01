@@ -1,6 +1,6 @@
 ﻿我们学习了 TypeORM，它是一个传统的 ORM 框架，也就是把表映射到 entity 类，把表的关联映射成 entity 类的属性关联。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-1.png)
 
 完成 entity 和表的映射之后，你只要调用 userRepository 和 postRepository 的 find、delete、save 等 api，typeorm 会自动生成对应的 sql 语句并执行。
 
@@ -14,11 +14,11 @@ Prisma 创造了一种 DSL（Domain Specific Language，领域特定语言）。
 
 类似这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-2.png)
 
 它是把表映射成了 DSL 里的 model，然后编译这个 DSL 会生成 prismaClient 的代码，之后就可以调用它的 find、delete、create 等 api 来做 CRUD 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-3.png)
 
 虽然多了一种 DSL 的语法，但整个流程其实和 typeorm 差不多的。
 
@@ -31,7 +31,7 @@ npm init -y
 ```
 首先生成项目：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-4.png)
 
 安装 typescript 相关的包：
 
@@ -46,7 +46,7 @@ typescript 是 tsc 编译器的包，ts-node 可以直接跑 ts 代码，而 @ty
 ```
 npx tsc --init
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-5.png)
 
 安装 prisma：
 
@@ -58,7 +58,7 @@ npm install prisma --save-dev
 
 首先，我们要写 schema 层的代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-6.png)
 
 这个也是用命令生成：
 
@@ -66,25 +66,25 @@ npm install prisma --save-dev
 npx prisma init --datasource-provider mysql
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-7.png)
 
 这时你会发现项目目录下多了 schema 文件和 env 文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-8.png)
 
 schema 文件里就是定义 model 的地方。
 
 这个文件可以安装 prisma 插件来添加语法高亮等支持：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-9.png)
 
 而 .env 文件里存储着连接信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-10.png)
 
 我们先去 mysql workbench 里创建个数据库：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-11.png)
 
 指定字符集为 utf8mb4，这个支持的字符集是最全的。
 
@@ -94,11 +94,11 @@ schema 文件里就是定义 model 的地方。
 CREATE SCHEMA `prisma_test` DEFAULT CHARACTER SET utf8mb4;
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-12.png)
 
 创建完 database 后，我们改下连接信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-13.png)
 
 ```env
 DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
@@ -107,7 +107,7 @@ DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
 
 然后来定义 model：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-14.png)
 
 ```prisma
 model User {
@@ -141,23 +141,23 @@ model Post {
 ```
 npx prisma migrate dev --name aaa
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-15.png)
 
 执行 prisma migrate dev，会生成并执行建表 sql 文件，而且在 node_modules 下生成了 client 代码。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-16.png)
 
 在 mysql workbench 里可以看到生成了 2 个表：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-17.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-18.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-19.png)
 
 在 node_modules/.prisma/client 下生成的代码也包含了 user 和 post 的信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-20.png)
 
 然后就可以用 @prisma/client 来做 CRUD 了。
 
@@ -196,11 +196,11 @@ test1();
 ```
 npx ts-node ./src/index.ts
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-21.png)
 
 可以看到，user 表确实插入了 2 条记录：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-22.png)
 
 然后我们再来插入一个新的 user 和它的两个 post：
 
@@ -249,12 +249,12 @@ test2();
 ```
 npx ts-node ./src/index.ts
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-23.png)
 
 可以看到被事务包裹的三条 insert 语句。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-24.png)
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-25.png)
 
 数据也都插入成功了。
 
@@ -274,9 +274,9 @@ test3();
 ```
 更新 id 为 2 的 post 的内容为 xxx：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-26.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-27.png)
 
 然后把它删掉：
 
@@ -291,15 +291,15 @@ async function test4() {
 test4();
 ```
 执行下：
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-28.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-29.png)
 
 这样，基于 prisma 的 model 定义还有 CRUD 我们就都完成了。
 
 回顾下整个流程：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第114章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第114章-30.png)
 
 只是把 entity 类变成了 DSL 语法里的 model，然后通过编译的方式生成 client 的代码，之后进行 CRUD。
 

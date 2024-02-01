@@ -2,7 +2,7 @@
 
 [官方文档](https://docs.nestjs.com/techniques/caching)里就是用的 cache-manger：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-1.png)
 
 确实，cache-manger 有它好用的地方，但是它的缺点更多。
 
@@ -13,7 +13,7 @@
 ```
 nest new cache-manager-test
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-2.png)
 
 创建个 nest 项目。
 
@@ -23,9 +23,9 @@ nest new cache-manager-test
 npm run start:dev
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-3.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-4.png)
 
 然后引入 cache-manager：
 
@@ -34,11 +34,11 @@ npm install @nestjs/cache-manager cache-manager
 ```
 在 AppModule 注册下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-5.png)
 
 之后在 AppController 加几个路由：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-6.png)
 
 注入 CacheManager，分别测试下它的 get、set、del 方法。
 
@@ -84,29 +84,29 @@ export class AppController {
 
 首先 get 没有数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-7.png)
 
 然后 set 设置为 111：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-8.png)
 
 再次 get 就有数据了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-9.png)
 
 之后 del 删掉：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-10.png)
 
 再次 get 就为空了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-11.png)
 
 这个缓存的用法很简单。
 
 此外，你还可以把它加到 handler 上，自动对结果缓存。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-12.png)
 
 ```javascript
 @Get('aaa')
@@ -118,15 +118,15 @@ aaa(@Query('a') a: string){
 ```
 参数不变的情况下，刷新几次，可以看到控制台只打印了一次：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-13.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-14.png)
 
 改变参数再刷新几次：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-15.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-16.png)
 
 这时候控制台再次打印了，说明 handler 又被执行了。
 
@@ -138,7 +138,7 @@ aaa(@Query('a') a: string){
 
 如果想存在 redis，要这样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-17.png)
 
 使用 cache-manager-redis-store，然后添加下连接配置：
 
@@ -180,25 +180,25 @@ npm install cache-manager-redis-store
 
 然后再次访问之前的 url：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-18.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-19.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-20.png)
 
 这时候在 redis 里就可以看到缓存的数据：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-21.png)
 
 注意，连接的时候我们指定 database为 2，所以在 RedisInsight 里要切到 db2 才可以看到这些数据。
 
 缓存的过期时间也是可以配置的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-22.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-23.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-24.png)
 
 有同学会说，这个 CacheManager 不是很好用么？
 
@@ -206,15 +206,15 @@ npm install cache-manager-redis-store
 
 但是，redis 还有 list、hash、zset 等数据结构，支持非常多的命令。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-25.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-26.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-27.png)
 
 而用 CacheManager 的话，只支持 get、set：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-28.png)
 
 这时候如果你想用 list、hash、zset 等数据结构，还是要自己封装。
 
@@ -228,7 +228,7 @@ npm install cache-manager-redis-store
 
 就是拼接这样一个 key 就好了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-29.png)
 
 我们实现下试试：
 
@@ -238,7 +238,7 @@ npm install redis
 ```
 然后在 AppModule 添加一个自定义的 provider：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-30.png)
 
 ```javascript
 {
@@ -261,7 +261,7 @@ npm install redis
 ```
 nest g interceptor my-cache --no-spec --flat
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-31.png)
 
 这样写：
 
@@ -311,15 +311,15 @@ HttpAdapterHost 前面没用过。我们知道 Nest 底层可以切换 express�
 
 在 aaa 上应用我们自己写的 interceptor：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-32.png)
 
 跑一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-33.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-34.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第53章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第53章-35.png)
 
 多次刷新只执行了一次 handler，并且在 redis 里存储了对应的 key、value。
 

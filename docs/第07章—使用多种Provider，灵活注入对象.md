@@ -8,21 +8,21 @@
 nest new custom-provider
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-1.png)
 
 可以看到 AppService 是被 @Injectable 修饰的 class：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-2.png)
 
 在 Module 的 providers 里声明：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-3.png)
 
 这就是 provider。
 
 其实这是一种简写，完整的写法是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-4.png)
 
 ```javascript
 {
@@ -35,11 +35,11 @@ nest new custom-provider
 
 在 AppController 的构造器里参数里声明了 AppService 的依赖，就会自动注入：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-5.png)
 
 如果不想用构造器注入，也可以属性注入：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-6.png)
 
 ```javascript
 @Inject(AppService)
@@ -54,7 +54,7 @@ private readonly appService: AppService;
 
 当然，这个 token 也可以是字符串：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-7.png)
 
 ```javascript
 {
@@ -65,7 +65,7 @@ private readonly appService: AppService;
 
 如果 token 是字符串的话，注入的时候就要用 @Inject 手动指定注入对象的 token 了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-8.png)
 
 ```javascript
 @Inject('app_service') private readonly appService: AppService
@@ -75,7 +75,7 @@ private readonly appService: AppService;
 
 点击调试面板的 create launch.json file，创建调试配置文件：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-9.png)
 
 添加这样一个调试配置：
 
@@ -97,11 +97,11 @@ private readonly appService: AppService;
 ```
 在 getHello 方法打个断点，点击调试启动：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-10.png)
 
 浏览器访问 http://localhost:3000 ，代码会在断点处断住。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-11.png)
 
 可以看到，这时候 appService 就有值了。
 
@@ -111,7 +111,7 @@ private readonly appService: AppService;
 
 除了指定 class 外，还可以直接指定一个值，让 IoC 容器来注入。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-12.png)
 
 ```javascript
 {
@@ -127,7 +127,7 @@ private readonly appService: AppService;
 
 然后在对象里注入它：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-13.png)
 
 ```javascript
 @Inject('person') private readonly person: {name: string, age: number}
@@ -135,7 +135,7 @@ private readonly appService: AppService;
 
 调试一下可以看到，确实是注入了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-14.png)
 
 provider 的值可能是动态产生的，Nest 也同样支持：
 
@@ -155,7 +155,7 @@ provider 的值可能是动态产生的，Nest 也同样支持：
 
 在对象里注入：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-15.png)
 
 ```javascript
 @Inject('person2') private readonly person2: {name: string, desc: string}
@@ -165,11 +165,11 @@ provider 的值可能是动态产生的，Nest 也同样支持：
 
 调试下，也是可以拿到创建出的对象的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-16.png)
 
 这个 useFactory 支持通过参数注入别的 provider：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-17.png)
 
 ```javascript
 {
@@ -188,17 +188,17 @@ provider 的值可能是动态产生的，Nest 也同样支持：
 
 也就是注入这两个 provider：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-18.png)
 
 在 return 那里打个断点。
 
 可以看到，在调用 useFactory 方法的时候，Nest 就会注入这两个对象：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-19.png)
 
 useFactory 支持异步：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-20.png)
 
 ```javascript
 {
@@ -216,13 +216,13 @@ useFactory 支持异步：
 ```
 Nest 会等拿到异步方法的结果之后再注入：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-21.png)
 
 这样就可以更灵活的创建注入对象。
 
 此外，provider 还可以通过 useExisting 来指定别名：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-22.png)
 
 ```javascript
 {
@@ -235,7 +235,7 @@ Nest 会等拿到异步方法的结果之后再注入：
 
 然后就可以用新 token 来注入了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-23.png)
 
 这些自定义 provider 的方式里，最常用的是 useClass，不过我们一般会用简写，也就是直接指定 class。
 
@@ -247,23 +247,23 @@ useExisting 只是用来起别名的，有的场景下会用到。
 
 它用 useValue 来[注入一段字符串](https://github.com/nestjs/typeorm/blob/153da09a384fdbf797b66e4500b69a72a7a47b78/lib/typeorm-core.module.ts#L113-L116)：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-24.png)
 
 用 useFactory 根据传入的 options [动态创建数据库连接对象](https://github.com/nestjs/typeorm/blob/153da09a384fdbf797b66e4500b69a72a7a47b78/lib/typeorm-core.module.ts#L83-L101)：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-25.png)
 
 用 useExisting 给 DataSource 起了一个 Connection 的[别名](https://github.com/nestjs/typeorm/blob/153da09a384fdbf797b66e4500b69a72a7a47b78/lib/typeorm-core.module.ts#L68-L71)：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-26.png)
 
 这里是一个版本用了 Connection，一个版本用了 DataSource，通过 useExisting 起别名就可以兼容两者。
 
 此外，如果觉得构造器注入写起来不方便，可以使用属性注入，效果一样：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-27.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第07章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第07章-28.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/custom-provider)。
 

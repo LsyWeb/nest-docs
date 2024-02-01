@@ -18,7 +18,7 @@ npm install --save @nestjs/swagger
 
 然后在 main.ts 添加这样一段代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-1.png)
 
 ```javascript
 const config = new DocumentBuilder()
@@ -43,19 +43,19 @@ npm run start:dev
 ```
 访问 http://localhost:3000/doc 就可以看到 swagger 的 api 文档了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-2.png)
 
 和 DocumentBuilder 填的配置的对应关系如下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-3.png)
 
 现在只有一个接口，调用会返回 hello world：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-4.png)
 
 点击 try it out，再点击 execute，就可以看到返回的响应体和 header：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-5.png)
 
 我们在 AppController 加几个接口试试：
 
@@ -83,11 +83,11 @@ ccc(@Body('ccc') ccc) {
 
 刷新下可以看到，这几个接口都列出来了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-6.png)
 
 但是都没有 param 的描述和 response 的描述：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-7.png)
 
 这时就需要我们手动标注了：
 
@@ -108,11 +108,11 @@ aaa(@Query('a1') a1, @Query('a2') a2) {
 
 这俩分别是指定这个接口的描述，接口的响应的。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-8.png)
 
 再加上 @ApiQuery 来添加 query 参数的说明：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-9.png)
 
 ```javascript
 @ApiQuery({
@@ -132,25 +132,25 @@ aaa(@Query('a1') a1, @Query('a2') a2) {
 ```
 刷新下，可以看到 swagger 文档里出现了这两个参数的说明：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-10.png)
 
 点击 try it out 和 execute，就可以看到发送了请求并返回了响应：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-11.png)
 
 这样，一个接口就描述完了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-12.png)
 
 通过 @ApiOperation 描述接口的信息，@ApiResponse 描述返回值信息，@ApiQuery 描述 query 参数信息。
 
 就能生成对应的 swagger 文档：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-13.png)
 
 我们接着来生成 bbb 接口的 swagger 文档：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-14.png)
 
 这里用到的是 @ApiParam 而不是 @ApiQuery，其余部分一样：
 ```javascript
@@ -169,13 +169,13 @@ aaa(@Query('a1') a1, @Query('a2') a2) {
 ```
 刷新可以看到 bbb 接口的文档：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-15.png)
 
 那如果 id 不合法的时候，我返回了一个 401 的响应呢？
 
 那就再加一个 @ApiResponse
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-16.png)
 
 ```javascript
 @ApiOperation({ summary: '测试 bbb',description: 'bbb 描述' })
@@ -205,13 +205,13 @@ bbb(@Param('id') id: number) {
 ```
 刷新下，可以看到 swagger 文档标识出了这两种响应：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-17.png)
 
 然后再来写 ccc 接口的文档：
 
 ccc 接收的是请求体的参数，我们创建个 CccDto。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-18.png)
 
 ```javascript
 export class CccDto {
@@ -234,7 +234,7 @@ ccc(@Body('ccc') ccc: CccDto) {
 ```
 创建个 vo 的 class：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-19.png)
 ```javascript
 export class CccVo {
     aaa: number;
@@ -257,11 +257,11 @@ ccc(@Body('ccc') ccc: CccDto) {
 
 这里的 dto、vo 随便搜一下就能查到解释：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-20.png)
 
 在 Nest 里要能清楚的区分 dto、vo、entity 的区别：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-21.png)
 
 dto 是 data transfer object，用于参数的接收。
 
@@ -273,7 +273,7 @@ vo 是 view object，用于返回给视图的数据的封装。
 
 很容易想到，body 的描述是通过 @ApiBody 的装饰器：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-22.png)
 ```javascript
 @ApiOperation({summary:'测试 ccc'})
 @ApiResponse({
@@ -297,7 +297,7 @@ ccc(@Body('ccc') ccc: CccDto) {
 
 刷新页面，你会看到除了接口外，还生成了俩 schema。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-23.png)
 
 也就是说对象的响应会对应 swagger 的 schema。
 
@@ -305,7 +305,7 @@ ccc(@Body('ccc') ccc: CccDto) {
 
 在 CccDto 加一下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-24.png)
 
 aaa、bbb、ccc 通过 @ApiProperty 标识下，并且 bbb 是 @ApiPropertyOptional，也就是可选，这个和 @ApiProperty({ required: false }) 等价。
 
@@ -326,49 +326,49 @@ export class CccVo {
 ```
 刷新下，现在就可以看到 CccDto、CccVo 的 schema 有属性了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-25.png)
 
 其中 bbb 是没有 * 的，代表可不传。
 
 上面的接口部分也有了请求和响应的示例：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-26.png)
 
 点下 try it out，可以自己编辑请求体：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-27.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-27.png)
 
 然后点击 execute 就可以看到响应的内容和 header：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-28.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-28.png)
 
 服务端也确实接收到了这个请求：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-29.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-29.png)
 
 可以用 swagger 来方便的测试接口。
 
 此外，还可以通过 @ApiTags 来给接口分组：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-30.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-30.png)
 
 比如 controller 是 xxx 开头的，那可以用 @ApiTags 来分组到 xxx。
 
 显示的时候，就会把这个 controller 的接口分到一个组下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-31.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-31.png)
 
 也可以添加在 handler 上：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-32.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-32.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-33.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-33.png)
 
 比如把 aaa、bbb 接口分到 xxx-get 的组。
 
 那显示的时候就会把这俩接口分出来：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-34.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-34.png)
 
 当接口多了之后，分组还是很有必要的。
 
@@ -391,7 +391,7 @@ export class CccDto {
 
 比如 required、minium、maximum、default、maxLength 等。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-35.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-35.png)
 
 此外，很多接口是需要登录才能访问的，那如何限制呢？
 
@@ -401,16 +401,16 @@ swagger 也提供了这方面的支持。
 
 分别在 aaa、bbb、ccc 接口添加 @ApiBearerAuth、@ApiCookieAuth、@ApiBasicAuth
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-36.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-36.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-37.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-37.png)
 
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-38.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-38.png)
 
 然后在 main.ts 里添 3 种认证方式的信息：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-39.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-39.png)
 
 ```javascript
 const config = new DocumentBuilder()
@@ -437,37 +437,37 @@ const config = new DocumentBuilder()
 ```
 刷新页面就可以看到接口出现了锁的标记：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-40.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-40.png)
 
 点击 aaa 的锁：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-41.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-41.png)
 
 输入 jwt 的 token，然后点击 authorize。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-42.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-42.png)
 
 锁会变成锁住状态，代表授权成功了。
 
 这时候再发一个请求：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-43.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-43.png)
 
 会发现带上了 Authorization 的 header，这就是我们见过的 jwt 认证方式。
 
 同理，下面的 cookie 会带上对应的 cookie来认证：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-44.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-44.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-45.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-45.png)
 
 而 basic 的方式，会要求你输入用户名密码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-46.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-46.png)
 
 请求时会带上 Authorization： Basic xxx 的 header 来访问。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-47.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-47.png)
 
 这样，这些需要授权的接口就分别添加上了不同的认证方式的标识。
 
@@ -475,11 +475,11 @@ const config = new DocumentBuilder()
 
 在 /doc 后加上个 -json 就可以看到对应的 json
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-48.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-48.png)
 
 装个格式化 chrome 插件格式化一下，大概是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第71章-49.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第71章-49.png)
 
 如果你觉得 swagger 文档比较丑，可以这个 json 导入别的平台。
 

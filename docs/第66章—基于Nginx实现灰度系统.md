@@ -6,7 +6,7 @@
 
 灰度系统可以把流量划分成多份，一份走新版本代码，一份走老版本代码。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-1.png)
 
 而且灰度系统支持设置流量的比例，比如可以把走新版本代码的流程设置为 5%，没啥问题再放到 10%，50%，最后放到 100% 全量。
 
@@ -22,7 +22,7 @@
 
 nginx 是一个反向代理的服务，用户请求发给它，由它转发给具体的应用服务器。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-2.png)
 
 这一层也叫做网关层。
 
@@ -37,7 +37,7 @@ nginx 是一个反向代理的服务，用户请求发给它，由它转发给�
 ```
 npx nest new gray_test -p npm
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-3.png)
 
 把 nest 服务跑起来：
 
@@ -45,29 +45,29 @@ npx nest new gray_test -p npm
 npm run start
 ```
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-4.png)
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-5.png)
 
 看到 hello world 代表 nest 服务跑起来了。
 
 然后改下 AppService：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-6.png)
 
 修改下端口：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-7.png)
 
 然后再 npm run start：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-8.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-8.png)
 
 浏览器访问下：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-9.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-9.png)
 
 现在我们就有了两个版本的 nest 代码。
 
@@ -77,22 +77,22 @@ npm run start
 
 docker desktop 搜索 nginx 镜像（这步需要科学上网），点击 run：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-10.png)
 
 设置容器名为 gray1，端口映射宿主机的 82 到容器内的 80
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-11.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-11.png)
 
 现在访问 http://localhost:82 就可以看到 nginx 页面了：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-12.png)
 
 我们要修改下配置文件，把它复制出来：
 
 ```
 docker cp gray1:/etc/nginx/conf.d ~/nginx-config
 ```
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-13.png)
 
 然后编辑下这个 default.conf
 
@@ -109,7 +109,7 @@ location ^~ /api {
 
 然后我们重新跑个 nginx 容器：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-14.png)
 
 容器名为 gray2，端口映射 83 到容器内的 80。
 
@@ -121,21 +121,21 @@ location ^~ /api {
 
 可以看到容器内的 /etc/nginx/conf.d 目录标识为了 mounted。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-15.png)
 
 点开看看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-16.png)
 
 这就是本地的那个文件。
 
 我们在本地改一下试试：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-17.png)
 
 容器内也同样修改了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-18.png)
 
 在容器内修改这个文件，本地同样也会修改。
 
@@ -143,19 +143,19 @@ location ^~ /api {
 
 然后我们访问下 http://localhost:83/api/ 看看：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-19.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-19.png)
 
 nest 服务访问成功了。
 
 现在我们不是直接访问 nest 服务了，而是经历了一层 nginx 反向代理或者说网关层。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-20.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-20.png)
 
 自然，我们可以在这一层实现流量控制的功能。
 
 前面我们讲负载均衡的时候，是这么配的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-21.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-21.png)
 
 默认会轮询把请求发给 upstream 下的 server。
 
@@ -197,21 +197,21 @@ location ^~ /api {
 ```
 如果包含 version=1.0 的 cookie，那就走 version1.0_server 的服务，有 version=2.0 的 cookie 就走 version2.0_server 的服务，否则，走默认的。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-22.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-22.png)
 
 这样就实现了流量的划分，也就是灰度的功能。
 
 然后我们重新跑下容器：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-23.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-23.png)
 
 这时候，你访问 http://localhost:83/api/ 走到的就是默认的版本。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-24.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-24.png)
 
 然后带上 version=2.0 的 cookie，走到的就是另一个版本的代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-25.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-25.png)
 
 这样，我们就实现了灰度的功能。
 
@@ -229,7 +229,7 @@ location ^~ /api {
 
 完整的灰度流程是这样的：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第66章-26.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第66章-26.png)
 
 第一次请求的时候，会按照设定的比例随机对流量染色，也就是设置不同 cookie。
 

@@ -18,11 +18,11 @@ express、koa 这种处理请求响应的库并不能约束代码的写法，代
 
 比如 Nest 代码一般都是分了很多模块：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-1.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-1.png)
 
 每个模块下都是 controller、service、guard、filter、interceptor、dto 等这些代码：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-2.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-2.png)
 
 什么代码放在哪里都是有规范的。
 
@@ -30,13 +30,13 @@ express、koa 这种处理请求响应的库并不能约束代码的写法，代
 
 <https://github.com/apitable/apitable/tree/35b05eb421d31a4e4b68ca0bacb1fb484186f4ea/packages/room-server>
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-3.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-3.png)
 
 那 egg 和 midway 呢？
 
 egg 的 ts 支持不行，在当下 ts 这么主流的情况下，已经不合适了。更何况它是阿里的项目，而阿里 egg 团队也被打包裁了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-4.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-4.png)
 
 midway 呢？
 
@@ -44,9 +44,9 @@ star 数差太多了，和 nest 不在一个量级。
 
 而且你能保证它不是下一个 egg 么？
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-5.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-5.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-6.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-6.png)
 
 Nest 是在全世界都很火，在国内也越来越流行，找不到啥对手。
 
@@ -58,7 +58,7 @@ Nest 是在全世界都很火，在国内也越来越流行，找不到啥对手
 
 比如类似这种的后端架构：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-7.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-7.png)
 
 所以我们学的并不只是 Nest，而是整个后端生态。
 
@@ -75,27 +75,27 @@ Nest 是在全世界都很火，在国内也越来越流行，找不到啥对手
 <https://eleduck.com/posts/oQfOD7>
 
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第02章-8.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-8.png)
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第02章-9.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-9.png)
 
 这个：
 
 <https://eleduck.com/tposts/Baf0Dy>
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-10.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-10.png)
 
 或者这个：
 
 <https://eleduck.com/posts/njfbzD>
 
-![image.png](http://static.liushuaiyang.com/nest-docs/image/第02章-11.png)
+![image.png](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-11.png)
 
 还有这个：
 
 <https://eleduck.com/posts/XNfBXN>
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-12.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-12.png)
 
 如果你会 React + Nest 技术栈，找个远程全栈工作不也很香么。
 
@@ -105,7 +105,7 @@ Nest 是在全世界都很火，在国内也越来越流行，找不到啥对手
 
 比如刚才我们看到这个国外的这个盈利的产品，它就是用 Nest 做的后端：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-13.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-13.png)
 
 或者你是大学生，想做一个写在简历里的前端项目，那只写前端就可以了么？
 
@@ -119,21 +119,21 @@ Nest 的架构很优雅，因为它用了不少设计模式。
 
 就是因为它用了适配器的设计模式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-14.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-14.png)
 
 Nest 本身只依赖 HttpServer 接口，并不和具体的库耦合。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-15.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-15.png)
 
 你想换别的 http 处理的库，只要写一个新的适配器就好了。
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-16.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-16.png)
 
 再比如 Nest 内构建复杂对象很多地方都用到了 builder 的设计模式：
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-17.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-17.png)
 
-![](http://static.liushuaiyang.com/nest-docs/image/第02章-18.png)
+![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/image/第02章-18.png)
 
 类似这样的设计有很多。
 
