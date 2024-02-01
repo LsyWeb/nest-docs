@@ -8,29 +8,29 @@
 
 比如 Reflect.get 是获取对象属性值
 
-![](./image/第13章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-1.png)
 
 Reflect.set 是设置对象属性值
 
-![](./image/第13章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-2.png)
 
 Reflect.has 是判断对象属性是否存在
 
-![](./image/第13章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-3.png)
 
 Reflect.apply 是调用某个方法，传入对象和参数
 
-![](./image/第13章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-4.png)
 
 Reflect.construct 是用构造器创建对象实例，传入构造器参数
 
-![](./image/第13章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-5.png)
 
 这些 api 在 [MDN 文档](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect)里可以查到，因为它们都已经是 es 标准了，也被很多浏览器实现了。
 
 但是实现 Nest 用到的 api 还没有进入标准，还在草案阶段，也就是 [metadata 的 api](https://rbuckton.github.io/reflect-metadata/)：
 
-![](./image/第13章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-6.png)
 
 它有这些 api：
 
@@ -111,7 +111,7 @@ let paramTypes = Reflect.getMetadata("design:paramtypes", obj, "add");
 
 我们再看下 nest 的源码：
 
-![](./image/第13章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-7.png)
 
 上面就是 @Module 装饰器的实现，里面就调用了 Reflect.defineMetadata 来给这个类添加了一些元数据。
 
@@ -131,15 +131,15 @@ let paramTypes = Reflect.getMetadata("design:paramtypes", obj, "add");
 
 后面创建 IOC 容器的时候就会取出这些元数据来处理：
 
-![](./image/第13章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-8.png)
 
-![](./image/第13章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-9.png)
 
 而且 @Controller 和 @Injectable 的装饰器也是这样实现的：
 
-![](./image/第13章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-10.png)
 
-![](./image/第13章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-11.png)
 
 Nest 的实现原理就是通过装饰器给 class 或者对象添加元数据，然后初始化的时候取出这些元数据，进行依赖的分析，然后创建对应的实例对象就可以了。
 
@@ -187,13 +187,13 @@ export class CatsController {
 
 按理说我们只添加了一个元数据，生成的代码也确实是这样的：
 
-![](./image/第13章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-12.png)
 
 但是呢，ts 有一个编译选项叫做 emitDecoratorMetadata，开启它就会自动添加一些元数据。
 
 开启之后再试一下：
 
-![](./image/第13章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-13.png)
 
 你会看到多了三个元数据：
 
@@ -209,27 +209,27 @@ design:returntype 是 String，也很容易理解，就是返回值的类型
 
 所以，nest 源码里你会看到这样的代码：
 
-![](./image/第13章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-14.png)
 
 就是获取构造器的参数类型的。这个常量就是我们上面说的那个：
 
-![](./image/第13章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-15.png)
 
 这也是为什么 nest 会用 ts 来写，因为它很依赖这个 emitDecoratorMetadata 的编译选项。
 
 你用 cli 生成的代码模版里也都默认开启了这个编译选项：
 
-![](./image/第13章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-16.png)
 
 这就是 nest 的核心实现原理：**通过装饰器给 class 或者对象添加 metadata，并且开启 ts 的 emitDecoratorMetadata 来自动添加类型相关的 metadata，然后运行的时候通过这些元数据来实现依赖的扫描，对象的创建等等功能。**
 
 Nest 的装饰器都是依赖 reflect-metadata 实现的，而且还提供了一个 @SetMetadata 的装饰器让我们可以给 class、method 添加一些 metadata：
 
-![](./image/第13章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-17.png)
 
 这个装饰器的底层实现自然是 Reflect.defineMetadata：
 
-![](./image/第13章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-18.png)
 
 Nest 为什么暴露这样一个底层的 metadata api 出来呢？
 
@@ -244,45 +244,45 @@ Nest 为什么暴露这样一个底层的 metadata api 出来呢？
     nest g interceptor aaa --flat --no-spec
     nest g guard aaa --flat --no-spec
 
-![](./image/第13章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-19.png)
 
 在路由级别应用：
 
-![](./image/第13章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-20.png)
 
 加个打印语句：
 
-![](./image/第13章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-21.png)
 
-![](./image/第13章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-22.png)
 
 然后 nest start --watch 把服务跑起来。
 
 浏览器访问：
 
-![](./image/第13章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-23.png)
 
 可以看到 guard 和 interceptor 成功执行了：
 
-![](./image/第13章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-24.png)
 
 然后我们用 @SetMetadata 在 controller 上加个 metadata：
 
-![](./image/第13章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-25.png)
 
 在 guard 和 interceptor 就就可以这样取出来：
 
-![](./image/第13章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-26.png)
 
 通过 ExecutationContext 取到目标 handler，然后注入 reflector，通过 reflector.get 取出 handler 上的 metadata。
 
 interceptor 里也是这样，这里换种属性注入方式：
 
-![](./image/第13章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-27.png)
 
 刷新下页面，就可以看到已经拿到了 metadata：
 
-![](./image/第13章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-28.png)
 
 拿到 metadata 有什么用呢？
 
@@ -292,43 +292,43 @@ interceptor 里也是这样，这里换种属性注入方式：
 
 除了能拿到 handler 上的装饰器，也可以拿到 class 上的：
 
-![](./image/第13章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-29.png)
 
-![](./image/第13章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-30.png)
 
-![](./image/第13章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-31.png)
 
 reflector 还有 3 个方法：
 
-![](./image/第13章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-32.png)
 
 这 4 个方法有啥区别呢？
 
 看下[它们的源码](https://github.com/nestjs/nest/blob/5bba7e9d264319490f142ca5e8099c559fa7e7e3/packages/core/services/reflector.service.ts#L11-L97)就知道了：
 
-![](./image/第13章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-33.png)
 
 get 的实现就是 Reflect.getMetadata。
 
-![](./image/第13章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-34.png)
 
 getAll 是返回一个 metadata 的数组。
 
-![](./image/第13章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-35.png)
 
 getAllAndMerge，会把它们合并为一个对象或者数组。
 
-![](./image/第13章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-36.png)
 
 getAllAndOverride 会返回第一个非空的 metadata。
 
 我们试一下：
 
-![](./image/第13章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-37.png)
 
 可以看到它们结果的区别：
 
-![](./image/第13章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第13章-38.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/metadata-and-reflector)。
 

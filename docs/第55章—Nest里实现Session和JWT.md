@@ -58,11 +58,11 @@ sss(@Session() session) {
 
     nest start --watch
 
-![](./image/第55章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-1.png)
 
 然后用 postman 测试下：
 
-![](./image/第55章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-2.png)
 
 可以看到每次请求返回的数据都不同，而且返回了一个 cookie 是 connect.sid，这个就是对应 session 的 id。
 
@@ -102,7 +102,7 @@ JwtModule 是一个动态模块，通过 register 传入 option。
 
 或者是 registerAsync，然后通过 useFactory 异步拿到 option 传入：
 
-![](./image/第55章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-3.png)
 
 这部分是动态模块的知识，忘了的同学可以看看动态模块那节。
 
@@ -110,7 +110,7 @@ JwtModule 是一个动态模块，通过 register 传入 option。
 
 然后在 controller 里注入 JwtModule 里的 JwtService：
 
-![](./image/第55章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-4.png)
 
 然后添加一个 handler：
 
@@ -132,7 +132,7 @@ ttt(@Res({ passthrough: true}) response: Response) {
 
 然后访问下试试看：
 
-![](./image/第55章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-5.png)
 
 可以看到，返回的响应确实带上了这个 header。
 
@@ -178,19 +178,19 @@ ttt(@Headers('authorization') authorization: string, @Res({ passthrough: true}) 
 
 第一次访问，会返回 jwt token，把它复制下来：
 
-![](./image/第55章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-6.png)
 
 放到请求的 header 里：
 
-![](./image/第55章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-7.png)
 
 这时候响应为 2，并且返回一个新的 token：
 
-![](./image/第55章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-8.png)
 
 把它复制下来放到 header 里再次请求：
 
-![](./image/第55章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-9.png)
 
 这时候返回的就是 3 了。
 
@@ -198,11 +198,11 @@ ttt(@Headers('authorization') authorization: string, @Res({ passthrough: true}) 
 
 那我们带一个错误的 token 呢？
 
-![](./image/第55章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-10.png)
 
 这时候 jwtService.verify 方法就会抛异常，然后我们返回了 401 错误。
 
-![](./image/第55章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第55章-11.png)
 
 这样，我们就分别用 Nest 分别实现了 session + cookie 和 jwt 两种保存 http 状态的方式。
 

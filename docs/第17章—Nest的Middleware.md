@@ -14,11 +14,11 @@
 
 创建个 middleware：
 
-![](./image/第17章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-1.png)
 
 因为这时候并不知道你用的 express 还是 fastify，所以 request、response 是 any，手动标注下类型就好了：
 
-![](./image/第17章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-2.png)
 
 这里是 express 的 request、response。
 
@@ -40,7 +40,7 @@ export class AaaMiddleware implements NestMiddleware {
 
 然后在 Module 里这样使用：
 
-![](./image/第17章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-3.png)
 
 实现 NestModule 接口的 configure 方法，在里面应用 AaaMiddleware 到所有路由。
 
@@ -50,25 +50,25 @@ export class AaaMiddleware implements NestMiddleware {
 
 浏览器访问 <http://localhost:3000>
 
-![](./image/第17章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-4.png)
 
 可以看到中间件的逻辑都执行了：
 
-![](./image/第17章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-5.png)
 
 这里也可以指定更精确的路由。
 
 我们添加几个 handler：
 
-![](./image/第17章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-6.png)
 
 然后重新指定 Middleware 应用的路由：
 
-![](./image/第17章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-7.png)
 
 可以看到，hello、hello2、world2 的路由都调用了这个中间件，而 world1 没有：
 
-![](./image/第17章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-8.png)
 
 这就是 Nest 里 middleware 的用法。
 
@@ -99,15 +99,15 @@ export class AaaMiddleware implements NestMiddleware {
 }
 ```
 
-![](./image/第17章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-9.png)
 
 当然，这里也可以用构造器注入，这样更简洁一点：
 
-![](./image/第17章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-10.png)
 
 这时在访问这个路由的时候，就可以看到中间件成功调用了 AppService：
 
-![](./image/第17章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-11.png)
 
 这就是 Nest 注入的依赖。
 
@@ -115,7 +115,7 @@ export class AaaMiddleware implements NestMiddleware {
 
 看这个 apply 方法的类型声明也可以看出来：
 
-![](./image/第17章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-12.png)
 
 如果不需要注入依赖，那可以写函数形式的 middleware，这时候和 Express 的 middleware 就没啥区别了。
 
@@ -123,13 +123,13 @@ export class AaaMiddleware implements NestMiddleware {
 
 当然，应用实例对象也可以 use 中间件，这个就和 express 那个一样了：
 
-![](./image/第17章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-13.png)
 
 不过这种形式不能注入依赖，而且也不能配置应用到什么路由，不建议用。
 
 app.use 等同于在 AppModule 的 configure 方法里的 forRoutes('\*')
 
-![](./image/第17章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-14.png)
 
 此外，middleware 里有个 next 参数，而 Nest 还有个 @Next 装饰器，这俩的区别是什么呢？
 
@@ -137,11 +137,11 @@ middleware 的 next 参数就是调用下一个 middleware 的，这个很好理
 
 而 @Next 装饰器是调用下一个 handler 的：
 
-![](./image/第17章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-15.png)
 
 但如果是这样一个 handler，它就不返回值了：
 
-![](./image/第17章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-16.png)
 
 这个和加上 @Response 装饰器的时候的效果一样。
 
@@ -149,15 +149,15 @@ middleware 的 next 参数就是调用下一个 middleware 的，这个很好理
 
 如果依然想让 Nest 把函数返回值作为响应，可以这样写：
 
-![](./image/第17章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-17.png)
 
 这个上节讲过。
 
 当然，传入 Next 参数的时候，一般是不需要在这里响应的，一般是调用下个 handler 来响应：
 
-![](./image/第17章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-18.png)
 
-![](./image/第17章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-19.png)
 
 不过一般也不需要这样写，直接写在一个 handler 里就行。
 
@@ -165,13 +165,13 @@ middleware 的 next 参数就是调用下一个 middleware 的，这个很好理
 
 区别有两点：
 
-![](./image/第17章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-20.png)
 
 interceptor 是能从 ExecutionContext 里拿到目标 class 和 handler，进而通过 reflector 拿到它的 metadata 等信息的，这些 middleware 就不可以。
 
 再就是 interceptor 里是可以用 rxjs 的操作符来组织响应处理流程的：
 
-![](./image/第17章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第17章-21.png)
 
 middleware 里也不可以。
 

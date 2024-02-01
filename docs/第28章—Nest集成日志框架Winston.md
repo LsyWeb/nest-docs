@@ -8,7 +8,7 @@
 nest new nest-winston-test
 ```
 
-![](./image/第28章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-1.png)
 
 创建个 nest 项目。
 
@@ -33,7 +33,7 @@ export class MyLogger implements LoggerService {
 ```
 然后在 main.ts 里引入：
 
-![](./image/第28章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-2.png)
 
 ```javascript
 app.useLogger(new MyLogger());
@@ -44,19 +44,19 @@ app.useLogger(new MyLogger());
 npm run start:dev
 ```
 
-![](./image/第28章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-3.png)
 
 现在的 logger 就换成我们自己的了。
 
 然后在 AppController 里添加 logger：
 
-![](./image/第28章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-4.png)
 
 浏览器访问下：
 
-![](./image/第28章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-5.png)
 
-![](./image/第28章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-6.png)
 
 这样就完成了 logger 的自定义。
 
@@ -108,7 +108,7 @@ export class MyLogger implements LoggerService {
 
 再跑下：
 
-![](./image/第28章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-7.png)
 
 现在的日志就是 winston 的了。
 
@@ -187,13 +187,13 @@ export class MyLogger implements LoggerService {
 
 效果是这样的：
 
-![](./image/第28章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-8.png)
 
 是不是和 nest 原本的日志很像了？
 
 然后我们再加一个 File 的 transport。
 
-![](./image/第28章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-9.png)
 
 指定为 json 格式，加上时间戳：
 
@@ -210,17 +210,17 @@ new transports.File({
 
 console 的日志是这样的：
 
-![](./image/第28章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-10.png)
 
 file 的日志是这样的：
 
-![](./image/第28章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-11.png)
 
 这样，我们就完成了 nest 和 winston 的集成。
 
 我们还可以进一步把它封装成一个动态模块。
 
-![](./image/第28章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-12.png)
 
 ```javascript
 import { DynamicModule, Global, Module } from '@nestjs/common';
@@ -257,7 +257,7 @@ export class WinstonModule {
 
 这里的 MyLogger 是之前那个复制过来的，但需要改一下 constructor：
 
-![](./image/第28章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-13.png)
 
 ```javascript
 constructor(options) {    
@@ -266,7 +266,7 @@ constructor(options) {
 ```
 然后在 AppModule 引入下：
 
-![](./image/第28章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-14.png)
 
 ```javascript
 import { Module } from '@nestjs/common';
@@ -311,18 +311,18 @@ export class AppModule {}
 
 之后改一下 main.ts 里用的 logger：
 
-![](./image/第28章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-15.png)
 
 ```javascript
 app.useLogger(app.get(WINSTON_LOGGER_TOKEN));
 ```
 功能正常：
 
-![](./image/第28章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-16.png)
 
 只不过现在就没必要每次都 new 了：
 
-![](./image/第28章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第28章-17.png)
 
 改成 inject 的方式，始终使用同一个实例，性能更好：
 

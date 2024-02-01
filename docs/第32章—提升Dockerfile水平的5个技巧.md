@@ -1,10 +1,10 @@
 ﻿Docker 是一种容器技术，它可以在操作系统上创建多个相互隔离的容器。容器内独立安装软件、运行服务。
 
-![](./image/第32章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-1.png)
 
 但是，这个容器和宿主机还是有关联的，比如可以把宿主机的端口映射到容器内的端口、宿主机某个目录挂载到容器内的目录。
 
-![](./image/第32章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-2.png)
 
 比如映射了 3000 端口，那容器内 3000 端口的服务，就可以在宿主机的 3000 端口访问了。
 
@@ -29,7 +29,7 @@ docker run -p 3000:3000 -v /aaa:/bbb/ccc --name xxx-container xxx-image
 
 也就是这样的流程：
 
-![](./image/第32章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-3.png)
 
 一般在项目里维护 Dockerfile ，然后执行 docker build 构建出镜像、push 到镜像仓库，部署的时候 pull 下来用 docker run 跑起来。
 
@@ -46,7 +46,7 @@ CD 的时候把打 tag 的镜像下下来，docker run 跑起来。
 ```
 npx nest new dockerfile-test -p npm
 ```
-![](./image/第32章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-4.png)
 
 然后执行 npm run build，之后把它跑起来：
 
@@ -54,11 +54,11 @@ npx nest new dockerfile-test -p npm
 npm run build
 node ./dist/main.js
 ```
-![](./image/第32章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-5.png)
 
 这时候访问 http://localhost:3000 可以看到 hello world，说明服务跑成功了:
 
-![](./image/第32章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-6.png)
 
 那如何通过 Docker 部署这个服务呢？
 
@@ -107,11 +107,11 @@ docker build -t dockerfile-test:first .
 
 -t 是指定名字和标签，这里镜像名为 dockerfile-test 标签为 first。
 
-![](./image/第32章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-7.png)
 
 然后在 docker desktop 的 images 里就可以看到这个镜像了：
 
-![](./image/第32章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-8.png)
 
 就是现在镜像稍微大了点，有 1.45 G。
 
@@ -126,19 +126,19 @@ docker run -d -p 2333:3000 --name first-container dockerfile-test:first
 
 --name 指定容器名
 
-![](./image/第32章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-9.png)
 
 然后就可以看到容器部分有了这个容器了：
 
-![](./image/第32章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-10.png)
 
 浏览器访问 http://localhost:2333 就可以访问容器内跑的这个服务：
 
-![](./image/第32章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-11.png)
 
 这就是 Dockerfile 构建成镜像，然后通过容器跑起来的流程。
 
-![](./image/第32章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-12.png)
 
 但是刚才也发现了，现在镜像太大了，有 1.45G 呢，怎么优化一下呢？
 
@@ -150,7 +150,7 @@ docker 容器内跑的是 linux 系统，各种镜像的 dockerfile 都会继承
 
 比如我们刚刚创建的那个镜像，点开详情可以看到它的镜像继承关系：
 
-![](./image/第32章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-13.png)
 
 最终还是继承了 debian 的 Linux 镜像，这是一个 linux 发行版。
 
@@ -158,13 +158,13 @@ docker 容器内跑的是 linux 系统，各种镜像的 dockerfile 都会继承
 
 它裁剪了很多不必要的 linux 功能，使得镜像体积大幅减小了。
 
-![](./image/第32章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-14.png)
 
 alpine 是高山植物，就是很少的资源就能存活的意思。
 
 我们改下 dockerfile，使用 alpine 的镜像：
 
-![](./image/第32章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-15.png)
 
 node:18-alpine3.14 是使用 18 版本的 node 镜像，它底层使用 alpine 3.14 的基础镜像。
 
@@ -173,19 +173,19 @@ node:18-alpine3.14 是使用 18 版本的 node 镜像，它底层使用 alpine 3
 ```
 docker build -t dockerfile-test:second .
 ```
-![](./image/第32章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-16.png)
 
 这次的 tag 为 second。
 
 然后在 docker desktop 里看下：
 
-![](./image/第32章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-17.png)
 
 好家伙，足足小了 900M。
 
 我们点开看看：
 
-![](./image/第32章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-18.png)
 
 可以看到它的底层 linux 镜像是 alpine3.14。
 
@@ -197,15 +197,15 @@ docker build -t dockerfile-test:second .
 docker run -d -p 2334:3000 --name second-container dockerfile-test:second
 ```
 
-![](./image/第32章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-19.png)
 
 docker desktop 可以看到这个跑起来的容器：
 
-![](./image/第32章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-20.png)
 
 浏览器访问下，依然是正常的：
 
-![](./image/第32章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-21.png)
 
 alpine 只是去掉了很多 linux 里用不到的功能，使得镜像体积更小。
 
@@ -217,7 +217,7 @@ alpine 只是去掉了很多 linux 里用不到的功能，使得镜像体积更
 
 看下这个 dockerfile，大家发现有啥问题没：
 
-![](./image/第32章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-22.png)
 
 有的同学可能会说：为什么先复制 package.json 进去，安装依赖之后再复制其他文件，直接全部复制进去不就行了？
 
@@ -240,31 +240,31 @@ docker 是分层存储的，dockerfile 里的每一行指令是一层，会做�
 ```
 docker build -t dockerfile-test:second .
 ```
-![](./image/第32章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-23.png)
 
 现在我们改下 README.md：
 
-![](./image/第32章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-24.png)
 
 然后重新跑 build：
 
-![](./image/第32章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-25.png)
 
 现在花了 25s，其实是没有重新 npm install 的。
 
 然后改下 package.json：
 
-![](./image/第32章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-26.png)
 
 再跑 docker build
 
-![](./image/第32章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-27.png)
 
 时间明显多了很多，过程中你可以看到在 npm install 那层停留了很长时间。
 
 这就是为什么要这样写：
 
-![](./image/第32章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-28.png)
 
 这里没问题，大家还能发现有没有什么别的问题么？
 
@@ -325,23 +325,23 @@ docker build -t dockerfile-test:third -f 222.Dockerfile .
 
 -f 是指定 Dockerfile 的名字。
 
-![](./image/第32章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-29.png)
 
 然后 desktop 里看下构建出来的镜像：
 
-![](./image/第32章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-30.png)
 
 镜像体积比没有用多阶段构建的时候小了 250 M。
 
 然后跑起来试试看：
 
-![](./image/第32章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-31.png)
 
 这次映射 2335 端口到容器内的 3000 端口。
 
 依然能正常访问：
 
-![](./image/第32章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-32.png)
 
 这就是第二个技巧，多阶段构建。
 
@@ -363,7 +363,7 @@ node ./test.js
 
 可以看到打印了这俩环境变量：
 
-![](./image/第32章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-33.png)
 
 然后我们写个 dockerfile，文件名是 333.Dockerfile：
 
@@ -395,15 +395,15 @@ docker build --build-arg aaa=3 --build-arg bbb=4 -t arg-test -f 333.Dockerfile .
 ```
 通过 --build-arg xxx=yyy 传入 ARG 参数的值。
 
-![](./image/第32章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-34.png)
 
 
 点击查看镜像详情，可以看到 ARG 已经被替换为具体的值了：
 
 
-![](./image/第32章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-35.png)
 
-![](./image/第32章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-36.png)
 
 然后跑起来：
 
@@ -413,7 +413,7 @@ docker run  --name fourth-container arg-test
 
 这次就不用 -d 后台运行了，直接看下日志：
 
-![](./image/第32章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-37.png)
 
 可以看到容器内拿到的环境变量就是 ENV 设置的。
 
@@ -427,11 +427,11 @@ docker run  --name fourth-container arg-test
 
 前面我们指定容器跑起来之后运行什么命令，用的是 CMD：
 
-![](./image/第32章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-38.png)
 
 其实还可以写成 ENTRYPOINT：
 
-![](./image/第32章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-39.png)
 
 这两种写法有什么区别么？
 
@@ -450,20 +450,20 @@ CMD ["echo", "光光", "到此一游"]
 ```
 docker build -t cmd-test -f 444.Dockerfile .
 ```
-![](./image/第32章-40.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-40.png)
 
 然后 run 一下：
 ```
 docker run cmd-test
 ```
 
-![](./image/第32章-41.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-41.png)
 
 没有指定 --name 时，会生成一个随机容器名。
 
 就是这种：
 
-![](./image/第32章-42.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-42.png)
 
 这不是重点。
 
@@ -472,7 +472,7 @@ docker run cmd-test
 ```
 docker run cmd-test echo "东东"
 ```
-![](./image/第32章-43.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-43.png)
 
 可以替换成任何命令。
 
@@ -487,14 +487,14 @@ docker build:
 ```
 docker build -t cmd-test -f 444.Dockerfile .
 ```
-![](./image/第32章-44.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-44.png)
 docker run: 
 
 ```
 docker run cmd-test echo "东东"
 ```
 
-![](./image/第32章-45.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-45.png)
 
 可以看到，现在 dockerfile 里 ENTRYPOINT 的命令依然执行了。
 
@@ -520,14 +520,14 @@ docker build：
 docker build -t cmd-test -f 444.Dockerfile .
 ```
 
-![](./image/第32章-46.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-46.png)
 
 docker run:
 ```
 docker run cmd-test
 docker run cmd-test 66666
 ```
-![](./image/第32章-47.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-47.png)
 
 当没传参数的时候，执行的是 ENTRYPOINT + CMD 组合的命令，而传入参数的时候，只有 CMD 部分会被覆盖。
 
@@ -547,14 +547,14 @@ docker run cmd-test 66666
 
 我们创建一个 aaa 目录，下面添加两个文件：
 
-![](./image/第32章-48.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-48.png)
 
 使用 tar 命令打包：
 
 ```
 tar -zcvf aaa.tar.gz ./aaa
 ```
-![](./image/第32章-49.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-49.png)
 
 然后写个 555.Dockerfile
 
@@ -572,7 +572,7 @@ docker build 生成镜像：
 docker build -t add-test -f 555.Dockerfile .
 ```
 
-![](./image/第32章-50.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-50.png)
 
 docker run 跑起来：
 
@@ -580,17 +580,17 @@ docker run 跑起来：
 docker run -d --name sixth-container add-test
 ```
 
-![](./image/第32章-51.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-51.png)
 
 可以看到，ADD 把 tar.gz 给解压然后复制到容器内了。
 
-![](./image/第32章-52.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-52.png)
 
 而 COPY 没有解压，它把文件整个复制过去了：
 
-![](./image/第32章-53.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-53.png)
 
-![](./image/第32章-54.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-54.png)
 
 也就是说，ADD、COPY 都可以用于把目录下的文件复制到容器内的目录下。
 
@@ -606,7 +606,7 @@ Docker 是流行的容器技术，它可以在操作系统上创建多个隔离�
 
 它的流程是 Dockerfile 经过 docker build 生成 docker 镜像，然后 docker run 来跑容器。
 
-![](./image/第32章-55.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第32章-55.png)
 
 docker run 的时候可以通过 -p 指定宿主机和容器的端口映射，通过 -v 挂载数据卷到容器内的某个目录。
 

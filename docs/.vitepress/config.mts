@@ -4,6 +4,12 @@ import routes from '../../routes.json'
 export default defineConfig({
   title: "Nest通关秘籍",
   ignoreDeadLinks: true,
+  markdown: {
+    image: {
+      // 默认禁用图片懒加载
+      lazyLoading: true
+    }
+  },
   // description: "最流行的 Node 企业级框架",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

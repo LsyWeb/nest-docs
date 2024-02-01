@@ -8,7 +8,7 @@
 
 我们创建个目录，然后进入这个目录执行 npm init -y 创建 package.json。
 
-![](./image/第43章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-1.png)
 
 然后安装 mysql2
 
@@ -44,11 +44,11 @@ results 是结果，fields 是一些元信息，比如字段名这些。
 
 node 执行下：
 
-![](./image/第43章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-2.png)
 
 和我们在 mysql workbench 里执行效果一样。
 
-![](./image/第43章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-3.png)
 
 查询也可以指定占位符：
 
@@ -65,7 +65,7 @@ connection.query(
 
 我们查询了姓李的顾客有哪些：
 
-![](./image/第43章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-4.png)
 
 当然，增删改也是可以的。
 
@@ -80,7 +80,7 @@ connection.execute('INSERT INTO customers (name) VALUES (?)',
 
 在 mysql workbench 里可以看到，确实插入了：
 
-![](./image/第43章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-5.png)
 
 再来试下修改。
 
@@ -95,11 +95,11 @@ connection.execute('UPDATE customers SET name="guang" where name="光"',
 
 node 跑一下：
 
-![](./image/第43章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-6.png)
 
 点下刷新，可以看到确实修改了：
 
-![](./image/第43章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-7.png)
 
 再试试删除：
 
@@ -113,7 +113,7 @@ connection.execute('DELETE  FROM customers where name=?',
 
 执行后数据库中这条记录也删除了：
 
-![](./image/第43章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-8.png)
 
 这就是用 mysql2 做增删改查的方式。
 
@@ -146,7 +146,7 @@ const mysql = require('mysql2/promise');
 
 结果一样：
 
-![](./image/第43章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-9.png)
 
 这是最基本的使用：需要操作数据库的时候，建立连接，用完之后释放连接。
 
@@ -156,7 +156,7 @@ const mysql = require('mysql2/promise');
 
 我们一般都是用连接池来管理：
 
-![](./image/第43章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-10.png)
 
 连接池中放着好几个 mysql 的连接对象，用的时候取出来执行 sql，用完之后放回去，不需要断开连接。
 
@@ -189,7 +189,7 @@ const mysql = require('mysql2/promise');
 
 只要把 createConnection 换成 createPool 就好了。query 或者 execute 的时候会自动从 pool 中取 connection 来用，用完会放回去。
 
-![](./image/第43章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-11.png)
 
 或者你也可以手动取：
 
@@ -200,11 +200,11 @@ const [results] = await connection.query('select * from orders');
 console.log(results);
 ```
 
-![](./image/第43章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-12.png)
 
 回过头来再看看这些 option：
 
-![](./image/第43章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-13.png)
 
 connectionLimit 是指定最多有多少个连接，比如 10 个，那就是只能同时用 10个，再多需要排队等。
 
@@ -228,9 +228,9 @@ enableKeepAlive、keepAliveInitialDelay 是保持心跳用的，用默认的就�
 
 其实这个想法也很自然，比如我们前面执行的这些 sql：
 
-![](./image/第43章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-14.png)
 
-![](./image/第43章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-15.png)
 
 返回的不就是 js 对象么。
 
@@ -246,7 +246,7 @@ TypeORM 就是一个流行的 ORM 框架。
 
 通过 typeorm 的 init 命令创建一个项目， --name 指定项目名，--database 指定连接的数据库。
 
-![](./image/第43章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-16.png)
 
 修改下 data-source.ts
 
@@ -273,7 +273,7 @@ export const AppDataSource = new DataSource({
 })
 ```
 
-![](./image/第43章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-17.png)
 
 用户名密码，要操作的数据库，这些很容易理解。
 
@@ -289,27 +289,27 @@ export const AppDataSource = new DataSource({
 
 这时候你会发现 practice 数据库多了个表：
 
-![](./image/第43章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-18.png)
 
 打开看一下：
 
-![](./image/第43章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-19.png)
 
 它还有一条数据。
 
 而且控制台也打印了查询出来的这条数据：
 
-![](./image/第43章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-20.png)
 
 怎么做到的呢？
 
 我们看下代码，有这样一个 entity，通过装饰器声明了主键列和其他的列：
 
-![](./image/第43章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-21.png)
 
 在 index.ts 里创建了一个 User 的对象，调用 save 方法保存这个对象，通过 find 方法查询这个对象：
 
-![](./image/第43章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-22.png)
 
 然后数据库里就创建好了表、插入了数据，并且还把它查了出来。
 
@@ -321,15 +321,15 @@ export const AppDataSource = new DataSource({
 
 加一个 logging 为 true 的选项：
 
-![](./image/第43章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-23.png)
 
 然后去数据库把那个 user 表删掉。
 
-![](./image/第43章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-24.png)
 
 再重新 npm run start：
 
-![](./image/第43章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-25.png)
 
 看到它打印的 CREATE TABLE、INSERT INTO、SELECT 的 sql 语句了么？
 
@@ -337,7 +337,7 @@ export const AppDataSource = new DataSource({
 
 它会根据你在 class 的属性上加的装饰器来生成建表 sql。
 
-![](./image/第43章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-26.png)
 
 然后 save 这个 class 的对象，就会执行 insert into 来插入数据。
 
@@ -347,7 +347,7 @@ find 方法会执行 select 来查询数据。
 
 此外，可以看到每个涉及到修改的 sql 都包了一层事务，这样出了错可以回滚：
 
-![](./image/第43章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第43章-27.png)
 
 [typeorm 案例代码](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/typeorm-mysql-test) 和 [mysql2 案例代码](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/mysql2-test) 都在小册仓库。
 

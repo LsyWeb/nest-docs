@@ -2,13 +2,13 @@
 
 那问题来了，如果有 10 个微服务，我们就创建 10 个 Nest 项目的 git 仓库么？
 
-![](./image/第105章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-1.png)
 
 那肯定不行，太难维护了。
 
 这时候我们就需要 monorepo 了。
 
-![](./image/第105章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-2.png)
 
 这样，同一个 git 仓库中存放多个 Nest 项目，外层叫做 workspace。
 
@@ -21,11 +21,11 @@ nest new monorepo-test
 ```
 创建个 nest 项目
 
-![](./image/第105章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-3.png)
 
 我们添加一个 aaa 的路由：
 
-![](./image/第105章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-4.png)
 
 ```javascript
 @Get('aaa')
@@ -35,7 +35,7 @@ aaa() {
 ```
 改下端口：
 
-![](./image/第105章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-5.png)
 
 然后把它跑起来：
 
@@ -43,11 +43,11 @@ aaa() {
 npm run start:dev
 ```
 
-![](./image/第105章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-6.png)
 
 浏览器访问下：
 
-![](./image/第105章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-7.png)
 
 没啥问题。
 
@@ -57,30 +57,30 @@ npm run start:dev
 nest g app app2
 ```
 
-![](./image/第105章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-8.png)
 
 它删除了 src 和 test，并创建了 apps 目录：
 
-![](./image/第105章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-9.png)
 
 这里的 apps/monorepo-test 就是之前的 src、test 代码：
 
-![](./image/第105章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-10.png)
 
 而 apps/app2 就是新创建的 nest 项目，或者叫 nest app。
  
-![](./image/第105章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-11.png)
 
 把之前的服务停掉，重新跑:
 
 ```
 npm run start:dev
 ```
-![](./image/第105章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-12.png)
 
 可以看到，跑的还是之前的那个 nest 项目，只不过换成了 webpack 编译。
 
-![](./image/第105章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-13.png)
 
 为什么同样都是 nest start --watch，换成 monorepo 的形式之后，还是跑之前项目呢？
 
@@ -88,11 +88,11 @@ npm run start:dev
 
 之前 nest-cli.json 是这样的：
 
-![](./image/第105章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-14.png)
 
 现在变成了这样：
 
-![](./image/第105章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-15.png)
 
 projects 下保存着多个 nest 项目的信息，比如根目录、入口文件、src 目录、编译配置文件。
 
@@ -106,11 +106,11 @@ projects 下保存着多个 nest 项目的信息，比如根目录、入口文�
 npm run start:dev app2
 ```
 
-![](./image/第105章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-16.png)
 
 比如我在 app2 添加一个 bbb 的路由：
 
-![](./image/第105章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-17.png)
 
 ```javascript
 @Get('bbb')
@@ -120,13 +120,13 @@ bbb() {
 ```
 浏览器访问下：
 
-![](./image/第105章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-18.png)
 
 这样，app2 的服务就跑起来了。
 
 原理也很简单，就是 nest cli 会根据 app 名字去读取对应的 tscofnig 文件：
 
-![](./image/第105章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-19.png)
 
 这就是 nest 的 monorepo。
 
@@ -140,27 +140,27 @@ bbb() {
 nest g lib lib1
 ```
 
-![](./image/第105章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-20.png)
 
 它会让你指定一个前缀，这里用默认的 @app。
 
 然后会生成 libs/lib1 目录：
 
-![](./image/第105章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-21.png)
 
 在 src 下生成了 module、service 并把它们导出了。
 
 还在 tsconfig.json 的 paths 下添加了对应的别名配置：
 
-![](./image/第105章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-22.png)
 
 在 nest-cli.json 里也多了这样一个 projects 配置：
 
-![](./image/第105章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-23.png)
 
 我们在 LibService 添加一个 xxx 方法：
 
-![](./image/第105章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-24.png)
 
 ```javascript
 xxx() {
@@ -169,11 +169,11 @@ xxx() {
 ```
 然后在 monorepo-test 的 app 里导入 Lib1Module：
 
-![](./image/第105章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-25.png)
 
 在 controller 里注入 Lib1Service 并调用它的方法：
 
-![](./image/第105章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-26.png)
 
 ```javascript
 @Inject(Lib1Service)
@@ -186,9 +186,9 @@ aaa() {
 ```
 同样的方式，在 app2 里也导入并使用它：
 
-![](./image/第105章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-27.png)
 
-![](./image/第105章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-28.png)
 
 ```javascript
 @Inject(Lib1Service)
@@ -207,16 +207,16 @@ npm run start:dev
 npm run start:dev app2
 ```
 
-![](./image/第105章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-29.png)
 
 
-![](./image/第105章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-30.png)
 
 浏览器访问下 http://localhost:3001/aaa 和 http://localhost:3000/bbb
 
-![](./image/第105章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-31.png)
 
-![](./image/第105章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-32.png)
 
 可以看到，引入的 library 中的模块生效了。
 
@@ -225,7 +225,7 @@ npm run start:dev app2
 ```
 npm run start:dev lib1
 ```
-![](./image/第105章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-33.png)
 
 nest 的 monorepo 和 libray 用起来都挺简单的。
 
@@ -238,7 +238,7 @@ npm run build
 ```
 产生了一个 apps/monorepo-test/main.js，因为现在换成 webpack 了：
 
-![](./image/第105章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-34.png)
 
 然后执行：
 
@@ -246,21 +246,21 @@ npm run build
 npm run build app2
 ```
 现在就多了 apps/app2/main.js 
-![](./image/第105章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-35.png)
 
 lib1 也是同理：
 ```
 npm run build lib1
 ```
-![](./image/第105章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-36.png)
 
 之所以 application 或者 library 都能知道输出目录在哪，是因为在 tsconfig.json 里配了：
 
-![](./image/第105章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-37.png)
 
-![](./image/第105章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-38.png)
 
-![](./image/第105章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第105章-39.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/monorepo-test)
 

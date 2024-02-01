@@ -2,13 +2,13 @@
 
 用户量可能很大，采集的数据可能比较多，这时候服务端的并发压力会比较大，要是直接存入数据库，那数据库服务很可能会崩掉。
 
-![](./image/第122章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-1.png)
 
 那就用现在的数据库，如何保证面对大量并发请求的时候，服务不崩呢？
 
 答案就是消息队列，比如常用的 RabbitMQ：
 
-![](./image/第122章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-2.png)
 
 第一个 web 服务接收请求，把消息存入 RabbitMQ，然后另一个 web 服务从 MQ 中取出消息存入数据库。
 
@@ -20,7 +20,7 @@
 
 比如 10w 的消息进来，每次只从中取出 1000 来消费：
 
-![](./image/第122章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-3.png)
 
 并发量被控制住了，自然就崩不了了，从 MQ 中取出慢慢处理就好了。
 
@@ -28,7 +28,7 @@
 
 而且完全可以加几个 web 服务来同时消费 MQ 中的消息：
 
-![](./image/第122章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-4.png)
 
 知道了 RabbitMQ 能干啥，那我们就来用一下试试吧！
 
@@ -36,13 +36,13 @@
 
 搜索 rabbitmq 的镜像，选择 3.11-management 的版本：
 
-![](./image/第122章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-5.png)
 
 这个版本是有 web 管理界面的。
 
 点击 run：
 
-![](./image/第122章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-6.png)
 
 映射容器内的 5672、15672 这俩端口到本地的端口。
 
@@ -50,17 +50,17 @@
 
 等 rabbitmq 跑起来之后：
 
-![](./image/第122章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-7.png)
 
 就可以在浏览器访问 http://localhost:15672 了：
 
-![](./image/第122章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-8.png)
 
 这就是它的 web 管理界面。
 
 输入 guest、guest 进入管理页面：
 
-![](./image/第122章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-9.png)
 
 可以看到 connection、channel、exchange、queue 的分别的管理页面。
 
@@ -77,7 +77,7 @@ cd rabbitmq-test
 
 npm init -y
 ```
-![](./image/第122章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-10.png)
 
 安装用到的包：
 
@@ -106,13 +106,13 @@ node ./src/producer.js
 ```
  （这里要用 es module 语法并且支持顶层 await 需要在 packege.json 里设置 type 为 module）
  
-![](./image/第122章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-11.png)
 
-![](./image/第122章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-12.png)
 
 之后就可以在管理界面看到这个队列了：
 
-![](./image/第122章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-13.png)
 
 然后我们再写一个消费端 src/consumer.js：
 
@@ -135,7 +135,7 @@ assertQueue 是如果没有就创建队列，有的话就直接返回。
 node src/consumer.js
 ```
 
-![](./image/第122章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-14.png)
 
 这样，我们就完成了第一次 RabbitMQ 的通信，两个服务之间也是这样通信的。
 
@@ -145,7 +145,7 @@ rabbitmq 使用确实挺简单。
 
 那怎么控制并发数呢？
 
-![](./image/第122章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-15.png)
 
 我们改一下 src/producer.js：
 
@@ -205,13 +205,13 @@ setInterval(() => {
 ```
 node ./src/producer.js
 ```
-![](./image/第122章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-16.png)
 
 消息消费端：
 ```
 node ./src/consumer.js
 ```
-![](./image/第122章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-17.png)
 
 可以看到生产者是每 0.5s 往队列里放一条消息。
 
@@ -223,7 +223,7 @@ node ./src/consumer.js
 
 大概了解了 rabbitmq 之后，我们来看看它的整体架构图：
 
-![](./image/第122章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-18.png)
 
 Producer 和 Consumer 分别是生产者和消费者。
 
@@ -317,13 +317,13 @@ node src/direct-consumer2.js
 ```
 就可以看到队列 queue1 和 queue2 分别接收到了对应的消息：
 
-![](./image/第122章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-19.png)
 
 这就是通过 direct 交换机发送消息的过程。
 
 在管理页面上也可以看到这个交换机的信息：
 
-![](./image/第122章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-20.png)
 
 包括 exchange 下的两个 queue 以及各自的 routing key。
 
@@ -399,17 +399,17 @@ node src/topic-consumer1.js
 node src/topic-consumer2.js
 ```
 
-![](./image/第122章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-21.png)
 
 可以看到，两个消费者分别收到了不同 routing key 对应的消息。
 
 当然，在管理界面这里也是可以发消息的：
 
-![](./image/第122章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-22.png)
 
 消费者端同样可以收到：
 
-![](./image/第122章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-23.png)
 
 这就是 topic 类型的交换机，可以根据模糊匹配 routing key 来发消息到不同队列。
 
@@ -480,7 +480,7 @@ node src/fanout-consumer1.js
 node src/fanout-consumer2.js
 ```
 
-![](./image/第122章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-24.png)
 
 这就是 fanout 类型交换机的特点，广播消息到所有绑定到它的 queue。
 
@@ -565,7 +565,7 @@ node src/headers-consumer1.js
 node src/headers-consumer2.js
 ```
 
-![](./image/第122章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第122章-25.png)
 
 很容易理解，只是从匹配 routing key 变成了匹配 header。
 

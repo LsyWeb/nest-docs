@@ -16,11 +16,11 @@ create database typeorm_test;
 
 执行它：
 
-![](./image/第45章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-1.png)
 
 点击刷新，就可以看到这个新的 database 了：
 
-![](./image/第45章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-2.png)
 
 我们用 typeorm 连上它来自动创建表。
 
@@ -30,7 +30,7 @@ npx typeorm@latest init --name typeorm-relation-mapping --database mysql
 
 创建个 typeorm 项目。
 
-![](./image/第45章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-3.png)
 
 修改 DataSource 的配置：
 
@@ -69,15 +69,15 @@ export const AppDataSource = new DataSource({
 
 可以看到，它生成了建表 sql 和插入数据的 sql：
 
-![](./image/第45章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-4.png)
 
 点击刷新，在 workbench 里也可以看到这个新建的表：
 
-![](./image/第45章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-5.png)
 
 点击新建 sql，执行 select，也是可以看到插入的数据的：
 
-![](./image/第45章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-6.png)
 
 然后我们再创建个身份证表。
 
@@ -87,9 +87,9 @@ export const AppDataSource = new DataSource({
 npx typeorm entity:create src/entity/IdCard
 ```
 
-![](./image/第45章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-7.png)
 
-![](./image/第45章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-8.png)
 
 填入属性和映射信息：
 
@@ -113,17 +113,17 @@ export class IdCard {
 
 在 DataSource 的 entities 里引入下：
 
-![](./image/第45章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-9.png)
 
 重新 npm run start：
 
-![](./image/第45章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-10.png)
 
 可以看到生成了这条建表 sql。
 
 workbench 里也可以看到这个表：
 
-![](./image/第45章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-11.png)
 
 现在 user 和 id\_card 表都有了，怎么让它们建立一对一的关联呢？
 
@@ -133,17 +133,17 @@ workbench 里也可以看到这个表：
 drop table id_card,user;
 ```
 
-![](./image/第45章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-12.png)
 
 在 IdCard 的 Entity 添加一个 user 列，指定它和 User 是 @OneToTone 一对一的关系。
 
 还要指定 @JoinColum 也就是外键列在 IdCard 对应的表里维护：
 
-![](./image/第45章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-13.png)
 
 重新 npm run start：
 
-![](./image/第45章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-14.png)
 
 仔细看生成的这 3 条 sql 语句。
 
@@ -153,23 +153,23 @@ drop table id_card,user;
 
 在 workbench 里看下：
 
-![](./image/第45章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-15.png)
 
-![](./image/第45章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-16.png)
 
-![](./image/第45章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-17.png)
 
 生成的表都是对的。
 
 但是这个级联关系还是默认的：
 
-![](./image/第45章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-18.png)
 
 如果我们想设置 CASCADE 应该怎么做呢？
 
 在第二个参数指定：
 
-![image.png](./image/第45章-19.png)
+![image.png](http://static.liushuaiyang.com/nest-docs/image/第45章-19.png)
 
 删除这两个表：
 
@@ -179,9 +179,9 @@ drop table id_card,user;
 
 重新 npm run start：
 
-![](./image/第45章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-20.png)
 
-![](./image/第45章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-21.png)
 
 这样就设置了级联删除和级联更新。
 
@@ -215,33 +215,33 @@ AppDataSource.initialize().then(async () => {
 
 跑 npm run start，生成的 sql 如下：
 
-![](./image/第45章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-22.png)
 
 可以看到后面插入 id\_card 的时候，已经有 userId 可以填入了。
 
 数据都插入成功了：
 
-![](./image/第45章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-23.png)
 
 但是我还要分别保存 user 和 idCard，能不能自动按照关联关系来保存呢？
 
 可以的，在 @OneToOne 那里指定 cascade 为 true：
 
-![](./image/第45章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-24.png)
 
 这个 cascade 不是数据库的那个级联，而是告诉 typeorm 当你增删改一个 Entity 的时候，是否级联增删改它关联的 Entity。
 
 这样我们就不用自己保存 user 了：
 
-![](./image/第45章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-25.png)
 
 重新 npm run start：
 
-![](./image/第45章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-26.png)
 
 可以看到它同样是先插入了 user，再插入了 id\_card，并且设置了正确的 userId。
 
-![](./image/第45章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-27.png)
 
 保存了之后，怎么查出来呢？
 
@@ -254,7 +254,7 @@ console.log(ics);
 
 跑下 npm run start：
 
-![](./image/第45章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-28.png)
 
 可以看到 idCard 查出来了，但是关联的 user 没查出来。
 
@@ -269,11 +269,11 @@ const ics = await AppDataSource.manager.find(IdCard, {
 console.log(ics);
 ```
 
-![](./image/第45章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-29.png)
 
 再跑一下：
 
-![](./image/第45章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-30.png)
 
 现在 idCard 关联的 user 就被查出来了。
 
@@ -292,7 +292,7 @@ console.log(ics);
 
 再创建 queryBuilder 来连接查询，给 idCard 起个别名 ic，然后连接的是 ic.user，起个别名为 u：
 
-![](./image/第45章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-31.png)
 
 或者也可以直接用 EntityManager 创建 queryBuilder 来连接查询：
 
@@ -303,15 +303,15 @@ const ics = await AppDataSource.manager.createQueryBuilder(IdCard, "ic")
 console.log(ics);
 ```
 
-![](./image/第45章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-32.png)
 
 再来试下修改：
 
 现在数据是这样的：
 
-![](./image/第45章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-33.png)
 
-![](./image/第45章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-34.png)
 
 我们给它加上 id 再 save：
 
@@ -332,13 +332,13 @@ await AppDataSource.manager.save(idCard);
 
 这样数据就被修改了：
 
-![](./image/第45章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-35.png)
 
-![](./image/第45章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-36.png)
 
 看下生成的 sql：
 
-![](./image/第45章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-37.png)
 
 在一个事务内，执行了两条 update 的 sql。
 
@@ -369,7 +369,7 @@ await AppDataSource.manager.delete(IdCard, idCard.id)
 
 同样需要加一个 @OneToOne 的装饰器：
 
-![](./image/第45章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-38.png)
 
 不过需要有第二个参数。
 
@@ -392,7 +392,7 @@ console.log(user);
 
 可以看到，同样关联查询成功了：
 
-![](./image/第45章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第45章-39.png)
 
 这就是一对一关系的映射和增删改查。
 

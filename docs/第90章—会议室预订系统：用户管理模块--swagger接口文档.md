@@ -9,7 +9,7 @@ npm install --save @nestjs/swagger
 ```
 在 main.ts 添加这段代码：
 
-![](./image/第90章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-1.png)
 
 ```javascript
 const config = new DocumentBuilder()
@@ -24,21 +24,21 @@ SwaggerModule.setup('api-doc', app, document);
 
 访问下：
 
-![](./image/第90章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-2.png)
 
 可以看到所有接口都列出来了：
 
-![](./image/第90章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-3.png)
 
 还有用到的 schema，也就是对象的结构：
 
-![](./image/第90章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-4.png)
 
 只不过很多接口的文档是不对的：
 
 比如用户列表接口，这些参数都不是必选的，而且也没有响应相关的信息：
 
-![](./image/第90章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-5.png)
 
 还有 schema 也没有具体的内容。
 
@@ -46,19 +46,19 @@ SwaggerModule.setup('api-doc', app, document);
 
 在 UserController 添加一个 @ApiTags
 
-![](./image/第90章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-6.png)
 
 这样这个 cotroller 的接口会被单独分组：
 
-![](./image/第90章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-7.png)
 
 然后我们一个个接口来看：
 
-![](./image/第90章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-8.png)
 
 先是 /user/register-captcha 接口
 
-![](./image/第90章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-9.png)
 
 ```javascript
 @ApiQuery({
@@ -76,15 +76,15 @@ SwaggerModule.setup('api-doc', app, document);
 ```
 通过 @ApiQuery 描述 query 参数，通过 @ApiResponse 描述响应。
 
-![](./image/第90章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-10.png)
 
 然后是 /user/register 接口：
 
 它一共有 2 种状态码，200 和 400：
 
-![](./image/第90章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-11.png)
 
-![](./image/第90章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-12.png)
 
 ```javascript
 @ApiBody({type: RegisterUserDto})
@@ -100,29 +100,29 @@ SwaggerModule.setup('api-doc', app, document);
 })
 ```
 
-![](./image/第90章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-13.png)
 
 请求体的属性需要去 dto 里标识：
 
-![](./image/第90章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-14.png)
 
-![](./image/第90章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-15.png)
 
 然后接口文档里就可看到请求体的信息了：
 
-![](./image/第90章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-16.png)
 
 下面的 schema 里的 RegisterUserDto 也有了内容：
 
-![](./image/第90章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-17.png)
 
 接下来是 /user/login 接口：
 
 它也是有 400 和 200 两种响应：
 
-![](./image/第90章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-18.png)
 
-![](./image/第90章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-19.png)
 
 ```javascript
 @ApiBody({
@@ -144,7 +144,7 @@ SwaggerModule.setup('api-doc', app, document);
 然后在 LoginUserDto 和 LoginUserVo 里标识下属性：
 
 LoginUserDto：
-![](./image/第90章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-20.png)
 
 LoginuserVo：
 
@@ -202,15 +202,15 @@ export class LoginUserVo {
 
 测试下：
 
-![](./image/第90章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-21.png)
 
-![](./image/第90章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-22.png)
 
 /user/admin/login 的 swagger 装饰器和 /user/login 一样。
 
 然后继续看 /user/refresh 接口：
 
-![](./image/第90章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-23.png)
 ```javascript
 @ApiQuery({
     name: 'refreshToken',
@@ -231,13 +231,13 @@ export class LoginUserVo {
 
 用 @ApiQuery 标识 query 参数，用 @ApiResponse 标识两种响应。
 
-![](./image/第90章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-24.png)
  
 但现在刷新成功的 access_token 和 refresh_token 没有显示。
 
 所以我们也需要把这个返回值封装成 vo：
 
-![](./image/第90章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-25.png)
 
 新建 src/user/vo/refresh-token.vo.ts
 
@@ -254,7 +254,7 @@ export class RefreshTokenVo {
 ```
 把返回的结果封装成 vo：
 
-![](./image/第90章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-26.png)
 
 ```javascript
 const vo = new RefreshTokenVo();
@@ -266,17 +266,17 @@ return vo;
 ```
 在 @ApiResponse 里标识这个 type
 
-![](./image/第90章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-27.png)
 
 刷新下页面，可以看到现在接口文档里就有了返回数据的结构：
 
-![](./image/第90章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-28.png)
 
 /user/admin/login 的处理方式一样。
 
 接下来是 /user/info 接口：
 
-![](./image/第90章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-29.png)
 
 加一下返回的数据的标识 @ApiResponse。
 
@@ -313,35 +313,35 @@ export class UserDetailVo {
 ```
 这样返回的数据结构就对了：
 
-![](./image/第90章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-30.png)
 
 但这个接口是需要登录的，我们加一下标识：
 
-![](./image/第90章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-31.png)
 
 然后在 main.ts 里加一下这种 bearer 的认证方式：
 
-![](./image/第90章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-32.png)
 
 这时候这个接口就有了锁的标记，代表需要登录了：
 
-![](./image/第90章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-33.png)
 
 点击锁，填入 access_token，这样再测试接口的时候，会自动带上 token 标识：
 
-![](./image/第90章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-34.png)
 
 比如我输入 xxx，然后点击 authorize
 
 然后点击 try it out 和 execute，可以看到浏览器发送了这个请求，并且带上了 authorization 的 header 
 
-![](./image/第90章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-35.png)
 
 可以在 swagger 文档里测试这个接口。
 
 接下来是 /user/update_password
 
-![](./image/第90章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-36.png)
 
 ```javascript
 @ApiBearerAuth()
@@ -355,14 +355,14 @@ export class UserDetailVo {
 ```
 在 UpdateUserPasswordDto 里加一下 @ApiProperty
 
-![](./image/第90章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-37.png)
 接口文档没啥问题：
 
-![](./image/第90章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-38.png)
 
 接下来是 /user/update_password/captcha 接口
 
-![](./image/第90章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-39.png)
 
 这个接口是需要登录的，当时为了测试方便没有加，现在加一下：
 
@@ -380,11 +380,11 @@ export class UserDetailVo {
 @RequireLogin()
 ```
 
-![](./image/第90章-40.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-40.png)
 
 然后是 /user/update 接口：
 
-![](./image/第90章-41.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-41.png)
 ```javascript
 @ApiBearerAuth()
 @ApiBody({
@@ -402,15 +402,15 @@ export class UserDetailVo {
 ```
 在 UpdateUserDto 里标识下 @ApiProperty
  
-![](./image/第90章-42.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-42.png)
 
 刷新下，可以看到最新的接口文档：
 
-![](./image/第90章-43.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-43.png)
 
 然后是 /user/freeeze 接口
 
-![](./image/第90章-44.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-44.png)
 
 ```javascript
 @ApiBearerAuth()
@@ -428,13 +428,13 @@ export class UserDetailVo {
 
 刷新下：
 
-![](./image/第90章-45.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-45.png)
 
 没啥问题。
 
 最后，还剩下 /user/list 接口：
 
-![](./image/第90章-46.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-46.png)
 
 ```javascript
 @ApiBearerAuth()
@@ -471,7 +471,7 @@ export class UserDetailVo {
 ```
 这里的返回值需要封装个 vo：
 
-![](./image/第90章-47.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-47.png)
 
 创建 src/user/vo/user-list.vo.ts
 ```javascript
@@ -519,7 +519,7 @@ export class UserListVo {
 
 然后把 findUsers 的返回值改为 UserListVo
 
-![](./image/第90章-48.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-48.png)
 
 ```javascript
 const vo = new UserListVo();
@@ -531,9 +531,9 @@ return vo;
 
 刷新下接口文档：
 
-![](./image/第90章-49.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-49.png)
 
-![](./image/第90章-50.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第90章-50.png)
 
 没啥问题。
 

@@ -14,11 +14,11 @@
 
 比如 3 号订单的这三个商品，我们把它数量都改为 1。
 
-![](./image/第41章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-1.png)
 
 那总金额就是 200，需要改 order 表的 total\_amount 为 200。
 
-![](./image/第41章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-2.png)
 
 我们先开启事务：
 
@@ -38,9 +38,9 @@ UPDATE orders SET total_amount=200 WHERE id=3;
 
 然后再查询下现在 orders 表和 order\_items 表的数据。
 
-![](./image/第41章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-3.png)
 
-![](./image/第41章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-4.png)
 
 确实改了。
 
@@ -48,13 +48,13 @@ UPDATE orders SET total_amount=200 WHERE id=3;
 
 别担心，这时候只要执行下 ROLLBACK 就好了。
 
-![](./image/第41章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-5.png)
 
 你会发现它们的数据恢复了：
 
-![](./image/第41章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-6.png)
 
-![](./image/第41章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-7.png)
 
 如果你确实想提交，那可以执行 COMMIT：
 
@@ -70,7 +70,7 @@ COMMIT;
 
 这时候数据就真正被修改，不能回滚了。
 
-![](./image/第41章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-8.png)
 
 那如果我不是想回滚所有的 sql 语句，只是回滚一部分呢？
 
@@ -95,9 +95,9 @@ SAVEPOINT ccc;
 
 执行这段 sql，数据确实修改了：
 
-![](./image/第41章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-9.png)
 
-![](./image/第41章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-10.png)
 
 这时候我们回滚到 bbb 的位置：
 
@@ -107,15 +107,15 @@ ROLLBACK TO SAVEPOINT bbb;
 
 然后再查询下：
 
-![](./image/第41章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-11.png)
 
-![](./image/第41章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-12.png)
 
 这时候 order\_items 表修改成功了，但是 orders 表修改没成功。
 
 这确实是这个点的状态：
 
-![image.png](./image/第41章-13.png)
+![image.png](http://static.liushuaiyang.com/nest-docs/image/第41章-13.png)
 
 再回滚到 ccc：
 
@@ -123,9 +123,9 @@ ROLLBACK TO SAVEPOINT bbb;
 ROLLBACK TO SAVEPOINT ccc;
 ```
 
-![](./image/第41章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-14.png)
 
-![](./image/第41章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-15.png)
 
 这时候就都修改成功了。
 
@@ -176,7 +176,7 @@ MYSQL 有 4 种事务隔离级别：
 ```sql
 select @@transaction_isolation
 ```
-![](./image/第41章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第41章-16.png)
 
 这个了解就好，一般用默认的。
 

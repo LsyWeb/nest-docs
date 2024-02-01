@@ -24,7 +24,7 @@ npm update -g @nestjs/cli
 
 nest -h 看看:
 
-![](./image/第03章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-1.png)
 
 有创建新项目的 nest new，有生成某些代码的 nest generate，还有编译构建的 nest build，开发模式的 nest start 等。
 
@@ -36,27 +36,27 @@ nest new 我们用过，就是创建一个新的 nest 项目的。
 
 它有这么几个选项：
 
-![](./image/第03章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-2.png)
 
 --skip-git 和 --skip-install 很容易理解，就是跳过 git 的初始化，跳过 npm install。
 
 --package-manager 是指定包管理器的，之前创建项目的时候会让我们选择：
 
-![](./image/第03章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-3.png)
 
 指定之后，就跳过包管理器选择这步了：
 
-![](./image/第03章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-4.png)
 
 --language 可以指定 typescript 和 javascript，一般我们都选择 ts，用默认的就好。
 
 --strict 是指定 ts 的编译选项是否开启严格模式的，也就是这么 5 个选项：
 
-![](./image/第03章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-5.png)
 
 默认是 false，也可以指定为 true：
 
-![](./image/第03章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-6.png)
 
 这个之后需要的话再改就行。
 
@@ -70,28 +70,28 @@ nest 命令除了可以生成整个项目外，还可以生成一些别的代码
 nest generate module aaa
 ```
 
-![](./image/第03章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-7.png)
 
 它会生成 module 的代码：
 
-![](./image/第03章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-8.png)
 
 还会自动在 AppModule 里引入：
 
-![](./image/第03章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-9.png)
 
 当然你也可以生成 controller、service 等代码：
 
 ```
 nest generate controller aaa
 ```
-![](./image/第03章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-10.png)
 
 同样，它也会更新到 module 的依赖里去。
 
 生成 service 也是一样：
 
-![](./image/第03章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-11.png)
 
 当然，如果是要完整生成一个模块的代码，不需要一个个生成，可以用 
 
@@ -100,27 +100,27 @@ nest generate resource xxx
 ```
 它会让你选择是哪种代码，因为 nest 支持 http、websocket、graphql、tcp 等，这里我们选择 http 的 REST 风格 api：
 
-![](./image/第03章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-12.png)
 
 然后会让你选择是否生成 CRUD 代码：
 
-![](./image/第03章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-13.png)
 
 选择是。
 
 然后就会生成整个模块的 CRUD + REST api 的代码：
 
-![](./image/第03章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-14.png)
 
-![](./image/第03章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-15.png)
 
 当然，它同样会自动在 AppModule 引入：
 
-![](./image/第03章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-16.png)
 
 这就是 nest generate，可以快速生成各种代码：
 
-![](./image/第03章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-17.png)
 
 这些代码模版的集合是在 @nestjs/schematics 这个包里定义的。
 
@@ -130,31 +130,31 @@ nest new 创建项目的时候有个 --collection 选项，就是配置这个的
 
 你可以在 [@nestjs/schematics](https://github.com/nestjs/schematics/tree/master/src/lib) 里看到这些代码模版的定义：
 
-![](./image/第03章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-18.png)
 
 它的实现原理很简单，就是模版引擎填充变量，打印成代码：
 
-![](./image/第03章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-19.png)
 
 nest generate 也有不少选项：
 
-![](./image/第03章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-20.png)
 
 --flat 和 --no-flat 是指定是否生成对应目录的：
 
-![](./image/第03章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-21.png)
 
 --spec 和 --no-spec 是指定是否生成测试文件：
 
-![](./image/第03章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-22.png)
 
 --skip-import 是指定不在 AppModule 里引入：
 
-![](./image/第03章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-23.png)
 
 也就是不生成这部分代码：
 
-![](./image/第03章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-24.png)
 
 至于 --project，这是指定生成代码在哪个子项目的，等之后用到 monorepo 项目的时候再说。
 
@@ -164,23 +164,23 @@ nest generate 也有不少选项：
 
 然后就是 nest build 了，它是用来构建项目的:
 
-![](./image/第03章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-25.png)
 
 执行 nest build，会在 dist 目录下生成编译后的代码。
 
 同样，它也有一些选项：
 
-![](./image/第03章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-26.png)
 
 --wepback 和 --tsc 是指定用什么编译，默认是 tsc 编译，也可以切换成 webpack。
 
 这是 tsc 的编译产物：
 
-![](./image/第03章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-27.png)
 
 这是 webpack 的编译产物：
 
-![](./image/第03章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-28.png)
 
 tsc 不做打包、webpack 会做打包，两种方式都可以。
 
@@ -200,11 +200,11 @@ node 模块本来就不需要打包，但是打包成单模块能提升加载的
 
 刚刚我们说的那些选项都可以在 nest-cli.json 里配置：
 
-![](./image/第03章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-29.png)
 
 比如 compilerOptions 里设置 webpack 为 true 就相当于 nest build --webpack，一样的效果：
 
-![](./image/第03章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-30.png)
 
 webpack 设置为 false 就是用 tsc 了。
 
@@ -216,13 +216,13 @@ deleteOutDir 设置为 true，每次 build 都会都清空 dist 目录。
 
 不过只支持 src 下文件的复制，如果是非 src 下的，可以自己写脚本复制：
 
-![](./image/第03章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-31.png)
 
 然后是 generateOptions，这些就和我们 nest generate 时的 --no-spec、--no-flat 一样的效果。
 
 比如我把 flat 设置为 false、spec 设置为 false，那再 generate 代码时就是这样的：
 
-![](./image/第03章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-32.png)
 
 生成了一层目录，并且没有生成测试文件。
 
@@ -236,7 +236,7 @@ entryFile 是指定入口文件的名字，默认是 main。
 
 这是一种 json schema 的规范，还是挺容易看懂的：
 
-![](./image/第03章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-33.png)
 
 如果想全面了解 nest-cli.json 都有啥属性，可以看看这个 schema 定义。
 
@@ -244,21 +244,21 @@ entryFile 是指定入口文件的名字，默认是 main。
 
 最后，再来看下 nest start 命令：
 
-![](./image/第03章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-34.png)
 
 可以看到每次重新 build 了，并且用 node 把 main.js 跑了起来。
 
 它有这些选项：
 
-![](./image/第03章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-35.png)
 
 --watch 是最常用的选项了，也就是改动文件之后自动重新 build：
 
-![](./image/第03章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-36.png)
 
 --debug 是启动调试的 websocket 服务，用来 debug。
 
-![](./image/第03章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-37.png)
 
 --exec 可以指定用什么来跑，默认是用 node 跑，你也可以切换别的 runtime。
 
@@ -268,7 +268,7 @@ entryFile 是指定入口文件的名字，默认是 main。
 
 最后还有个 nest info 命令，这个就是查看项目信息的，包括系统信息、 node、npm 和依赖版本：
 
-![](./image/第03章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第03章-38.png)
 
 ## 总结
 

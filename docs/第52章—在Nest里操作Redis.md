@@ -6,13 +6,13 @@
 
 redis 有很多的 [node 客户端的包](https://redis.io/resources/clients/#nodejs)：
 
-![](./image/第52章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-1.png)
 
 最流行的就是 redis 和 ioredis 这两个。
 
 我们创建个项目来试一下：
 
-![](./image/第52章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-2.png)
 
 我们先试一下 redis，它是官方提供的 npm 包：
 
@@ -45,15 +45,15 @@ await client.disconnect();
 
 因为用到了 es module、顶层 await，这些的启用需要在 package.json 里添加 type: module
 
-![](./image/第52章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-3.png)
 
 然后 node 执行下：
 
-![](./image/第52章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-4.png)
 
 用 RedisInsight 看下：
 
-![](./image/第52章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-5.png)
 
 确实现在是有这些 key。
 
@@ -67,11 +67,11 @@ await client.hSet('guangguang1', '333', 'value333');
 
 执行以后是这样的：
 
-![](./image/第52章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-6.png)
 
 所有的 redis 命令都有对应的方法：
 
-![](./image/第52章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-7.png)
 
 和我们在命令行客户端里操作一样。
 
@@ -95,11 +95,11 @@ console.log(res);
 
 结果如下：
 
-![](./image/第52章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-8.png)
 
 其他命令也是这样执行：
 
-![](./image/第52章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-9.png)
 
 这些 node 包用起来还是很简单的，没啥学习成本。
 
@@ -111,7 +111,7 @@ console.log(res);
 
     nest new nest-redis -p npm
 
-![](./image/第52章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-10.png)
 
 当然，要先安装用到的 redis 的包。
 
@@ -119,7 +119,7 @@ console.log(res);
 
 然后在 AppModule 添加一个自定义的 provider：
 
-![](./image/第52章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-11.png)
 
 ```javascript
 import { Module } from '@nestjs/common';
@@ -175,7 +175,7 @@ export class AppService {
 
 因为 service 里加了 async、await，那 controller 里也得加一下：
 
-![](./image/第52章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-12.png)
 
 这样就能在 nest 里操作 redis 了。
 
@@ -185,7 +185,7 @@ export class AppService {
 
 可以看到控制台打印了 redis 命令的执行结果：
 
-![](./image/第52章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第52章-13.png)
 
 这就是在 Nest 里操作 redis 的方式。
 

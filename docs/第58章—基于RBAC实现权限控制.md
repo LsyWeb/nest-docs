@@ -4,13 +4,13 @@ RBAC 是 Role Based Access Control，基于角色的权限控制。
 
 上节我们学的 ACL 是这样的：
 
-![](./image/第58章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-1.png)
 
 直接给用户分配权限。
 
 而 RBAC 是这样的：
 
-![](./image/第58章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-2.png)
 
 给角色分配权限，然后给用户分配角色。
 
@@ -35,11 +35,11 @@ RBAC 是 Role Based Access Control，基于角色的权限控制。
 ```sql
 CREATE DATABASE rbac_test DEFAULT CHARACTER SET utf8mb4;
 ```
-![](./image/第58章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-3.png)
 
 可以看到创建出的 database：
 
-![](./image/第58章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-4.png)
 
 然后创建 nest 项目：
 
@@ -47,7 +47,7 @@ CREATE DATABASE rbac_test DEFAULT CHARACTER SET utf8mb4;
 nest new rbac-test -p npm
 ```
 
-![](./image/第58章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-5.png)
 
 安装 typeorm 的依赖：
 
@@ -94,12 +94,12 @@ export class AppModule {}
 nest g resource user
 ```
 
-![](./image/第58章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-6.png)
 
 添加 User、Role、Permission 的 Entity：
 
 
-![](./image/第58章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-7.png)
 
 用户、角色、权限都是多对多的关系。
 
@@ -201,14 +201,14 @@ Permission 有 id、name、createTime、updateTime 4 个字段。
 
 然后在 TypeOrm.forRoot 的 entities 数组加入这三个 entity：
 
-![](./image/第58章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-8.png)
 
 把 Nest 服务跑起来试试：
 
 ```
 npm run start:dev
 ```
-![](./image/第58章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-9.png)
 
 可以看到生成了 user、role、permission 这 3 个表，还有 user_roole_relation、role_permission_relation 这 2 个中间表。
 
@@ -216,21 +216,21 @@ npm run start:dev
 
 在 mysql workbench 里看下这 5 个表：
 
-![](./image/第58章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-10.png)
 
-![](./image/第58章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-11.png)
 
-![](./image/第58章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-12.png)
 
-![](./image/第58章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-13.png)
 
-![](./image/第58章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-14.png)
 
 还有外键：
 
-![](./image/第58章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-15.png)
 
-![](./image/第58章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-16.png)
 
 都没啥问题。
 
@@ -332,7 +332,7 @@ async initData() {
 }
 ```
 
-![](./image/第58章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-17.png)
 
 然后在 UserController 里添加一个 handler：
 
@@ -350,11 +350,11 @@ npm run start:dev
 ```
 浏览器访问下：
 
-![](./image/第58章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-18.png)
 
 服务端控制台打印了一堆 sql：
 
-![](./image/第58章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-19.png)
 
 可以看到分别插入了 user、role、permission 还有 2 个中间表的数据。
 
@@ -362,23 +362,23 @@ npm run start:dev
 
 permission 表：
 
-![](./image/第58章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-20.png)
 
 role 表：
 
-![](./image/第58章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-21.png)
 
 user 表：
 
-![](./image/第58章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-22.png)
 
 role_permission_relation 中间表：
 
-![](./image/第58章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-23.png)
 
 user_role_relation 中间表：
 
-![](./image/第58章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-24.png)
 
 都没啥问题。
 
@@ -426,19 +426,19 @@ export class UserLoginDto {
 
 全局启用 ValidationPipe：
 
-![](./image/第58章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-25.png)
 
 然后在 postman 里测试下：
 
 ValidationPipe 不通过的时候，会返回错误信息：
 
-![](./image/第58章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-26.png)
 
 ValidationPipe 通过之后，就会执行 handler 里的方法：
 
-![](./image/第58章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-27.png)
 
-![](./image/第58章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-28.png)
 
 接下来实现查询数据库的逻辑，在 UserService 添加 login 方法：
 
@@ -482,9 +482,9 @@ async login(@Body() loginUser: UserLoginDto){
 
 可以看到，user 信息和 roles 信息都查询出来了：
 
-![](./image/第58章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-29.png)
 
-![](./image/第58章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-30.png)
 
 我们要把 user 信息放到 jwt 里，所以安装下相关的包：
 
@@ -492,13 +492,13 @@ async login(@Body() loginUser: UserLoginDto){
  
 然后在 AppModule 里引入 JwtModule：
 
-![](./image/第58章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-31.png)
 
 设置为全局模块，这样不用每个模块都引入。
 
 然后在 UserController 里注入 JwtModule 里的 JwtService：
 
-![](./image/第58章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-32.png)
 
 把 user 信息放到 jwt 里，然后返回：
 
@@ -522,7 +522,7 @@ async login(@Body() loginUser: UserLoginDto){
 
 测试下：
 
-![](./image/第58章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-33.png)
 
 服务端在登录后返回了 jwt 的 token。
 
@@ -533,15 +533,15 @@ async login(@Body() loginUser: UserLoginDto){
 nest g resource aaa 
 nest g resource bbb 
 ```
-![](./image/第58章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-34.png)
 
-![](./image/第58章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-35.png)
 
 现在这些接口可以直接访问：
 
-![](./image/第58章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-36.png)
 
-![](./image/第58章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-37.png)
 
 而实际上这些接口是要控制权限的。
 
@@ -595,13 +595,13 @@ export class LoginGuard implements CanActivate {
 
 然后把它放到 request 上：
 
-![](./image/第58章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-38.png)
 
 但这时候会报错 user 不在 Request 的类型上。
 
 扩展下就好了：
 
-![](./image/第58章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-39.png)
 
 ```typescript
 declare module 'express' {
@@ -617,25 +617,25 @@ declare module 'express' {
 
 上节我们是一个个加的 Guard：
 
-![](./image/第58章-40.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-40.png)
 
 这样太麻烦了，这次我们全局加：
 
-![](./image/第58章-41.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-41.png)
 
 前面讲过，通过 app.userGlobalXxx 的方式不能注入 provider，可以通过在 AppModule 添加 token 为 APP_XXX 的 provider 的方式来声明全局 Guard、Pipe、Intercepter 等：
 
-![](./image/第58章-42.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-42.png)
 
 再访问下 aaa、bbb 接口：
 
-![](./image/第58章-43.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-43.png)
 
-![](./image/第58章-44.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-44.png)
 
 但这时候你访问 /user/login 接口也被拦截了：
 
-![](./image/第58章-45.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-45.png)
 
 我们需要区分哪些接口需要登录，哪些接口不需要。
 
@@ -652,15 +652,15 @@ export const  RequireLogin = () => SetMetadata('require-login', true);
 
 在 aaa、bbb 的 controller 上用一下：
 
-![](./image/第58章-46.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-46.png)
 
-![](./image/第58章-47.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-47.png)
 
 我们支持在 controller 上添加声明，不需要每个 handler 都添加，这样方便很多。
 
 然后需要改造下 LoginGuard，取出目标 handler 的 metadata 来判断是否需要登录：
 
-![](./image/第58章-48.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-48.png)
 
 ```javascript
 const requireLogin = this.reflector.getAllAndOverride('require-login', [
@@ -681,27 +681,27 @@ if(!requireLogin) {
 
 现在登录接口能正常访问了：
 
-![](./image/第58章-49.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-49.png)
 
 因为没有 require-login 的 metadata：
 
-![](./image/第58章-50.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-50.png)
 
 而 aaa、bbb 是需要登录的：
 
-![](./image/第58章-51.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-51.png)
 
-![](./image/第58章-52.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-52.png)
 
 因为它们包含 require-login 的metadata：
 
-![](./image/第58章-53.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-53.png)
 
 然后我们登录下，带上 token 访问试试：
 
-![](./image/第58章-54.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-54.png)
 
-![](./image/第58章-55.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-55.png)
 
 带上 token 就能正常访问了。
 
@@ -714,11 +714,11 @@ nest g guard permission --no-spec --flat
 ```
 同样声明成全局 Guard：
 
-![](./image/第58章-56.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-56.png)
 
 PermissionGuard 里需要用到 UserService，所以在 UserModule 里导出下 UserService：
 
-![](./image/第58章-57.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-57.png)
 
 注入 UserService：
 
@@ -807,15 +807,15 @@ export class PermissionGuard implements CanActivate {
 
 带上 token 访问：
 
-![](./image/第58章-58.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-58.png)
 
 可以看到打印了这个用户拥有的角色的所有 permission 信息：
 
-![](./image/第58章-59.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-59.png)
 
 再增加个自定义 decorator：
 
-![](./image/第58章-60.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-60.png)
 
 ```typescript
 export const  RequirePermission = (...permissions: string[]) => SetMetadata('require-permission', permissions);
@@ -823,12 +823,12 @@ export const  RequirePermission = (...permissions: string[]) => SetMetadata('req
 
 然后我们在 BbbController 上声明需要的权限。
 
-![](./image/第58章-61.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-61.png)
 
 在 PermissionGuard 里取出来判断：
 
 
-![](./image/第58章-62.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-62.png)
 
 
 ```javascript
@@ -841,11 +841,11 @@ console.log(requiredPermissions);
 ```
 先打印下试试：
 
-![](./image/第58章-63.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-63.png)
 
 带上 token 访问：
 
-![](./image/第58章-64.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-64.png)
 
 可以看到打印了用户有的 permission 还有这个接口需要的 permission。
 
@@ -853,7 +853,7 @@ console.log(requiredPermissions);
 
 添加这样的对比逻辑：
 
-![](./image/第58章-65.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-65.png)
 
 ```javascript
 for(let i = 0; i < requiredPermissions.length; i++) {
@@ -869,19 +869,19 @@ for(let i = 0; i < requiredPermissions.length; i++) {
 
 当前用户是李四，是没有访问 bbb 的权限的：
 
-![](./image/第58章-66.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-66.png)
 
 我们再登录下张三账号：
 
-![](./image/第58章-67.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-67.png)
 
 用这个 token 去访问下 bbb 接口，就能正常访问了：
 
-![](./image/第58章-68.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-68.png)
 
 他是有这个权限的：
 
-![](./image/第58章-69.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第58章-69.png)
 
 这样，我们就实现了基于 RBAC 的权限控制。
 

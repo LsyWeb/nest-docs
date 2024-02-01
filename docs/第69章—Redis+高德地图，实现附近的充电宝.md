@@ -1,10 +1,10 @@
 ﻿想必大家都打过车，打车软件可以根据你的当前位置搜索附近的车辆：
 
-![](./image/第69章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-1.png)
 
 这两天国庆节，大家出去玩可能会借用共享充电宝。它也是基于你的位置来搜索附近充电宝：
 
-![](./image/第69章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-2.png)
 
 再就是大家搜索附近的酒店、餐厅等，也是基于位置的搜索。
 
@@ -14,7 +14,7 @@
 
 很多人对 Redis 的认识停留在它能做缓存，也就是从数据库中查询出来的数据，放到 redis 里，下次直接拿 redis 的数据返回：
 
-![](./image/第69章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-3.png)
 
 确实，缓存是 redis 的常见应用。
 
@@ -31,7 +31,7 @@ redis 是 key-value 的数据库，value 有很多种类型：
 
 其中，geo 的数据结构，就可以用来实现附近的人等功能。
 
-![](./image/第69章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-4.png)
 
 比如大众点评、美团外卖这种，就是用 redis 实现的基于地理位置的功能。
 
@@ -43,7 +43,7 @@ redis 是 key-value 的数据库，value 有很多种类型：
 geoadd loc 13.361389 38.115556 "guangguang" 15.087269 37.502669 "dongdong" 
 ```
 
-![](./image/第69章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-5.png)
 
 我们用 geoadd 命令添加了两个位置。
 
@@ -53,7 +53,7 @@ dongdong 的位置是经度 15.08729 ，纬度 37.502669
 
 点击刷新，就可以看到 loc 的 key：
 
-![](./image/第69章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-6.png)
 
 然后可以用 geodist 计算两个位置之间的距离：
 
@@ -61,7 +61,7 @@ dongdong 的位置是经度 15.08729 ，纬度 37.502669
 geodist loc guangguang dongdong
 ```
 
-![](./image/第69章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-7.png)
 
 可以看到相距差不多 166 km
 
@@ -73,13 +73,13 @@ georadius loc 15 37 200 km
 ```
 结果如下：
 
-![](./image/第69章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-8.png)
 
 因为两个点相距 166km，所以搜索 100km 以内的点，只能搜到一个。而 200km 的内的点，能搜到两个。
 
 这样，我们就可以实现搜索附近 1km 的充电宝的功能。
 
-![](./image/第69章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-9.png)
 
 服务端提供一个接口，让充电宝机器上传位置信息，然后把它存到 redis 里。
 
@@ -89,19 +89,19 @@ georadius loc 15 37 200 km
 
 这里用高德地图或者百度地图都行，他们都支持在地图上绘制 marker 标记的功能：
 
-![](./image/第69章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-10.png)
 
 比如上面我们分别在地图上绘制了 marker 和 circle：
 
 这是添加 Marker 的代码：
 
-![](./image/第69章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-11.png)
 
 指定 marker 的经纬度和图片就行。
 
 这是添加 Circle 的代码：
 
-![](./image/第69章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-12.png)
 
 指定圆心经纬度和半径就行。
 
@@ -118,7 +118,7 @@ npm install g @nestjs/cli
 
 nest new nearby-search
 ```
-![](./image/第69章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-13.png)
 
 进入项目目录，把它跑起来：
 
@@ -126,11 +126,11 @@ nest new nearby-search
 npm run start:dev
 ```
 
-![](./image/第69章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-14.png)
 
 浏览器访问 http://localhost:3000 可以看到 hello world，就代表 nest 服务跑起来了：
 
-![](./image/第69章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-15.png)
 
 然后我们安装连接 redis 的包：
 
@@ -145,7 +145,7 @@ nest g module redis
 nest g service redis
 ```
 
-![](./image/第69章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-16.png)
 
 在 RedisModule 创建连接 redis 的 provider，导出 RedisService：
 
@@ -201,7 +201,7 @@ export class RedisService {
 
 在 AppController 里注入 RedisService，然后添加一个路由：
 
-![](./image/第69章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-17.png)
 
 添加 addPos 的 get 请求的路由，传入 name、longitude、latitude，调用 redisService添加位置信息。
 
@@ -247,25 +247,25 @@ export class AppController {
 
 /addPos?name=guang
 
-![](./image/第69章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-18.png)
 
 /addPos?name=guang&longitude=15&latitude=35
 
-![](./image/第69章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-19.png)
 
 /addPos?name=dong&longitude=15&latitude=85
 
-![](./image/第69章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-20.png)
 
 然后去 RedisInsight 里看下：
 
-![](./image/第69章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-21.png)
 
 点击刷新，可以看到确实有了 positions 的数据。
 
 然后我们再添加个查询位置列表的接口：
 
-![](./image/第69章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-22.png)
 
 ```javascript
 async geoPos(key: string, posName: string) {
@@ -298,13 +298,13 @@ zset 是有序列表，列表项会有一个分数，zrange 是返回某个分�
 
 我们先在 RedisInsight 测试下这两个命令：
 
-![](./image/第69章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-23.png)
 
 没啥问题。
 
 在 AppController 添加两个路由：
 
-![](./image/第69章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-24.png)
 
 ```javascript
 @Get('allPos')
@@ -320,15 +320,15 @@ async pos(@Query('name') name: string) {
 
 访问下试试：
 
-![](./image/第69章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-25.png)
 
-![](./image/第69章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-26.png)
 
 最后，还要提供一个搜索附近的点的接口：
 
 在 RedisService 添加 geoSearch 方法，传入 key，经纬度、搜索半径，返回附近的点：
 
-![](./image/第69章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-27.png)
 
 这里单位用的 km。
 
@@ -352,7 +352,7 @@ async geoSearch(key: string, pos: [number, number], radius: number) {
 
 在 AppController 添加 nearbySearch 接口：
 
-![](./image/第69章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-28.png)
 
 ```javascript
 @Get('nearbySearch')
@@ -374,7 +374,7 @@ async nearbySearch(
 
 首先我们在 RedisInsight 里算下两点的距离：
 
-![](./image/第69章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-29.png)
 
 大概 5561 km
 
@@ -382,7 +382,7 @@ async nearbySearch(
 
 /nearbySearch?longitude=15&latitude=35&radius=5000
 
-![](./image/第69章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-30.png)
 
 找到了一个点。
 
@@ -390,29 +390,29 @@ async nearbySearch(
 
 /nearbySearch?longitude=15&latitude=35&radius=6000
 
-![](./image/第69章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-31.png)
 
 不过现在的经纬度我们是随便给的。
 
 可以用高德地图的坐标拾取工具来取几个位置：
 
-![](./image/第69章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-32.png)
 
 天安门： 116.397444,39.909183
 
-![](./image/第69章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-33.png)
 
 文化宫科技馆：116.3993,39.908578
 
-![](./image/第69章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-34.png)
 
 售票处：116.397283,39.90943
 
-![](./image/第69章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-35.png)
 
 故宫彩扩部：116.398002,39.909175
 
-![](./image/第69章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-36.png)
 
 把这样 4 个位置添加到系统中：
 
@@ -424,7 +424,7 @@ async nearbySearch(
 
 /addPos?name=故宫彩扩部&longitude=116.398002&latitude=39.909175
 
-![](./image/第69章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-37.png)
 
 先计算下天安门到故宫彩扩部的距离：
 
@@ -432,7 +432,7 @@ async nearbySearch(
 GEODIST positions 天安门 故宫彩扩部 km
 ```
 
-![](./image/第69章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-38.png)
 
 是 0.0476km
 
@@ -444,11 +444,11 @@ GEODIST positions 天安门 故宫彩扩部 km
 
 /nearbySearch?longitude=116.397444&latitude=39.909183&radius=0.04
 
-![](./image/第69章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-39.png)
 
 /nearbySearch?longitude=116.397444&latitude=39.909183&radius=0.05
 
-![](./image/第69章-40.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-40.png)
 
 没啥问题，这样我们搜索附近的充电宝的后端功能就完成了。
 
@@ -456,7 +456,7 @@ GEODIST positions 天安门 故宫彩扩部 km
 
 在 main.ts 指定 public 目录为静态文件的目录：
 
-![](./image/第69章-41.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-41.png)
 
 ```javascript
 import { NestFactory } from '@nestjs/core';
@@ -489,23 +489,23 @@ bootstrap();
 ```
 访问下看看：
 
-![](./image/第69章-42.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-42.png)
 
 接下来要接入高德地图。
 
 先按照[文档](https://lbs.amap.com/api/javascript-api-v2/getting-started)的步骤获取 key
 
-![](./image/第69章-43.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-43.png)
 
 这个很简单，填一下信息就好。
 
 点击[创建新应用](https://console.amap.com/dev/key/app)，选择 web 应用，就可以生成 key 了
 
-![](./image/第69章-44.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-44.png)
 
 然后把文档的 [demo 代码](https://lbs.amap.com/demo/javascript-api-v2/example/map-componets/map-overlays)复制过来：
 
-![](./image/第69章-45.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-45.png)
 
 改成这样：
 
@@ -566,11 +566,11 @@ map.setFitView();
 ```
 在天安门画了一个 circle，然后在文化宫科技馆画了一个 marker：
 
-![](./image/第69章-46.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-46.png)
 
 接下来引入 axios，来调用服务端接口：
 
-![](./image/第69章-47.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-47.png)
 ```html
 <!doctype html>
 <html>
@@ -654,11 +654,11 @@ map.setFitView();
 ```
 效果是这样的：
 
-![](./image/第69章-48.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-48.png)
 
 然后把 radius 改成 0.05，是这样的：
 
-![](./image/第69章-49.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第69章-49.png)
 
 这样就实现了查找附近的充电宝的功能。
 

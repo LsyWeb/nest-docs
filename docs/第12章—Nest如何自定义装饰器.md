@@ -20,13 +20,13 @@
 
 创建个 decorator。
 
-![](./image/第12章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-1.png)
 
 这个装饰器就是自定义的装饰器。
 
 之前我们是这样用的 @SetMetadata
 
-![](./image/第12章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-2.png)
 
 然后加个 Guard 取出来做一些判断：
 
@@ -56,7 +56,7 @@ export class AaaGuard implements CanActivate {
 ```
 加到路由上：
 
-![](./image/第12章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-3.png)
 
 把服务跑起来：
 
@@ -65,7 +65,7 @@ npm run start:dev
 ```
 然后访问 http://localhost:3000 可以看到打印的 metadata
 
-![](./image/第12章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-4.png)
 
 但是不同 metadata 有不同的业务场景，有的是用于权限的，有的是用于其他场景的。
 
@@ -73,11 +73,11 @@ npm run start:dev
 
 这时候就可以这样封装一层：
 
-![](./image/第12章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-5.png)
 
 装饰器就可以简化成这样：
 
-![](./image/第12章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-6.png)
 
 还有，有没有觉得现在装饰器太多了，能不能合并成一个呢？
 
@@ -101,7 +101,7 @@ export function Bbb(path, role) {
 
 在自定义装饰器里通过 applyDecorators 调用其他装饰器。
 
-![](./image/第12章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-7.png)
 
 这三个 handler 的装饰器都是一样的效果。
 
@@ -121,17 +121,17 @@ export const Ccc = createParamDecorator(
 
 先用用看：
 
-![](./image/第12章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-8.png)
 
 大家猜这个 c 参数的值是啥？
 
-![](./image/第12章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-9.png)
 
 没错，就是 ccc，也就是说参数装饰器的返回值就是参数的值。
 
 回过头来看看这个装饰器：
 
-![](./image/第12章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-10.png)
 
 data 很明显就是传入的参数，而 ExecutionContext 前面用过，可以取出 request、response 对象。
 
@@ -155,7 +155,7 @@ export const MyHeaders = createParamDecorator(
 
 效果如下：
 
-![](./image/第12章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-11.png)
 
 分别通过内置的 @Headers 装饰器和我们自己实现的 @MyHeaders 装饰器来取请求头，结果是一样的。
 
@@ -172,9 +172,9 @@ export const MyQuery = createParamDecorator(
 
 用一下试试看：
 
-![](./image/第12章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-12.png)
 
-![](./image/第12章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-13.png)
 
 和内置的 Query 用起来一毛一样！
 
@@ -182,11 +182,11 @@ export const MyQuery = createParamDecorator(
 
 而且这些装饰器和内置装饰器一样，可以使用 Pipe 做参数验证和转换：
 
-![](./image/第12章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-14.png)
 
-![](./image/第12章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-15.png)
 
-![](./image/第12章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-16.png)
 
 知道了如何自定义方法和参数的装饰器，那 class 的装饰器呢？
 
@@ -194,31 +194,31 @@ export const MyQuery = createParamDecorator(
 
 比如单个装饰器：
 
-![](./image/第12章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-17.png)
 
-![](./image/第12章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-18.png)
 
 可以看到自定义装饰器生效了：
 
-![](./image/第12章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-19.png)
 
 也可以通过 applyDecorators 组合多个装饰器：
 
-![](./image/第12章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-20.png)
 
-![](./image/第12章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-21.png)
 
 在 guard 里加一条打印：
 
-![](./image/第12章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-22.png)
 
 浏览器访问下：
 
-![](./image/第12章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-23.png)
 
 可以看到 metadata 也设置成功了：
 
-![](./image/第12章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第12章-24.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/custom-decorator)
 

@@ -9,7 +9,7 @@ mkdir prisma-client-api
 cd prisma-client-api
 npm init -y
 ```
-![](./image/第117章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-1.png)
 
 进入项目，执行 init 命令：
 
@@ -17,15 +17,15 @@ npm init -y
 npx prisma init
 ```
 
-![](./image/第117章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-2.png)
 
 生成了 .env 和 schema 文件：
 
-![](./image/第117章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-3.png)
 
 然后改下 .env 文件的数据库连接信息：
 
-![](./image/第117章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-4.png)
 
 ```
 DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
@@ -33,7 +33,7 @@ DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
 
 改一下 datasource 的 provider 为 mysql，并且添加一个 model
 
-![](./image/第117章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-5.png)
 
 ```prisma
 generator client {
@@ -54,7 +54,7 @@ model Aaa {
 
 然后再添加一个 generator，生成 docs，并且修改下生成代码的位置：
 
-![](./image/第117章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-6.png)
 
 ```
 generator docs {
@@ -73,7 +73,7 @@ npm install --save-dev prisma-docs-generator
 npx prisma migrate reset
 ```
 
-![](./image/第117章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-7.png)
 
 之后用 migrate dev 创建新的迁移：
 
@@ -81,13 +81,13 @@ npx prisma migrate reset
 npx prisma migrate dev --name aaa
 ```
 
-![](./image/第117章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-8.png)
 
 可以看到，生成了 client 代码、docs 文档，还有 sql 文件。
 
 数据库中也多了这个表：
 
-![](./image/第117章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-9.png)
 
 然后我们写下初始化数据的代码：
 
@@ -175,13 +175,13 @@ main();
 ```
 npx prisma db seed
 ```
-![](./image/第117章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-10.png)
 
 打印了插入数据的 sql。
 
 去 mysql workbench 里看下：
 
-![](./image/第117章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-11.png)
 
 插入成功了。
 
@@ -217,11 +217,11 @@ npx http-server ./generated/docs
 ```
 跑一个静态服务：
 
-![](./image/第117章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-12.png)
 
 访问 http://localhost:8080 可以看到 Aaa 的字段和方法，一共 9 个方法：
 
-![](./image/第117章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-13.png)
 
 我们依次试一下：
 
@@ -261,7 +261,7 @@ test1();
 ```
 所以，这里的 id、email 都可以：
 
-![](./image/第117章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-14.png)
 
 跑一下试试：
 
@@ -269,11 +269,11 @@ test1();
 npx ts-node ./src/index.ts
 ```
 
-![](./image/第117章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-15.png)
 
 但是如果指定 name 就不行了：
 
-![](./image/第117章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-16.png)
 
 因为通过 name 来查并不能保证记录唯一。
 
@@ -303,7 +303,7 @@ async function test1() {
 
 比如我通过 select 指定返回 id、email：
 
-![](./image/第117章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-17.png)
 
 那结果里就只包含这两个字段。
 
@@ -339,7 +339,7 @@ async function test2() {
 test2();
 ```
 
-![](./image/第117章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-18.png)
 
 再换成 findUniqueOrThrow 试试：
 
@@ -369,7 +369,7 @@ test2();
 
 如果没找到会抛异常：
 
-![](./image/第117章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-19.png)
 
 ## findMany
 
@@ -411,7 +411,7 @@ test3();
 ```
 npx ts-node ./src/index.ts
 ```
-![](./image/第117章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-20.png)
 
 然后再加个分页，取从第 2 条开始的 3 条。
 
@@ -434,7 +434,7 @@ async function test3() {
 ```
 下标是从 0 开始的，所以是这三条：
 
-![](./image/第117章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-21.png)
 
 当然，你可以再加上 select 指定返回的字段：
 
@@ -460,7 +460,7 @@ async function test3() {
 }
 ```
 
-![](./image/第117章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-22.png)
 
 你会发现熟练 sql 之后，这些 api 用起来都很自然，过一遍就会了。
 
@@ -491,11 +491,11 @@ async  function test4() {
 test4();
 ```
 
-![](./image/第117章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-23.png)
 
 此外，where 条件这里可以指定的更细致：
 
-![](./image/第117章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-24.png)
 
 contains 是包含，endsWith 是以什么结尾
 
@@ -526,11 +526,11 @@ test5();
 ```
 它同样也可以通过 select 指定插入之后再查询出来的字段。
 
-![](./image/第117章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-25.png)
 
 createMany 我们用过，这里就不测了：
 
-![](./image/第117章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-26.png)
 
 ## update
 
@@ -557,7 +557,7 @@ test6();
 ```
 npx ts-node ./src/index.ts
 ```
-![](./image/第117章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-27.png)
 
 可以看到，打印了 3 条 sql：
 
@@ -567,7 +567,7 @@ updateMany 自然是更新多条记录。
 
 比如你想更新所有邮箱包含 xx.com 的记录为 666@xx.com
 
-![](./image/第117章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-28.png)
 
 用 update 会报错，它只是用来更新单条记录的，需要指定 id 或者有唯一索引的列。
 
@@ -589,11 +589,11 @@ async function test7() {
 test7();
 ```
 
-![](./image/第117章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-29.png)
 
 在 mysql workbench 里可以看到，确实改了：
 
-![](./image/第117章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-30.png)
 
 ## upsert
 
@@ -619,15 +619,15 @@ test8();
 ```
 第一次跑执行的是 insert：
 
-![](./image/第117章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-31.png)
 
-![](./image/第117章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-32.png)
 
 第二次跑就是 update 了：
 
-![](./image/第117章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-33.png)
 
-![](./image/第117章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-34.png)
 
 ## delete
 
@@ -651,11 +651,11 @@ async function test9() {
 test9();
 ```
 
-![](./image/第117章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-35.png)
 
 可以看到有两条 delete 语句。
 
-![](./image/第117章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-36.png)
 
 可以看到 3 条记录都被删除了。
 
@@ -684,7 +684,7 @@ async function test10() {
 test10();
 ```
 
-![](./image/第117章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-37.png)
 
 把 findMany 改为 count 就是这样了：
 
@@ -707,7 +707,7 @@ async function test10() {
 test10();
 ```
 
-![](./image/第117章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-38.png)
 
 ## aggregate 
 
@@ -720,7 +720,7 @@ aggregate 是统计相关的。
 
 改一下 model：
 
-![](./image/第117章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-39.png)
 
 ```
 model Aaa {
@@ -737,11 +737,11 @@ model Aaa {
 npx prisma migrate dev --name bbb
 ```
 
-![](./image/第117章-40.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-40.png)
 
 对应的 sql 如下：
 
-![](./image/第117章-41.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-41.png)
 
 然后我们用代码改一下：
 
@@ -767,11 +767,11 @@ async function test11() {
 }
 test11();
 ```
-![](./image/第117章-42.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-42.png)
 
 在 mysql workbench 里刷新下，可以看到确实改了：
 
-![](./image/第117章-43.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-43.png)
 
 接下来就可以测试 aggregate 方法了：
 
@@ -803,7 +803,7 @@ test12();
 
 跑一下：
 
-![](./image/第117章-44.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-44.png)
 
 可以看到返回的最大值、最小值、计数、平均值，都是对的。
 
@@ -838,11 +838,11 @@ test13();
 就是按照 email 分组，过滤出平均年龄大于 2 的分组，计算年龄总和返回。
 
 结果如下：
-![](./image/第117章-45.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-45.png)
 
 因为 age 大于 2 的就 2 条，然后算平均值、计数，就是上面的结果了：
 
-![](./image/第117章-46.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第117章-46.png)
 
 这样，我们就把所有 Prisma Client 的 api 过了一遍。
 

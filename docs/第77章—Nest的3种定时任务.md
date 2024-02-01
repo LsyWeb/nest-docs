@@ -10,7 +10,7 @@
 nest new schedule-task
 ```
 
-![](./image/第77章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-1.png)
 
 然后安装定时任务的包：
 
@@ -19,7 +19,7 @@ npm install --save @nestjs/schedule
 ```
 在 AppModule 里引入：
 
-![](./image/第77章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-2.png)
 
 然后就可以创建定时任务了。
 
@@ -27,7 +27,7 @@ npm install --save @nestjs/schedule
 ```
 nest g service task --flat --no-spec
 ```
-![](./image/第77章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-3.png)
 
 通过 @Cron 声明任务执行时间：
 
@@ -49,7 +49,7 @@ export class TaskService {
 ```
 npm run start:dev
 ```
-![](./image/第77章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-4.png)
 
 可以看到，任务每 5s 都会执行。
 
@@ -60,11 +60,11 @@ npm run start:dev
 ```
 nest g resource aaa
 ```
-![](./image/第77章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-5.png)
 
 把 AaaService 导出：
 
-![](./image/第77章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-6.png)
 
 然后在 TaskService 注入：
 
@@ -87,17 +87,17 @@ export class TaskService {
 ```
 这样就可以定时执行 AaaService 的方法：
 
-![](./image/第77章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-7.png)
 
 上节我们定时把 redis 数据刷入数据库就是这样做的。
 
 我们设置的每 5s 执行一次，其实是一个 cron 表达式：
 
-![](./image/第77章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-8.png)
 
 cron 表达式有这 7 个字段：
 
-![](./image/第77章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-9.png)
 
 其中年是可选的，所以一般都是 6 个。
 
@@ -144,7 +144,7 @@ cron 表达式有这 7 个字段：
 
 此外，日期和星期还支持几个特殊字符：
 
-![](./image/第77章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-10.png)
 
 L 是 last，L 用在星期的位置就是星期六：
 ```
@@ -219,19 +219,19 @@ LW 可以在指定日期时连用，代表每月最后一个工作日：
 
 但自己写这样的 cron 表达式还是挺麻烦的，所以 Nest 提供了一些常量可以直接用：
 
-![](./image/第77章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-11.png)
 
 这个 @Cron 装饰器还有第二个参数，可以指定定时任务的名字，还有时区：
 
-![](./image/第77章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-12.png)
 
 时区的名字可以在[这里](https://momentjs.com/timezone/)查：
 
-![](./image/第77章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-13.png)
 
 除了 @Cron 之外，你还可以用 @Interval 指定任务的执行间隔，参数是毫秒值：
 
-![](./image/第77章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-14.png)
 
 ```javascript
 @Interval('task2', 500)
@@ -239,7 +239,7 @@ task2() {
     console.log('task2');
 }
 ```
-![](./image/第77章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-15.png)
 
 还可以用 @Timeout 指定多长时间后执行一次：
 
@@ -249,7 +249,7 @@ task3() {
     console.log('task3');
 }
 ```
-![](./image/第77章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-16.png)
 
 综上，我们可以通过 @Cron、@Interval、@Timeout 创建 3 种定时任务。
 
@@ -259,7 +259,7 @@ task3() {
 
 我们在 AppModule 里注入 SchedulerRegistry，然后在 onApplicationBootstrap 的声明周期里拿到所有的 cronJobs 打印下：
 
-![](./image/第77章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-17.png)
 
 ```javascript
 @Inject(SchedulerRegistry)
@@ -272,13 +272,13 @@ onApplicationBootstrap() {
 ```
 可以看到，拿到了我们声明的 task1 的定时任务：
 
-![](./image/第77章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-18.png)
 
 这样看不方便，我们加一下调试配置：
 
-![](./image/第77章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-19.png)
 
-![](./image/第77章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-20.png)
 ```json
 {
     "type": "node",
@@ -297,15 +297,15 @@ onApplicationBootstrap() {
 ```
 打个断点：
 
-![](./image/第77章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-21.png)
 
 把之前的服务停掉，点击 debug 启动：
 
-![](./image/第77章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-22.png)
 
 代码会在断点处断住：
 
-![](./image/第77章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-23.png)
 
 这样就方便多了。
 
@@ -313,11 +313,11 @@ onApplicationBootstrap() {
 
 比如拿到所有的 interval 定时任务的名字：
 
-![](./image/第77章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-24.png)
 
 再根据名字拿到具体的 interval 定时任务：
 
-![](./image/第77章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-25.png)
 
 ```javascript
 this.schedulerRegistry.getIntervals()
@@ -326,13 +326,13 @@ this.schedulerRegistry.getInterval('task2')
 ```
 timeout 和 cron 类型的定时任务也是同理：
 
-![](./image/第77章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-26.png)
 ```javascript
 this.schedulerRegistry.getTimeouts();
 
 this.schedulerRegistry.getTimeout('task3')
 ```
-![](./image/第77章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-27.png)
 
 ```javascript
 this.schedulerRegistry.getCronJobs()
@@ -341,7 +341,7 @@ this.schedulerRegistry.getCronJob('task1')
 ```
 当然，它还有增加和删除定时任务的 api：
 
-![](./image/第77章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-28.png)
 
 我们来写个具体的案例：
 
@@ -397,11 +397,11 @@ npm run start:dev
 ```
 确实没有定时任务执行了：
 
-![](./image/第77章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-29.png)
 
 当然，还可以动态添加定时任务：
 
-![](./image/第77章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-30.png)
 
 ```javascript
 const job = new CronJob(`0/5 * * * * *`, () => {
@@ -423,7 +423,7 @@ this.schedulerRegistry.addTimeout('job3', timeout);
 ```
 这里也可以看出来 CronJob 是基于 cron 包封装的，而 interval 和 timeout 就是用的原生 api。
 
-![](./image/第77章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第77章-31.png)
 
 跑起来可以看到，定时任务确实都添加成功了。
 

@@ -9,7 +9,7 @@
 ```
 nest new nest-multer-upload -p npm
 ```
-![](./image/第24章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-1.png)
 
 还需要安装下 multer 的 ts 类型的包：
 ```
@@ -32,21 +32,21 @@ uploadFile(@UploadedFile() file: Express.Multer.File, @Body() body) {
 
 用 npm run start:dev 把服务跑起来，一保存，就可以看到这个目录被创建了：
 
-![](./image/第24章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-2.png)
 
 然后来写前端代码。
 
 之前我们用过这种方式：
 
-![](./image/第24章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-3.png)
 
 就是让 nest 服务支持静态文件的访问。
 
 现在我们换种方式，让 nest 服务支持跨域，再单独跑个 http-server 来提供静态服务：
 
-![](./image/第24章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-4.png)
 
-![](./image/第24章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-5.png)
 
 在根目录创建 index.html，前端代码和之前差不多：
 
@@ -83,11 +83,11 @@ uploadFile(@UploadedFile() file: Express.Multer.File, @Body() body) {
 
 浏览器访问下：
 
-![](./image/第24章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-6.png)
 
 服务端就打印了 file 对象，并且文件也保存到了 uploads 目录：
 
-![](./image/第24章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-7.png)
 
 其他字段通过 @Body 装饰器获取。
 
@@ -126,7 +126,7 @@ async function formData2() {
 
 这样就可以上传多文件了：
 
-![](./image/第24章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-8.png)
 
 那如果有多个文件的字段呢？
 
@@ -165,11 +165,11 @@ async function formData3() {
 
 这里应该用两个 file input 来分别上传 aaa 和 bbb 对应的文件，我这里为了测试方便就简化了下。
 
-![](./image/第24章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-9.png)
 
 后端收到了上传的 aaa、bbb 的文件：
 
-![](./image/第24章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-10.png)
 
 那如果并不知道有哪些字段是 file 呢？
 
@@ -205,7 +205,7 @@ async function formData4() {
 
 同样识别出了所有 file 字段：
 
-![](./image/第24章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-11.png)
 
 这就是 Nest 上传文件的方式。
 
@@ -235,42 +235,42 @@ export { storage };
 
 把我们之前写的这个 storage 拿过来，在 controller 里用一下：
 
-![](./image/第24章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-12.png)
 
-![](./image/第24章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-13.png)
 为什么 Nest 上传文件的方式和直接使用 multer 这么像呢？
 
 因为它就是对 multer 做了一层简单的封装呀。
 
 比如在 multer 里我们是通过 single 方法来处理单个 file 的字段：
 
-![](./image/第24章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-14.png)
 
 在 FileInterceptor 里也是一样：
 
-![](./image/第24章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-15.png)
 
 在 multer 里我们是通过 array 方法来处理多个 file 的字段：
 
-![](./image/第24章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-16.png)
 
 在 FilesInterceptor 里也一样：
 
-![](./image/第24章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-17.png)
 
 另外两个装饰器也是同理：
 
-![](./image/第24章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-18.png)
 
-![](./image/第24章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-19.png)
 
 而 UploadedFile、UploadedFiles 这些装饰器，只是从 request 中取出处理完的 file、files 等属性作为参数传入 handler：
 
-![](./image/第24章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-20.png)
 
 了解了这些装饰器的原理之后，回头再来看这些文件上传用的装饰器，是不是就很清晰了呢：
 
-![](./image/第24章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-21.png)
 
 此外，我们还要对上传的文件做一些限制，比如文件大小、类型等，很明显，这部分可以放在 pipe 里做：
 
@@ -298,11 +298,11 @@ export class FileSizeValidationPipe implements PipeTransform {
 
 把它加到 UploadedFile 的参数里：
 
-![](./image/第24章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-22.png)
 
 然后访问下：
 
-![](./image/第24章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-23.png)
 
 这样就可以实现文件的校验了。
 
@@ -334,15 +334,15 @@ uploadFile3(@UploadedFile(new ParseFilePipe({
 
 我们来试试：
 
-![](./image/第24章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-24.png)
 
 可以看到，返回的也是 400 响应，并且 message 说明了具体的错误信息。
 
 而且这个错误信息可以自己修改：
 
-![](./image/第24章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-25.png)
 
-![](./image/第24章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-26.png)
 
 我们也可以自己实现这样的 validator，只要继承 FileValidator 就可以：
 
@@ -368,11 +368,11 @@ export class MyFileValidator extends FileValidator{
 
 然后在 controller 用一下：
 
-![](./image/第24章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-27.png)
 
 在浏览器上传个文件：
 
-![](./image/第24章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第24章-28.png)
 
 可以看到我们自定义的 FileValidator 生效了。
 

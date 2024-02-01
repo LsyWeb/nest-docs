@@ -53,7 +53,7 @@ CMD 指定容器跑起来之后执行的命令，这里就是执行 http-server 
 
 把这个文件保存为 Dockerfile，然后在同级添加一个 index.html
 
-![](./image/第30章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-1.png)
 
 然后通过 docker build 就可以根据这个 dockerfile 来生成镜像。
 
@@ -61,7 +61,7 @@ CMD 指定容器跑起来之后执行的命令，这里就是执行 http-server 
 
 aaa 是镜像名，ccc 是镜像的标签
 
-![](./image/第30章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-2.png)
 
 FROM 是继承一个基础镜像，看输出也可以看出来，前面都是 node 镜像的内容，会一层层下载下来。
 
@@ -69,41 +69,41 @@ FROM 是继承一个基础镜像，看输出也可以看出来，前面都是 no
 
 这时你在 desktop 的 images 列表里就可以看到这个镜像了：
 
-![](./image/第30章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-3.png)
 
 然后执行 docker run 把这个镜像跑起来，用 desktop 我们就直接点击 run 按钮了：
 
-![](./image/第30章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-4.png)
 
 会让你输入这些内容：
 
-![](./image/第30章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-5.png)
 
 是不是上节用 nginx 镜像的感觉回来了？这次是我们自己 build 的镜像。
 
 指定容器名、映射的端口、点击 run：
 
-![](./image/第30章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-6.png)
 
 然后可以看到容器内的日志，服务启动成功了：
 
-![](./image/第30章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-7.png)
 
 当然，容器内打印的是 8080 端口，但在容器外要用映射的 8888 端口访问：
 
 访问 <http://localhost:8888> 就可以看到我们在 html 写的内容了：
 
-![](./image/第30章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-8.png)
 
 在容器内页打印了一条访问日志：
 
-![](./image/第30章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-9.png)
 
 至此，我们写的第一个 dockerfile 和 build 出的第一个镜像就跑成功了！
 
 我们在 files 里看看 /app 下是啥内容：
 
-![](./image/第30章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-10.png)
 
 双击 index.html，可以看到这就是我们 build 镜像的时候 COPY 进去的文件。
 
@@ -113,7 +113,7 @@ FROM 是继承一个基础镜像，看输出也可以看出来，前面都是 no
 
 这样改下 Dockerfile：
 
-![](./image/第30章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-11.png)
 
 然后重新 build 出一个镜像来：
 
@@ -121,29 +121,29 @@ FROM 是继承一个基础镜像，看输出也可以看出来，前面都是 no
 
 因为现在不是默认的 Dockerfile 了，需要用 -f 指定下 dockefile 的文件名。
 
-![](./image/第30章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-12.png)
 
 构建完之后再 run 一下这个新镜像：
 
-![](./image/第30章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-13.png)
 
 这次我把我的桌面目录作为数据卷挂载到 /app 目录了：
 
-![](./image/第30章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-14.png)
 
-![](./image/第30章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-15.png)
 
 容器跑起来后可以看到确实挂载上去了，也标识为了 mount：
 
-![](./image/第30章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-16.png)
 
 浏览器访问下：
 
-![](./image/第30章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-17.png)
 
 在 inspect 这里也可以看到挂载的目录：
 
-![](./image/第30章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-18.png)
 
 有同学说，就算不在 dockerfile 里指定 VOLUME，我还是可以 docker run 的时候通过 -v 挂载数据卷呀。
 
@@ -153,17 +153,17 @@ FROM 是继承一个基础镜像，看输出也可以看出来，前面都是 no
 
 比如我直接点击 run，不设置参数：
 
-![](./image/第30章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-19.png)
 
 docker 会随机给他生成一个名字。
 
 还会随机生成一个目录作为数据卷挂载上去：
 
-![](./image/第30章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-20.png)
 
 inspect 可以看到这时候的路径是一个临时的目录：
 
-![](./image/第30章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-21.png)
 
 这样就算你删了容器，数据也可以在这里找回。
 
@@ -173,7 +173,7 @@ inspect 可以看到这时候的路径是一个临时的目录：
 
 在镜像详情可以看到 mysql 的 dockerfile，确实声明了 volume
 
-![](./image/第30章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第30章-22.png)
 
 这样就能保证数据不丢失。
 

@@ -2,7 +2,7 @@
 
 单体架构就是所有业务逻辑都在一个服务里实现。
 
-![](./image/第104章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-1.png)
 
 这样有个问题：
 
@@ -12,7 +12,7 @@
 
 所以就有了拆分的需求，把业务模块拆成单独的微服务：
 
-![](./image/第104章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-2.png)
 
 拆分也很简单，就是把之前放在不同目录的业务模块放到不同的服务里，再加上通信就好了。
 
@@ -22,7 +22,7 @@
 
 因为 http 的请求响应会携带大量的 header：
 
-![](./image/第104章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-3.png)
 
 这些增大了通信的开销。
 
@@ -36,14 +36,14 @@ nest 里实现微服务以及之间的 tcp 通信也很简单，下面我们来�
 nest new microservice-test-main
 ```
 
-![](./image/第104章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-4.png)
 
 再创建一个：
 
 ```
 nest new microservice-test-user
 ```
-![](./image/第104章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-5.png)
 
 前面那个作为 http 服务向外提供接口，后面这个是微服务，提供 tcp 的微服务通信端口。
 
@@ -58,7 +58,7 @@ npm install @nestjs/microservices --save
 
 之前这个是启动 http 服务的：
 
-![](./image/第104章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-6.png)
 
 微服务不需要暴露 http 接口，只需要支持微服务的通信就行。
 
@@ -84,7 +84,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-![](./image/第104章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-7.png)
 
 这就是启动一个微服务，通信端口在 8888，用 TCP 方式通信。
 
@@ -92,7 +92,7 @@ bootstrap();
 
 这里暴露接口不再是 http 时的 @Get、@Post 了，而是这样：
 
-![](./image/第104章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-8.png)
 
 ```javascript
 @MessagePattern('sum')
@@ -106,7 +106,7 @@ sum(numArr: Array<number>): number {
 
 这样，我们就创建了一个微服务：
 
-![](./image/第104章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-9.png)
 
 然后在 microservice-test-main 这个服务里连上它。
 
@@ -123,7 +123,7 @@ npm install @nestjs/microservices --save
 
 在 AppModule 引入 ClientsModule 动态模块：
 
-![](./image/第104章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-10.png)
 
 ClientsModule 的动态模块有 register、registerAsync 方法。
 
@@ -156,7 +156,7 @@ export class AppModule {}
 
 引入了 ClientsModule 模块，就可以注入其中的 provider 来用了。
 
-![](./image/第104章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-11.png)
 
 ```javascript
 @Inject('USER_SERVICE')
@@ -171,17 +171,17 @@ calc(@Query('num') str) {
 ```
 注入的时候指定 token 为前面我们声明的微服务名字：
 
-![](./image/第104章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-12.png)
 
 注入的对象就是连接这个微服务的客户端代理：
 
-![](./image/第104章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-13.png)
 
 调用它的 send 方法，第一个是消息的名字，第二个是参数。
 
 这里的 sum 就是微服务那边声明的这个消息，而参数就是那边声明的参数:
 
-![](./image/第104章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-14.png)
 
 把两个服务都跑起来：
 
@@ -190,21 +190,21 @@ npm run start:dev
 ```
 微服务那边跑起来的提示是这样的：
 
-![](./image/第104章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-15.png)
 
 http 服务跑起来的提示是这样的：
 
-![](./image/第104章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-16.png)
 
 然后浏览器访问下 http://localhost:3000/sum?num=3,5,6：
 
-![](./image/第104章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-17.png)
 
 返回了 14，是 3 + 5 + 6 的结果。
 
 浏览器把 3、5、6 的参数传递给 http 服务，然后它给微服务发送消息，把参数带过去，微服务计算后返回了 14 给 http 服务，它再返回给浏览器：
 
-![](./image/第104章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-18.png)
 
 前面在微服务里是用 @MessagePattern 声明的要处理的消息。
 
@@ -219,11 +219,11 @@ log(str: string) {
 }
 ```
 
-![](./image/第104章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-19.png)
 
 然后在 microservice-test-main 里调用下：
 
-![](./image/第104章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-20.png)
 
 ```javascript
 this.userClient.emit('log', '求和')
@@ -233,9 +233,9 @@ this.userClient.emit('log', '求和')
 
 测试下：
 
-![](./image/第104章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-21.png)
 
-![](./image/第104章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-22.png)
 
 可以看到，微服务收到了这边发送的消息，并打印了日志。
 
@@ -245,37 +245,37 @@ this.userClient.emit('log', '求和')
 
 在 [wireshark 官网](https://www.wireshark.org/)下载安装包：
 
-![](./image/第104章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-23.png)
 
 安装后把它跑起来：
 
-![](./image/第104章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-24.png)
 
 选择 loopback 这个网卡，本地回环地址，可以抓到 localhost 的包：
 
-![](./image/第104章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-25.png)
 
 输入过滤器 port 8888，也就是过滤 8888 端口的数据包。
 
 然后回车就会进入抓包界面：
 
-![](./image/第104章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-26.png)
 
 这时候再访问下 http://localhost:3000/sum?num=1,2,3
 
-![](./image/第104章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-27.png)
 
 可以看到抓到了几个 tcp 的包：
 
-![](./image/第104章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-28.png)
 
 点开这几个 PSH 的包看一下：
 
-![](./image/第104章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-29.png)
 
-![](./image/第104章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-30.png)
 
-![](./image/第104章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第104章-31.png)
 
 内容如下：
 

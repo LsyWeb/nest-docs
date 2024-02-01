@@ -14,15 +14,15 @@ Nest 的解决方法是 ArgumentHost 和 ExecutionContext 类。
 
     nest new argument-host -p npm
 
-![](./image/第11章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-1.png)
 
 然后创建一个 filter：
 
     nest g filter aaa --flat --no-spec
 
-![](./image/第11章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-2.png)
 
-![](./image/第11章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-3.png)
 
 Nest 会 catch 所有未捕获异常，如果是 Exception Filter 声明的异常，那就会调用 filter 来处理。
 
@@ -30,37 +30,37 @@ Nest 会 catch 所有未捕获异常，如果是 Exception Filter 声明的异�
 
 我们创建一个自定义的异常类：
 
-![](./image/第11章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-4.png)
 
 在 @Catch 装饰器里声明这个 filter 处理该异常：
 
-![](./image/第11章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-5.png)
 
 然后需要启用它：
 
-![](./image/第11章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-6.png)
 
 路由级别启用 AaaFilter，并且在 handler 里抛了一个 AaaException 类型的异常。
 
 也可以全局启用：
 
-![](./image/第11章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-7.png)
 
 访问 <http://localhost:3000> 就可以看到 filter 被调用了。
 
-![](./image/第11章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-8.png)
 
 filter 的第一个参数就是异常对象，那第二个参数呢？
 
 可以看到，它有这些方法：
 
-![](./image/第11章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-9.png)
 
 我们用调试的方式跑一下：
 
 点击 create launch.json file 创建一个调试配置文件：
 
-![](./image/第11章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-10.png)
 
 在 .vscode/launch.json 添加这样的调试配置：
 
@@ -83,21 +83,21 @@ filter 的第一个参数就是异常对象，那第二个参数呢？
 
 点击调试启动：
 
-![](./image/第11章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-11.png)
 
 打个断点：
 
-![](./image/第11章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-12.png)
 
 浏览器访问 <http://localhost:3000> 就可以看到它断住了：
 
-![](./image/第11章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-13.png)
 
 我们分别调用下这些方法试试：
 
 在 debug console 输入 host，可以看到它有这些属性方法：
 
-![](./image/第11章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-14.png)
 
 host.getArgs 方法就是取出当前上下文的 reqeust、response、next 参数。
 
@@ -105,13 +105,13 @@ host.getArgs 方法就是取出当前上下文的 reqeust、response、next 参�
 
 host.getArgByIndex 方法是根据下标取参数：
 
-![](./image/第11章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-15.png)
 
 这种按照下标取参数的写法不太建议用，因为不同上下文参数不同，这样写就没法复用到 ws、tcp 等上下文了。
 
 一般是这样来用：
 
-![](./image/第11章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-16.png)
 
 如果是 ws、基于 tcp 的微服务等上下文，就分别调用 host.swtichToWs、host.switchToRpc 方法。
 
@@ -149,9 +149,9 @@ export class AaaFilter implements ExceptionFilter {
 
 刷新页面，就可以看到 filter 返回的响应：
 
-![](./image/第11章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-17.png)
 
-![](./image/第11章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-18.png)
 
 所以说，**ArgumentHost 是用于切换 http、ws、rpc 等上下文类型的，可以根据上下文类型取到对应的 argument**。
 
@@ -161,21 +161,21 @@ export class AaaFilter implements ExceptionFilter {
 
     nest g guard aaa --no-spec --flat
 
-![](./image/第11章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-19.png)
 
 可以看到它传入的是 ExecutionContext：
 
-![](./image/第11章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-20.png)
 
 有这些方法：
 
-![](./image/第11章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-21.png)
 
 是不是很眼熟？
 
 没错，ExecutionContext 是 ArgumentHost 的子类，扩展了 getClass、getHandler 方法。
 
-![](./image/第11章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-22.png)
 
 多加这两个方法是干啥的呢？
 
@@ -183,17 +183,17 @@ export class AaaFilter implements ExceptionFilter {
 
 路由级别启用 Guard：
 
-![](./image/第11章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-23.png)
 
 在 Guard 里打个断点：
 
-![](./image/第11章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-24.png)
 
 调用下 context.getClass 和 getHandler：
 
-![](./image/第11章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-25.png)
 
-![](./image/第11章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-26.png)
 
 会发现这俩分别是要调用的 controller 的 class 以及要调用的方法。
 
@@ -203,17 +203,17 @@ export class AaaFilter implements ExceptionFilter {
 
 比如权限验证的时候，我们会先定义几个角色：
 
-![](./image/第11章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-27.png)
 
 然后定义这样一个装饰器：
 
-![](./image/第11章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-28.png)
 
 它的作用是往修饰的目标上添加 roles 的 metadata。
 
 然后在 handler 上添加这个装饰器，参数为 admin，也就是给这个 handler 添加了一个 roles 为 admin 的metadata。
 
-![](./image/第11章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-29.png)
 
 这样在 Guard 里就可以根据这个 metadata 决定是否放行了：
 
@@ -249,7 +249,7 @@ guard、interceptor、middleware、pipe、filter 都是 Nest 的特殊 class，�
 
 刷新页面，可以看到返回的是 403：
 
-![](./image/第11章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-30.png)
 
 这说明 Guard 生效了。
 
@@ -259,9 +259,9 @@ guard、interceptor、middleware、pipe、filter 都是 Nest 的特殊 class，�
 
     nest g interceptor aaa --no-spec --flat
 
-![](./image/第11章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-31.png)
 
-![](./image/第11章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第11章-32.png)
 
 同样可以通过 reflector 取出 class 或者 handler 上的 metdadata。
 

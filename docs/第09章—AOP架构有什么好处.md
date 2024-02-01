@@ -2,7 +2,7 @@
 
 MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 Controller，由它调度 Model 层的 Service 来完成业务逻辑，然后返回对应的 View。
 
-![](./image/第09章-1.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-1.png)
 
 在这个流程中，Nest 还提供了 AOP （Aspect Oriented Programming）的能力，也就是面向切面编程的能力。
 
@@ -10,7 +10,7 @@ AOP 是什么意思呢？什么是面向切面编程呢？
 
 一个请求过来，可能会经过 Controller（控制器）、Service（服务）、Repository（数据库访问） 的逻辑：
 
-![](./image/第09章-2.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-2.png)
 
 如果想在这个调用链路里加入一些通用逻辑该怎么加呢？比如日志记录、权限控制、异常处理等。
 
@@ -22,7 +22,7 @@ AOP 是什么意思呢？什么是面向切面编程呢？
 
 比如这样：
 
-![](./image/第09章-3.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-3.png)
 
 是不是就和切了一刀一样？
 
@@ -40,7 +40,7 @@ AOP 是什么意思呢？什么是面向切面编程呢？
 nest new aop-test
 ```
 
-![](./image/第09章-4.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-4.png)
 
 ### 中间件 Middleware
 
@@ -48,7 +48,7 @@ nest new aop-test
 
 全局中间件就是这样：
 
-![](./image/第09章-5.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-5.png)
 
 在 main.ts 里通过 app.use 使用：
 
@@ -62,26 +62,26 @@ app.use(function(req: Request, res: Response, next: NextFunction) {
 
 在 AppController 里也加个打印：
 
-![](./image/第09章-6.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-6.png)
 
 把服务跑起来：
 
 ```
 npm run start:dev
 ```
-![](./image/第09章-7.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-7.png)
 
 浏览器访问下：
 
-![](./image/第09章-8.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-8.png)
 
-![](./image/第09章-9.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-9.png)
 
 可以看到，在调用 handler 前后，执行了中间件的逻辑。
 
 我们再添加几个路由：
 
-![](./image/第09章-10.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-10.png)
 
 ```javascript
 @Get('aaa')
@@ -98,18 +98,18 @@ bbb(): string {
 ```
 然后浏览器访问下：
 
-![](./image/第09章-11.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-11.png)
 
-![](./image/第09章-12.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-12.png)
 
 可以看到，中间件逻辑都执行了：
 
-![](./image/第09章-13.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-13.png)
 
 
 也就是说，可以在多个 handler 之间复用中间件的逻辑：
 
-![](./image/第09章-14.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-14.png)
 
 这种可以给在 handler 前后动态增加一些可复用的逻辑，就是 AOP 的切面编程的思想。
 
@@ -121,13 +121,13 @@ bbb(): string {
 nest g middleware log --no-spec --flat
 ```
 
-![](./image/第09章-15.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-15.png)
 
 --no-spec 是不生成测试文件，--flat 是平铺，不生成目录。
 
 生成的代码是这样的：
 
-![](./image/第09章-16.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-16.png)
 
 在前后打印下日志：
 
@@ -149,7 +149,7 @@ export class LogMiddleware implements NestMiddleware {
 ```
 然后在 AppModule 里启用：
 
-![](./image/第09章-17.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-17.png)
 
 ```javascript
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -176,11 +176,11 @@ export class AppModule implements NestModule{
 
 然后测试下：
 
-![](./image/第09章-18.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-18.png)
 
-![](./image/第09章-19.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-19.png)
 
-![](./image/第09章-20.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-20.png)
 
 可以看到，只有 aaa 的路由，中间件生效了。
 
@@ -190,7 +190,7 @@ export class AppModule implements NestModule{
 
 Guard 是路由守卫的意思，可以用于在调用某个 Controller 之前判断权限，返回 true 或者 false 来决定是否放行：
 
-![](./image/第09章-21.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-21.png)
 
 我们创建个 Guard：
 
@@ -198,11 +198,11 @@ Guard 是路由守卫的意思，可以用于在调用某个 Controller 之前�
 nest g guard login --no-spec --flat
 ```
 
-![](./image/第09章-22.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-22.png)
 
 生成的 Guard 代码是这样的：
 
-![](./image/第09章-23.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-23.png)
 
 Guard 要实现 CanActivate 接口，实现 canActivate 方法，可以从 context 拿到请求的信息，然后做一些权限验证等处理之后返回 true 或者 false。
 
@@ -226,31 +226,31 @@ export class LoginGuard implements CanActivate {
 
 之后在 AppController 里启用：
 
-![](./image/第09章-24.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-24.png)
 
 然后再访问下：
 
-![](./image/第09章-25.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-25.png)
 
-![](./image/第09章-26.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-26.png)
 
 aaa 没有权限，返回了 403。
 
-![](./image/第09章-27.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-27.png)
 
 Controller 本身不需要做啥修改，却透明的加上了权限判断的逻辑，这就是 AOP 架构的好处。
 
 而且，就像 Middleware 支持全局级别和路由级别一样，Guard 也可以全局启用：
 
-![](./image/第09章-28.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-28.png)
 
 这样每个路由都会应用这个 Guard：
 
-![](./image/第09章-29.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-29.png)
 
 还有一种全局启用的方式，是在 AppModule 里这样声明：
 
-![](./image/第09章-30.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-30.png)
 
 ```javascript
 {
@@ -260,11 +260,11 @@ Controller 本身不需要做啥修改，却透明的加上了权限判断的逻
 ```
 把 main.ts 里的 useGlobalGuards 注释掉：
 
-![](./image/第09章-31.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-31.png)
 
 再试下：
 
-![](./image/第09章-32.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-32.png)
 
 可以看到，Guard 依然是生效的。
 
@@ -272,15 +272,15 @@ Controller 本身不需要做啥修改，却透明的加上了权限判断的逻
 
 因为之前这种方式是手动 new 的 Guard 实例，不在 IoC 容器里：
 
-![](./image/第09章-33.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-33.png)
 
 而用 provider 的方式声明的 Guard 是在 IoC 容器里的，可以注入别的 provider：
 
-![](./image/第09章-34.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-34.png)
 
 我们注入下 AppService 试试：
 
-![](./image/第09章-35.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-35.png)
 
 ```javascript
 @Inject(AppService)
@@ -288,7 +288,7 @@ private appService: AppService;
 ```
 浏览器访问下：
 
-![](./image/第09章-36.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-36.png)
 
 可以看到，注入的 AppService 生效了。
 
@@ -298,7 +298,7 @@ private appService: AppService;
 
 Interceptor 是拦截器的意思，可以在目标 Controller 方法前后加入一些逻辑：
 
-![](./image/第09章-37.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-37.png)
 
 创建个 interceptor：
 
@@ -306,11 +306,11 @@ Interceptor 是拦截器的意思，可以在目标 Controller 方法前后加�
 nest g interceptor time --no-spec --flat
 ```
 
-![](./image/第09章-38.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-38.png)
 
 生成的 interceptor 是这样的：
 
-![](./image/第09章-39.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-39.png)
 
 Interceptor 要实现 NestInterceptor 接口，实现 intercept 方法，调用 next.handle() 就会调用目标 Controller，可以在之前和之后加入一些处理逻辑。
 
@@ -337,15 +337,15 @@ export class TimeInterceptor implements NestInterceptor {
 
 把之前那个 LoginGuard 注掉：
 
-![](./image/第09章-40.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-40.png)
 
 然后启用这个 interceptor：
 
-![](./image/第09章-41.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-41.png)
 
 跑一下：
 
-![](./image/第09章-42.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-42.png)
 
 可以看到，interceptor 生效了。
 
@@ -353,25 +353,25 @@ export class TimeInterceptor implements NestInterceptor {
 
 interceptor 可以拿到调用的 controller 和 handler：
 
-![](./image/第09章-43.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-43.png)
 
-![](./image/第09章-44.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-44.png)
 
 后面我们会在 controller 和 handler 上加一些 metadata，这种就只有 interceptor或者 guard 里可以取出来，middleware 不行。
 
 Interceptor 支持每个路由单独启用，只作用于某个 handler：
 
-![](./image/第09章-45.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-45.png)
 
 也可以在 controller 级别启动，作用于下面的全部 handler：
 
-![](./image/第09章-46.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-46.png)
 
 也同样支持全局启用，作用于全部 controller：
 
-![](./image/第09章-47.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-47.png)
 
-![](./image/第09章-48.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-48.png)
 
 两种全局启用方式的区别和 guard 的一样，就不测试了。
 
@@ -381,18 +381,18 @@ Interceptor 支持每个路由单独启用，只作用于某个 handler：
 
 Pipe 是管道的意思，用来对参数做一些检验和转换：
 
-![](./image/第09章-49.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-49.png)
 
 用 nest cli 创建个 pipe：
 ```
 nest g pipe validate --no-spec --flat
 ```
 
-![](./image/第09章-50.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-50.png)
 
 生成的代码是这样的：
 
-![](./image/第09章-51.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-51.png)
 
 Pipe 要实现 PipeTransform 接口，实现 transform 方法，里面可以对传入的参数值 value 做参数验证，比如格式、类型是否正确，不正确就抛出异常。也可以做转换，返回转换后的值。
 
@@ -417,7 +417,7 @@ export class ValidatePipe implements PipeTransform {
 
 在 AppController 添加一个 handler，然后应用这个 pipe：
 
-![](./image/第09章-52.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-52.png)
 
 ```javascript
 @Get('ccc')
@@ -428,9 +428,9 @@ ccc(@Query('num', ValidatePipe) num: number) {
 访问下：
 
 
-![](./image/第09章-53.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-53.png)
 
-![](./image/第09章-54.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-54.png)
 
 可以看到，参数错误的时候返回了 400 响应，参数正确的时候也乘 10 传入了 handler。
 
@@ -450,16 +450,16 @@ Nest 内置了一些 Pipe，从名字就能看出它们的意思：
 
 同样，Pipe 可以只对某个参数生效，或者整个 Controller 都生效：
 
-![](./image/第09章-55.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-55.png)
 
-![](./image/第09章-56.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-56.png)
 
 
 或者全局生效：
 
-![](./image/第09章-57.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-57.png)
 
-![](./image/第09章-58.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-58.png)
 
 不管是 Pipe、Guard、Interceptor 还是最终调用的 Controller，过程中都可以抛出一些异常，如何对某种异常做出某种响应呢？
 
@@ -469,13 +469,13 @@ Nest 内置了一些 Pipe，从名字就能看出它们的意思：
 
 ExceptionFilter 可以对抛出的异常做处理，返回对应的响应：
 
-![](./image/第09章-59.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-59.png)
 
 其实我们刚刚在 pipe 里抛的这个错误，能够返回 400 的响应，就是 Exception Filter 做的：
 
-![](./image/第09章-60.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-60.png)
 
-![](./image/第09章-61.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-61.png)
 
 创建一个 filter：
 
@@ -483,11 +483,11 @@ ExceptionFilter 可以对抛出的异常做处理，返回对应的响应：
 nest g filter test --no-spec --flat
 ```
 
-![](./image/第09章-62.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-62.png)
 
 生成的代码是这样的：
 
-![](./image/第09章-63.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-63.png)
 
 改一下：
 
@@ -515,11 +515,11 @@ export class TestFilter implements ExceptionFilter {
 
 用一下：
 
-![](./image/第09章-64.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-64.png)
 
 再次访问，异常返回的响应就变了：
 
-![](./image/第09章-65.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-65.png)
 Nest 内置了很多 http 相关的异常，都是 HttpException 的子类：
 
 *   BadRequestException
@@ -541,25 +541,25 @@ Nest 内置了很多 http 相关的异常，都是 HttpException 的子类：
 
 当然，也可以自己扩展：
 
-![](./image/第09章-66.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-66.png)
 
 **Nest 通过这样的方式实现了异常到响应的对应关系，代码里只要抛出不同的异常，就会返回对应的响应，很方便。**
 
 同样，ExceptionFilter 也可以选择全局生效或者某个路由生效：
 
 某个 handler：
-![](./image/第09章-67.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-67.png)
 
 某个 controller：
 
-![](./image/第09章-68.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-68.png)
 
 全局：
-![](./image/第09章-69.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-69.png)
 
-![](./image/第09章-70.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-70.png)
 
-![](./image/第09章-71.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-71.png)
 我们了解了 Nest 提供的 AOP 的机制，但它们的顺序关系是怎样的呢？
 
 ### 几种 AOP 机制的顺序
@@ -572,31 +572,31 @@ Middleware、Guard、Pipe、Interceptor、ExceptionFilter 都可以透明的添�
 
 对应的源码是这样的：
 
-![](./image/第09章-72.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-72.png)
 
 很明显，进入这个路由的时候，会先调用 Guard，判断是否有权限等，如果没有权限，这里就抛异常了：
 
-![](./image/第09章-73.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-73.png)
 
 抛出的 ForbiddenException 会被 ExceptionFilter 处理，返回 403 状态码。
 
 如果有权限，就会调用到拦截器，拦截器组织了一个链条，一个个的调用，最后会调用的 controller 的方法：
 
-![](./image/第09章-74.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-74.png)
 
 调用 controller 方法之前，会使用 pipe 对参数做处理：
 
-![](./image/第09章-75.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-75.png)
 
 会对每个参数做转换：
 
-![](./image/第09章-76.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-76.png)
 
 ExceptionFilter 的调用时机很容易想到，就是在响应之前对异常做一次处理。
 
 而 Middleware 是 express 中的概念，Nest 只是继承了下，那个是在最外层被调用。
 
-![](./image/第09章-77.png)
+![](http://static.liushuaiyang.com/nest-docs/image/第09章-77.png)
 
 这就是这几种 AOP 机制的调用顺序。把这些理清楚，就知道什么逻辑放在什么切面里了。
 
