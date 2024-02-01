@@ -2,7 +2,7 @@
 
 虽然简单，它却是微服务体系必不可少的组件：
  
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-1.image#?w=1166&h=696&s=248707&e=png&b=fffeff.png)
+![](./image/第107章-1.png)
 
 服务注册、发现、配置集中管理，都是用它来做。
 
@@ -14,7 +14,7 @@
 
 还可以像 TypeOrmModule、JwtModule 等这些，封装一个动态模块：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-2.image#?w=836&h=768&s=140728&e=png&b=1f1f1f.png)
+![](./image/第107章-2.png)
 
 下面我们就来写一下：
 
@@ -22,28 +22,28 @@
 nest new nest-etcd
 ```
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-3.image#?w=868&h=694&s=152075&e=png&b=010101.png)
+![](./image/第107章-3.png)
 
 进入项目，把服务跑起来：
 
 ```
 npm run start:dev
 ```
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-4.image#?w=1602&h=388&s=119095&e=png&b=181818.png)
+![](./image/第107章-4.png)
 
 浏览器访问下：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-5.image#?w=622&h=222&s=17274&e=png&b=ffffff.png)
+![](./image/第107章-5.png)
 
 nest 服务跑起来了。
 
 按照上节的步骤把 etcd 服务跑起来：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-6.image#?w=2050&h=1216&s=386967&e=png&b=ffffff.png)
+![](./image/第107章-6.png)
 
 然后我们加一个 etcd 的 provider：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-7.image#?w=950&h=944&s=138700&e=png&b=1f1f1f.png)
+![](./image/第107章-7.png)
 
 ```javascript
 import { Module } from '@nestjs/common';
@@ -76,7 +76,7 @@ export class AppModule {}
 ```
 在 AppController 里注入下：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-8.image#?w=1116&h=1088&s=196153&e=png&b=1f1f1f.png)
+![](./image/第107章-8.png)
 
 ```javascript
 import { Controller, Get, Inject, Query } from '@nestjs/common';
@@ -116,13 +116,13 @@ export class AppController {
 
 测试下：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-9.image#?w=754&h=190&s=19755&e=png&b=ffffff.png)
+![](./image/第107章-9.png)
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-10.image#?w=688&h=190&s=17445&e=png&b=ffffff.png)
+![](./image/第107章-10.png)
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-11.image#?w=630&h=180&s=16336&e=png&b=ffffff.png)
+![](./image/第107章-11.png)
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-12.image#?w=614&h=174&s=15476&e=png&b=ffffff.png)
+![](./image/第107章-12.png)
 
 这样 etcd 就集成好了，很简单。
 
@@ -135,7 +135,7 @@ nest g module etcd
 nest g service etcd
 ```
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-13.image#?w=800&h=310&s=74417&e=png&b=191919.png)
+![](./image/第107章-13.png)
 
 在 EtcdModule 添加 etcd 的 provider：
 
@@ -232,15 +232,15 @@ export class EtcdService {
 nest g resource aaa
 ```
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-14.image#?w=794&h=410&s=100568&e=png&b=191919.png)
+![](./image/第107章-14.png)
 
 引入 EtcdModule：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-15.image#?w=850&h=548&s=100368&e=png&b=1f1f1f.png)
+![](./image/第107章-15.png)
 
 然后在 AaaController 注入 EtcdService，添加两个 handler：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-16.image#?w=1046&h=798&s=177018&e=png&b=1f1f1f.png)
+![](./image/第107章-16.png)
 
 ```javascript
 @Inject(EtcdService)
@@ -259,9 +259,9 @@ async getConfig() {
 ```
 测试下：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-17.image#?w=848&h=202&s=20615&e=png&b=ffffff.png)
+![](./image/第107章-17.png)
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-18.image#?w=670&h=184&s=16756&e=png&b=ffffff.png)
+![](./image/第107章-18.png)
 
 没啥问题。
 
@@ -310,20 +310,20 @@ export class EtcdModule {
 
 然后 AaaModule 引入 EtcdModule 的方式也改下：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-19.image#?w=904&h=766&s=131351&e=png&b=1f1f1f.png)
+![](./image/第107章-19.png)
 
 用起来是一样的：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-20.image#?w=706&h=192&s=16946&e=png&b=ffffff.png)
+![](./image/第107章-20.png)
 
 但是现在 etcd 的参数是动态传入的了，这就是动态模块的好处。
 
 当然，一般动态模块都有 forRootAsync，我们也加一下：
 
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-21.image#?w=1210&h=638&s=126562&e=png&b=1f1f1f.png)
+![](./image/第107章-21.png)
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-22.image#?w=1308&h=1128&s=169282&e=png&b=1f1f1f.png)
+![](./image/第107章-22.png)
 
 ```javascript
 export interface EtcdModuleAsyncOptions  {
@@ -361,7 +361,7 @@ static forRootAsync(options: EtcdModuleAsyncOptions): DynamicModule {
 
 现在就可以这样传入 options 了：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-23.image#?w=1018&h=1052&s=148689&e=png&b=1f1f1f.png)
+![](./image/第107章-23.png)
 
 ```javascript
 EtcdModule.forRootAsync({
@@ -385,7 +385,7 @@ npm install @nestjs/config
 ```
 在 AppModule 引入 ConfigModule：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-24.image#?w=802&h=682&s=127643&e=png&b=1f1f1f.png)
+![](./image/第107章-24.png)
 
 ```javascript
 ConfigModule.forRoot({
@@ -402,7 +402,7 @@ etcd_auth_password=guang
 ```
 然后在引入 EtcdModule 的时候，从 ConfigService 拿配置：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-25.image#?w=1220&h=790&s=141984&e=png&b=1f1f1f.png)
+![](./image/第107章-25.png)
 
 ```javascript
 EtcdModule.forRootAsync({
@@ -421,7 +421,7 @@ EtcdModule.forRootAsync({
 ```
 测试下：
 
-![](./image/第107章—Nest集成Etcd做注册中心、配置中心-26.image#?w=636&h=216&s=17078&e=png&b=ffffff.png)
+![](./image/第107章-26.png)
 
 功能正常。
 

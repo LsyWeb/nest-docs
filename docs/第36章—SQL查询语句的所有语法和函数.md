@@ -4,17 +4,17 @@
 
 用 docker 跑个 mysql 镜像：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-1.png)
+![](./image/第36章-1.png)
 
 上节我们跑 mysql 镜像的时候，把数据保存在了一个目录下，这次把那个目录挂载到新容器的 /var/lib/mysql
 
-![](./image/第36章—SQL查询语句的所有语法和函数-2.png)
+![](./image/第36章-2.png)
 
 指定容器名、端口映射，点击 run。
 
 这次不用再指定 MYSQL\_ROOT\_PASSWORD 的环境变量了，因为这个配置同样保存在挂载目录下。
 
-![](./image/第36章—SQL查询语句的所有语法和函数-3.png)
+![](./image/第36章-3.png)
 
 还是用之前的密码连接 mysql，然后 show databases 查看所有数据库。
 
@@ -24,7 +24,7 @@
 
 然后还是用 mysql workbench 来连接：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-4.png)
+![](./image/第36章-4.png)
 
 点击之前建的 connection 就行。
 
@@ -57,9 +57,9 @@ score 为成绩，非空。
 
 这和你可视化的建表是一样的：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-5.png)
+![](./image/第36章-5.png)
 
-![](./image/第36章—SQL查询语句的所有语法和函数-6.png)
+![](./image/第36章-6.png)
 
 这次我们就通过 sql 建表了。
 
@@ -69,11 +69,11 @@ score 为成绩，非空。
 drop table student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-7.png)
+![](./image/第36章-7.png)
 
 然后执行建表 sql：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-8.png)
+![](./image/第36章-8.png)
 
 然后查询下这个表：
 
@@ -81,7 +81,7 @@ drop table student;
 SELECT * FROM student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-9.png)
+![](./image/第36章-9.png)
 
 没什么数据。
 
@@ -114,11 +114,11 @@ id 是自动递增的，不需要指定。
 
 先选中执行 insert，再选中执行 select：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-10.png)
+![](./image/第36章-10.png)
 
 插入了这样 18 条数据：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-11.png)
+![](./image/第36章-11.png)
 
 接下来就用这些数据来练习 sql：
 
@@ -128,7 +128,7 @@ id 是自动递增的，不需要指定。
 SELECT name, score FROM student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-12.png)
+![](./image/第36章-12.png)
 
 之前 select \* 是查询所有列的意思。
 
@@ -138,7 +138,7 @@ SELECT name, score FROM student;
 SELECT name as "名字", score as "分数" FROM student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-13.png)
+![](./image/第36章-13.png)
 
 查询自然是可以带条件的，通过 where：
 
@@ -146,7 +146,7 @@ SELECT name as "名字", score as "分数" FROM student;
 select name as "名字",class as "班级" from student where age >= 19;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-14.png)
+![](./image/第36章-14.png)
 
 并且条件可以是 and 连接的多个：
 
@@ -156,7 +156,7 @@ select name as '名字',class as '班级' from student where gender='男' and sc
 
 这里单双引号都可以。
 
-![](./image/第36章—SQL查询语句的所有语法和函数-15.png)
+![](./image/第36章-15.png)
 
 可以看到，有两个成绩在 90 以上的男生。
 
@@ -168,7 +168,7 @@ select name as '名字',class as '班级' from student where gender='男' and sc
 select * from student where name like '王%';
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-16.png)
+![](./image/第36章-16.png)
 
 还可以通过 in 来指定一个集合：
 
@@ -176,7 +176,7 @@ select * from student where name like '王%';
 select * from student where class in ('一班', '二班');
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-17.png)
+![](./image/第36章-17.png)
 
 也可以 not in：
 
@@ -184,7 +184,7 @@ select * from student where class in ('一班', '二班');
 select * from student where class not in ('一班', '二班');
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-18.png)
+![](./image/第36章-18.png)
 
 in 指定的是一个集合，还可以通过 between and 来指定一个区间：
 
@@ -192,7 +192,7 @@ in 指定的是一个集合，还可以通过 between and 来指定一个区间�
 select * from student where age between 18 and 20;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-19.png)
+![](./image/第36章-19.png)
 
 如果觉得返回的数量太多，可以分页返回，这个是通过 limit 实现的：
 
@@ -202,7 +202,7 @@ select * from student limit 0,5;
 
 比如从 0 开始的 5 个：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-20.png)
+![](./image/第36章-20.png)
 
 这种也可以简化为：
 
@@ -210,7 +210,7 @@ select * from student limit 0,5;
 select * from student limit 5;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-21.png)
+![](./image/第36章-21.png)
 
 第二页的数据：
 
@@ -218,7 +218,7 @@ select * from student limit 5;
 select * from student limit 5,5;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-22.png)
+![](./image/第36章-22.png)
 
 此外，你可以通过 order by 来指定排序的列：
 
@@ -228,7 +228,7 @@ select name,score,age from student order by score asc,age desc;
 
 order by 指定根据 score 升序排列，如果 score 相同再根据 age 降序排列。
 
-![](./image/第36章—SQL查询语句的所有语法和函数-23.png)
+![](./image/第36章-23.png)
 
 此外，还可以分组统计。
 
@@ -246,7 +246,7 @@ SELECT class as '班级', AVG(score) AS '平均成绩' FROM student GROUP BY cla
 
 之后根据平均成绩来降序排列。
 
-![](./image/第36章—SQL查询语句的所有语法和函数-24.png)
+![](./image/第36章-24.png)
 
 这种内置函数还有不少，比如 count：
 
@@ -256,7 +256,7 @@ select class, count(*) as count from student group by class;
 
 这里的 \* 就代表当前行。
 
-![](./image/第36章—SQL查询语句的所有语法和函数-25.png)
+![](./image/第36章-25.png)
 
 分组统计之后还可以做进一步的过滤，但这时候不是用 where 了，而是用 having：
 
@@ -266,11 +266,11 @@ SELECT class,AVG(score) AS avg_score FROM student GROUP BY class HAVING avg_scor
 
 不过滤的时候是这样：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-26.png)
+![](./image/第36章-26.png)
 
 过滤之后是这样：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-27.png)
+![](./image/第36章-27.png)
 
 如果你想查看有哪些班级，可能会这样写：
 
@@ -280,11 +280,11 @@ SELECT class FROM student;
 
 但这样会有很多重复的：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-28.png)
+![](./image/第36章-28.png)
 
 这时候可以用 distinct 去重：
 
-![](./image/第36章—SQL查询语句的所有语法和函数-29.png)
+![](./image/第36章-29.png)
 
 最后再来过一遍所有的内置函数，函数分为这么几类：
 
@@ -294,7 +294,7 @@ SELECT class FROM student;
 select avg(score) as '平均成绩',count(*) as '人数',sum(score) as '总成绩',min(score) as '最低分', max(score) as '最高分' from student 
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-30.png)
+![](./image/第36章-30.png)
 
 **字符串函数**：用于对字符串的处理，比如 CONCAT、SUBSTR、LENGTH、UPPER、LOWER。
 
@@ -302,7 +302,7 @@ select avg(score) as '平均成绩',count(*) as '人数',sum(score) as '总成�
 SELECT CONCAT('xx', name, 'yy'), SUBSTR(name,2,3), LENGTH(name), UPPER('aa'), LOWER('TT') FROM student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-31.png)
+![](./image/第36章-31.png)
 
 其中，substr 第二个参数表示开始的下标（**mysql 下标从 1 开始**），所以 substr('一二三',2,3) 的结果是 '二三'。
 
@@ -314,7 +314,7 @@ SELECT CONCAT('xx', name, 'yy'), SUBSTR(name,2,3), LENGTH(name), UPPER('aa'), LO
 SELECT ROUND(1.234567, 2), CEIL(1.234567), FLOOR(1.234567), ABS(-1.234567), MOD(5, 2);
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-32.png)
+![](./image/第36章-32.png)
 
 分别是 ROUND 四舍五入、CEIL 向上取整、FLOOR 向下取整、ABS 绝对值、MOD 取模。
 
@@ -322,7 +322,7 @@ SELECT ROUND(1.234567, 2), CEIL(1.234567), FLOOR(1.234567), ABS(-1.234567), MOD(
 
     SELECT YEAR('2023-06-01 22:06:03'), MONTH('2023-06-01 22:06:03'),DAY('2023-06-01 22:06:03'),DATE('2023-06-01 22:06:03'), TIME('2023-06-01 22:06:03');
 
-![](./image/第36章—SQL查询语句的所有语法和函数-33.png)
+![](./image/第36章-33.png)
 
 **条件函数**：根据条件是否成立返回不同的值，比如 IF、CASE
 
@@ -330,13 +330,13 @@ SELECT ROUND(1.234567, 2), CEIL(1.234567), FLOOR(1.234567), ABS(-1.234567), MOD(
 select name, if(score >=60, '及格', '不及格') from student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-34.png)
+![](./image/第36章-34.png)
 
 ```sql
 SELECT name, score, CASE WHEN score >=90 THEN '优秀' WHEN score >=60 THEN '良好'ELSE '差' END AS '档次' FROM student;
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-35.png)
+![](./image/第36章-35.png)
 
 if 和 case 函数和 js 里的 if、swtch 语句很像，很容易理解。
 
@@ -346,7 +346,7 @@ if 函数适合单个条件，case 适合多个条件。
 
     select VERSION(), DATABASE(), USER()
 
-![](./image/第36章—SQL查询语句的所有语法和函数-36.png)
+![](./image/第36章-36.png)
 
 **其他函数**：NULLIF、COALESCE、GREATEST、LEAST。
 
@@ -356,7 +356,7 @@ NULLIF：如果相等返回 null，不相等返回第一个值。
 select NULLIF(1,1), NULLIF(1,2);
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-37.png)
+![](./image/第36章-37.png)
 
 COALESCE：返回第一个非 null 的值：
 
@@ -364,7 +364,7 @@ COALESCE：返回第一个非 null 的值：
 select COALESCE(null, 1), COALESCE(null, null, 2)
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-38.png)
+![](./image/第36章-38.png)
 
 GREATEST、LEAST：返回几个值中最大最小的。
 
@@ -372,7 +372,7 @@ GREATEST、LEAST：返回几个值中最大最小的。
 select GREATEST(1,2,3),LEAST(1,2,3,4);
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-39.png)
+![](./image/第36章-39.png)
 
 **类型转换函数**：转换类型为另一种，比如 CAST、CONVERT、DATE\_FORMAT、STR\_TO\_DATE。
 
@@ -384,7 +384,7 @@ select greatest(1, '123',3);
 
 3 最大，因为它并没有把 '123' 当成数字
 
-![](./image/第36章—SQL查询语句的所有语法和函数-40.png)
+![](./image/第36章-40.png)
 
 这时候就可以用 convert 或者 cast 做类型转换了：
 
@@ -392,13 +392,13 @@ select greatest(1, '123',3);
 select greatest(1, convert('123', signed),3);
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-41.png)
+![](./image/第36章-41.png)
 
 ```sql
 select greatest(1, cast('123' as signed),3);
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-42.png)
+![](./image/第36章-42.png)
 
 这里可以转换的类型有这些：
 
@@ -417,13 +417,13 @@ select greatest(1, cast('123' as signed),3);
 SELECT DATE_FORMAT('2022-01-01', '%Y年%m月%d日');
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-43.png)
+![](./image/第36章-43.png)
 
 ```sql
 SELECT STR_TO_DATE('2023-06-01', '%Y-%m-%d');
 ```
 
-![](./image/第36章—SQL查询语句的所有语法和函数-44.png)
+![](./image/第36章-44.png)
 
 至此，我们就把 sql 查询的语法和函数都过了一遍。
 

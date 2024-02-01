@@ -18,13 +18,13 @@ nest g module bbb
 ```
 创建两个 Module。
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-1.png)
+![](./image/第14章-1.png)
 
 然后这两个 Module 相互引用。
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-2.png)
+![](./image/第14章-2.png)
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-3.png)
+![](./image/第14章-3.png)
 
 这时候你执行
 
@@ -33,7 +33,7 @@ nest start -w
 ```
 把服务跑起来，会报这样的错误：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-4.png)
+![](./image/第14章-4.png)
 
 意思是在解析 BbbModule 的时候，它的第一个 imports 是 undefined。
 
@@ -41,7 +41,7 @@ nest start -w
 
 因为 Nest 创建 Module 的时候会递归创建它的依赖，而它的依赖又依赖了这个 Module，所以没法创建成功，拿到的就是 undefined。
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-5.png)
+![](./image/第14章-5.png)
 
 那怎么办呢？
 
@@ -49,17 +49,17 @@ nest start -w
 
 也就是用 forwardRef 的方式：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-6.png)
+![](./image/第14章-6.png)
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-7.png)
+![](./image/第14章-7.png)
 
 因为我们用了 nest start --watch 的方式启动的，nest 会自动重启，这时候就没有错误了：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-8.png)
+![](./image/第14章-8.png)
 
 nest 会单独创建两个 Module，之后再把 Module 的引用转发过去，也就是 forwardRef 的含义。
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-9.png)
+![](./image/第14章-9.png)
 
 除了 Module 和 Module 之间会循环依赖以外，provider 之间也会。
 
@@ -73,17 +73,17 @@ nest 会单独创建两个 Module，之后再把 Module 的引用转发过去，
 nest g service ccc --no-spec --flat
 nest g service ddd --no-spec --flat
 ```
-![](./image/第14章—Module和Provider的循环依赖怎么处理-10.png)
+![](./image/第14章-10.png)
 
 分别创建 ccc 和 ddd 两个 service，--no-spec 是不生成测试文件，--flat 是平铺。
 
 就会创建这两个 service，并在 AppModule 引入了：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-11.png)
+![](./image/第14章-11.png)
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-12.png)
+![](./image/第14章-12.png)
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-13.png)
+![](./image/第14章-13.png)
 
 然后我们让两者相互注入：
 
@@ -140,25 +140,25 @@ export class AppService {
 
 这时候 nest start --watch 会报错：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-14.png)
+![](./image/第14章-14.png)
 
 说是没法解析 DddService 的依赖，也是因为循环依赖导致的。
 
 这时候也是通过 forwardRef 解决：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-15.png)
+![](./image/第14章-15.png)
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-16.png)
+![](./image/第14章-16.png)
 
 这时候就不能用默认的注入方式了，通过 @Inject 手动指定注入的 token，这里是 forwardRef 的方式注入。
 
 这样报错就没了：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-17.png)
+![](./image/第14章-17.png)
 
 浏览器访问下：
 
-![](./image/第14章—Module和Provider的循环依赖怎么处理-18.png)
+![](./image/第14章-18.png)
 
 两个 service 的相互调用也成功了。
 

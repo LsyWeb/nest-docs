@@ -1,6 +1,6 @@
 ﻿文章都会有个阅读量，那这个阅读量是怎么计数的呢？
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-1.png)
+![](./image/第76章-1.png)
 
 有同学说，很简单啊，这不就是文章表里加个 views 的字段，然后每次刷新页面都加一么？
 
@@ -29,7 +29,7 @@
 nest new article-views -p npm
 ```
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-2.png)
+![](./image/第76章-2.png)
 
 创建个 nest 项目。
 
@@ -77,11 +77,11 @@ export class AppModule {}
 CREATE DATABASE article-views DEFAULT CHARACTER SET utf8mb4;
 ```
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-3.image#?w=1204&h=162&e=png&b=f5f4f4.png)
+![](./image/第76章-3.png)
 
 刷新可以看到这个 database
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-4.image#?w=500&h=456&e=png&b=e9e6e3.png)
+![](./image/第76章-4.png)
 
 然后建个文章和用户的模块：
 
@@ -90,7 +90,7 @@ nest g resource user --no-spec
 nest g resource article --no-spec
 ```
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-5.image#?w=884&h=602&e=png&b=191919.png)
+![](./image/第76章-5.png)
 
 添加 user 和 article 的 entity
 
@@ -155,17 +155,17 @@ export class Article {
 ```
 在 entities 引入：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-6.image#?w=894&h=1050&e=png&b=1f1f1f.png)
+![](./image/第76章-6.png)
 
 可以看到 typeorm 自动创建了这两个表：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-7.image#?w=1634&h=670&e=png&b=191919.png)
+![](./image/第76章-7.png)
 
 然后插入一些数据：
 
 在 AppController 创建 init-data 的路由，然后注入 EntityManager：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-8.image#?w=1108&h=862&e=png&b=1f1f1f.png)
+![](./image/第76章-8.png)
 
 ```javascript
 @InjectEntityManager()
@@ -203,18 +203,18 @@ export class Article {
 
 浏览器访问下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-9.image#?w=712&h=216&e=png&b=ffffff.png)
+![](./image/第76章-9.png)
 
 
 可以看到 4 条 insert 语句：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-10.image#?w=1672&h=672&e=png&b=191919.png)
+![](./image/第76章-10.png)
 
 在 mysql workbench 里也可以看到两个表都插入了数据：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-11.image#?w=1758&h=394&e=png&b=f0eeed.png)
+![](./image/第76章-11.png)
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-12.image#?w=1038&h=420&e=png&b=edeae8.png)
+![](./image/第76章-12.png)
 
 然后先实现登录：
 
@@ -226,7 +226,7 @@ npm install express-session @types/express-session
 ```
 在 main.ts 里启用：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-13.image#?w=928&h=648&e=png&b=1f1f1f.png)
+![](./image/第76章-13.png)
 
 ```javascript
 import { NestFactory } from '@nestjs/core';
@@ -269,9 +269,9 @@ export class LoginUserDto {
 ```
 测试下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-14.image#?w=716&h=628&e=png&b=fbfbfb.png)
+![](./image/第76章-14.png)
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-15.image#?w=772&h=396&e=png&b=191919.png)
+![](./image/第76章-15.png)
 
 然后在 UserService 实现登录逻辑：
 
@@ -316,15 +316,15 @@ async login(@Body() loginUserDto: LoginUserDto, @Session() session) {
 
 当用户不存在时：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-16.image#?w=800&h=764&e=png&b=fbfbfb.png)
+![](./image/第76章-16.png)
 
 当密码错误时：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-17.image#?w=818&h=748&e=png&b=fcfcfc.png)
+![](./image/第76章-17.png)
 
 登录成功时：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-18.image#?w=754&h=670&e=png&b=fcfcfc.png)
+![](./image/第76章-18.png)
 
 然后在 ArticleController 添加一个查询文章的接口：
 
@@ -348,7 +348,7 @@ async findOne(id: number) {
 ```
 测试下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-19.image#?w=1224&h=896&e=png&b=fdfdfd.png)
+![](./image/第76章-19.png)
 
 然后我们在 ArticleController 加一个阅读的接口：
 
@@ -373,15 +373,15 @@ async view(id: number) {
 ```
 测试下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-20.image#?w=1262&h=768&e=gif&f=24&b=fcfcfc.png)
+![](./image/第76章-20.png)
 
 数据库里阅读量确实更新了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-21.image#?w=1214&h=304&e=png&b=f6f6f6.png)
+![](./image/第76章-21.png)
 
 再次查询出来的就是新的阅读量：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-22.image#?w=966&h=806&e=png&b=fdfdfd.png)
+![](./image/第76章-22.png)
 
 这样是能实现功能，但有前面我们讲到的两个问题：
 
@@ -404,7 +404,7 @@ nest g module redis
 nest g service redis
 ```
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-23.image#?w=722&h=196&e=webp&b=1f1f1f.png)
+![](./image/第76章-23.png)
 
 在 RedisModule 创建连接 redis 的 provider，导出 RedisService，并把这个模块标记为 @Global 模块
 
@@ -516,15 +516,15 @@ async view(id: number) {
 
 测试下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-24.image#?w=772&h=640&e=png&b=fcfcfc.png)
+![](./image/第76章-24.png)
 
 服务端打印了 3 条 sql：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-25.image#?w=1596&h=314&e=png&b=191919.png)
+![](./image/第76章-25.png)
 
 redis 里也有了这个 hash 的结构：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-26.image#?w=2246&h=838&e=png&b=1a1a1a.png)
+![](./image/第76章-26.png)
 
 为什么是 3 条呢？
 
@@ -532,7 +532,7 @@ redis 里也有了这个 hash 的结构：
 
 我们可以优化一下，把 save 换成 update：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-27.image#?w=984&h=652&e=png&b=1f1f1f.png)
+![](./image/第76章-27.png)
 
 ```javascript
 await this.entityManager.update(Article, {  id }, {
@@ -541,33 +541,33 @@ await this.entityManager.update(Article, {  id }, {
 ```
 然后把 redis 那条数据删掉：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-28.image#?w=1412&h=824&e=png&b=1d1d1d.png)
+![](./image/第76章-28.png)
 
 重新跑一下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-29.image#?w=1618&h=216&e=png&b=191919.png)
+![](./image/第76章-29.png)
 
 现在就只有一条 select、一条 update 了。
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-30.image#?w=1944&h=706&e=png&b=1c1c1c.png)
+![](./image/第76章-30.png)
 
 然后多刷新几次：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-31.image#?w=1270&h=670&e=gif&f=19&b=fbfbfb.png)
+![](./image/第76章-31.png)
 
 没发送 sql，还是之前那两条：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-32.image#?w=1078&h=228&e=png&b=191919.png)
+![](./image/第76章-32.png)
 
 因为这时候查的是 redis。
 
 redis 里数据更新了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-33.image#?w=1924&h=738&e=png&b=1c1c1c.png)
+![](./image/第76章-33.png)
 
 但是数据库里的 viewCount 还是 8
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-34.image#?w=1042&h=240&e=png&b=fafafa.png)
+![](./image/第76章-34.png)
 
 这样一重启 redis 数据就没了。
 
@@ -583,14 +583,14 @@ npm install --save @nestjs/schedule
 
 在 AppModule 引入下：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-35.image#?w=988&h=602&e=png&b=1f1f1f.png)
+![](./image/第76章-35.png)
 
 然后创建一个 service：
 ```
 nest g module task
 nest g service task
 ```
-![](./image/第76章—定时任务+Redis实现阅读量计数-36.image#?w=732&h=248&e=png&b=191919.png)
+![](./image/第76章-36.png)
 
 定义个方法，通过 @Cron 声明每 10s 执行一次：
 
@@ -609,7 +609,7 @@ export class TasksService {
 ```
 然后就可以看到控制台会每 10s 打印一次
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-37.image#?w=1084&h=738&e=png&b=181818.png)
+![](./image/第76章-37.png)
 
 我们在 TaskModule 引入 ArticleModule：
 
@@ -628,7 +628,7 @@ export class TaskModule {}
 ```
 并且在 ArticleModule 导出 ArticleService
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-38.image#?w=882&h=488&e=png&b=1f1f1f.png)
+![](./image/第76章-38.png)
 
 然后在 TaskService 里注入 articleService 
 ```javascript
@@ -655,7 +655,7 @@ export class TaskService {
 
 先在 RedisService 添加一个 keys 方法，用来查询 key：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-39.image#?w=920&h=512&e=png&b=1f1f1f.png)
+![](./image/第76章-39.png)
 
 ```javascript
 async keys(pattern: string) {
@@ -673,16 +673,16 @@ async flushRedisToDB() {
 
 我们先打印下 keys。
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-40.image#?w=358&h=214&e=png&b=181818.png)
+![](./image/第76章-40.png)
 
 现在只有一个 key，我们再访问下另一篇文章
 
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-41.image#?w=742&h=576&e=png&b=fbfbfb.png)
+![](./image/第76章-41.png)
 
 现在就有 2 个 key 了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-42.image#?w=496&h=174&e=png&b=191919.png)
+![](./image/第76章-42.png)
 
 我们把所有的 key 对应的值存入数据库：
 
@@ -710,27 +710,27 @@ async flushRedisToDB() {
 
 测试下：
   
-![](./image/第76章—定时任务+Redis实现阅读量计数-43.image#?w=1320&h=864&e=gif&f=29&b=fcfcfc.png)
+![](./image/第76章-43.png)
 
 刷新几次 view 接口，redis 里阅读量增加了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-44.image#?w=1916&h=678&e=png&b=1d1d1d.png)
+![](./image/第76章-44.png)
 
 但是数据库里没变：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-45.image#?w=1108&h=238&e=png&b=fafafa.png)
+![](./image/第76章-45.png)
 
 过了一会，控制台打印了 2 条 update 语句：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-46.image#?w=1176&h=180&e=png&b=191919.png)
+![](./image/第76章-46.png)
 
 数据库里的数据就更新了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-47.image#?w=1048&h=236&e=png&b=f9f9f9.png)
+![](./image/第76章-47.png)
 
 接下来只要把定时任务的执行时间改为 4 点就好了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-48.image#?w=936&h=598&e=png&b=1f1f1f.png)
+![](./image/第76章-48.png)
 
 ```javascript
 @Cron(CronExpression.EVERY_DAY_AT_4AM)
@@ -743,7 +743,7 @@ async flushRedisToDB() {
 
 我们可以在用户访问文章的时候在 redis 存一个 10 分钟过期的标记，有这个标记的时候阅读量不增加。
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-49.image#?w=1018&h=1238&e=png&b=1f1f1f.png)
+![](./image/第76章-49.png)
 
 ```javascript
 await this.redisService.set(`user_${userId}_article_${id}`, 1, 3);
@@ -770,25 +770,25 @@ async view(@Param('id') id: string, @Session() session, @Req() req) {
 
 试试看：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-50.image#?w=1266&h=684&e=gif&f=38&b=fcfcfc.png)
+![](./image/第76章-50.png)
 
 可以看到，现在就不是每次刷新都增加阅读量了，而是 3s 之后再刷新才增加。
 
 在 redis 里可以看到这个 key：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-51.image#?w=1246&h=600&e=png&b=1c1c1c.png)
+![](./image/第76章-51.png)
 
 只不过现在没登录，用的是 ip，而本地访问的时候获取的 ip 就是 ::1 这样的，线上就能拿到具体的 ip 了。
 
 然后我们登录下再访问：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-52.image#?w=696&h=586&e=png&b=fbfbfb.png)
+![](./image/第76章-52.png)
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-53.image#?w=750&h=584&e=png&b=fbfbfb.png)
+![](./image/第76章-53.png)
 
 这时用的就是用户 id 了：
 
-![](./image/第76章—定时任务+Redis实现阅读量计数-54.image#?w=1214&h=626&e=png&b=1b1b1b.png)
+![](./image/第76章-54.png)
 
 这样就实现了真实的阅读量计数。
 

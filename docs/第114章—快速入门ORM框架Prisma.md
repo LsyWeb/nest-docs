@@ -1,6 +1,6 @@
 ﻿我们学习了 TypeORM，它是一个传统的 ORM 框架，也就是把表映射到 entity 类，把表的关联映射成 entity 类的属性关联。
 
-![](./image/第114章—快速入门ORM框架Prisma-1.image#?w=1662&h=632&s=56056&e=png&b=ffffff.png)
+![](./image/第114章-1.png)
 
 完成 entity 和表的映射之后，你只要调用 userRepository 和 postRepository 的 find、delete、save 等 api，typeorm 会自动生成对应的 sql 语句并执行。
 
@@ -14,11 +14,11 @@ Prisma 创造了一种 DSL（Domain Specific Language，领域特定语言）。
 
 类似这样：
 
-![](./image/第114章—快速入门ORM框架Prisma-2.image#?w=1108&h=596&s=108843&e=png&b=1f1f1f.png)
+![](./image/第114章-2.png)
 
 它是把表映射成了 DSL 里的 model，然后编译这个 DSL 会生成 prismaClient 的代码，之后就可以调用它的 find、delete、create 等 api 来做 CRUD 了：
 
-![](./image/第114章—快速入门ORM框架Prisma-3.image#?w=1666&h=632&s=58044&e=png&b=ffffff.png)
+![](./image/第114章-3.png)
 
 虽然多了一种 DSL 的语法，但整个流程其实和 typeorm 差不多的。
 
@@ -31,7 +31,7 @@ npm init -y
 ```
 首先生成项目：
 
-![](./image/第114章—快速入门ORM框架Prisma-4.image#?w=834&h=638&s=127128&e=png&b=010101.png)
+![](./image/第114章-4.png)
 
 安装 typescript 相关的包：
 
@@ -46,7 +46,7 @@ typescript 是 tsc 编译器的包，ts-node 可以直接跑 ts 代码，而 @ty
 ```
 npx tsc --init
 ```
-![](./image/第114章—快速入门ORM框架Prisma-5.image#?w=670&h=374&s=42563&e=png&b=181818.png)
+![](./image/第114章-5.png)
 
 安装 prisma：
 
@@ -58,7 +58,7 @@ npm install prisma --save-dev
 
 首先，我们要写 schema 层的代码：
 
-![](./image/第114章—快速入门ORM框架Prisma-6.image#?w=1666&h=632&s=58044&e=png&b=ffffff.png)
+![](./image/第114章-6.png)
 
 这个也是用命令生成：
 
@@ -66,25 +66,25 @@ npm install prisma --save-dev
 npx prisma init --datasource-provider mysql
 ```
 
-![](./image/第114章—快速入门ORM框架Prisma-7.image#?w=1118&h=432&s=81961&e=png&b=181818.png)
+![](./image/第114章-7.png)
 
 这时你会发现项目目录下多了 schema 文件和 env 文件：
 
-![](./image/第114章—快速入门ORM框架Prisma-8.image#?w=1126&h=502&s=101501&e=png&b=1d1d1d.png)
+![](./image/第114章-8.png)
 
 schema 文件里就是定义 model 的地方。
 
 这个文件可以安装 prisma 插件来添加语法高亮等支持：
 
-![](./image/第114章—快速入门ORM框架Prisma-9.image#?w=786&h=306&s=39728&e=png&b=1d1d1d.png)
+![](./image/第114章-9.png)
 
 而 .env 文件里存储着连接信息：
 
-![](./image/第114章—快速入门ORM框架Prisma-10.image#?w=1068&h=378&s=74936&e=png&b=1f1f1f.png)
+![](./image/第114章-10.png)
 
 我们先去 mysql workbench 里创建个数据库：
 
-![](./image/第114章—快速入门ORM框架Prisma-11.image#?w=1264&h=752&s=186420&e=png&b=e7e5e5.png)
+![](./image/第114章-11.png)
 
 指定字符集为 utf8mb4，这个支持的字符集是最全的。
 
@@ -94,11 +94,11 @@ schema 文件里就是定义 model 的地方。
 CREATE SCHEMA `prisma_test` DEFAULT CHARACTER SET utf8mb4;
 ```
 
-![](./image/第114章—快速入门ORM框架Prisma-12.image#?w=476&h=254&s=37328&e=png&b=e5e0df.png)
+![](./image/第114章-12.png)
 
 创建完 database 后，我们改下连接信息：
 
-![](./image/第114章—快速入门ORM框架Prisma-13.image#?w=1006&h=348&s=69452&e=png&b=1f1f1f.png)
+![](./image/第114章-13.png)
 
 ```env
 DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
@@ -107,7 +107,7 @@ DATABASE_URL="mysql://root:guang@localhost:3306/prisma_test"
 
 然后来定义 model：
 
-![](./image/第114章—快速入门ORM框架Prisma-14.image#?w=1114&h=852&s=140113&e=png&b=1f1f1f.png)
+![](./image/第114章-14.png)
 
 ```prisma
 model User {
@@ -141,23 +141,23 @@ model Post {
 ```
 npx prisma migrate dev --name aaa
 ```
-![](./image/第114章—快速入门ORM框架Prisma-15.image#?w=1166&h=484&s=77481&e=png&b=191919.png)
+![](./image/第114章-15.png)
 
 执行 prisma migrate dev，会生成并执行建表 sql 文件，而且在 node_modules 下生成了 client 代码。
 
-![](./image/第114章—快速入门ORM框架Prisma-16.image#?w=1576&h=1062&s=273442&e=png&b=1d1d1d.png)
+![](./image/第114章-16.png)
 
 在 mysql workbench 里可以看到生成了 2 个表：
 
-![](./image/第114章—快速入门ORM框架Prisma-17.image#?w=1098&h=442&s=129826&e=png&b=eeebeb.png)
+![](./image/第114章-17.png)
 
-![](./image/第114章—快速入门ORM框架Prisma-18.image#?w=1102&h=580&s=184182&e=png&b=eeebeb.png)
+![](./image/第114章-18.png)
 
-![](./image/第114章—快速入门ORM框架Prisma-19.image#?w=1600&h=482&s=99384&e=png&b=f7f6f6.png)
+![](./image/第114章-19.png)
 
 在 node_modules/.prisma/client 下生成的代码也包含了 user 和 post 的信息：
 
-![](./image/第114章—快速入门ORM框架Prisma-20.image#?w=1132&h=636&s=142091&e=png&b=1c1c1c.png)
+![](./image/第114章-20.png)
 
 然后就可以用 @prisma/client 来做 CRUD 了。
 
@@ -196,11 +196,11 @@ test1();
 ```
 npx ts-node ./src/index.ts
 ```
-![](./image/第114章—快速入门ORM框架Prisma-21.image#?w=758&h=160&s=29609&e=png&b=181818.png)
+![](./image/第114章-21.png)
 
 可以看到，user 表确实插入了 2 条记录：
 
-![](./image/第114章—快速入门ORM框架Prisma-22.image#?w=1050&h=408&s=125597&e=png&b=ece9e8.png)
+![](./image/第114章-22.png)
 
 然后我们再来插入一个新的 user 和它的两个 post：
 
@@ -249,12 +249,12 @@ test2();
 ```
 npx ts-node ./src/index.ts
 ```
-![](./image/第114章—快速入门ORM框架Prisma-23.image#?w=1314&h=330&s=92682&e=png&b=181818.png)
+![](./image/第114章-23.png)
 
 可以看到被事务包裹的三条 insert 语句。
 
-![](./image/第114章—快速入门ORM框架Prisma-24.image#?w=1034&h=400&s=132137&e=png&b=ece9e8.png)
-![](./image/第114章—快速入门ORM框架Prisma-25.image#?w=1064&h=332&s=108189&e=png&b=ebe8e7.png)
+![](./image/第114章-24.png)
+![](./image/第114章-25.png)
 
 数据也都插入成功了。
 
@@ -274,9 +274,9 @@ test3();
 ```
 更新 id 为 2 的 post 的内容为 xxx：
 
-![](./image/第114章—快速入门ORM框架Prisma-26.image#?w=1316&h=286&s=80407&e=png&b=191919.png)
+![](./image/第114章-26.png)
 
-![](./image/第114章—快速入门ORM框架Prisma-27.image#?w=592&h=252&s=56477&e=png&b=fafafa.png)
+![](./image/第114章-27.png)
 
 然后把它删掉：
 
@@ -291,15 +291,15 @@ async function test4() {
 test4();
 ```
 执行下：
-![](./image/第114章—快速入门ORM框架Prisma-28.image#?w=1258&h=266&s=61733&e=png&b=191919.png)
+![](./image/第114章-28.png)
 
-![](./image/第114章—快速入门ORM框架Prisma-29.image#?w=622&h=208&s=47905&e=png&b=fafafa.png)
+![](./image/第114章-29.png)
 
 这样，基于 prisma 的 model 定义还有 CRUD 我们就都完成了。
 
 回顾下整个流程：
 
-![](./image/第114章—快速入门ORM框架Prisma-30.image#?w=1666&h=632&s=58044&e=png&b=ffffff.png)
+![](./image/第114章-30.png)
 
 只是把 entity 类变成了 DSL 语法里的 model，然后通过编译的方式生成 client 的代码，之后进行 CRUD。
 

@@ -2,11 +2,11 @@
 
 首先，provider 是可以注入的对象，它们都有 token，比如 @Injectable 装饰器声明的 class
 
-![](./image/第22章—图解串一串Nest核心概念-1.png)
+![](./image/第22章-1.png)
 
 token 可以是 class 也可以是 string：
 
-![](./image/第22章—图解串一串Nest核心概念-2.png)
+![](./image/第22章-2.png)
 
 provider 可以是 useClass 指定 class，也可以 useValue 指定值，或者 useFactory 动态创建。
 
@@ -14,7 +14,7 @@ provider 之间可以相互注入，还可以注入到 controller 里。
 
 provider、controller 放在一个个 Module 里：
 
-![](./image/第22章—图解串一串Nest核心概念-3.png)
+![](./image/第22章-3.png)
 
 module 里 exports 的 provider 在模块被 imports 之后就可以用于别的模块的注入了。
 
@@ -22,11 +22,11 @@ module 里 exports 的 provider 在模块被 imports 之后就可以用于别的
 
 Provider 可以通过 useFactory 动态创建，Module 也是，可以通过 register、forRoot、forFeature 等方法来动态创建。
 
-![](./image/第22章—图解串一串Nest核心概念-4.png)
+![](./image/第22章-4.png)
 
 在 main.ts 里调用 NestFactory.create 方法，就会从 AppModule 开始递归解析 Module，实例化其中的 provider、controller，并依次调用它们的 onModuleInit 生命周期方法。
 
-![](./image/第22章—图解串一串Nest核心概念-5.png)
+![](./image/第22章-5.png)
 
 之后会再递归调用每个 Module 的 provider、controller 的还有 Module 自身的 onApplicationBootstrap 生命周期方法。
 
@@ -38,7 +38,7 @@ Provider 可以通过 useFactory 动态创建，Module 也是，可以通过 reg
 
 在这个过程中，会经历很多层切面：
 
-![](./image/第22章—图解串一串Nest核心概念-6.png)
+![](./image/第22章-6.png)
 
 首先，请求会被 middleware 处理，这一层可以复用 express 的中间件生态，实现 session、static files 等功能。
 

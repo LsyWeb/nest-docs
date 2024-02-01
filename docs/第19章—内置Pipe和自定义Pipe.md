@@ -2,11 +2,11 @@
 
 对应的源码如下：
 
-![](./image/第19章—内置Pipe和自定义Pipe-1.png)
+![](./image/第19章-1.png)
 
 对每个参数都会应用 pipe：
 
-![](./image/第19章—内置Pipe和自定义Pipe-2.png)
+![](./image/第19章-2.png)
 
 内置的 Pipe 有这些：
 
@@ -24,7 +24,7 @@
 
 比如 ParseIntPipe 的源码是这样的：
 
-![](./image/第19章—内置Pipe和自定义Pipe-3.png)
+![](./image/第19章-3.png)
 
 我们分别来试下内置的 Pipe 的功能吧。
 
@@ -34,45 +34,45 @@
 
 参数默认是 string 类型：
 
-![](./image/第19章—内置Pipe和自定义Pipe-4.png)
+![](./image/第19章-4.png)
 
 我们可以通过 Pipe 把它转为整数：
 
-![](./image/第19章—内置Pipe和自定义Pipe-5.png)
+![](./image/第19章-5.png)
 
 效果如下：
 
-![](./image/第19章—内置Pipe和自定义Pipe-6.png)
+![](./image/第19章-6.png)
 
 当你传入的参数不能 parse 为 int 时，会返回这样的响应：
 
-![](./image/第19章—内置Pipe和自定义Pipe-7.png)
+![](./image/第19章-7.png)
 
 这个也是可以修改的，但要使用 new XxxPipe 的方式：
 
-![](./image/第19章—内置Pipe和自定义Pipe-8.png)
+![](./image/第19章-8.png)
 
 比如我指定错误时的状态码为 404。
 
-![](./image/第19章—内置Pipe和自定义Pipe-9.png)
+![](./image/第19章-9.png)
 
 就会返回这样的响应。
 
 此外，你还可以自己抛一个异常出来，然后让 exception filter 处理：
 
-![](./image/第19章—内置Pipe和自定义Pipe-10.png)
+![](./image/第19章-10.png)
 
 可以看到，状态码和 message 都改了：
 
-![](./image/第19章—内置Pipe和自定义Pipe-11.png)
+![](./image/第19章-11.png)
 
 你也可以加个 @UseFilters 来使用自己的 exception filter 处理。
 
 ParseFloatPipe 是把参数转换为 float 类型的。
 
-![](./image/第19章—内置Pipe和自定义Pipe-12.png)
+![](./image/第19章-12.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-13.png)
+![](./image/第19章-13.png)
 
 它也同样可以 new ParseFloatPipe 的形式，传入 errorHttpStatusCode 和 exceptionFactory。
 
@@ -80,31 +80,31 @@ ParseFloatPipe 是把参数转换为 float 类型的。
 
 ParseBoolPipe：
 
-![](./image/第19章—内置Pipe和自定义Pipe-14.png)
+![](./image/第19章-14.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-15.png)
+![](./image/第19章-15.png)
 
 ParseArrayPipe：
 
-![](./image/第19章—内置Pipe和自定义Pipe-16.png)
+![](./image/第19章-16.png)
 
 这时会提示需要 class-validator 这个包：
 
-![](./image/第19章—内置Pipe和自定义Pipe-17.png)
+![](./image/第19章-17.png)
 
 这是可以用装饰器和非装饰器两种方式对 class 属性做验证的库
 
-![](./image/第19章—内置Pipe和自定义Pipe-18.png)
+![](./image/第19章-18.png)
 
 还会提示需要 class-transformer 这个包：
 
-![](./image/第19章—内置Pipe和自定义Pipe-19.png)
+![](./image/第19章-19.png)
 
 它是把普通对象转换为对应的 class 实例的包：
 
-![](./image/第19章—内置Pipe和自定义Pipe-20.png)
+![](./image/第19章-20.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-21.png)
+![](./image/第19章-21.png)
 
 后面我们也会用到这俩包。
 
@@ -114,47 +114,47 @@ ParseArrayPipe：
 
 然后访问下：
 
-![](./image/第19章—内置Pipe和自定义Pipe-22.png)
+![](./image/第19章-22.png)
 
 你会发现它确实把每一项都提取出来了，但是没有转为 number。
 
 这时候就需要用 new XxxPipe 的方式传入参数了：
 
-![](./image/第19章—内置Pipe和自定义Pipe-23.png)
+![](./image/第19章-23.png)
 
 指定 item 的类型。
 
 这样就把数组每一项处理为 number 了。
 
-![](./image/第19章—内置Pipe和自定义Pipe-24.png)
+![](./image/第19章-24.png)
 
 此外，你还可以指定分隔符：
 
-![](./image/第19章—内置Pipe和自定义Pipe-25.png)
+![](./image/第19章-25.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-26.png)
+![](./image/第19章-26.png)
 
 当没有传参数的时候会报错：
 
-![](./image/第19章—内置Pipe和自定义Pipe-27.png)
+![](./image/第19章-27.png)
 
 可以把它设置为 optional：
 
-![](./image/第19章—内置Pipe和自定义Pipe-28.png)
+![](./image/第19章-28.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-29.png)
+![](./image/第19章-29.png)
 
 然后是 ParseEnumPipe：
 
 假设我们有这样一个枚举：
 
-![](./image/第19章—内置Pipe和自定义Pipe-30.png)
+![](./image/第19章-30.png)
 
 就可以用 ParseEnumPipe 来取：
 
-![](./image/第19章—内置Pipe和自定义Pipe-31.png)
+![](./image/第19章-31.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-32.png)
+![](./image/第19章-32.png)
 
 有同学说，这不是多此一举么，本来 @Param 也能把它取出来呀。
 
@@ -162,7 +162,7 @@ ParseEnumPipe 还是有用的：
 
 第一个是可以限制参数的取值范围：
 
-![](./image/第19章—内置Pipe和自定义Pipe-33.png)
+![](./image/第19章-33.png)
 
 如果参数值不是枚举里的，就会报错。
 
@@ -170,7 +170,7 @@ ParseEnumPipe 还是有用的：
 
 第二个是帮你转换类型：
 
-![](./image/第19章—内置Pipe和自定义Pipe-34.png)
+![](./image/第19章-34.png)
 
 这里拿到的就直接是枚举类型了，如果有个方法的参数是这样的枚举类型，就可以直接传入。
 
@@ -180,33 +180,33 @@ UUID 是一种随机生成的几乎不可能重复的字符串，可以用来做
 
 它有 v3、v4、v5 3 个版本，我们用 uuid 包可以生成这种 id：
 
-![](./image/第19章—内置Pipe和自定义Pipe-35.png)
+![](./image/第19章-35.png)
 
 在参数里，可以用 ParseUUIDPipe 来校验是否是 UUID：
 
-![](./image/第19章—内置Pipe和自定义Pipe-36.png)
+![](./image/第19章-36.png)
 
 如果不是 uuid 会抛异常：
 
-![](./image/第19章—内置Pipe和自定义Pipe-37.png)
+![](./image/第19章-37.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-38.png)
+![](./image/第19章-38.png)
 
 接下来是 DefaultValuePipe：
 
 这个是设置参数默认值的：
 
-![](./image/第19章—内置Pipe和自定义Pipe-39.png)
+![](./image/第19章-39.png)
 
 当你没传参数的时候，会使用默认值：
 
-![](./image/第19章—内置Pipe和自定义Pipe-40.png)
+![](./image/第19章-40.png)
 
-![](./image/第19章—内置Pipe和自定义Pipe-41.png)
+![](./image/第19章-41.png)
 
 它的源码也很简单：
 
-![](./image/第19章—内置Pipe和自定义Pipe-42.png)
+![](./image/第19章-42.png)
 
 还剩下 ValidationPipe 和 ParseFilePipe，这个我们之后再讲。
 
@@ -216,29 +216,29 @@ UUID 是一种随机生成的几乎不可能重复的字符串，可以用来做
 
 生成一个 pipe，打印下参数值，返回 aaa：
 
-![](./image/第19章—内置Pipe和自定义Pipe-43.png)
+![](./image/第19章-43.png)
 
 在 handler 里用下：
 
-![](./image/第19章—内置Pipe和自定义Pipe-44.png)
+![](./image/第19章-44.png)
 
 浏览器访问这个接口：
 
-![](./image/第19章—内置Pipe和自定义Pipe-45.png)
+![](./image/第19章-45.png)
 
 返回的值是 aaaaaa，也就是说 pipe 的返回值就是传给 handler 的参数值。
 
 打印的 value 就是 query、param 的值，而 metadata 里包含 type、metatype、data：
 
-![](./image/第19章—内置Pipe和自定义Pipe-46.png)
+![](./image/第19章-46.png)
 
 type 就是 @Query、@Param、@Body 装饰器，或者自定义装饰器：
 
-![](./image/第19章—内置Pipe和自定义Pipe-47.png)
+![](./image/第19章-47.png)
 
 而 metatype 是参数的 ts 类型：
 
-![](./image/第19章—内置Pipe和自定义Pipe-48.png)
+![](./image/第19章-48.png)
 
 data 是传给 @Query、@Param、@Body 等装饰器的参数。
 

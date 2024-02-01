@@ -32,7 +32,7 @@ pm2 的主要功能就是**进程管理、日志管理、负载均衡、性能�
 
 直接 node 跑是这样的，日志打印在控制台：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-1.png)
+![](./image/第34章-1.png)
 
 而用 pm2 的话，就可以这样跑：
 
@@ -40,7 +40,7 @@ pm2 的主要功能就是**进程管理、日志管理、负载均衡、性能�
 
 它会把这个 node 进程跑起来，然后管理起来：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-2.png)
+![](./image/第34章-2.png)
 
 管理起来之后，就有我们上面说的那些功能了，比如自动重启、日志管理、性能监控等。
 
@@ -48,25 +48,25 @@ pm2 的主要功能就是**进程管理、日志管理、负载均衡、性能�
 
     pm2 logs
 
-![i](./image/第34章—为什么Node应用要用PM2来跑-3.png)
+![i](./image/第34章-3.png)
 
 可以看到 pm2 会把所有进程的日志打印出来，通过前面的“进程id|进程名字”来区分，比如 0|main。
 
 而且，它会把它写到日志文件里，在 \~/.pm2/logs 下，以“进程名-out.log”和“进程名-error.log”分别保存不同进程的日志：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-4.png)
+![](./image/第34章-4.png)
 
 比如 main-out.log 里保存了 main 进程的正常日志，而 main-error.log 里保存了它的报错日志：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-5.png)
+![](./image/第34章-5.png)
 
 我们再跑一个进程试试：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-6.png)
+![](./image/第34章-6.png)
 
 现在有两个进程了，pm2 logs 可以看到这两个进程的日志：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-7.png)
+![](./image/第34章-7.png)
 
 也可以
 
@@ -75,7 +75,7 @@ pm2 的主要功能就是**进程管理、日志管理、负载均衡、性能�
 
 这样查看单个进程的日志：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-8.png)
+![](./image/第34章-8.png)
 
 这就是 pm2 的日志管理的功能。
 
@@ -105,35 +105,35 @@ pm2 的主要功能就是**进程管理、日志管理、负载均衡、性能�
 
     pm2 delete 0
 
-![](./image/第34章—为什么Node应用要用PM2来跑-9.png)
+![](./image/第34章-9.png)
 
 我们指定 1k 内存就重启：
 
     pm2 start xxx --max-memory-restart 1K
 
-![](./image/第34章—为什么Node应用要用PM2来跑-10.png)
+![](./image/第34章-10.png)
 
 然后在 nest 代码里用超过 1k 的内存：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-11.png)
+![](./image/第34章-11.png)
 
 先把之前的日志清空，使用 pm2 flush 或者 pm2 flush 进程名|id
 
-![](./image/第34章—为什么Node应用要用PM2来跑-12.png)
+![](./image/第34章-12.png)
 
 确实清空了：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-13.png)
+![](./image/第34章-13.png)
 
 访问下这个 controller：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-14.png)
+![](./image/第34章-14.png)
 
 查看 main 进程的前 100 行日志：
 
     pm2 logs main --lines 100 
 
-![](./image/第34章—为什么Node应用要用PM2来跑-15.png)
+![](./image/第34章-15.png)
 
 明显看到重启了。
 
@@ -156,7 +156,7 @@ node 提供的 cluster 模块就是做这个的，pm2 就是基于这个实现�
 
 用多进程的方式跑 nest 应用：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-16.png)
+![](./image/第34章-16.png)
 
 可以看到启动了 8 个进程，因为我是 8 核 cpu。
 
@@ -166,7 +166,7 @@ node 提供的 cluster 模块就是做这个的，pm2 就是基于这个实现�
 
 我把 main 的集群调整为 3 个进程：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-17.png)
+![](./image/第34章-17.png)
 
 可以看到 pm2 删除了 5 个，留下了 3 个。
 
@@ -174,7 +174,7 @@ node 提供的 cluster 模块就是做这个的，pm2 就是基于这个实现�
 
 我又加了 3 个，现在变成了 6 个：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-18.png)
+![](./image/第34章-18.png)
 
 可以动态伸缩进程的数量，pm2 会把请求分配到不同进程上去。
 
@@ -184,7 +184,7 @@ node 提供的 cluster 模块就是做这个的，pm2 就是基于这个实现�
 
     pm2 monit
 
-![](./image/第34章—为什么Node应用要用PM2来跑-19.png)
+![](./image/第34章-19.png)
 
 可以看到不同进程的 cpu 和内存占用情况。
 
@@ -196,15 +196,15 @@ pm2 支持配置文件的方式启动多个应用。
 
 执行 pm2 ecosystem，会创建一个配置文件：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-20.png)
+![](./image/第34章-20.png)
 
 apps 部分就是配置应用的，scripts 就是应用的启动路径：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-21.png)
+![](./image/第34章-21.png)
 
 它可以指定的配置非常多，基本就是命令行有啥选项，这里就有啥属性：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-22.png)
+![](./image/第34章-22.png)
 
 然后 pm2 start ecosystem.config.js 就可以批量跑一批应用。
 
@@ -216,23 +216,23 @@ apps 部分就是配置应用的，scripts 就是应用的启动路径：
 
 访问 pm2 的网站，登录，创建 bucket：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-23.png)
+![](./image/第34章-23.png)
 
 然后在本地执行 pm2 link xxx xxx，把本地的 pm2 和那个网站关联起来：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-24.png)
+![](./image/第34章-24.png)
 
 再执行 pm2 plus 就会打开 bucket 对应的网页：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-25.png)
+![](./image/第34章-25.png)
 
 可以在线监控你的应用：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-26.png)
+![](./image/第34章-26.png)
 
 下面这些 plus 的功能都是收费的：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-27.png)
+![](./image/第34章-27.png)
 
 一般也不需要用，用免费的本地功能就好了。
 
@@ -244,7 +244,7 @@ docker 容器内的进程同样有日志管理、进程管理和监控的需求�
 
 一般都是 [docker 镜像](https://github.com/Unitech/pm2/blob/master/examples/docker-pm2/Dockerfile)内安装 pm2 来跑 node：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-28.png)
+![](./image/第34章-28.png)
 
 之前我们写的 Nest 的 dockerfile 是这样的：
 
@@ -281,7 +281,7 @@ CMD ["node", "/app/main.js"]
 
 现在要改成这样：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-29.png)
+![](./image/第34章-29.png)
 
 就是多装一个 pm2，然后用 pm2 代替 node 来跑。
 
@@ -289,22 +289,22 @@ CMD ["node", "/app/main.js"]
 
     docker build -t nest:ccc .
 
-![](./image/第34章—为什么Node应用要用PM2来跑-30.png)
+![](./image/第34章-30.png)
 
 把它跑起来：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-31.png)
+![](./image/第34章-31.png)
 
-![](./image/第34章—为什么Node应用要用PM2来跑-32.png)
+![](./image/第34章-32.png)
 
 
-![](./image/第34章—为什么Node应用要用PM2来跑-33.png)
+![](./image/第34章-33.png)
 
 这个就是 pm2 打印的日志。
 
 你可以在 terminal 使用 pm2 的命令：
 
-![](./image/第34章—为什么Node应用要用PM2来跑-34.png)
+![](./image/第34章-34.png)
 
 现在这个容器内的 node 进程在崩溃时就会自动重启。
 

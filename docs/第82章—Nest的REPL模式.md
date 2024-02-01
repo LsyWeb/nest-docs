@@ -4,7 +4,7 @@
 
 repl 是 read-eval-paint-loop，也就是这个：
 
-![](./image/第82章—Nest的REPL模式-1.image#?w=566&h=482&s=51437&e=png&b=000000.png)
+![](./image/第82章-1.png)
 
 Nest 能不能这样来测试呢？
 
@@ -16,24 +16,24 @@ Nest 能不能这样来测试呢？
 nest new repl-test
 ```
 
-![](./image/第82章—Nest的REPL模式-2.image#?w=840&h=642&s=141942&e=png&b=010101.png)
+![](./image/第82章-2.png)
 
 然后创建两个模块：
 
-![](./image/第82章—Nest的REPL模式-3.image#?w=926&h=1016&s=239764&e=png&b=191919.png)
+![](./image/第82章-3.png)
 
 把服务跑起来：
 
 ```
 npm run start:dev
 ```
-![](./image/第82章—Nest的REPL模式-4.image#?w=1704&h=994&s=451390&e=png&b=181818.png)
+![](./image/第82章-4.png)
 
 浏览器访问下：
 
-![](./image/第82章—Nest的REPL模式-5.image#?w=600&h=182&s=19289&e=png&b=ffffff.png)
+![](./image/第82章-5.png)
 
-![](./image/第82章—Nest的REPL模式-6.image#?w=604&h=204&s=19983&e=png&b=ffffff.png)
+![](./image/第82章-6.png)
 
 我们前面都是这么测试接口的。
 
@@ -62,7 +62,7 @@ npm run start:dev -- --entryFile repl
 
 也就是会传给 nest start
 
-![](./image/第82章—Nest的REPL模式-7.image#?w=690&h=114&s=25838&e=png&b=202020.png)
+![](./image/第82章-7.png)
 
 当然，你直接执行 nest start 也可以：
 
@@ -72,11 +72,11 @@ nest start --watch --entryFile repl
 
 跑起来后，执行 debug()，会打印所有的 module 和 module 下的 controllers 和 providers。
 
-![](./image/第82章—Nest的REPL模式-8.image#?w=588&h=794&s=87297&e=png&b=181818.png)
+![](./image/第82章-8.png)
 
 而且，你可以 get() 来取对应的 providers 或者 controllers 调用：
 
-![](./image/第82章—Nest的REPL模式-9.image#?w=1062&h=698&s=116051&e=png&b=1c1c1c.png)
+![](./image/第82章-9.png)
 
 get、post 方法都可以调用。
 
@@ -84,11 +84,11 @@ get、post 方法都可以调用。
 
 那我们加一些：
 
-![](./image/第82章—Nest的REPL模式-10.image#?w=690&h=286&s=36309&e=png&b=1f1f1f.png)
+![](./image/第82章-10.png)
 
 然后添加 ValidationPipe：
 
-![](./image/第82章—Nest的REPL模式-11.image#?w=1046&h=612&s=127403&e=png&b=1f1f1f.png)
+![](./image/第82章-11.png)
 
 安装校验相关的包：
 
@@ -117,7 +117,7 @@ npm run start:dev
 ```
 然后 postman 里测试下：
 
-![](./image/第82章—Nest的REPL模式-12.image#?w=788&h=838&s=83951&e=png&b=fcfcfc.png)
+![](./image/第82章-12.png)
 
 可以看到，ValidationPipe 生效了。
 
@@ -131,7 +131,7 @@ npm run start:dev -- --entryFile repl
 
 可以看到，并没有触发 pipe：
 
-![](./image/第82章—Nest的REPL模式-13.image#?w=1098&h=804&s=167939&e=png&b=1b1b1b.png)
+![](./image/第82章-13.png)
 
 也就是说，它只是单纯的传参调用这个函数，不会解析装饰器。
 
@@ -139,11 +139,11 @@ npm run start:dev -- --entryFile repl
 
 但是测试 service 很不错：
 
-![](./image/第82章—Nest的REPL模式-14.image#?w=644&h=214&s=26237&e=png&b=181818.png)
+![](./image/第82章-14.png)
 
 比如测试某个项目的 UserService 的 login 方法：
 
-![](./image/第82章—Nest的REPL模式-15.image#?w=1534&h=1422&s=336812&e=png&b=191919.png)
+![](./image/第82章-15.png)
 
 就很方便。
 
@@ -151,23 +151,23 @@ npm run start:dev -- --entryFile repl
 
 debug() 可以查看全部的 module 或者某个 module 下的 cotrollers、providers：
 
-![](./image/第82章—Nest的REPL模式-16.image#?w=466&h=644&s=62438&e=png&b=181818.png)
+![](./image/第82章-16.png)
 
-![](./image/第82章—Nest的REPL模式-17.image#?w=426&h=296&s=28159&e=png&b=181818.png)
+![](./image/第82章-17.png)
 
 methods() 可以查看某个 controller 或者 provider 的方法：
 
-![](./image/第82章—Nest的REPL模式-18.image#?w=530&h=338&s=27089&e=png&b=181818.png)
+![](./image/第82章-18.png)
 
 get() 或者 $() 可以拿到某个 controller 或者 provider 调用它的方法：
 
-![](./image/第82章—Nest的REPL模式-19.image#?w=800&h=288&s=40856&e=png&b=181818.png)
+![](./image/第82章-19.png)
 
 常用的 api 就这些。
 
 此外，按住上下键可以在历史命令中导航：
 
-![](./image/第82章—Nest的REPL模式-20.image#?w=1234&h=718&s=96689&e=gif&f=26&b=191919.png)
+![](./image/第82章-20.png)
 
 但有个问题。
 
@@ -192,15 +192,15 @@ bootstrap();
 ```
 再跑的时候也是有历史的：
 
-![](./image/第82章—Nest的REPL模式-21.image#?w=1572&h=764&s=319655&e=gif&f=42&b=191919.png)
+![](./image/第82章-21.png)
 
 其实就是 nest 会把历史命令写入文件里，下一次跑就可以用它恢复历史了：
 
-![](./image/第82章—Nest的REPL模式-22.image#?w=482&h=272&s=27250&e=png&b=1f1f1f.png)
+![](./image/第82章-22.png)
 
 你还可以把这个命令配到 npm scripts 里：
 
-![](./image/第82章—Nest的REPL模式-23.image#?w=924&h=114&s=25935&e=png&b=202020.png)
+![](./image/第82章-23.png)
 
 然后直接 npm run repl:dev 来跑。
 

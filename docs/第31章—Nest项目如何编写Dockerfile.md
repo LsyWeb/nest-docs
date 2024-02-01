@@ -6,13 +6,13 @@ dockerfile 是在哪里 build 的，在命令行工具里，还是在 docker 守
 
 我没启动 docker daemon 的时候是不能 build 的，启动之后才可以：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-1.png)
+![](./image/第31章-1.png)
 
 命令行工具会和 docker daemon 交互来实现各种功能。
 
 比如 docker build 的时候，会把 dockerfile 和它的构建上下文（也就是所在目录）打包发送给 docker daemon 来构建镜像。
 
-![](./image/第31章—Nest项目如何编写Dockerfile-2.png)
+![](./image/第31章-2.png)
 
 比如我们会执行这样的命令：
 
@@ -49,7 +49,7 @@ eslint、prettier 的配置文件在构建镜像的时候也用不到
 
 此外，还有注释的语法：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-3.png)
+![](./image/第31章-3.png)
 
 这就是 dockerfile 的全部语法，没多少东西。
 
@@ -65,7 +65,7 @@ eslint、prettier 的配置文件在构建镜像的时候也用不到
 
 也就是这样：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-4.png)
+![](./image/第31章-4.png)
 
 新建个项目：
 
@@ -116,15 +116,15 @@ eslint、prettier 的配置文件在构建镜像的时候也用不到
 
 镜像名为 nest、标签为 first，构建上下文是当前目录
 
-![](./image/第31章—Nest项目如何编写Dockerfile-5.png)
+![](./image/第31章-5.png)
 
 然后就可以在 docker desktop 里看到你构建出来的镜像了：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-6.png)
+![](./image/第31章-6.png)
 
 如果你 build 的时候报这个错误：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-7.png)
+![](./image/第31章-7.png)
 
 那需要加一行：
 
@@ -132,19 +132,19 @@ eslint、prettier 的配置文件在构建镜像的时候也用不到
 
 原因如下：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-8.png)
+![](./image/第31章-8.png)
 
 点击 run 把它跑起来：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-9.png)
+![](./image/第31章-9.png)
 
 容器跑成功了：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-10.png)
+![](./image/第31章-10.png)
 
 浏览器访问下也没啥问题：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-11.png)
+![](./image/第31章-11.png)
 
 这样我们就用 docker 把我们的 nest 应用跑起来了！
 
@@ -154,7 +154,7 @@ eslint、prettier 的配置文件在构建镜像的时候也用不到
 
 明显，src 等目录就不再需要了，构建的时候需要这些，但运行的时候只需要 dist 目录就可以了。
 
-![](./image/第31章—Nest项目如何编写Dockerfile-12.png)
+![](./image/第31章-12.png)
 
 把这些文件包含在内，会让镜像体积变大。
 
@@ -211,30 +211,30 @@ eslint、prettier 的配置文件在构建镜像的时候也用不到
 
     docker build -t nest:second .
 
-![](./image/第31章—Nest项目如何编写Dockerfile-13.png)
+![](./image/第31章-13.png)
 
 把之前的容器停掉，把这个跑起来：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-14.png)
+![](./image/第31章-14.png)
 
 这次用 3003 端口来跑：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-15.png)
+![](./image/第31章-15.png)
 
-![](./image/第31章—Nest项目如何编写Dockerfile-16.png)
+![](./image/第31章-16.png)
 
 浏览器访问下：
-![](./image/第31章—Nest项目如何编写Dockerfile-17.png)
+![](./image/第31章-17.png)
 
 nest 服务跑成功了。
 
 这时候 app 下就是有 dist 的文件、生产阶段的 node\_modules、package.json 这些文件：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-18.png)
+![](./image/第31章-18.png)
 
 对比下镜像体积，明显看出有减小，少的就是 src、test、构建阶段的 node\_modules 这些文件：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-19.png)
+![](./image/第31章-19.png)
 
 这就是多阶段构建（multi-stage build）的魅力。
 
@@ -277,15 +277,15 @@ node:18-alpine3.14 就是用 alpine 的 linux 的 3.14 版本，用 node 的 18.
 docker build -t nest:ccc .
 ```
 
-![](./image/第31章—Nest项目如何编写Dockerfile-20.png)
+![](./image/第31章-20.png)
 
 可以看到现在镜像体积只有 277M 了：
 
-![](./image/第31章—Nest项目如何编写Dockerfile-21.png)
+![](./image/第31章-21.png)
 
 一般情况下，我们都会用多阶段构建 + alpine 基础镜像。
 
-![](./image/第31章—Nest项目如何编写Dockerfile-22.png)
+![](./image/第31章-22.png)
 
 alpine 是一种高山植物，就是很少的养分就能存活，很贴合体积小的含义。
 

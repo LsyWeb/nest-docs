@@ -10,7 +10,7 @@
 
 Nest 会打印这些日志：
 
-![](./image/第26章—Nest里如何打印日志-1.png)
+![](./image/第26章-1.png)
 
 它也同样提供了打印这种日志的 api。
 
@@ -42,29 +42,29 @@ export class AppController {
 
 浏览器访问下：
 
-![](./image/第26章—Nest里如何打印日志-2.png)
+![](./image/第26章-2.png)
 
 会打印这样的日志：
 
-![](./image/第26章—Nest里如何打印日志-3.png)
+![](./image/第26章-3.png)
 
 这里的 verbose、debug、log、warn、error 就是日志级别，而 \[] 中的是 context，也就是当前所在的上下文，最后是日志的内容。
 
-![](./image/第26章—Nest里如何打印日志-4.png)
+![](./image/第26章-4.png)
 
 这个日志是受 Nest 控制的，可以在创建应用的时候指定是否开启：
 
-![](./image/第26章—Nest里如何打印日志-5.png)
+![](./image/第26章-5.png)
 
 设置 logger 为 false 之后就没有日志了。
 
 你也可以自己决定输出什么级别的日志：
 
-![](./image/第26章—Nest里如何打印日志-6.png)
+![](./image/第26章-6.png)
 
 此外，你还可以自定义日志打印的方式，定义一个实现 LoggerService 接口的类：
 
-![](./image/第26章—Nest里如何打印日志-7.png)
+![](./image/第26章-7.png)
 
 只要实现 log、warn、error 3 个方法就好了：
 
@@ -88,15 +88,15 @@ export class MyLogger implements LoggerService {
 
 在创建应用时指定这个 logger：
 
-![](./image/第26章—Nest里如何打印日志-8.png)
+![](./image/第26章-8.png)
 
 然后现在项目启动就是这样了：
 
-![](./image/第26章—Nest里如何打印日志-9.png)
+![](./image/第26章-9.png)
 
 刷新页面打印的日志是这样的：
 
-![](./image/第26章—Nest里如何打印日志-10.png)
+![](./image/第26章-10.png)
 
 确实还挺丑的。。
 
@@ -116,15 +116,15 @@ export class MyLogger2 extends ConsoleLogger{
 
 因为 ConsoleLogger 实现了 LoggerService 接口：
 
-![](./image/第26章—Nest里如何打印日志-11.png)
+![](./image/第26章-11.png)
 
 这样你没重写的方法就是原来的：
 
-![](./image/第26章—Nest里如何打印日志-12.png)
+![](./image/第26章-12.png)
 
 这就是创建应用时 logger 的 3 种取值：
 
-![](./image/第26章—Nest里如何打印日志-13.png)
+![](./image/第26章-13.png)
 
 但这样有个问题，没法注入依赖，因为 Logger 是在容器外面，手动 new 的对象。
 
@@ -132,7 +132,7 @@ export class MyLogger2 extends ConsoleLogger{
 
 这时候可以这样：
 
-![](./image/第26章—Nest里如何打印日志-14.png)
+![](./image/第26章-14.png)
 
 bufferLogs 就是先不打印日志，把它放到 buffer 缓冲区，直到用 useLogger 指定了 Logger 并且应用初始化完毕。
 
@@ -158,13 +158,13 @@ export class MyLogger3 extends ConsoleLogger{
 
 添加 @Injectable() 装饰器，代表这是一个 provider，并且要在 Module 里引入：
 
-![](./image/第26章—Nest里如何打印日志-15.png)
+![](./image/第26章-15.png)
 
 通过 @Inject 注入 AppService，并在 log 的时候调用。
 
 现在的日志是这样的：
 
-![](./image/第26章—Nest里如何打印日志-16.png)
+![](./image/第26章-16.png)
 
 很明显，logger 里成功注入了 appService 的依赖。
 
@@ -174,7 +174,7 @@ export class MyLogger3 extends ConsoleLogger{
 
 把这个 Module 设置为全局模块：
 
-![](./image/第26章—Nest里如何打印日志-17.png)
+![](./image/第26章-17.png)
 
 这样在任何地方都可以注入这个 logger 对象了。
 
@@ -184,17 +184,17 @@ export class MyLogger3 extends ConsoleLogger{
 nest g resource aaa 
 ```
 
-![](./image/第26章—Nest里如何打印日志-18.png)
+![](./image/第26章-18.png)
 
 在这个模块里可以直接注入 MyLogger，不用 imports 那个 Module。
 
-![](./image/第26章—Nest里如何打印日志-19.png)
+![](./image/第26章-19.png)
 
 测试下：
 
-![](./image/第26章—Nest里如何打印日志-20.png)
+![](./image/第26章-20.png)
 
-![](./image/第26章—Nest里如何打印日志-21.png)
+![](./image/第26章-21.png)
 
 可以看到，成功注入了 MyLogger。
 
@@ -224,14 +224,14 @@ export class Logger2Module{
 ```
 把传入的 options 作为 provider，在 Logger 里注入：
 
-![](./image/第26章—Nest里如何打印日志-22.png)
+![](./image/第26章-22.png)
 
 
-![](./image/第26章—Nest里如何打印日志-23.png)
+![](./image/第26章-23.png)
 
 每次 imports 的时候传入不同的配置：
 
-![](./image/第26章—Nest里如何打印日志-24.png)
+![](./image/第26章-24.png)
 
 在 AppService 里注入下：
 
@@ -255,7 +255,7 @@ export class AppService {
 ```
 浏览器访问 http://localhost:3000 就可以看到 MyLogger 打印的传入的 option：
 
-![](./image/第26章—Nest里如何打印日志-25.png)
+![](./image/第26章-25.png)
 
 具体是用全局模块还是动态模块，可以根据情况来选择。
 

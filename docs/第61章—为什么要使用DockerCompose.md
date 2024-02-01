@@ -22,7 +22,7 @@ nest new docker-compose-test -p npm
 
 创建个 nest 项目：
 
-![](./image/第61章—为什么要使用DockerCompose-1.png)
+![](./image/第61章-1.png)
 
 安装 tyeporm、mysql2；
 
@@ -68,7 +68,7 @@ export class AppModule {}
 CREATE DATABASE `aaa` DEFAULT CHARACTER SET utf8mb4 ;
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-2.png)
+![](./image/第61章-2.png)
 
 添加一个 aaa.entity.ts
 
@@ -94,7 +94,7 @@ export class Aaa {
 ```
 在 entities 里注册下：
 
-![](./image/第61章—为什么要使用DockerCompose-3.png)
+![](./image/第61章-3.png)
 
 然后把 nest 服务跑起来：
 
@@ -102,11 +102,11 @@ export class Aaa {
 npm run start:dev
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-4.png)
+![](./image/第61章-4.png)
 
 可以看到，执行了 create table 的 sql。
 
-![](./image/第61章—为什么要使用DockerCompose-5.png)
+![](./image/第61章-5.png)
 
 说明 mysql 是连接成功了。
 
@@ -118,7 +118,7 @@ npm install redis
 
 添加一个 redis client 的 provider：
 
-![](./image/第61章—为什么要使用DockerCompose-6.png)
+![](./image/第61章-6.png)
 
 ```javascript
 {
@@ -138,7 +138,7 @@ npm install redis
 
 在 AppService 里注入下：
 
-![](./image/第61章—为什么要使用DockerCompose-7.png)
+![](./image/第61章-7.png)
 
 ```javascript
 import { Controller, Get, Inject } from '@nestjs/common';
@@ -165,20 +165,20 @@ export class AppController {
 
 这里用到的 mysql、redis 都是之前通过 docker 跑的：
 
-![](./image/第61章—为什么要使用DockerCompose-8.png)
+![](./image/第61章-8.png)
 
-![](./image/第61章—为什么要使用DockerCompose-9.png)
+![](./image/第61章-9.png)
 
 忘记怎么跑 msyql 和 redis 的 docker 容器的同学去翻一下这两个的入门章节。
 
 然后访问下 http://localhost:3000
 
 打印了 redis 里的 key：
-![](./image/第61章—为什么要使用DockerCompose-10.png)
+![](./image/第61章-10.png)
 
 在 RedisInsight 里看到的也是这些：
 
-![](./image/第61章—为什么要使用DockerCompose-11.png)
+![](./image/第61章-11.png)
 
 这就说明 redis 服务连接成功了。
 
@@ -224,21 +224,21 @@ CMD ["node", "/app/main.js"]
 ```
 docker build -t eee .
 ```
-![](./image/第61章—为什么要使用DockerCompose-12.png)
+![](./image/第61章-12.png)
 
 （我这里稍微有点久，用了 200 多秒）
 
 在 docker desktop 里可以看到这个镜像：
 
-![](./image/第61章—为什么要使用DockerCompose-13.png)
+![](./image/第61章-13.png)
 
 那假设在服务器上，要怎么部署这个 nest 应用呢？
 
 我们先把 mysql、redis 的容器停掉。
 
-![](./image/第61章—为什么要使用DockerCompose-14.png)
+![](./image/第61章-14.png)
 
-![](./image/第61章—为什么要使用DockerCompose-15.png)
+![](./image/第61章-15.png)
 
 在服务器上，是没有 docker desktop 的，所以接下来我们通过命令行的方式：
 
@@ -263,7 +263,7 @@ docker run -d -p 3306:3306 -v /Users/guang/mysql-data:/var/lib/mysql --name mysq
 
 跑起来可以看到容器 id：
 
-![](./image/第61章—为什么要使用DockerCompose-16.png)
+![](./image/第61章-16.png)
 
 然后再跑下 redis 的 docker 容器：
 
@@ -271,32 +271,32 @@ docker run -d -p 3306:3306 -v /Users/guang/mysql-data:/var/lib/mysql --name mysq
 docker run -d -p 6379:6379 -v /Users/guang/aaa:/data --name redis-container redis
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-17.png)
+![](./image/第61章-17.png)
 
 之后跑 nest 的：
 ```
 docker run -d -p 3000:3000 --name nest-container eee
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-18.png)
+![](./image/第61章-18.png)
 
 看下 3个容器的日志
 
 ```
 docker logs mysql-container
 ```
-![](./image/第61章—为什么要使用DockerCompose-19.png)
+![](./image/第61章-19.png)
 ```
 docker logs redis-container
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-20.png)
+![](./image/第61章-20.png)
 
 ```
 docker logs nest-container
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-21.png)
+![](./image/第61章-21.png)
 
 这时候你会发现报错了，说是 127.0.0.1 的 6379 端口连不上。
 
@@ -308,18 +308,18 @@ docker logs nest-container
 
 查一下本机的 ip 地址：
 
-![](./image/第61章—为什么要使用DockerCompose-22.png)
+![](./image/第61章-22.png)
 
 然后把 AppModule 里的 redis 和 mysql 连接信息改一下：
 
-![](./image/第61章—为什么要使用DockerCompose-23.png)
+![](./image/第61章-23.png)
 
 之后重新 build 一个镜像：
 ```
 docker build -t fff .
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-24.png)
+![](./image/第61章-24.png)
 
 这次构建用了 120s，比上次快，因为本地有缓存了。
 
@@ -328,10 +328,10 @@ docker build -t fff .
 ```
 docker rm nest-container
 ```
-![](./image/第61章—为什么要使用DockerCompose-25.png)
+![](./image/第61章-25.png)
 然后在数据库里把 aaa这个表删掉：
 
-![](./image/第61章—为什么要使用DockerCompose-26.png)
+![](./image/第61章-26.png)
 
 再跑 nest 容器：
 
@@ -339,7 +339,7 @@ docker rm nest-container
 docker run -d -p 3000:3000 --name nest-container fff
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-27.png)
+![](./image/第61章-27.png)
 
 
 这时候再查看日志：
@@ -348,7 +348,7 @@ docker run -d -p 3000:3000 --name nest-container fff
 docker logs nest-container
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-28.png)
+![](./image/第61章-28.png)
 
 这时候就正常了。
 
@@ -356,15 +356,15 @@ docker logs nest-container
 
 表也创建成功了：
 
-![image.png](./image/第61章—为什么要使用DockerCompose-29.png)
+![image.png](./image/第61章-29.png)
 
 浏览器访问下 http://localhost:3000
 
-![image.png](./image/第61章—为什么要使用DockerCompose-30.png)
+![image.png](./image/第61章-30.png)
 
 再次 docker logs 看看：
 
-![image.png](./image/第61章—为什么要使用DockerCompose-31.png)
+![image.png](./image/第61章-31.png)
 
 可以看到 redis 服务也连接成功了。
 
@@ -382,7 +382,7 @@ docker logs nest-container
 docker stop nest-container mysql-container redis-container
 ```
 
-![](./image/第61章—为什么要使用DockerCompose-32.png)
+![](./image/第61章-32.png)
 
 然后在根目录添加一个 docker-compose.yml
 
@@ -432,7 +432,7 @@ docker-compose 和 docker 命令是一起的，docker 能用，docker-compose �
 
 它会把所有容器的日志合并输出：
 
-![](./image/第61章—为什么要使用DockerCompose-33.png)
+![](./image/第61章-33.png)
 
 可以看到是先跑的 mysql、redis，再跑的 nest。
 
@@ -440,16 +440,16 @@ docker-compose 和 docker 命令是一起的，docker 能用，docker-compose �
 
 最后是会成功的：
 
-![](./image/第61章—为什么要使用DockerCompose-34.png)
+![](./image/第61章-34.png)
 
 浏览器访问下 http://localhost:3000
 
 
-![](./image/第61章—为什么要使用DockerCompose-35.png)
+![](./image/第61章-35.png)
 
 可以看到 redis 也连接成功了：
 
-![](./image/第61章—为什么要使用DockerCompose-36.png)
+![](./image/第61章-36.png)
 
 这样，我们只需要定义 docker-compose.yaml 来声明容器的顺序和启动方式，之后执行 docker-compose up 一条命令就能按照顺序启动所有的容器。
 
@@ -459,7 +459,7 @@ docker-compose 和 docker 命令是一起的，docker 能用，docker-compose �
 
 这时候如果你去 docker desktop 里看下，会发现它有专门的显示方式：
 
-![](./image/第61章—为什么要使用DockerCompose-37.png)
+![](./image/第61章-37.png)
 
 多个容器可以一起管理。
 

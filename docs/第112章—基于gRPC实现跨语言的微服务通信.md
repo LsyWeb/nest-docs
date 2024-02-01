@@ -8,13 +8,13 @@
 
 跨语言调用服务一般会用 gRPC，它是 google 出的一种跨语言的远程方法调用的方案。
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-1.image#?w=764&h=250&s=13642&e=png&b=ffffff.png)
+![](./image/第112章-1.png)
 
 其中，RPC 是 Remote Procedure Call，远程过程调用。
 
 比如 java 微服务有个方法 aaa，node 微服务想调用它，就可以通过 gRPC 来实现。
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-2.image#?w=802&h=344&s=16534&e=png&b=ffffff.png)
+![](./image/第112章-2.png)
 
 这节我们就来用一下 gRPC。
 
@@ -28,7 +28,7 @@
 nest new grpc-client
 ```
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-3.image#?w=828&h=674&s=255412&e=png&b=010101.png)
+![](./image/第112章-3.png)
 
 我们用 monorepo 的形式来放 client 和 server 的代码。
 
@@ -36,15 +36,15 @@ nest new grpc-client
 ```
 nest g app grpc-server
 ```
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-4.image#?w=1032&h=630&s=173185&e=png&b=191919.png)
+![](./image/第112章-4.png)
 
 这样，就有了两个 nest 的 application：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-5.image#?w=372&h=280&s=21852&e=png&b=1c1c1c.png)
+![](./image/第112章-5.png)
 
 改下 grpc-server 的启动端口号为 3001:
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-6.image#?w=1090&h=520&s=117192&e=png&b=1c1c1c.png)
+![](./image/第112章-6.png)
 
 分别把两个 nest 应用跑起来：
 
@@ -54,15 +54,15 @@ npm run start:dev grpc-client
 npm run start:dev grpc-server
 ```
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-7.image#?w=900&h=468&s=107964&e=png&b=181818.png)
+![](./image/第112章-7.png)
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-8.image#?w=906&h=456&s=105741&e=png&b=181818.png)
+![](./image/第112章-8.png)
 
 浏览器访问下：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-9.image#?w=570&h=198&s=16375&e=png&b=ffffff.png)
+![](./image/第112章-9.png)
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-10.image#?w=502&h=178&s=15931&e=png&b=ffffff.png)
+![](./image/第112章-10.png)
 
 这就代表两个 nest 应用都跑起来了。
 
@@ -109,7 +109,7 @@ bootstrap();
 
 在 src 下创建这个对应的文件：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-11.image#?w=1360&h=696&s=148820&e=png&b=1d1d1d.png)
+![](./image/第112章-11.png)
 
 ```javascript
 syntax = "proto3";
@@ -136,11 +136,11 @@ message Book {
 
 搜索 ext:proto，也就是处理 .proto 文件的插件：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-12.image#?w=742&h=256&s=33645&e=png&b=37373c.png)
+![](./image/第112章-12.png)
 
 安装之后就有语法高亮了：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-13.image#?w=792&h=672&s=84683&e=png&b=1f1f1f.png)
+![](./image/第112章-13.png)
 
 为什么要有一种 protocol buffer 的语法呢？
 
@@ -186,7 +186,7 @@ message Book {
 ```
 book.proto 只是定义了可用的方法和参数返回值的格式，我们还要在 controller 里实现对应的方法：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-14.image#?w=1130&h=846&s=198478&e=png&b=1f1f1f.png)
+![](./image/第112章-14.png)
 
 ```javascript
 @GrpcMethod('BookService', 'FindBook')
@@ -203,7 +203,7 @@ findBook(data: { id: number}) {
 
 在 nest-cli.json 添加 assets 配置，让 nest 在 build 的时候把 proto 也复制到 dist 目录下：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-15.image#?w=768&h=360&s=75026&e=png&b=1f1f1f.png)
+![](./image/第112章-15.png)
 
 ```javascript
 "assets": ["**/*.proto"],
@@ -215,17 +215,17 @@ findBook(data: { id: number}) {
 ```
 npm run start:dev grpc-server
 ```
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-16.image#?w=1100&h=422&s=90536&e=png&b=181818.png)
+![](./image/第112章-16.png)
 
 这时 dist 下就有 grpc-server 的代码了： 
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-17.image#?w=422&h=276&s=22634&e=png&b=1d1d1d.png)
+![](./image/第112章-17.png)
 
 然后我们在 grpc-client 里连上它：
 
 在 AppModule 里添加连接 grpc-server 的微服务的配置：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-18.image#?w=1092&h=928&s=177452&e=png&b=1f1f1f.png)
+![](./image/第112章-18.png)
 
 ```javascript
 import { Module } from '@nestjs/common';
@@ -257,11 +257,11 @@ export class AppModule {}
 
 把 book/book.proto 文件复制过来：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-19.image#?w=442&h=364&s=36430&e=png&b=1b1b1b.png)
+![](./image/第112章-19.png)
 
 然后在 AppController 里实现调用远程方法的逻辑：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-20.image#?w=1160&h=1224&s=211307&e=png&b=1f1f1f.png)
+![](./image/第112章-20.png)
 
 注入 BOOK_PACKAGE 的 grpc 客户端对象。
 
@@ -313,15 +313,15 @@ npm run start:dev grpc-client
 ```
 浏览器访问下：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-21.image#?w=848&h=204&s=28571&e=png&b=ffffff.png)
+![](./image/第112章-21.png)
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-22.image#?w=890&h=182&s=28557&e=png&b=fefefe.png)
+![](./image/第112章-22.png)
 
 可以看到，远程方法调用成功了。
 
 这就是基于 grpc 的远程方法调用，用 java、python、go、c++ 等实现的微服务也是这样来通信。
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-23.image#?w=998&h=472&s=31177&e=png&b=ffffff.png)
+![](./image/第112章-23.png)
 
 通过 protocol buffer 的语法定义通信数据的格式，比如 package、service 等。
 
@@ -329,15 +329,15 @@ npm run start:dev grpc-client
 
 比如在 java 的 srping 里，需要安装这两个依赖：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-24.image#?w=1256&h=252&s=60129&e=png&b=f4f6fa.png)
+![](./image/第112章-24.png)
 
 然后也是定义这样的 proto 文件：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-25.image#?w=1168&h=1030&s=172873&e=png&b=f4f6fa.png)
+![](./image/第112章-25.png)
 
 之后定义对应的 servie：
 
-![](./image/第112章—基于gRPC实现跨语言的微服务通信-26.image#?w=1596&h=942&s=190072&e=png&b=f3f5f9.png)
+![](./image/第112章-26.png)
 
 和 node 里差不多。
 

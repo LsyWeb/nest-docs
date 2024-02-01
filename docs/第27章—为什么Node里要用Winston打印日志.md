@@ -16,7 +16,7 @@
 
 它是 Node 最流行的日志框架，[npm 官网](https://www.npmjs.com/package/winston)上可以看到每周千万级的下载量：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-1.image#?w=556&h=604&s=47935&e=png&b=fefefe.png)
+![](./image/第27章-1.png)
 
 那 winston 都有什么功能？怎么用呢？
 
@@ -28,7 +28,7 @@ cd winston-test
 npm init -y
 ```
 
-![](./image/第27章—为什么Node里要用Winston打印日志-2.image#?w=812&h=686&s=127944&e=png&b=000000.png)
+![](./image/第27章-2.png)
 
 先创建个项目。
 
@@ -69,7 +69,7 @@ transports：日志的传输方式
 
 在 package.json 里指定 type 为 module，也就是所有代码都是 es module 的：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-3.image#?w=530&h=402&s=55987&e=png&b=202020.png)
+![](./image/第27章-3.png)
 
 这样代码里就可以直接用 import、export 这些语法了。
 
@@ -79,7 +79,7 @@ transports：日志的传输方式
 node index.js
 ```
 
-![](./image/第27章—为什么Node里要用Winston打印日志-4.image#?w=1210&h=564&s=88217&e=png&b=1b1b1b.png)
+![](./image/第27章-4.png)
 
 可以看到控制台和文件里都有了打印的日志。
 
@@ -90,27 +90,27 @@ node index.js
 ```
 会在后面追加：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-5.image#?w=908&h=338&s=56832&e=png&b=1d1d1d.png)
+![](./image/第27章-5.png)
 
 那么问题来了，如果所有日志都写在一个文件里，那这个文件最终会不会特别大？
 
 不用担心，winston 支持按照大小自动分割文件：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-6.image#?w=1114&h=642&s=119756&e=png&b=1f1f1f.png)
+![](./image/第27章-6.png)
 
 我们指定 maxsize 为 1024 字节，也就是 1kb。
 
 然后再跑几次：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-7.image#?w=1132&h=1148&s=223224&e=png&b=1a1a1a.png)
+![](./image/第27章-7.png)
 
 大概跑了 10 次左右，出现了第二个文件：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-8.image#?w=910&h=332&s=59599&e=png&b=1e1e1e.png)
+![](./image/第27章-8.png)
 
 而这时第一个日志文件刚好是 1kb：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-9.image#?w=926&h=596&s=67453&e=png&b=fefefe.png)
+![](./image/第27章-9.png)
 
 这就是根据大小自动分割日志文件的功能。
 
@@ -122,7 +122,7 @@ node index.js
 
 在 [winston 文档](https://github.com/winstonjs/winston/blob/HEAD/docs/transports.md#winston-core)里可以看到有很多 Transport：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-10.image#?w=864&h=1016&s=106987&e=png&b=ffffff.png)
+![](./image/第27章-10.png)
 
 Console、File、Http、Stream 这几个 Transport 是内置的。
 
@@ -167,7 +167,7 @@ logger.debug(66666666);
 
 指定文件名里的日志格式包含分钟，所以不同的分钟打印的日志会写入不同文件里：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-11.image#?w=1182&h=322&s=62610&e=png&b=1e1e1e.png)
+![](./image/第27章-11.png)
 
 这就达到了滚动日志的效果。
 
@@ -178,11 +178,11 @@ logger.debug(66666666);
 ```
 nest new winston-log-server
 ```
-![](./image/第27章—为什么Node里要用Winston打印日志-12.image#?w=942&h=674&s=284602&e=png&b=010101.png)
+![](./image/第27章-12.png)
 
 添加一个路由：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-13.image#?w=814&h=666&s=117492&e=png&b=1f1f1f.png)
+![](./image/第27章-13.png)
 ```javascript
 @Post('log')
 log(@Body() body) {
@@ -194,7 +194,7 @@ log(@Body() body) {
 ```
 npm run start:dev
 ```
-![](./image/第27章—为什么Node里要用Winston打印日志-14.image#?w=1228&h=366&s=122431&e=png&b=181818.png)
+![](./image/第27章-14.png)
 
 然后改下 index.js
 
@@ -225,9 +225,9 @@ logger.debug(66666666);
 ```
 node ./index.js
 ```
-![](./image/第27章—为什么Node里要用Winston打印日志-15.image#?w=542&h=164&s=23391&e=png&b=191919.png)
+![](./image/第27章-15.png)
 
-![](./image/第27章—为什么Node里要用Winston打印日志-16.image#?w=830&h=512&s=111820&e=png&b=181818.png)
+![](./image/第27章-16.png)
 
 nest 服务收到了传过来的日志。
 
@@ -259,19 +259,19 @@ logger.debug(66666666);
 
 效果就是只有一个 file 的 transport：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-17.image#?w=1082&h=684&s=92309&e=png&b=1c1c1c.png)
+![](./image/第27章-17.png)
 
 再就是日志级别，winston 有 6 种级别的日志：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-18.image#?w=472&h=486&s=30770&e=png&b=f7f7f7.png)
+![](./image/第27章-18.png)
 
 从上往下，重要程度依次降低。
 
 比如当你指定 level 是 info 时，那 info、warn、error 的日志会输出，而 http、debug 这些不会。
 
-![](./image/第27章—为什么Node里要用Winston打印日志-19.image#?w=826&h=608&s=91608&e=png&b=1d1d1d.png)
+![](./image/第27章-19.png)
 
-![](./image/第27章—为什么Node里要用Winston打印日志-20.image#?w=858&h=702&s=105645&e=png&b=1d1d1d.png)
+![](./image/第27章-20.png)
 
 日志级别的功能虽然简单，但却是很实用的功能。
 
@@ -279,28 +279,28 @@ logger.debug(66666666);
 
 simple：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-21.image#?w=786&h=744&s=114721&e=png&b=1d1d1d.png)
+![](./image/第27章-21.png)
 
 json：
-![](./image/第27章—为什么Node里要用Winston打印日志-22.image#?w=794&h=718&s=120569&e=png&b=1d1d1d.png)
+![](./image/第27章-22.png)
 
 prettyPrint（比 json 的格式多了一些空格）：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-23.image#?w=896&h=792&s=131623&e=png&b=1d1d1d.png)
+![](./image/第27章-23.png)
 
 用 combine 组合 timestamp 和 json：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-24.image#?w=1296&h=742&s=149315&e=png&b=1d1d1d.png)
+![](./image/第27章-24.png)
 
 或者再组合个 label：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-25.image#?w=1488&h=626&s=142403&e=png&b=1d1d1d.png)
+![](./image/第27章-25.png)
 
 加上个标签，再搜索相关日志就方便多了。
 
 彩色：
 
-![](./image/第27章—为什么Node里要用Winston打印日志-26.image#?w=834&h=698&s=113226&e=png&b=1d1d1d.png)
+![](./image/第27章-26.png)
 
 通过这些，就可以指定各种日志格式。
 
@@ -335,9 +335,9 @@ logger.debug(66666666);
 
 每个 transport 单独指定 format 就好了。
 
-![](./image/第27章—为什么Node里要用Winston打印日志-27.image#?w=514&h=160&s=22739&e=png&b=181818.png)
+![](./image/第27章-27.png)
 
-![](./image/第27章—为什么Node里要用Winston打印日志-28.image#?w=1190&h=210&s=50227&e=png&b=1e1e1e.png)
+![](./image/第27章-28.png)
 
 那如果我有的日志只想 console，而有的日志希望写入文件，而且配置都不同呢？
 
@@ -385,9 +385,9 @@ logger2.info('yyyy');
 
 然后分别用不同的 logger 来打印日志。
 
-![](./image/第27章—为什么Node里要用Winston打印日志-29.image#?w=386&h=148&s=18845&e=png&b=181818.png)
+![](./image/第27章-29.png)
 
-![](./image/第27章—为什么Node里要用Winston打印日志-30.image#?w=1228&h=214&s=45557&e=png&b=1f1f1f.png)
+![](./image/第27章-30.png)
 
 这样，项目中有不同的日志需求的时候，就可以创建多个 logger 实例。
 
@@ -417,7 +417,7 @@ logger.debug(66666666);
 ```
 跑一下，可以看到错误日志被输出到了 error.log
 
-![](./image/第27章—为什么Node里要用Winston打印日志-31.image#?w=1224&h=246&s=52553&e=png&b=1f1f1f.png)
+![](./image/第27章-31.png)
 
 除了 error 外，Promise 的未捕获异常也可以指定如何处理日志：
 
@@ -446,7 +446,7 @@ logger.error('东东东东东东东东');
 logger.debug(66666666);
 ```
 
-![](./image/第27章—为什么Node里要用Winston打印日志-32.image#?w=1238&h=268&s=66666&e=png&b=1f1f1f.png)
+![](./image/第27章-32.png)
 
 这些就是 winston 的主要功能了。
 

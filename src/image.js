@@ -11,8 +11,8 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
     // 读取MD文件内容
     let mdContent = fs.readFileSync(mdFilePath, "utf8");
 
-   // 正则表达式用于匹配MD文件中的http/https图片链接
-   const imgRegex = /!\[.*?\]\((https?:\/\/[^\s\)]+)\)/g;
+    // 正则表达式用于匹配MD文件中的http/https图片链接
+    const imgRegex = /!\[.*?\]\((https?:\/\/[^\s\)]+)\)/g;
 
     // 获取所有匹配的图片链接
     const imgMatches = mdContent.match(imgRegex);
@@ -31,7 +31,7 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
         const imgMatch = imgMatches[index];
         const imgSrc = imgMatch.match(/!\[.*?\]\((.*?)\)/)[1];
         const imgName =
-          `${mdFileName}-${index + 1}${path.extname(imgSrc)}`.replace(".image?", "") +
+          `${mdFileName.replace(/第(\d+)章.*/, "第$1章")}-${index + 1}` +
           ".png";
         const imgPath = path.join(downloadDir, imgName);
 
@@ -50,7 +50,7 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
       fs.writeFileSync(mdFilePath, mdContent, "utf8");
       console.log(`MD file updated with local image paths: ${mdFilePath}`);
     } else {
-      console.log(`No images found in the MD file: ${mdFilePath}`);
+      console.log(`该文件夹下无image: ${mdFilePath}`);
     }
   } catch (error) {
     console.error(`Error processing MD file: ${mdFilePath}`, error);
@@ -68,10 +68,10 @@ fs.readdir(rootFolder, (err, files) => {
   const mdFiles = files.filter((file) => path.extname(file) === ".md");
   const customSort = (a, b) => {
     const getChapterNumber = (str) => parseInt(str.match(/第(\d+)章/)[1], 10);
-  
+
     const chapterA = getChapterNumber(a);
     const chapterB = getChapterNumber(b);
-  
+
     return chapterA - chapterB;
   };
   const sortedFiles = mdFiles

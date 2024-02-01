@@ -2,7 +2,7 @@
 
 每个 database 包含表、视图、存储过程、函数：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-1.png)
+![](./image/第42章-1.png)
 
 表的增删改查我们已经学会了。
 
@@ -33,7 +33,7 @@ CREATE VIEW customer_orders AS
 select * from customer_orders
 ```
 
-![](./image/第42章—MySQL的视图、存储过程和函数-2.png)
+![](./image/第42章-2.png)
 
 视图有什么好处呢？
 
@@ -70,15 +70,15 @@ DELIMITER ;
 
 创建这个存储过程：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-3.png)
+![](./image/第42章-3.png)
 
 刷新就可以看到这个刚创建的存储过程：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-4.png)
+![](./image/第42章-4.png)
 
 点击第二个图标就可以传参数调用：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-5.png)
+![](./image/第42章-5.png)
 
 当然你可以在 sql 里调用：
 
@@ -88,7 +88,7 @@ CALL get_customer_orders(5);
 
 调用使用 CALL 存储过程(参数) 的形式：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-6.png)
+![](./image/第42章-6.png)
 
 可以看到，存储过程可以封装一些 sql，用的时候传入参数 CALL 一下就行。
 
@@ -124,19 +124,19 @@ BEGIN、END 中间的是函数体。
 SET GLOBAL log_bin_trust_function_creators = 1;
 ```
 
-![](./image/第42章—MySQL的视图、存储过程和函数-7.png)
+![](./image/第42章-7.png)
 
 之后之后再创建 function：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-8.png)
+![](./image/第42章-8.png)
 
 创建成功之后就可以在 sql 里用它了：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-9.png)
+![](./image/第42章-9.png)
 
 比如查询刚才的视图：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-10.png)
+![](./image/第42章-10.png)
 
 就可以用上这个函数：
 
@@ -144,11 +144,11 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 select product_name, square(price) from order_items_view
 ```
 
-![](./image/第42章—MySQL的视图、存储过程和函数-11.png)
+![](./image/第42章-11.png)
 
 你也可以可视化的调用这个 function：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-12.png)
+![](./image/第42章-12.png)
 
 当然，这个函数没啥意义，我们再创建个有意义一点的：
 
@@ -176,15 +176,15 @@ DELIMITER ;
 ```sql
 select id, get_order_total(id) from orders;
 ```
-![](./image/第42章—MySQL的视图、存储过程和函数-13.png)
+![](./image/第42章-13.png)
 
 我们自己来算算对不对：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-14.png)
+![](./image/第42章-14.png)
 
 id 为 3 的订单的总额是对的：
 
-![](./image/第42章—MySQL的视图、存储过程和函数-15.png)
+![](./image/第42章-15.png)
 
 这就是自定义函数。
 

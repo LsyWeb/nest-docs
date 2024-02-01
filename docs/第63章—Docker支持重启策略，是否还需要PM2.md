@@ -6,7 +6,7 @@
 
 我们来试一下：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-1.png)
+![](./image/第63章-1.png)
 
 ```javascript
 setTimeout(() => {
@@ -15,7 +15,7 @@ setTimeout(() => {
 ```
 1s 以后抛一个错误，进程会终止。
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-2.png)
+![](./image/第63章-2.png)
 
 然后我们把它放到 Docker 容器里跑。
 
@@ -35,11 +35,11 @@ CMD ["node", "/app/index.js"]
 ```shell
 docker build -t restart-test:first .
 ```
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-3.png)
+![](./image/第63章-3.png)
 
 在 docker desktop 里可以看到：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-4.png)
+![](./image/第63章-4.png)
 
 然后把它跑起来：
 
@@ -48,7 +48,7 @@ docker run --name=restart-test-container restart-test:first
 ```
 可以看到，容器 1s 后就停掉了：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-5.png)
+![](./image/第63章-5.png)
 
 当进程退出的时候，容器也会停止。
 
@@ -62,15 +62,15 @@ docker run -d --restart=always --name=restart-test-container2 restart-test:first
 
 然后你在 docker desktop 里就可以看到它一直在 restart：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-6.png)
+![](./image/第63章-6.png)
 
 打印了很多次错误日志：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-7.png)
+![](./image/第63章-7.png)
 
 你可以点击停止，就不会再重启了：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-8.png)
+![](./image/第63章-8.png)
 
 这就是 docker 的自动重启功能。
 
@@ -98,20 +98,20 @@ CMD ["pm2-runtime", "/app/index.js"]
 docker build -t restart-test:second -f 222.Dockerfile .
 ```
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-9.png)
+![](./image/第63章-9.png)
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-10.png)
+![](./image/第63章-10.png)
 
 然后跑一下：
 ```
 docker run -d --name=restart-test-container3 restart-test:second
 ```
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-11.png)
+![](./image/第63章-11.png)
 
 这时候你会发现容器一直是运行状态，但是内部的进程一直在重启：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-12.png)
+![](./image/第63章-12.png)
 
 也就是说，Docker 的自动重启功能和 PM2 的自动重启功能是重合的。
 
@@ -147,11 +147,11 @@ on-failure 是只有在非正常退出的时候才重启，相比之下，always
 docker run -d --restart=on-failure:2 --name=restart-test-container4 restart-test:first
 ```
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-13.png)
+![](./image/第63章-13.png)
 
 可以看到容器重启了 2 次，一共打印了 3 次错误就不再重启了：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-14.png)
+![](./image/第63章-14.png)
 
 再来试试 unless-stopped：
 
@@ -161,23 +161,23 @@ unless-stopped 是除非手动停止，否则总是会重启。
 docker run -d --restart=unless-stopped --name=restart-test-container5 restart-test:first
 ```
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-15.png)
+![](./image/第63章-15.png)
 
 可以看到容器一直在重启：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-16.png)
+![](./image/第63章-16.png)
 
 除非点击停止按钮，也就是执行 docker stop 才会停止：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-17.png)
+![](./image/第63章-17.png)
 
 ```
 docker stop restart-test-container5
 ```
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-18.png)
+![](./image/第63章-18.png)
 
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-19.png)
+![](./image/第63章-19.png)
 
 那看起来和 always 也没啥区别呀，都是只有手动 stop 才能停止，否则一直重启。
 
@@ -185,25 +185,25 @@ docker stop restart-test-container5
 
 现在 docker-test-container2 是用的 always 的重启策略，docker-test-container5 是用的 unless-stopped 的重启策略:
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-20.png)
+![](./image/第63章-20.png)
 
 这俩容器都停掉了。
 
 现在我们重启 Docker：
 
-![image.png](./image/第63章—Docker支持重启策略，是否还需要PM2-21.png)
+![image.png](./image/第63章-21.png)
 
 他会重启跑 Docker Engine ，也就是 Docker Deamon 的后台进程。
 
-![image.png](./image/第63章—Docker支持重启策略，是否还需要PM2-22.png)
+![image.png](./image/第63章-22.png)
 
 这时候你会发现，always 重启策略的容器又跑起来了，而 unless-stopped 的容器没有重启。这就是这俩的区别：
 
-![image.png](./image/第63章—Docker支持重启策略，是否还需要PM2-23.png)
+![image.png](./image/第63章-23.png)
 
 Docker Compose 是用于同时跑多个 Docker 容器的，它自然也支持 restart 的配置：
 
-![](./image/第63章—Docker支持重启策略，是否还需要PM2-24.png)
+![](./image/第63章-24.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/docker-restart-test)。
 

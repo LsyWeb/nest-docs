@@ -4,7 +4,7 @@
 
 对于复杂的项目来说，会用断点调试是必须的，因为这样可以看到作用域、调用栈，也就是代码的执行路线，然后单步运行来看变量的变化。
 
-![](./image/第06章—如何调试Nest项目-1.png)
+![](./image/第06章-1.png)
 
 所以这一节我们来学下如何调试 nest 项目。
 
@@ -18,7 +18,7 @@ cd debug-test
 npm init -y
 ```
 
-![](./image/第06章—如何调试Nest项目-2.image#?w=892&h=672&s=124406&e=png&b=000000.png)
+![](./image/第06章-2.png)
 
 添加 index.js
 
@@ -34,13 +34,13 @@ console.log(homedir);
 
 直接 node 执行会输出结果：
 
-![](./image/第06章—如何调试Nest项目-3.png)
+![](./image/第06章-3.png)
 
 我们以调试模式跑起来：
 ```
 node --inspect-brk index.js
 ```
-![](./image/第06章—如何调试Nest项目-4.png)
+![](./image/第06章-4.png)
 
 \--inspect 是调试模式运行，而 --inspect-brk 还会在首行断住。
 
@@ -50,49 +50,49 @@ node --inspect-brk index.js
 
 打开 <chrome://inspect/>，可以看到可以调试的目标：
 
-![](./image/第06章—如何调试Nest项目-5.png)
+![](./image/第06章-5.png)
 
 如果没有，就配置下 network target，加上 localhost:9229
 
-![](./image/第06章—如何调试Nest项目-6.png)
+![](./image/第06章-6.png)
 
 点击 inspect 就可以看到调试界面了：
 
-![](./image/第06章—如何调试Nest项目-7.png)
+![](./image/第06章-7.png)
 
 代码在首行断住了，右侧也可以看到作用域和调用栈。
 
 可以单步调试：
 
-![](./image/第06章—如何调试Nest项目-8.png)
+![](./image/第06章-8.png)
 
 nest 也是 node 项目，自然也是这样来调试的。
 
 nest start 有个 --debug 的选项，
 
-![](./image/第06章—如何调试Nest项目-9.png)
+![](./image/第06章-9.png)
 
 原理就是 node --inspect。
 
 这时候 inspect 发现啥也没：
 
-![](./image/第06章—如何调试Nest项目-10.png)
+![](./image/第06章-10.png)
 
 因为 --inspect 并不会和 --inspect-brk 一样在首行断住。
 
 我们在 controller 里加个 debugger：
 
-![](./image/第06章—如何调试Nest项目-11.png)
+![](./image/第06章-11.png)
 
 然后访问下 <http://localhost:3000>
 
 这时候你会发现代码在断点处断住了：
 
-![](./image/第06章—如何调试Nest项目-12.png)
+![](./image/第06章-12.png)
 
 可以看到代码的整个执行路线：
 
-![](./image/第06章—如何调试Nest项目-13.png)
+![](./image/第06章-13.png)
 
 这样，就可以调试 nest 项目了。
 
@@ -104,21 +104,21 @@ VSCode 也实现了 Debugger 的客户端。
 
 点击调试面板的 create launch.json file，它会创建 .vscode/launch.json 的调试配置文件：
 
-![](./image/第06章—如何调试Nest项目-14.png)
+![](./image/第06章-14.png)
 
-![](./image/第06章—如何调试Nest项目-15.png)
+![](./image/第06章-15.png)
 
 然后输入 node，快速创建一个 node 调试配置：
 
-![](./image/第06章—如何调试Nest项目-16.png)
+![](./image/第06章-16.png)
 
 我们先调试下前面那个 index.js 文件：
 
-![](./image/第06章—如何调试Nest项目-17.png)
+![](./image/第06章-17.png)
 
 stopOnEntry 是在首行断住，和 --inspect-brk 一样的效果。
 
-![](./image/第06章—如何调试Nest项目-18.png)
+![](./image/第06章-18.png)
 
 这样，就可以在 vscode 里调试 node 代码了。
 
@@ -126,7 +126,7 @@ stopOnEntry 是在首行断住，和 --inspect-brk 一样的效果。
 
 比如你调试的过程中修改了代码，然后点击重新调试，就可以马上看到改动之后的效果：
 
-![](./image/第06章—如何调试Nest项目-19.png)
+![](./image/第06章-19.png)
 
 调试体验就很棒！
 
@@ -134,17 +134,17 @@ nest 自然也可以这样调试：
 
 还是 nest start --debug 来启动 nest 服务：
 
-![](./image/第06章—如何调试Nest项目-20.png)
+![](./image/第06章-20.png)
 
 添加一个 attach 类型的调试配置：
 
-![](./image/第06章—如何调试Nest项目-21.png)
+![](./image/第06章-21.png)
 
-![](./image/第06章—如何调试Nest项目-22.png)
+![](./image/第06章-22.png)
 
 然后在 controller 里打个断点，访问 <http://localhost:3000>
 
-![](./image/第06章—如何调试Nest项目-23.png)
+![](./image/第06章-23.png)
 
 代码同样会在断点处断住。
 
@@ -152,7 +152,7 @@ nest 自然也可以这样调试：
 
 不过如果是用 VSCode 调试，可以不用 nest start --debug，有更简便的方式：
 
-![](./image/第06章—如何调试Nest项目-24.png)
+![](./image/第06章-24.png)
 
 创建 npm scripts 的调试配置：
 
@@ -177,21 +177,21 @@ nest 自然也可以这样调试：
 
 和我们命令行执行 npm run start:dev 一样。
 
-![](./image/第06章—如何调试Nest项目-25.png)
+![](./image/第06章-25.png)
 
 这里的 runtimeExecutable 代表执行什么命令，args 传参数。
 
 要指定 console 为 integratedTerminal，也就是用 vscode 的内置终端来打印日志，不然默认会用 debug console 跑，那个没有颜色：
 
-![](./image/第06章—如何调试Nest项目-26.png)
+![](./image/第06章-26.png)
 
 点击调试模式启动：
 
-![](./image/第06章—如何调试Nest项目-27.png)
+![](./image/第06章-27.png)
 
 然后浏览器访问 <http://localhost:3000>
 
-![](./image/第06章—如何调试Nest项目-28.png)
+![](./image/第06章-28.png)
 
 代码同样会在断点处断住。
 
@@ -201,31 +201,31 @@ nest 自然也可以这样调试：
 
 有的时候只想打印日志，不想断住，又不想加 console.log 污染代码，这时候可以用 logpoint：
 
-![](./image/第06章—如何调试Nest项目-29.png)
+![](./image/第06章-29.png)
 
 右键选择 logpoint：
 
-![](./image/第06章—如何调试Nest项目-30.png)
+![](./image/第06章-30.png)
 
 输入打印的信息，变量用 {} 包裹。
 
 代码执行到这里就会打印：
 
-![](./image/第06章—如何调试Nest项目-31.png)
+![](./image/第06章-31.png)
 
 这样适合不需要断住，但想打印日志的情况。不用在代码里加 console.log。
 
 再就是条件断点：
 
-![](./image/第06章—如何调试Nest项目-32.png)
+![](./image/第06章-32.png)
 
-![](./image/第06章—如何调试Nest项目-33.png)
+![](./image/第06章-33.png)
 
 表达式成立才会断住。
 
 再就是异常断点，可以在没有处理的异常处自动断住：
 
-![](./image/第06章—如何调试Nest项目-34.png)
+![](./image/第06章-34.png)
 
 这些断点类型只要有个印象，用到的时候能想起来就行。
 

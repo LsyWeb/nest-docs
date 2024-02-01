@@ -4,119 +4,119 @@
 
     nest new all-decorator -p npm
 
-![](./image/第10章—一网打尽Nest全部装饰器-1.png)
+![](./image/第10章-1.png)
 
 Nest 提供了一套模块系统，通过 @Module声明模块：
 
-![](./image/第10章—一网打尽Nest全部装饰器-2.png)
+![](./image/第10章-2.png)
 
 通过 @Controller、@Injectable 分别声明其中的 controller 和 provider：
 
-![](./image/第10章—一网打尽Nest全部装饰器-3.png)
+![](./image/第10章-3.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-4.png)
+![](./image/第10章-4.png)
 
 这个 provider 可以是任何的 class：
 
-![](./image/第10章—一网打尽Nest全部装饰器-5.png)
+![](./image/第10章-5.png)
 
 注入的方式可以是构造器注入：
 
-![](./image/第10章—一网打尽Nest全部装饰器-6.png)
+![](./image/第10章-6.png)
 
 或者属性注入：
 
-![](./image/第10章—一网打尽Nest全部装饰器-7.png)
+![](./image/第10章-7.png)
 
 属性注入要指定注入的 token，可能是 class 也可能是 string。
 
 你可以通过 useFactory、useValue 等方式声明 provider：
 
-![](./image/第10章—一网打尽Nest全部装饰器-8.png)
+![](./image/第10章-8.png)
 
 这时候也需要通过 @Inject 指定注入的 token：
 
-![](./image/第10章—一网打尽Nest全部装饰器-9.png)
+![](./image/第10章-9.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-10.png)
+![](./image/第10章-10.png)
 
 这些注入的依赖如果没有的话，创建对象时会报错。但如果它是可选的，你可以用 @Optional 声明一下，这样没有对应的 provider 也能正常创建这个对象。
 
-![](./image/第10章—一网打尽Nest全部装饰器-11.png)
+![](./image/第10章-11.png)
 
 如果模块被很多地方都引用，为了方便，可以用 @Global 把它声明为全局的，这样它 exports 的 provider 就可以直接注入了：
 
-![](./image/第10章—一网打尽Nest全部装饰器-12.png)
+![](./image/第10章-12.png)
 
 filter 是处理抛出的未捕获异常的，通过 @Catch 来指定处理的异常：
 
-![](./image/第10章—一网打尽Nest全部装饰器-13.png)
+![](./image/第10章-13.png)
 
 然后通过 @UseFilters 应用到 handler 上：
 
-![](./image/第10章—一网打尽Nest全部装饰器-14.png)
+![](./image/第10章-14.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-15.png)
+![](./image/第10章-15.png)
 
 除了 filter 之外，interceptor、guard、pipe 也是这样用：
 
-![](./image/第10章—一网打尽Nest全部装饰器-16.png)
+![](./image/第10章-16.png)
 
 当然，pipe 更多还是单独在某个参数的位置应用：
 
-![](./image/第10章—一网打尽Nest全部装饰器-17.png)
+![](./image/第10章-17.png)
 
 这里的 @Query 是取 url 后的 ?bbb=true，而 @Param 是取路径中的参数，比如 /xxx/111 种的 111
 
-![](./image/第10章—一网打尽Nest全部装饰器-18.png)
+![](./image/第10章-18.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-19.png)
+![](./image/第10章-19.png)
 
 此外，如果是 @Post 请求，可以通过 @Body 取到 body 部分：
 
-![](./image/第10章—一网打尽Nest全部装饰器-20.png)
+![](./image/第10章-20.png)
 
 我们一般用 dto 的 class 来接受请求体里的参数：
 
-![](./image/第10章—一网打尽Nest全部装饰器-21.png)
+![](./image/第10章-21.png)
 
 nest 会实例化一个 dto 对象：
 
 用 postman 发个 post 请求：
 
-![](./image/第10章—一网打尽Nest全部装饰器-22.png)
+![](./image/第10章-22.png)
 
 可以看到 nest 接受到了 body 里的参数：
 
-![](./image/第10章—一网打尽Nest全部装饰器-23.png)
+![](./image/第10章-23.png)
 
 除了 @Get、@Post 外，还可以用 @Put、@Delete、@Patch、@Options、@Head 装饰器分别接受 put、delete、patch、options、head 请求：
 
-![](./image/第10章—一网打尽Nest全部装饰器-24.png)
+![](./image/第10章-24.png)
 
 handler 和 class 可以通过 @SetMetadata 指定 metadata：
 
-![](./image/第10章—一网打尽Nest全部装饰器-25.png)
+![](./image/第10章-25.png)
 
 然后在 guard 或者 interceptor 里取出来：
 
-![](./image/第10章—一网打尽Nest全部装饰器-26.png)
+![](./image/第10章-26.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-27.png)
+![](./image/第10章-27.png)
 
 你可以通过 @Headers 装饰器取某个请求头 或者全部请求头：
 
-![](./image/第10章—一网打尽Nest全部装饰器-28.png)
+![](./image/第10章-28.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-29.png)
+![](./image/第10章-29.png)
 
 通过 @Ip 拿到请求的 ip：
 
-![](./image/第10章—一网打尽Nest全部装饰器-30.png)
+![](./image/第10章-30.png)
 
 通过 @Session 拿到 session 对象：
 
-![](./image/第10章—一网打尽Nest全部装饰器-31.png)
+![](./image/第10章-31.png)
 
 但要使用 session 需要安装一个 express 中间件：
 
@@ -124,25 +124,25 @@ handler 和 class 可以通过 @SetMetadata 指定 metadata：
 
 在 main.ts 里引入并启用：
 
-![](./image/第10章—一网打尽Nest全部装饰器-32.png)
+![](./image/第10章-32.png)
 
 指定加密的密钥和 cookie 的存活时间。
 
 然后刷新页面：
 
-![](./image/第10章—一网打尽Nest全部装饰器-33.png)
+![](./image/第10章-33.png)
 
 会返回 set-cookie 的响应头，设置了 cookie，包含 sid 也就是 sesssionid。
 
 之后每次请求都会自动带上这个 cookie：
 
-![](./image/第10章—一网打尽Nest全部装饰器-34.png)
+![](./image/第10章-34.png)
 
 这样就可以在 session 对象里存储信息了。
 
-![](./image/第10章—一网打尽Nest全部装饰器-35.png)
+![](./image/第10章-35.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-36.png)
+![](./image/第10章-36.png)
 
 @HostParam 用于取域名部分的参数：
 
@@ -150,7 +150,7 @@ handler 和 class 可以通过 @SetMetadata 指定 metadata：
 
     nest g controller aaa --no-spec --flat
 
-![](./image/第10章—一网打尽Nest全部装饰器-37.png)
+![](./image/第10章-37.png)
 
 这样指定 controller 的生效路径：
 
@@ -168,11 +168,11 @@ export class AaaController {
 
 controller 除了可以指定某些 path 生效外，还可以指定 host：
 
-![](./image/第10章—一网打尽Nest全部装饰器-38.png)
+![](./image/第10章-38.png)
 
 然后再访问下：
 
-![](./image/第10章—一网打尽Nest全部装饰器-39.png)
+![](./image/第10章-39.png)
 
 这时候你会发现只有 host 满足 xx.0.0.1 的时候才会路由到这个 controller。
 
@@ -190,71 +190,71 @@ export class AaaController {
 }
 ```
 
-![](./image/第10章—一网打尽Nest全部装饰器-40.png)
+![](./image/第10章-40.png)
 
 前面取的这些都是 request 里的属性，当然也可以直接注入 request 对象：
 
-![](./image/第10章—一网打尽Nest全部装饰器-41.png)
+![](./image/第10章-41.png)
 
 通过 @Req 或者 @Request 装饰器，这俩是同一个东西：
 
-![](./image/第10章—一网打尽Nest全部装饰器-42.png)
+![](./image/第10章-42.png)
 
 注入 request 对象后，可以手动取任何参数：
 
-![](./image/第10章—一网打尽Nest全部装饰器-43.png)
+![](./image/第10章-43.png)
 
 当然，也可以 @Res 或者 @Response 注入 response 对象，只不过 response 对象有点特殊：
 
-![](./image/第10章—一网打尽Nest全部装饰器-44.png)
+![](./image/第10章-44.png)
 
 当你注入 response 对象之后，服务器会一直没有响应：
 
-![](./image/第10章—一网打尽Nest全部装饰器-45.png)
+![](./image/第10章-45.png)
 
 因为这时候 Nest 就不会再把 handler 返回值作为响应内容了。
 
 你可以自己返回响应：
 
-![](./image/第10章—一网打尽Nest全部装饰器-46.png)
+![](./image/第10章-46.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-47.png)
+![](./image/第10章-47.png)
 
 Nest 这么设计是为了避免你自己返回的响应和 Nest 返回的响应的冲突。
 
 如果你不会自己返回响应，可以通过 passthrough 参数告诉 Nest：
 
-![](./image/第10章—一网打尽Nest全部装饰器-48.png)
+![](./image/第10章-48.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-49.png)
+![](./image/第10章-49.png)
 
 除了注入 @Res 不会返回响应外，注入 @Next 也不会：
 
-![](./image/第10章—一网打尽Nest全部装饰器-50.png)
+![](./image/第10章-50.png)
 
 当你有两个 handler 来处理同一个路由的时候，可以在第一个 handler 里注入 next，调用它来把请求转发到第二个 handler：
 
-![](./image/第10章—一网打尽Nest全部装饰器-51.png)
+![](./image/第10章-51.png)
 
 Nest 不会处理注入 @Next 的 handler 的返回值。
 
 handler 默认返回的是 200 的状态码，你可以通过 @HttpCode 修改它：
 
-![](./image/第10章—一网打尽Nest全部装饰器-52.png)
+![](./image/第10章-52.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-53.png)
+![](./image/第10章-53.png)
 
 当然，你也可以修改 response header，通过 @Header 装饰器：
 
-![](./image/第10章—一网打尽Nest全部装饰器-54.png)
+![](./image/第10章-54.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-55.png)
+![](./image/第10章-55.png)
 
 此外，你还可以通过 @Redirect 装饰器来指定路由重定向的 url：
 
-![](./image/第10章—一网打尽Nest全部装饰器-56.png)
+![](./image/第10章-56.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-57.png)
+![](./image/第10章-57.png)
 
 或者在返回值的地方设置 url：
 
@@ -271,7 +271,7 @@ async jump() {
 
 你还可以给返回的响应内容指定渲染引擎，不过这需要先这样设置：
 
-![](./image/第10章—一网打尽Nest全部装饰器-58.png)
+![](./image/第10章-58.png)
 
 ```javascript
 import { NestFactory } from '@nestjs/core';
@@ -300,17 +300,17 @@ bootstrap();
 
 然后准备图片和模版文件：
 
-![](./image/第10章—一网打尽Nest全部装饰器-59.png)
+![](./image/第10章-59.png)
 
-![](./image/第10章—一网打尽Nest全部装饰器-60.png)
+![](./image/第10章-60.png)
 
 在 handler 里指定模版和数据：
 
-![](./image/第10章—一网打尽Nest全部装饰器-61.png)
+![](./image/第10章-61.png)
 
 就可以看到渲染出的 html 了：
 
-![](./image/第10章—一网打尽Nest全部装饰器-62.png)
+![](./image/第10章-62.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/all-decorator)。
 

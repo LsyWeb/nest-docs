@@ -10,7 +10,7 @@
 nest new nest-prisma-test
 ```
 
-![](./image/第119章—在Nest里集成Prisma-1.image#?w=846&h=666&s=266810&e=png&b=020202.png)
+![](./image/第119章-1.png)
 
 进入项目，安装 prisma
 
@@ -22,9 +22,9 @@ npm install prisma --save-dev
 ```
 npx prisma init
 ```
-![](./image/第119章—在Nest里集成Prisma-2.image#?w=1068&h=504&s=98914&e=png&b=181818.png)
+![](./image/第119章-2.png)
 
-![](./image/第119章—在Nest里集成Prisma-3.image#?w=1220&h=536&s=111764&e=png&b=1d1d1d.png)
+![](./image/第119章-3.png)
 
 改下 .env 的配置：
 
@@ -43,7 +43,7 @@ datasource db {
 
 然后创建 model：
 
-![](./image/第119章—在Nest里集成Prisma-4.image#?w=1406&h=920&s=183023&e=png&b=1f1f1f.png)
+![](./image/第119章-4.png)
 
 ```
 generator client {
@@ -80,24 +80,24 @@ model Employee {
 ```
 npx prisma migrate reset 
 ```
-![](./image/第119章—在Nest里集成Prisma-5.image#?w=1162&h=584&s=89806&e=png&b=191919.png)
+![](./image/第119章-5.png)
 
 然后创建新的 migration:
 
 ```
 npx prisma migrate dev --name init
 ```
-![](./image/第119章—在Nest里集成Prisma-6.image#?w=1134&h=498&s=77658&e=png&b=191919.png)
+![](./image/第119章-6.png)
 
 这时候数据库就就有这两个表了：
 
-![](./image/第119章—在Nest里集成Prisma-7.image#?w=1088&h=428&s=135687&e=png&b=eceae9.png)
+![](./image/第119章-7.png)
 
-![](./image/第119章—在Nest里集成Prisma-8.image#?w=1020&h=396&s=122940&e=png&b=eeebeb.png)
+![](./image/第119章-8.png)
 
 外键约束也创建好了：
 
-![](./image/第119章—在Nest里集成Prisma-9.image#?w=1822&h=358&s=112063&e=png&b=f2f0f0.png)
+![](./image/第119章-9.png)
 
 并且 migrate dev 还会生成 client 代码，接下来我们就可以直接来做 CRUD 了。
 
@@ -108,7 +108,7 @@ npx prisma migrate dev --name init
 ```
 nest g service prisma --flat --no-spec
 ```
-![](./image/第119章—在Nest里集成Prisma-10.image#?w=692&h=94&s=27645&e=png&b=191919.png)
+![](./image/第119章-10.png)
 
 改下 PrismaService，继承 PrismaClient，这样它就有 crud 的 api 了：
 
@@ -144,13 +144,13 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 ```
 nest g service department --flat --no-spec
 ```
-![](./image/第119章—在Nest里集成Prisma-11.image#?w=736&h=94&s=25816&e=png&b=191919.png)
+![](./image/第119章-11.png)
 
 ```
 nest g service employee --flat --no-spec
 ```
 
-![](./image/第119章—在Nest里集成Prisma-12.image#?w=686&h=106&s=30956&e=png&b=191919.png)
+![](./image/第119章-12.png)
 
 这俩 service 里注入 PrismaService，不就可以 CRUD 了么？
 
@@ -183,7 +183,7 @@ export class DepartmentService {
 
 输入 Prisma.Deparment 就会提示出来
 
-![](./image/第119章—在Nest里集成Prisma-13.image#?w=1066&h=408&s=104579&e=png&b=202020.png)
+![](./image/第119章-13.png)
 
 还有 EmployeeService：
 
@@ -213,7 +213,7 @@ export class EmployeeService {
 
 然后在 AppController 里注入这俩 service：
 
-![](./image/第119章—在Nest里集成Prisma-14.image#?w=1112&h=1060&s=180016&e=png&b=1f1f1f.png)
+![](./image/第119章-14.png)
 
 声明一个 create 的路由，里面创建一个 department，再创建一个 employee。
 
@@ -267,17 +267,17 @@ npm run start:dev
 ```
 浏览器访问下 http://localhost:3000/create
 
-![](./image/第119章—在Nest里集成Prisma-15.image#?w=636&h=212&s=17925&e=png&b=ffffff.png)
+![](./image/第119章-15.png)
 
 生成了 2 条 insert 语句：
 
-![](./image/第119章—在Nest里集成Prisma-16.image#?w=1362&h=616&s=209330&e=png&b=181818.png)
+![](./image/第119章-16.png)
 
 在 mysql workbench 里也可以看到插入的 2 条记录：
 
-![](./image/第119章—在Nest里集成Prisma-17.image#?w=800&h=196&s=58378&e=png&b=f8f8f8.png)
+![](./image/第119章-17.png)
 
-![](./image/第119章—在Nest里集成Prisma-18.image#?w=572&h=226&s=39386&e=png&b=f6f6f6.png)
+![](./image/第119章-18.png)
 
 这样，prisma 和 nest 的集成就完成了。
 

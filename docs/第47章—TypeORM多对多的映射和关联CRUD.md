@@ -1,24 +1,24 @@
 ﻿一对一我们是通过 @OneToOne 和 @JoinColumn 来把 Entity 映射成数据库表：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-1.png)
+![](./image/第47章-1.png)
 
 Entity 之间的引用关系，转换为数据库表之间的外键关联的关系。
 
 一对多我们是通过 @OneToMany 和 @ManyToOne 来把 Entity 映射成数据库表：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-2.png)
+![](./image/第47章-2.png)
 
 它并不需要 @JoinColumn 来指定外键列，因为外键一定在多的那一边。
 
 那多对多呢？
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-3.png)
+![](./image/第47章-3.png)
 
 前面讲过，在数据库里，我们是通过中间表来保存这种多对多的关系的：
 
 把多对多拆成了两个一对多：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-4.png)
+![](./image/第47章-4.png)
 
 那在 TypeORM 里如何映射这种关系呢？
 
@@ -26,7 +26,7 @@ Entity 之间的引用关系，转换为数据库表之间的外键关联的关�
 
     npx typeorm@latest init --name typeorm-relation-mapping3 --database mysql
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-5.png)
+![](./image/第47章-5.png)
 
 进入项目目录，安装驱动包 mysql2：
 
@@ -64,7 +64,7 @@ export const AppDataSource = new DataSource({
     npx typeorm entity:create src/entity/Article
     npx typeorm entity:create src/entity/Tag
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-6.png)
+![](./image/第47章-6.png)
 
 添加一些属性：
 
@@ -109,31 +109,31 @@ export class Tag {
 
 然后在 data-source.ts 里引入这俩 Entity：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-7.png)
+![](./image/第47章-7.png)
 
 把 index.ts 的代码去掉：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-8.png)
+![](./image/第47章-8.png)
 
 然后 npm run start
 
 可以看到它生成了两个 Entity 的建表 sql：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-9.png)
+![](./image/第47章-9.png)
 
 然后把这两个表删掉，我们来添加多对多的关联关系：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-10.png)
+![](./image/第47章-10.png)
 
 在 Entity 里通过 @ManyToMany 关联。
 
 比如一篇文章可以有多个标签：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-11.png)
+![](./image/第47章-11.png)
 
 然后再 npm run start
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-12.png)
+![](./image/第47章-12.png)
 
 你会看到 3 条建表 sql，分别是 article、tag 和中间表 article\_tags\_tag
 
@@ -145,7 +145,7 @@ export class Tag {
 
 你也可以自己指定中间表的名字：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-13.png)
+![](./image/第47章-13.png)
 
 我们插入点数据试试：
 
@@ -192,15 +192,15 @@ AppDataSource.initialize().then(async () => {
 
 跑一下：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-14.png)
+![](./image/第47章-14.png)
 
 可以看到，3 个标签、2 篇文章，还有两者的关系，都插入成功了。
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-15.png)
+![](./image/第47章-15.png)
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-16.png)
+![](./image/第47章-16.png)
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-17.png)
+![](./image/第47章-17.png)
 
 再来查询：
 
@@ -217,7 +217,7 @@ console.log(article.map(item=> item.tags))
 
 同样是通过 relations 指定关联查询：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-18.png)
+![](./image/第47章-18.png)
 
 也可以手动用 query builder 来 join 查询：
 
@@ -233,7 +233,7 @@ console.log(article.map(item=> item.tags))
 
 结果一样：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-19.png)
+![](./image/第47章-19.png)
 
 或者先拿到 Article 的 Repository 再创建 query builder 来查询也行：
 
@@ -271,23 +271,23 @@ await entityManager.save(article);
 
 之前它是有 3 个标签的：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-20.png)
+![](./image/第47章-20.png)
 
 npm run start 跑一下：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-21.png)
+![](./image/第47章-21.png)
 
 它会先查出 id 为 2 的 article 有哪些标签，查出了 1、2、3。
 
 然后会把他和 id 为 2 的 article 的关系，(2, 2) (2, 3) 从中间表中删除。
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-22.png)
+![](./image/第47章-22.png)
 
 这样就这个 article 就只有 id 为 1 的 tag 了。
 
 此外，更新 article.title 的是另一个 update 语句：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-23.png)
+![](./image/第47章-23.png)
 
 至于删除就简单了，因为中间表的外键设置了 CASCADE 的级联删除，这样只要你删除了 article 或者 tag，它都会跟着删除关联记录。
 
@@ -298,7 +298,7 @@ await entityManager.delete(Tag, 1);
 
 如果 tag 里也想有文章的引用呢？
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-24.png)
+![](./image/第47章-24.png)
 
 那就加一个 @ManyToMany 的映射属性。
 
@@ -306,7 +306,7 @@ await entityManager.delete(Tag, 1);
 
 而且不止这里要加，article 里也要加：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-25.png)
+![](./image/第47章-25.png)
 
 为什么呢？
 
@@ -320,11 +320,11 @@ await entityManager.delete(Tag, 1);
 
 比如一对一的 user 那方，不维护外键，所以需要第二个参数来指定通过哪个外键找到 user。
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-26.png)
+![](./image/第47章-26.png)
 
 一对多的 department 那方，不维护外键，所以需要第二个参数来指定通过哪个外键找到 department：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-27.png)
+![](./image/第47章-27.png)
 
 而多对多的时候，双方都不维护外键，所以都需要第二个参数来指定外键列在哪里，怎么找到当前 Entity。
 
@@ -342,7 +342,7 @@ console.log(tags);
 
 也是能成功关联查出来的：
 
-![](./image/第47章—TypeORM多对多的映射和关联CRUD-28.png)
+![](./image/第47章-28.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/typeorm-relation-mapping3)。
 

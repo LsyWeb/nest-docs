@@ -19,7 +19,7 @@
 
 然后根据 cookie 里的标记去查找的服务端对应的数据叫做 session，这个标记就是 session 的 id。
 
-![](./image/第54章—两种登录状态保存方式：JWT、Session-1.png)
+![](./image/第54章-1.png)
 
 如图，因为请求自动带上 cookie，那两次请求就都可以找到 id 为 1 对应的 session，自然就知道当前登录的用户是谁，也可以存储其他的状态数据。
 
@@ -63,7 +63,7 @@ session 是把状态数据保存在服务端，那么问题来了，如果有多
 
 那不同服务器之间的 session 怎么同步？
 
-![](./image/第54章—两种登录状态保存方式：JWT、Session-2.png)
+![](./image/第54章-2.png)
 
 登录之后 session 是保存在某一台服务器的，之后可能会访问到别的服务器，这时候那台服务器是没有对应的 session 的，就没法完成对应的功能。
 
@@ -87,7 +87,7 @@ cookie 为了安全，是做了 domain 的限制的，设置 cookie 的时候会
 
 而且还可以设置过期时间、路径等：
 
-![](./image/第54章—两种登录状态保存方式：JWT、Session-3.png)
+![](./image/第54章-3.png)
 
 那万一是不同 domain 的请求呢？也就是跨域的时候，怎么带 cookie 呢？
 
@@ -124,7 +124,7 @@ token 的方案常用 json 格式来保存，叫做 json web token，简称 JWT�
 
 JWT 是保存在 request header 里的一段字符串（比如用 header 名可以叫 authorization），它分为三部分：
 
-![](./image/第54章—两种登录状态保存方式：JWT、Session-4.png)
+![](./image/第54章-4.png)
 
 如图 JWT 是由 header、payload、verify signature 三部分组成的：
 
@@ -138,7 +138,7 @@ header 部分保存当前的加密算法，payload 部分是具体存储的数�
 
 把状态数据都保存在 payload 部分，这样就实现了有状态的 http:
 
-![](./image/第54章—两种登录状态保存方式：JWT、Session-5.png)
+![](./image/第54章-5.png)
 
 而且这种方式是没有 session + cookie 那些问题的，不信我们分别来看一下：
 

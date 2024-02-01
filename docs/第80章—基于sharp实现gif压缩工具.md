@@ -4,25 +4,25 @@
 
 比如这样一个图片：
 
-![](./image/第80章—基于sharp实现gif压缩工具-1.png)
+![](./image/第80章-1.png)
 
 在编辑器上传会提示超过 10 M 了：
 
-![](./image/第80章—基于sharp实现gif压缩工具-2.png)
+![](./image/第80章-2.png)
 
 这时候就需要 GIF 压缩，不然文章发不了。
 
 于是我在百度搜素 GIF 压缩，就找到了一个工具：
 
-![](./image/第80章—基于sharp实现gif压缩工具-3.png)
+![](./image/第80章-3.png)
 
 它确实能解决我的问题：
 
-![](./image/第80章—基于sharp实现gif压缩工具-4.png)
+![](./image/第80章-4.png)
 
 但是要花钱：
 
-![](./image/第80章—基于sharp实现gif压缩工具-5.png)
+![](./image/第80章-5.png)
 
 一年 148 呢，对一个小工具来说还是挺贵的。
 
@@ -30,19 +30,19 @@
 
 于是去年年底我就开了一年的会员：
 
-![](./image/第80章—基于sharp实现gif压缩工具-6.png)
+![](./image/第80章-6.png)
 
 但最近发现有 npm 包可以做这个，没必要买这种网站的会员。。。
 
 当时我的心情是这样的：
 
-![](./image/第80章—基于sharp实现gif压缩工具-7.png)
+![](./image/第80章-7.png)
 
 这个 npm 包就是 sharp，它是用来处理各种图片的：
 
-![](./image/第80章—基于sharp实现gif压缩工具-8.png)
+![](./image/第80章-8.png)
 
-![](./image/第80章—基于sharp实现gif压缩工具-9.png)
+![](./image/第80章-9.png)
 
 它可以用来调整图片的大小，对图片做旋转、颜色调整、合成图片等。
 
@@ -64,21 +64,21 @@ sharp('1.image.gif', {
 
 node 执行这个文件，可以看到产生了 2.image.gif，只有 2.7 M
 
-![](./image/第80章—基于sharp实现gif压缩工具-10.png)
+![](./image/第80章-10.png)
 
 要知道之前的 1.image.gif 可是有 21M 啊：
 
-![](./image/第80章—基于sharp实现gif压缩工具-11.png)
+![](./image/第80章-11.png)
 
 然后打开它看看：
 
-![](./image/第80章—基于sharp实现gif压缩工具-12.png)
+![](./image/第80章-12.png)
 
 没啥问题。
 
 回过头来，我们再来看看这段代码：
 
-![](./image/第80章—基于sharp实现gif压缩工具-13.png)
+![](./image/第80章-13.png)
 
 animated 设为 true 是读取所有的帧，不然默认只会读取 gif 的第一帧。
 
@@ -86,7 +86,7 @@ limitInputPixels 设为 false 是不限制大小，默认太大的图片是会�
 
 然后是输出参数：
 
-![](./image/第80章—基于sharp实现gif压缩工具-14.png)
+![](./image/第80章-14.png)
 
 colours 是颜色的数量，默认是 256。
 
@@ -94,11 +94,11 @@ colours 是颜色的数量，默认是 256。
 
 当把 colours 设置为 2，图片就变成这样了：
 
-![](./image/第80章—基于sharp实现gif压缩工具-15.png)
+![](./image/第80章-15.png)
 
 图片也更小了一些：
 
-![](./image/第80章—基于sharp实现gif压缩工具-16.png)
+![](./image/第80章-16.png)
 
 具体怎么设置压缩级别和颜色数量，还是看需求。
 
@@ -112,7 +112,7 @@ colours 是颜色的数量，默认是 256。
 npx create-react-app gif-compression-frontend
 ```
 
-![](./image/第80章—基于sharp实现gif压缩工具-17.png)
+![](./image/第80章-17.png)
 
 进入项目目录，安装 antd：
 
@@ -141,7 +141,7 @@ npm run start
 ```
 浏览器访问下：
 
-![](./image/第80章—基于sharp实现gif压缩工具-18.png)
+![](./image/第80章-18.png)
 
 antd 引入成功了。
 
@@ -180,11 +180,11 @@ export default App;
 ```
 大概是这样的：
 
-![](./image/第80章—基于sharp实现gif压缩工具-19.png)
+![](./image/第80章-19.png)
 
 antd 会 post 方式请求 action 对应的接口，带上上传的文件：
 
-![](./image/第80章—基于sharp实现gif压缩工具-20.png)
+![](./image/第80章-20.png)
 
 我们再用 nest 写个后端服务接收下：
 
@@ -193,11 +193,11 @@ nest new gif-compression-backend
 ```
 创建个 nest 项目：
 
-![](./image/第80章—基于sharp实现gif压缩工具-21.png)
+![](./image/第80章-21.png)
 
 修改 main.ts，启用跨域支持，并修改启动端口为 3005
 
-![](./image/第80章—基于sharp实现gif压缩工具-22.png)
+![](./image/第80章-22.png)
 
 把它跑起来：
 
@@ -205,11 +205,11 @@ nest new gif-compression-backend
 npm run start:dev
 ```
 
-![](./image/第80章—基于sharp实现gif压缩工具-23.png)
+![](./image/第80章-23.png)
 
 浏览器访问 http://localhost:3005 可以看到 hello world，说明 nest 服务跑成功了：
 
-![](./image/第80章—基于sharp实现gif压缩工具-24.png)
+![](./image/第80章-24.png)
 
 然后我们来添加下文章上传的接口：
 
@@ -221,7 +221,7 @@ npm install -D @types/multer
 
 在 AppController 里添加这样一个路由：
 
-![](./image/第80章—基于sharp实现gif压缩工具-25.png)
+![](./image/第80章-25.png)
 
 ```javascript
 @Post('upload')
@@ -236,27 +236,27 @@ uploadFile(@UploadedFile() file: Express.Multer.File) {
 
 然后我们改下前端代码的上传接口：
 
-![](./image/第80章—基于sharp实现gif压缩工具-26.png)
+![](./image/第80章-26.png)
 
 测试下上传：
 
-![](./image/第80章—基于sharp实现gif压缩工具-27.png)
+![](./image/第80章-27.png)
 
 提示文件上传成功了，然后在服务端控制台也打印了文件信息，并且在 uploads 目录下可以看到这个文件：
 
-![](./image/第80章—基于sharp实现gif压缩工具-28.png)
+![](./image/第80章-28.png)
 
 这些文件在浏览器打开，可以看到就是上传的 gif：
 
-![](./image/第80章—基于sharp实现gif压缩工具-29.png)
+![](./image/第80章-29.png)
 
 然后我们把文件路径返回就好了：
 
-![](./image/第80章—基于sharp实现gif压缩工具-30.png)
+![](./image/第80章-30.png)
 
 现在上传文件成功之后就可以拿到这个文件在服务端的路径了：
 
-![](./image/第80章—基于sharp实现gif压缩工具-31.png)
+![](./image/第80章-31.png)
 
 然后我们再实现下压缩，在 AppController 增加一个接口：
 
@@ -282,19 +282,19 @@ compression(@Query('path') filePath: string, @Query('color', ParseIntPipe) color
 
 提示文件不存在：
 
-![](./image/第80章—基于sharp实现gif压缩工具-32.png)
+![](./image/第80章-32.png)
 
 服务端接收到了传过来的参数：
 
-![](./image/第80章—基于sharp实现gif压缩工具-33.png)
+![](./image/第80章-33.png)
 
 然后换一个真实存在的路径，返回 success：
 
-![](./image/第80章—基于sharp实现gif压缩工具-34.png)
+![](./image/第80章-34.png)
 
 说明服务端找到了这个路径的文件：
 
-![](./image/第80章—基于sharp实现gif压缩工具-35.png)
+![](./image/第80章-35.png)
 
 接下来安装 sharp 来实现压缩：
 
@@ -306,7 +306,7 @@ npm install --save sharp
 
 调用 sharp 来压缩 gif 图片，并注入 response 对象来返回文件下载响应：
 
-![](./image/第80章—基于sharp实现gif压缩工具-36.png)
+![](./image/第80章-36.png)
 
 ```javascript
 @Get('compression')
@@ -335,15 +335,15 @@ async compression(
 ```
 测试下：
 
-![](./image/第80章—基于sharp实现gif压缩工具-37.png)
+![](./image/第80章-37.png)
 
 访问这个接口，带上文件路径和压缩的参数，会返回压缩后的文件：
 
-![](./image/第80章—基于sharp实现gif压缩工具-38.png)
+![](./image/第80章-38.png)
 
 然后我们在前端页面上加一个表单来填参数，然后访问这个接口压缩文件：
 
-![](./image/第80章—基于sharp实现gif压缩工具-39.png)
+![](./image/第80章-39.png)
 
 代码如下：
 ```javascript
@@ -412,7 +412,7 @@ export default App;
 
 我们试试看：
 
-![](./image/第80章—基于sharp实现gif压缩工具-40.png)
+![](./image/第80章-40.png)
 
 3 个参数都拿到了，然后调用下压缩接口。
 
@@ -453,7 +453,7 @@ const compress = async (values) => {
 
 我们试试看：
 
-![](./image/第80章—基于sharp实现gif压缩工具-41.png)
+![](./image/第80章-41.png)
 
 整个流程都跑通了！
 
@@ -461,7 +461,7 @@ const compress = async (values) => {
 
 和用这个网站压缩的差不多：
 
-![](./image/第80章—基于sharp实现gif压缩工具-42.png)
+![](./image/第80章-42.png)
 
 更重要的是不用每年 138 的会员费。
 
@@ -485,7 +485,7 @@ const compress = async (values) => {
 
 整个流程如下：
 
-![](./image/第80章—基于sharp实现gif压缩工具-43.png)
+![](./image/第80章-43.png)
 
 其实最好再做一步: 把这个应用通过 dockerfile 来 build 成 docker 镜像，随时用，随时跑。
 

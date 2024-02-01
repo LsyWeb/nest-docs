@@ -6,7 +6,7 @@
 
 然后改下用户名密码数据库，把连接 msyql 的驱动包改为 mysql2，并修改加密密码的方式：
 
-![](./image/第44章—快速掌握TypeORM-1.png)
+![](./image/第44章-1.png)
 
 ```typescript
 import "reflect-metadata"
@@ -48,11 +48,11 @@ user、password 是登录数据库的用户名和密码。
 
 database 是要指定操作的 database，因为 mysql 是可以有多个 database 或者叫 schema 的。
 
-![](./image/第44章—快速掌握TypeORM-2.png)
+![](./image/第44章-2.png)
 
 synchronize 是根据同步建表，也就是当 database 里没有和 Entity 对应的表的时候，会自动生成建表 sql 语句并执行。
 
-![](./image/第44章—快速掌握TypeORM-3.png)
+![](./image/第44章-3.png)
 
 当然，如果有对应的表就不会创建了。
 
@@ -62,13 +62,13 @@ entities 是指定有哪些和数据库的表对应的 Entity。
 
 除了 class，还可以通过这种方式指定：
 
-![](./image/第44章—快速掌握TypeORM-4.png)
+![](./image/第44章-4.png)
 
 migrations 是修改表结构之类的 sql，暂时用不到，就不展开了。
 
 subscribers 是一些 Entity 生命周期的订阅者，比如 insert、update、remove 前后，可以加入一些逻辑：
 
-![](./image/第44章—快速掌握TypeORM-5.png)
+![](./image/第44章-5.png)
 
 poolSize 是指定数据库连接池中连接的最大数量。
 
@@ -80,15 +80,15 @@ extra 是额外发送给驱动包的一些选项。
 
 DataSource 会根据你传入的连接配置、驱动包，来创建数据库连接，并且如果制定了 synchronize 的话，会同步创建表。
 
-![](./image/第44章—快速掌握TypeORM-6.png)
+![](./image/第44章-6.png)
 
 而创建表的依据就是 Entity：
 
-![](./image/第44章—快速掌握TypeORM-7.png)
+![](./image/第44章-7.png)
 
 比如这个 Entity 就会执行这样的 sql：
 
-![](./image/第44章—快速掌握TypeORM-8.png)
+![](./image/第44章-8.png)
 
 主键为 INT 自增、firstName 和 lastName 是 VARCHAR(255)，age 是 INT。
 
@@ -151,31 +151,31 @@ nullable 设置 NOT NULL 约束，unique 设置 UNIQUE 唯一索引。
 
 type 这里指定的都是数据库里的数据类型。
 
-![](./image/第44章—快速掌握TypeORM-9.png)
+![](./image/第44章-9.png)
 
 然后在 DataSource 的 entities 里引入下：
 
-![](./image/第44章—快速掌握TypeORM-10.png)
+![](./image/第44章-10.png)
 
 重新跑 npm run start。
 
 生成建表 sql 是这样的：
 
-![](./image/第44章—快速掌握TypeORM-11.png)
+![](./image/第44章-11.png)
 
 格式化一下：
 
-![](./image/第44章—快速掌握TypeORM-12.png)
+![](./image/第44章-12.png)
 
 对比着 Entity 看下：
 
-![](./image/第44章—快速掌握TypeORM-13.png)
+![](./image/第44章-13.png)
 
 是不是就明白怎么映射了？
 
 在 mysql workbench 里看下，确实生成了这个表：
 
-![](./image/第44章—快速掌握TypeORM-14.png)
+![](./image/第44章-14.png)
 
 表创建好了，接下来就是增删改查了。
 
@@ -199,13 +199,13 @@ AppDataSource.initialize().then(async () => {
 
 删除 User 表重新跑 npm run start。
 
-![](./image/第44章—快速掌握TypeORM-15.png)
+![](./image/第44章-15.png)
 
-![](./image/第44章—快速掌握TypeORM-16.png)
+![](./image/第44章-16.png)
 
 可以看到数据库插入了这条记录：
 
-![](./image/第44章—快速掌握TypeORM-17.png)
+![](./image/第44章-17.png)
 
 如果你指定了 id，那就变成修改了：
 
@@ -228,17 +228,17 @@ AppDataSource.initialize().then(async () => {
 
 重新跑下 npm run start。
 
-![](./image/第44章—快速掌握TypeORM-18.png)
+![](./image/第44章-18.png)
 
 可以看到，生成的 sql 语句变成了 select 和 update：
 
-![](./image/第44章—快速掌握TypeORM-19.png)
+![](./image/第44章-19.png)
 
 当你指定了 id 的时候，typeorm 会先查询这个 id 的记录，如果查到了，那就执行 update。
 
 在 mysql workbench 里看下：
 
-![](./image/第44章—快速掌握TypeORM-20.png)
+![](./image/第44章-20.png)
 
 确实修改了。
 
@@ -265,13 +265,13 @@ AppDataSource.initialize().then(async () => {
 
 我们 npm run start 跑一下：
 
-![](./image/第44章—快速掌握TypeORM-21.png)
+![](./image/第44章-21.png)
 
 可以看到确实生成了 3 条 insert into 的 sql 语句。
 
 数据库中也能看到：
 
-![](./image/第44章—快速掌握TypeORM-22.png)
+![](./image/第44章-22.png)
 
 批量修改也很容易想到，是这样写：
 
@@ -293,11 +293,11 @@ AppDataSource.initialize().then(async () => {
 
 执行 npm run start，会看到一条 select 语句， 3 条 update 语句：
 
-![](./image/第44章—快速掌握TypeORM-23.png)
+![](./image/第44章-23.png)
 
 在 workbench 里也可以看到数据被修改了：
 
-![](./image/第44章—快速掌握TypeORM-24.png)
+![](./image/第44章-24.png)
 
 这就是 typeorm 里新增和修改的方式，使用 save 方法。
 
@@ -320,11 +320,11 @@ AppDataSource.initialize().then(async () => {
 
 执行下：
 
-![](./image/第44章—快速掌握TypeORM-25.png)
+![](./image/第44章-25.png)
 
 数据库了对应记录就被删除了：
 
-![](./image/第44章—快速掌握TypeORM-26.png)
+![](./image/第44章-26.png)
 
 这里也可以用 remove 方法：
 
@@ -371,7 +371,7 @@ AppDataSource.initialize().then(async () => {
 
 控制台打印了查询出的数据：
 
-![](./image/第44章—快速掌握TypeORM-27.png)
+![](./image/第44章-27.png)
 
 也可以通过 findBy 方法根据条件查询：
 
@@ -389,7 +389,7 @@ AppDataSource.initialize().then(async () => {
 }).catch(error => console.log(error))
 ```
 
-![](./image/第44章—快速掌握TypeORM-28.png)
+![](./image/第44章-28.png)
 
 此外，你还可以用 findAndCount 来拿到有多少条记录：
 
@@ -407,7 +407,7 @@ AppDataSource.initialize().then(async () => {
 
 会额外执行一个统计的 sql：
 
-![](./image/第44章—快速掌握TypeORM-29.png)
+![](./image/第44章-29.png)
 
 count 是可以指定条件的：
 
@@ -426,7 +426,7 @@ AppDataSource.initialize().then(async () => {
 
 可以看到，生成的 sql 里多了一个 where 条件：
 
-![](./image/第44章—快速掌握TypeORM-30.png)
+![](./image/第44章-30.png)
 
 除了可以查询多条，还可以查询一条，使用 findOne：
 
@@ -456,7 +456,7 @@ AppDataSource.initialize().then(async () => {
 
 查询结果如下:
 
-![](./image/第44章—快速掌握TypeORM-31.png)
+![](./image/第44章-31.png)
 
 findOne 只是比 find 多加了个 LIMIT 1，其余的都一样。
 
@@ -486,7 +486,7 @@ AppDataSource.initialize().then(async () => {
 
 把它改为 find，id 改为 In(\[4, 8]) 之后，结果如下：
 
-![](./image/第44章—快速掌握TypeORM-32.png)
+![](./image/第44章-32.png)
 
 通过 findOneBy 也可以：
 
@@ -504,7 +504,7 @@ AppDataSource.initialize().then(async () => {
 
 ```
 
-![](./image/第44章—快速掌握TypeORM-33.png)
+![](./image/第44章-33.png)
 
 此外，findOne 还有两个特殊的方法：
 
@@ -530,7 +530,7 @@ AppDataSource.initialize().then(async () => {
 
 findOneOrFail 或者 findOneByOrFail，如果没找到，会抛一个 EntityNotFoundError 的异常：
 
-![](./image/第44章—快速掌握TypeORM-34.png)
+![](./image/第44章-34.png)
 
 此外，你还可以用 query 方法直接执行 sql 语句：
 
@@ -545,7 +545,7 @@ AppDataSource.initialize().then(async () => {
 }).catch(error => console.log(error))
 ```
 
-![](./image/第44章—快速掌握TypeORM-35.png)
+![](./image/第44章-35.png)
 
 但复杂 sql 语句不会直接写，而是会用 query builder：
 
@@ -562,13 +562,13 @@ console.log(user);
 
 生成的 sql 语句如下：
 
-![](./image/第44章—快速掌握TypeORM-36.png)
+![](./image/第44章-36.png)
 
 有同学说，用 query builder 和我用 find 指定 where 有什么区别么？
 
 比如这种复杂的关联查询：
 
-![](./image/第44章—快速掌握TypeORM-37.png)
+![](./image/第44章-37.png)
 
 涉及到多个表，也就是多个 Entity 的关联查询，就得用 query builder 了。
 
@@ -589,17 +589,17 @@ await AppDataSource.manager.transaction(async manager => {
 });
 ```
 
-![](./image/第44章—快速掌握TypeORM-38.png)
+![](./image/第44章-38.png)
 
 还有，调用每个方法的时候都要先传入实体类，这也太麻烦了：
 
-![](./image/第44章—快速掌握TypeORM-39.png)
+![](./image/第44章-39.png)
 
 有没有什么简便方法呢？
 
 有，可以先调用 getRepository 传入 Entity，拿到专门处理这个 Entity 的增删改查的类，再调用这些方法：
 
-![](./image/第44章—快速掌握TypeORM-40.png)
+![](./image/第44章-40.png)
 
 具体的方法和 EntityManager 是一样的。
 
@@ -609,7 +609,7 @@ await AppDataSource.manager.transaction(async manager => {
 
 我们过了一遍 TypeORM 的各种概念，画个图总结下：
 
-![](./image/第44章—快速掌握TypeORM-41.png)
+![](./image/第44章-41.png)
 
 DataSource 里管理着数据库连接配置，数据库驱动包，调用它的 intialize 方法会创建和 mysql 的连接。
 

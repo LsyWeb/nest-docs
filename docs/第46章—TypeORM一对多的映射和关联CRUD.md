@@ -4,7 +4,7 @@
 
     npx typeorm@latest init --name typeorm-relation-mapping2 --database mysql
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-1.png)
+![](./image/第46章-1.png)
 
 进入项目目录，安装驱动包 mysql2：
 
@@ -44,7 +44,7 @@ export const AppDataSource = new DataSource({
     npx typeorm entity:create src/entity/Department
     npx typeorm entity:create src/entity/Employee
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-2.png)
+![](./image/第46章-2.png)
 
 然后添加 Department 和 Employee 的映射信息：
 
@@ -82,15 +82,15 @@ export class Employee {
 
 把这俩 Entity 添加到 DataSource 的 entities 里：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-3.png)
+![](./image/第46章-3.png)
 
 因为 index.ts 里用到了 User，我们用不到，把这些代码删掉：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-4.png)
+![](./image/第46章-4.png)
 
 然后 npm run start：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-5.png)
+![](./image/第46章-5.png)
 
 可以看到，这两个表都创建成功了。
 
@@ -98,23 +98,23 @@ export class Employee {
 
 通过 @ManyToOne 的装饰器：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-6.png)
+![](./image/第46章-6.png)
 
 在多的一方使用 @ManyToOne 装饰器。
 
 把这两个表删掉：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-7.png)
+![](./image/第46章-7.png)
 
 重新 npm run start：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-8.png)
+![](./image/第46章-8.png)
 
 就可以看到创建了两个表，并且在 employee 表添加了外建约束。
 
 workbench 里也可以看到这个外键：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-9.png)
+![](./image/第46章-9.png)
 
 改下 index.ts，新增一些数据，调用 save 保存：
 
@@ -150,21 +150,21 @@ AppDataSource.initialize().then(async () => {
 
 再跑下：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-10.png)
+![](./image/第46章-10.png)
 
 可以看到被 transaction 包裹的 4 条 insert 语句，分别插入了 Department 和 3 个 Employee。
 
 当然，如果是设置了 cascade，那就只需要保存 empolyee 就好了：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-11.png)
+![](./image/第46章-11.png)
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-12.png)
+![](./image/第46章-12.png)
 
 department 会自动级联保存。
 
 不过一对多关系更多还是在一的那一方来保持关系，我们改下 Department：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-13.png)
+![](./image/第46章-13.png)
 
 这里要通过第二个参数指定外键列在 employee.department 维护。
 
@@ -176,17 +176,17 @@ department 会自动级联保存。
 
 不过你也可以通过 @JoinColumn 来修改外键列的名字：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-14.png)
+![](./image/第46章-14.png)
 
 加上 @OneToMany 装饰器，再设置下 cascade：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-15.png)
+![](./image/第46章-15.png)
 
 这样当你保存 department 的时候，关联的 employee 也都会保存了。
 
 不过这时候要把 @ManyToOne 的 cascade 去掉。
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-16.png)
+![](./image/第46章-16.png)
 
 不然，双方都级联保存，那不就无限循环了么？
 
@@ -220,7 +220,7 @@ AppDataSource.initialize().then(async () => {
 
 这样关联的 employee 就会自动保存：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-17.png)
+![](./image/第46章-17.png)
 
 然后再来试下查询：
 
@@ -229,7 +229,7 @@ const deps = await AppDataSource.manager.find(Department);
 console.log(deps);
 ```
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-18.png)
+![](./image/第46章-18.png)
 
 想要关联查询需要声明下 relations：
 
@@ -243,7 +243,7 @@ console.log(deps);
 console.log(deps.map(item => item.employees))
 ```
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-19.png)
+![](./image/第46章-19.png)
 
 这个 relations 其实就是 left join on，或者通过 query builder 来手动关联：
 
@@ -257,7 +257,7 @@ console.log(es);
 console.log(es.map(item => item.employees))
 ```
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-20.png)
+![](./image/第46章-20.png)
 
 先 getRepository 再创建 query builder。
 
@@ -285,11 +285,11 @@ await AppDataSource.manager.delete(Department, deps[0].id);
 
 当然，如果你设置了 onDelete 为 SET NULL 或者 CASCADE：
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-21.png)
+![](./image/第46章-21.png)
 
 那就不用自己删 employee 了，只要删了 department，mysql 会自动把关联的 employee 记录删除，或者是把它们的外键 id 置为空。
 
-![](./image/第46章—TypeORM一对多的映射和关联CRUD-22.png)
+![](./image/第46章-22.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/typeorm-relation-mapping2)。
 

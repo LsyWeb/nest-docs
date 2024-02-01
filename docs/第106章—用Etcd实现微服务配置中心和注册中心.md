@@ -12,7 +12,7 @@
 
 就很麻烦。
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-1.png)
+![](./image/第106章-1.png)
 
 如果有一个服务专门用来集中管理配置信息呢？
 
@@ -20,7 +20,7 @@
 
 这个集中管理配置信息的服务就叫配置中心。
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-2.png)
+![](./image/第106章-2.png)
 
 再就是注册中心：
 
@@ -36,11 +36,11 @@
 
 这时候微服务 A 怎么知道微服务 B 有哪些节点可用呢？
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-3.png)
+![](./image/第106章-3.png)
 
 答案也是需要一个单独的服务来管理，这个服务就是注册中心：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-4.png)
+![](./image/第106章-4.png)
 
 微服务在启动的时候，向注册中心注册，销毁的时候向注册中心注销，并且定时发心跳包来汇报自己的状态。
 
@@ -53,13 +53,13 @@
 下面是我网上找的几张微服务系统的架构图：
 
 这个：
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-5.png)
+![](./image/第106章-5.png)
 
 这个：
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-6.png)
+![](./image/第106章-6.png)
 
 或者这个：
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-7.png)
+![](./image/第106章-7.png)
 
 可以看到，配置中心和注册中心是必备组件。
 
@@ -69,27 +69,27 @@
 
 今天我们来学下 etcd 实现注册中心和配置中心。
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-8.png)
+![](./image/第106章-8.png)
 
 它其实是一个 key-value 的存储服务。
 
 k8s 就是用它来做的注册中心、配置中心：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-9.png)
+![](./image/第106章-9.png)
 
 我们通过 docker 把它跑起来。
 
 在 docker desktop 搜索 etcd 的镜像，点击 run:
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-10.png)
+![](./image/第106章-10.png)
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-11.png)
+![](./image/第106章-11.png)
 
 输入容器名，映射 2379 端口到容器内的 2379 端口，设置 ETCD_ROOT_PASSWORD 环境变量，也就是指定 root 的密码。
 
 然后就可以看到 etcd server 的 docker 镜像成功跑起来了：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-12.png)
+![](./image/第106章-12.png)
 
 它带了一个 etcdctl 的命令行工具，可以作为客户端和 etcd server 交互。
 
@@ -116,7 +116,7 @@ export ETCDCTL_PASSWORD=guang
 ```
 这里的 password 就是启动容器的时候指定的那个环境变量：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-13.png)
+![](./image/第106章-13.png)
 
 我们设置几个 key：
 
@@ -124,7 +124,7 @@ export ETCDCTL_PASSWORD=guang
 etcdctl put /services/a xxxx
 etcdctl put /services/b yyyy
 ```
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-14.png)
+![](./image/第106章-14.png)
 
 之后可以 get 来查询他们的值：
 
@@ -132,7 +132,7 @@ etcdctl put /services/b yyyy
 etcdctl get /services/a
 etcdctl get /services/b
 ```
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-15.png)
+![](./image/第106章-15.png)
 
 也可以通过 --prefix 查询指定前缀的 key 的值：
 
@@ -140,7 +140,7 @@ etcdctl get /services/b
 etcdctl get --prefix /services 
 ```
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-16.png)
+![](./image/第106章-16.png)
 
 删除也是可以单个删和指定前缀批量删：
 
@@ -149,7 +149,7 @@ etcdctl del /servcies/a
 etcdctl del --prefix /services
 ```
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-17.png)
+![](./image/第106章-17.png)
 
 这样的 key-value 用来存储 服务名-链接信息，那就是注册中心，用来存储配置信息，那就是配置中心。
 
@@ -163,7 +163,7 @@ cd etcd-test
 npm init -y
 ```
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-18.image#?w=874&h=708&s=83915&e=png&b=000000.png)
+![](./image/第106章-18.png)
 
 安装 etcd 的包：
 ```
@@ -210,7 +210,7 @@ watch().key(xx).create 则是创建某个 key 的监听器，监听他的 put �
 
 我们再 put 几个 key：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-19.png)
+![](./image/第106章-19.png)
 
 ```
 etcdctl put /services/a xxx
@@ -220,13 +220,13 @@ etcdctl put /services/b yyy
 
 然后执行上面的 node 脚本：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-20.png)
+![](./image/第106章-20.png)
 
 确实取到了 etcd server 中的值。
 
 然后在 etcdctl 里 put 修改下 /services/a 的值：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-21.png)
+![](./image/第106章-21.png)
 
 ```
 etcdctl put /services/a zzz
@@ -234,18 +234,18 @@ etcdctl put /services/a zzz
 
 在 node 脚本这里收到了通知：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-22.png)
+![](./image/第106章-22.png)
 
 再 del 试下：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-23.png)
+![](./image/第106章-23.png)
 ```
 etcdctl del /services/a
 ```
 
 也收到了通知：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-24.png)
+![](./image/第106章-24.png)
 
 这样，在 node 里操作 etcd server 就跑通了。
 
@@ -279,7 +279,7 @@ async function deleteConfig(key) {
 })();
 ```
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-25.png)
+![](./image/第106章-25.png)
 
 你可以在这里存各种数据库连接信息、环境变量等各种配置。
 
@@ -355,16 +355,16 @@ async function watchService(serviceName, callback) {
 
 跑起来确实能获得服务的所有节点信息：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-26.png)
+![](./image/第106章-26.png)
 
 当在 etcdctl 里 del 一个服务节点的时候，这里也能收到通知：
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-27.png)
+![](./image/第106章-27.png)
 ```
 etcdctl del /services/my_service/instance_2
 ```
 
-![](./image/第106章—用Etcd实现微服务配置中心和注册中心-28.png)
+![](./image/第106章-28.png)
 
 这样，我们就实现了服务注册、服务发现功能。
 

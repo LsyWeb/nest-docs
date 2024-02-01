@@ -2,15 +2,15 @@
 
 比如路由找不到时返回 404：
 
-![](./image/第21章—如何自定义ExceptionFilter-1.image#?w=598&h=300&s=33718&e=png&b=fdfdfd.png)
+![](./image/第21章-1.png)
 
 服务端报错时返回 500：
 
-![](./image/第21章—如何自定义ExceptionFilter-2.image#?w=540&h=296&s=29295&e=png&b=fdfdfd.png)
+![](./image/第21章-2.png)
 
 参数的错误返回 400：
 
-![](./image/第21章—如何自定义ExceptionFilter-3.image#?w=494&h=304&s=32943&e=png&b=fdfdfd.png)
+![](./image/第21章-3.png)
 
 这些都是 Exception Filter 做的事情。
 
@@ -23,7 +23,7 @@
 ```
 nest new exception-filter-test
 ```
-![](./image/第21章—如何自定义ExceptionFilter-4.image#?w=970&h=684&s=168165&e=png&b=010101.png)
+![](./image/第21章-4.png)
 
 把它跑起来：
 
@@ -31,34 +31,34 @@ nest new exception-filter-test
 npm run start:dev
 ```
 
-![](./image/第21章—如何自定义ExceptionFilter-5.image#?w=1526&h=334&s=115093&e=png&b=181818.png)
+![](./image/第21章-5.png)
 
 浏览器访问 http://localhost:3000 可以看到 hello world，代表服务跑起来了：
 
-![](./image/第21章—如何自定义ExceptionFilter-6.image#?w=550&h=170&s=15840&e=png&b=ffffff.png)
+![](./image/第21章-6.png)
 
 然后在 controller 里抛个异常： 
 
-![](./image/第21章—如何自定义ExceptionFilter-7.image#?w=994&h=486&s=112600&e=png&b=202020.png)
+![](./image/第21章-7.png)
 
 ```javascript
 throw new HttpException('xxxx', HttpStatus.BAD_REQUEST)
 ```
 这个 HttpStatus 就是一些状态码的常量：
 
-![](./image/第21章—如何自定义ExceptionFilter-8.image#?w=1110&h=524&s=171231&e=gif&f=34&b=222222.png)
+![](./image/第21章-8.png)
 
 这时候刷新页面，返回的就是 400 对应的响应：
 
-![](./image/第21章—如何自定义ExceptionFilter-9.image#?w=600&h=280&s=25680&e=png&b=fdfdfd.png)
+![](./image/第21章-9.png)
 
 这个响应的格式是内置的 Exception Filter 生成的。
 
 当然，你也可以直接抛具体的异常：
 
-![](./image/第21章—如何自定义ExceptionFilter-10.image#?w=918&h=248&s=48310&e=png&b=1f1f1f.png)
+![](./image/第21章-10.png)
 
-![](./image/第21章—如何自定义ExceptionFilter-11.image#?w=582&h=314&s=31111&e=png&b=fdfdfd.png)
+![](./image/第21章-11.png)
 
 然后我们自己定义个 exception filter：
 
@@ -68,9 +68,9 @@ nest g filter hello --flat --no-spec
 
 --flat 是不生成 hello 目录，--no-spec 是不生成测试文件。
 
-![](./image/第21章—如何自定义ExceptionFilter-12.image#?w=670&h=70&s=17647&e=png&b=191919.png)
+![](./image/第21章-12.png)
 
-![](./image/第21章—如何自定义ExceptionFilter-13.image#?w=1172&h=284&s=62603&e=png&b=1f1f1f.png)
+![](./image/第21章-13.png)
 
 @Catch 指定要捕获的异常，这里指定 BadRequestException。
 
@@ -89,24 +89,24 @@ export class HelloFilter implements ExceptionFilter {
 
 在 AppModule 里引入：
 
-![](./image/第21章—如何自定义ExceptionFilter-14.image#?w=846&h=484&s=93395&e=png&b=1f1f1f.png)
+![](./image/第21章-14.png)
 
 ```javascript
 app.useGlobalFilters(new HelloFilter());
 ```
 如果你想局部启用，可以加在 handler 或者 controller 上：
 
-![](./image/第21章—如何自定义ExceptionFilter-15.image#?w=504&h=182&s=30353&e=png&b=1f1f1f.png)
+![](./image/第21章-15.png)
 
-![](./image/第21章—如何自定义ExceptionFilter-16.image#?w=490&h=150&s=25435&e=png&b=1f1f1f.png)
+![](./image/第21章-16.png)
 
 然后新建个调试配置文件：
 
-![](./image/第21章—如何自定义ExceptionFilter-17.image#?w=640&h=390&s=45127&e=png&b=181818.png)
+![](./image/第21章-17.png)
 
 输入调试配置：
 
-![](./image/第21章—如何自定义ExceptionFilter-18.image#?w=872&h=840&s=116234&e=png&b=1f1f1f.png)
+![](./image/第21章-18.png)
 
 ```json
 {
@@ -126,15 +126,15 @@ app.useGlobalFilters(new HelloFilter());
 ```
 把之前的服务关掉，点击调试启动：
 
-![](./image/第21章—如何自定义ExceptionFilter-19.image#?w=1324&h=852&s=176647&e=png&b=1c1c1c.png)
+![](./image/第21章-19.png)
 
 刷新页面，代码会在断点处断住：
 
-![](./image/第21章—如何自定义ExceptionFilter-20.image#?w=1598&h=858&s=238183&e=png&b=1d1d1d.png)
+![](./image/第21章-20.png)
 
 我们只要根据异常信息返回对应的响应就可以了：
 
-![](./image/第21章—如何自定义ExceptionFilter-21.image#?w=1076&h=540&s=129790&e=png&b=202020.png)
+![](./image/第21章-21.png)
 
 ```javascript
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
@@ -160,17 +160,17 @@ export class HelloFilter implements ExceptionFilter {
 ```
 这样，抛异常时返回的响应就是自定义的了：
 
-![](./image/第21章—如何自定义ExceptionFilter-22.image#?w=550&h=356&s=32092&e=png&b=fdfdfd.png)
+![](./image/第21章-22.png)
 
 但我们只是 @Catch 了 BadRequestException
 
 如果抛的是其他异常，依然是原来的格式：
 
-![](./image/第21章—如何自定义ExceptionFilter-23.image#?w=904&h=226&s=47330&e=png&b=1f1f1f.png)
+![](./image/第21章-23.png)
 
 比如我抛一个 BadGatewayException。
 
-![](./image/第21章—如何自定义ExceptionFilter-24.image#?w=570&h=304&s=30168&e=png&b=fdfdfd.png)
+![](./image/第21章-24.png)
 
 依然是默认格式。
 
@@ -178,13 +178,13 @@ export class HelloFilter implements ExceptionFilter {
 
 因为 BadRequestExeption、BadGateWayException 等都是它的子类。
 
-![](./image/第21章—如何自定义ExceptionFilter-25.image#?w=920&h=740&s=150347&e=png&b=1f1f1f.png)
+![](./image/第21章-25.png)
 
 试一下：
 
-![](./image/第21章—如何自定义ExceptionFilter-26.image#?w=574&h=344&s=31776&e=png&b=fdfdfd.png)
+![](./image/第21章-26.png)
 
-![](./image/第21章—如何自定义ExceptionFilter-27.image#?w=538&h=344&s=31635&e=png&b=fdfdfd.png)
+![](./image/第21章-27.png)
 
 确实，现在所有的 HttpException 都会被处理了。
 
@@ -231,7 +231,7 @@ export class AaaDto {
 ```
 在 main.ts 启用 ValidationPipe：
 
-![](./image/第21章—如何自定义ExceptionFilter-28.image#?w=866&h=608&s=122015&e=png&b=1f1f1f.png)
+![](./image/第21章-28.png)
 
 ```javascript
 app.useGlobalPipes(new ValidationPipe());
@@ -239,37 +239,37 @@ app.useGlobalPipes(new ValidationPipe());
 
 在 postman 里测试下：
 
-![](./image/第21章—如何自定义ExceptionFilter-29.image#?w=914&h=818&s=82850&e=png&b=fcfcfc.png)
+![](./image/第21章-29.png)
 
 可以看到，提示的错误也不对了。
 
 因为我们自定义的 exception filter 会拦截所有 HttpException，但是没有对这种情况做支持。
 
-![](./image/第21章—如何自定义ExceptionFilter-30.image#?w=872&h=620&s=123385&e=png&b=1f1f1f.png)
+![](./image/第21章-30.png)
 
 先不加这个 filter。
 
 这时候响应是这样的：
 
-![](./image/第21章—如何自定义ExceptionFilter-31.image#?w=880&h=894&s=90951&e=png&b=fcfcfc.png)
+![](./image/第21章-31.png)
 
 我们对这种情况做下支持：
 
-![](./image/第21章—如何自定义ExceptionFilter-32.image#?w=886&h=590&s=121580&e=png&b=1f1f1f.png)
+![](./image/第21章-32.png)
 
 启用自定义的 filter，然后打个断点：
 
-![](./image/第21章—如何自定义ExceptionFilter-33.image#?w=1036&h=594&s=122550&e=png&b=1f1f1f.png)
+![](./image/第21章-33.png)
 
 再次访问会在断点处断住：
 
-![](./image/第21章—如何自定义ExceptionFilter-34.image#?w=1036&h=598&s=151151&e=png&b=202020.png)
+![](./image/第21章-34.png)
 
 可以看到 ValidationPipe 的 response 格式是这样的。
 
 所以我们可以这样改：
 
-![](./image/第21章—如何自定义ExceptionFilter-35.image#?w=1310&h=738&s=172236&e=png&b=1f1f1f.png)
+![](./image/第21章-35.png)
 
 ```javascript
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
@@ -299,9 +299,9 @@ export class HelloFilter implements ExceptionFilter {
 
 再试下：
 
-![](./image/第21章—如何自定义ExceptionFilter-36.image#?w=950&h=806&s=87413&e=png&b=fcfcfc.png)
+![](./image/第21章-36.png)
 
-![](./image/第21章—如何自定义ExceptionFilter-37.image#?w=554&h=326&s=31640&e=png&b=fdfdfd.png)
+![](./image/第21章-37.png)
 
 现在，ValidationPipe 的错误和其他的错误就都返回了正确的格式。
 
@@ -309,11 +309,11 @@ export class HelloFilter implements ExceptionFilter {
 
 这就需要改一下注册方式：
 
-![](./image/第21章—如何自定义ExceptionFilter-38.image#?w=896&h=600&s=123262&e=png&b=1f1f1f.png)
+![](./image/第21章-38.png)
 
 不用 useGlobalFilters 注册了，而是在 AppModule 里注册一个 token 为 APP_FILTER 的 provider：
 
-![](./image/第21章—如何自定义ExceptionFilter-39.image#?w=876&h=718&s=125118&e=png&b=1f1f1f.png)
+![](./image/第21章-39.png)
 
 ```javascript
 {
@@ -327,13 +327,13 @@ Nest 会把所有 token 为 APP_FILTER 的 provider 注册为全局 Exception Fi
 
 其余的全局 Guard、Interceptor、Pipe 也是这样注册：
 
-![](./image/第21章—如何自定义ExceptionFilter-40.image#?w=578&h=222&s=28288&e=png&b=222222.png)
+![](./image/第21章-40.png)
 
 这样注册的好处就是可以注入其他 provider 了：
 
 比如我注入了 AppService，然后调用它的 getHello 方法：
 
-![](./image/第21章—如何自定义ExceptionFilter-41.image#?w=1228&h=984&s=218038&e=png&b=1f1f1f.png)
+![](./image/第21章-41.png)
 
 ```javascript
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException, Inject } from '@nestjs/common';
@@ -366,7 +366,7 @@ export class HelloFilter implements ExceptionFilter {
 ```
 可以看到，service 方法调用成功了：
 
-![](./image/第21章—如何自定义ExceptionFilter-42.image#?w=888&h=872&s=91087&e=png&b=fcfcfc.png)
+![](./image/第21章-42.png)
 
 此外，如果你想自定义 Exception 也是可以的。
 
@@ -403,7 +403,7 @@ export class UnloginFilter implements ExceptionFilter {
 
 在 AppModule 里注册这个全局 Filter：
 
-![](./image/第21章—如何自定义ExceptionFilter-43.image#?w=866&h=892&s=153175&e=png&b=1f1f1f.png)
+![](./image/第21章-43.png)
 
 ```javascript
 {
@@ -413,11 +413,11 @@ export class UnloginFilter implements ExceptionFilter {
 ```
 之后在 AppController 里抛出这个异常：
 
-![](./image/第21章—如何自定义ExceptionFilter-44.image#?w=634&h=268&s=48195&e=png&b=202020.png)
+![](./image/第21章-44.png)
 
 浏览器里访问下：
 
-![](./image/第21章—如何自定义ExceptionFilter-45.image#?w=592&h=298&s=29084&e=png&b=fdfdfd.png)
+![](./image/第21章-45.png)
 
 可以看到，返回的是我们自定义的格式。
 

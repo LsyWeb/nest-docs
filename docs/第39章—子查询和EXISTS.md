@@ -12,7 +12,7 @@
 select * from student;
 ```
 
-![](./image/第39章—子查询和EXISTS-1.png)
+![](./image/第39章-1.png)
 
 然后我们想查询学生表中成绩最高的学生的姓名和班级名称。
 
@@ -24,7 +24,7 @@ select * from student;
 SELECT MAX(score) FROM student;
 ```
 
-![](./image/第39章—子查询和EXISTS-2.png)
+![](./image/第39章-2.png)
 
 再查询这个分数为这个最高分的学生：
 
@@ -32,7 +32,7 @@ SELECT MAX(score) FROM student;
 SELECT name, class FROM student WHERE score = 95;
 ```
 
-![](./image/第39章—子查询和EXISTS-3.png)
+![](./image/第39章-3.png)
 
 能不能把这两个 sql 合并呢？
 
@@ -42,7 +42,7 @@ SELECT name, class FROM student WHERE score = 95;
 SELECT name, class FROM student WHERE score = (SELECT MAX(score) FROM student);
 ```
 
-![](./image/第39章—子查询和EXISTS-4.png)
+![](./image/第39章-4.png)
 
 比如查询成绩高于全校平均成绩的学生记录：
 
@@ -52,7 +52,7 @@ SELECT * FROM student WHERE score > (SELECT AVG(score) FROM student);
 
 先一个 select 语句查询学生的平均分，然后查询分数大于这个平均分的学生。
 
-![](./image/第39章—子查询和EXISTS-5.png)
+![](./image/第39章-5.png)
 
 此外，子查询还有个特有的语法 EXISTS、NOT EXISTS。
 
@@ -64,17 +64,17 @@ SELECT * FROM student WHERE score > (SELECT AVG(score) FROM student);
 select * from department;
 ```
 
-![](./image/第39章—子查询和EXISTS-6.png)
+![](./image/第39章-6.png)
 
 ```sql
 select * from employee;
 ```
 
-![](./image/第39章—子查询和EXISTS-7.png)
+![](./image/第39章-7.png)
 
 改一下员工的部门，点击 apply：
 
-![](./image/第39章—子查询和EXISTS-8.png)
+![](./image/第39章-8.png)
 
 这样就有的部门 2 个员工，有的部门 3 个员工，有的部门没有员工了。
 
@@ -97,7 +97,7 @@ SELECT name FROM department
 
 这就是 EXISTS 的作用：子查询返回结果，条件成立，反之不成立。
 
-![](./image/第39章—子查询和EXISTS-9.png)
+![](./image/第39章-9.png)
 
 这就是所有有员工的部门。
 
@@ -110,7 +110,7 @@ SELECT name FROM department
     );
 ```
 
-![](./image/第39章—子查询和EXISTS-10.png)
+![](./image/第39章-10.png)
 
 子查询不止 select 里可以用，insert、update、delete 语句同样可以。
 
@@ -128,7 +128,7 @@ CREATE TABLE product (
 
 直接用这个 sql 建就好了：
 
-![](./image/第39章—子查询和EXISTS-11.png)
+![](./image/第39章-11.png)
 
 然后插入几条数据：
 
@@ -144,7 +144,7 @@ INSERT INTO product (id, name, price, category, stock)
 
 选中 sql，点击执行：
 
-![](./image/第39章—子查询和EXISTS-12.png)
+![](./image/第39章-12.png)
 
 然后查询下：
 
@@ -152,7 +152,7 @@ INSERT INTO product (id, name, price, category, stock)
 select * from product
 ```
 
-![](./image/第39章—子查询和EXISTS-13.png)
+![](./image/第39章-13.png)
 
 查询的时候，可以用子查询，这个我们前面试过。
 
@@ -162,7 +162,7 @@ select * from product
 SELECT name, price FROM product WHERE price = (SELECT MAX(price) FROM product);
 ```
 
-![](./image/第39章—子查询和EXISTS-14.png)
+![](./image/第39章-14.png)
 
 通过一个子查询查最高的价格，然后外层查询查价格为最高价格的产品。
 
@@ -189,7 +189,7 @@ avg\_price 为 DECIMAL(10,2) 也就是一共 10 位，小数点后占 2 位的�
 
 点击执行：
 
-![](./image/第39章—子查询和EXISTS-15.png)
+![](./image/第39章-15.png)
 
 然后把 product 产品表里的分类和平均价格查出来插入这个表：
 
@@ -200,7 +200,7 @@ INSERT INTO avg_price_by_category (category, avg_price)
 
 点击执行：
 
-![](./image/第39章—子查询和EXISTS-16.png)
+![](./image/第39章-16.png)
 
 然后再查询现在的 avg\_price\_by\_category 表：
 
@@ -210,7 +210,7 @@ select * from avg_price_by_category
 
 可以看到，确实插入了数据：
 
-![](./image/第39章—子查询和EXISTS-17.png)
+![](./image/第39章-17.png)
 
 这就是 insert + select 结合使用的场景。
 
@@ -230,11 +230,11 @@ UPDATE employee SET name = CONCAT('技术-', name)
 
 执行这个 sql:
 
-![](./image/第39章—子查询和EXISTS-18.png)
+![](./image/第39章-18.png)
 
 可以看到技术部的员工的名字都改了：
 
-![](./image/第39章—子查询和EXISTS-19.png)
+![](./image/第39章-19.png)
 
 接下来再试试 delete：
 
@@ -249,13 +249,13 @@ DELETE FROM employee WHERE department_id = (
 ```
 执行一下：
 
-![](./image/第39章—子查询和EXISTS-20.png)
+![](./image/第39章-20.png)
 
 然后再次查询：
 ```sql
 select * from employee;
 ```
-![](./image/第39章—子查询和EXISTS-21.png)
+![](./image/第39章-21.png)
 
 可以看到技术部员工确实都没有了。
 

@@ -2,7 +2,7 @@
 
 [官方文档](https://docs.nestjs.com/techniques/caching)里就是用的 cache-manger：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-1.image#?w=1734&h=848&s=127296&e=png&b=fafafa.png)
+![](./image/第53章-1.png)
 
 确实，cache-manger 有它好用的地方，但是它的缺点更多。
 
@@ -13,7 +13,7 @@
 ```
 nest new cache-manager-test
 ```
-![](./image/第53章—为什么不用cache-manager操作Redis-2.image#?w=964&h=698&s=165646&e=png&b=010101.png)
+![](./image/第53章-2.png)
 
 创建个 nest 项目。
 
@@ -23,9 +23,9 @@ nest new cache-manager-test
 npm run start:dev
 ```
 
-![](./image/第53章—为什么不用cache-manager操作Redis-3.image#?w=1580&h=346&s=114543&e=png&b=181818.png)
+![](./image/第53章-3.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-4.image#?w=582&h=152&s=15987&e=png&b=ffffff.png)
+![](./image/第53章-4.png)
 
 然后引入 cache-manager：
 
@@ -34,11 +34,11 @@ npm install @nestjs/cache-manager cache-manager
 ```
 在 AppModule 注册下：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-5.image#?w=888&h=438&s=99701&e=png&b=1f1f1f.png)
+![](./image/第53章-5.png)
 
 之后在 AppController 加几个路由：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-6.image#?w=1094&h=1200&s=228053&e=png&b=1f1f1f.png)
+![](./image/第53章-6.png)
 
 注入 CacheManager，分别测试下它的 get、set、del 方法。
 
@@ -84,29 +84,29 @@ export class AppController {
 
 首先 get 没有数据：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-7.image#?w=632&h=200&s=15474&e=png&b=ffffff.png)
+![](./image/第53章-7.png)
 
 然后 set 设置为 111：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-8.image#?w=742&h=198&s=19175&e=png&b=ffffff.png)
+![](./image/第53章-8.png)
 
 再次 get 就有数据了：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-9.image#?w=612&h=190&s=15558&e=png&b=ffffff.png)
+![](./image/第53章-9.png)
 
 之后 del 删掉：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-10.image#?w=614&h=160&s=15945&e=png&b=ffffff.png)
+![](./image/第53章-10.png)
 
 再次 get 就为空了：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-11.image#?w=608&h=170&s=14784&e=png&b=ffffff.png)
+![](./image/第53章-11.png)
 
 这个缓存的用法很简单。
 
 此外，你还可以把它加到 handler 上，自动对结果缓存。
 
-![](./image/第53章—为什么不用cache-manager操作Redis-12.image#?w=678&h=442&s=69269&e=png&b=1f1f1f.png)
+![](./image/第53章-12.png)
 
 ```javascript
 @Get('aaa')
@@ -118,15 +118,15 @@ aaa(@Query('a') a: string){
 ```
 参数不变的情况下，刷新几次，可以看到控制台只打印了一次：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-13.image#?w=706&h=192&s=16848&e=png&b=ffffff.png)
+![](./image/第53章-13.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-14.image#?w=380&h=456&s=66532&e=png&b=181818.png)
+![](./image/第53章-14.png)
 
 改变参数再刷新几次：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-15.image#?w=678&h=188&s=16877&e=png&b=ffffff.png)
+![](./image/第53章-15.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-16.image#?w=578&h=458&s=83866&e=png&b=181818.png)
+![](./image/第53章-16.png)
 
 这时候控制台再次打印了，说明 handler 又被执行了。
 
@@ -138,7 +138,7 @@ aaa(@Query('a') a: string){
 
 如果想存在 redis，要这样：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-17.image#?w=982&h=1048&s=198581&e=png&b=1f1f1f.png)
+![](./image/第53章-17.png)
 
 使用 cache-manager-redis-store，然后添加下连接配置：
 
@@ -180,25 +180,25 @@ npm install cache-manager-redis-store
 
 然后再次访问之前的 url：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-18.image#?w=756&h=182&s=18973&e=png&b=ffffff.png)
+![](./image/第53章-18.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-19.image#?w=744&h=230&s=18051&e=png&b=ffffff.png)
+![](./image/第53章-19.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-20.image#?w=686&h=162&s=16171&e=png&b=ffffff.png)
+![](./image/第53章-20.png)
 
 这时候在 redis 里就可以看到缓存的数据：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-21.image#?w=1570&h=666&s=95461&e=png&b=131313.png)
+![](./image/第53章-21.png)
 
 注意，连接的时候我们指定 database为 2，所以在 RedisInsight 里要切到 db2 才可以看到这些数据。
 
 缓存的过期时间也是可以配置的：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-22.image#?w=896&h=890&s=144295&e=png&b=1f1f1f.png)
+![](./image/第53章-22.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-23.image#?w=746&h=234&s=18292&e=png&b=ffffff.png)
+![](./image/第53章-23.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-24.image#?w=1254&h=560&s=60213&e=png&b=1b1b1b.png)
+![](./image/第53章-24.png)
 
 有同学会说，这个 CacheManager 不是很好用么？
 
@@ -206,15 +206,15 @@ npm install cache-manager-redis-store
 
 但是，redis 还有 list、hash、zset 等数据结构，支持非常多的命令。
 
-![](./image/第53章—为什么不用cache-manager操作Redis-25.image#?w=646&h=290&s=50209&e=png&b=212121.png)
+![](./image/第53章-25.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-26.image#?w=648&h=240&s=41781&e=png&b=212121.png)
+![](./image/第53章-26.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-27.image#?w=686&h=248&s=48930&e=png&b=212121.png)
+![](./image/第53章-27.png)
 
 而用 CacheManager 的话，只支持 get、set：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-28.image#?w=618&h=276&s=38615&e=png&b=212121.png)
+![](./image/第53章-28.png)
 
 这时候如果你想用 list、hash、zset 等数据结构，还是要自己封装。
 
@@ -228,7 +228,7 @@ npm install cache-manager-redis-store
 
 就是拼接这样一个 key 就好了：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-29.image#?w=1044&h=376&s=38372&e=png&b=1f1f1f.png)
+![](./image/第53章-29.png)
 
 我们实现下试试：
 
@@ -238,7 +238,7 @@ npm install redis
 ```
 然后在 AppModule 添加一个自定义的 provider：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-30.image#?w=998&h=1050&s=170634&e=png&b=1f1f1f.png)
+![](./image/第53章-30.png)
 
 ```javascript
 {
@@ -261,7 +261,7 @@ npm install redis
 ```
 nest g interceptor my-cache --no-spec --flat
 ```
-![](./image/第53章—为什么不用cache-manager操作Redis-31.image#?w=790&h=78&s=23845&e=png&b=191919.png)
+![](./image/第53章-31.png)
 
 这样写：
 
@@ -311,15 +311,15 @@ HttpAdapterHost 前面没用过。我们知道 Nest 底层可以切换 express�
 
 在 aaa 上应用我们自己写的 interceptor：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-32.image#?w=786&h=440&s=72934&e=png&b=1f1f1f.png)
+![](./image/第53章-32.png)
 
 跑一下：
 
-![](./image/第53章—为什么不用cache-manager操作Redis-33.image#?w=680&h=198&s=17009&e=png&b=ffffff.png)
+![](./image/第53章-33.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-34.image#?w=550&h=548&s=90713&e=png&b=191919.png)
+![](./image/第53章-34.png)
 
-![](./image/第53章—为什么不用cache-manager操作Redis-35.image#?w=1206&h=632&s=74637&e=png&b=151515.png)
+![](./image/第53章-35.png)
 
 多次刷新只执行了一次 handler，并且在 redis 里存储了对应的 key、value。
 

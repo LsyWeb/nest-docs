@@ -4,9 +4,9 @@
 
 大多数人会回答，就用邮箱客户端啊，比如 qq 邮箱的：
 
-![](./image/第73章—Node如何发邮件-1.png)
+![](./image/第73章-1.png)
 
-![](./image/第73章—Node如何发邮件-2.png)
+![](./image/第73章-2.png)
 
 但是这样体验并不好，比如写邮件的时候：
 
@@ -16,7 +16,7 @@
 
 但是它只支持富文本编辑器：
 
-![](./image/第73章—Node如何发邮件-3.png)
+![](./image/第73章-3.png)
 
 再比如收邮件的时候，我想把一些重要邮件的内容保存下来，附件啥的都下载到本地。
 
@@ -40,23 +40,23 @@
 
 在邮箱帮助中心 https://service.mail.qq.com/ 可以搜到如何开启 smtp、imap 等服务：
 
-![](./image/第73章—Node如何发邮件-4.png)
+![](./image/第73章-4.png)
 
 开启后可以在设置里看到：
 
-![](./image/第73章—Node如何发邮件-5.png)
+![](./image/第73章-5.png)
 
 然后在帮助中心页面搜索授权码：
 
-![](./image/第73章—Node如何发邮件-6.png)
+![](./image/第73章-6.png)
 
 按照指引生成一个授权码：
 
-![](./image/第73章—Node如何发邮件-7.png)
+![](./image/第73章-7.png)
 
 这个是 qq 邮箱特有的一个第三方登录密码：
 
-![](./image/第73章—Node如何发邮件-8.png)
+![](./image/第73章-8.png)
 
 然后就可以开始写代码了：
 
@@ -88,35 +88,35 @@ main().catch(console.error);
 ```
 安装 nodemailer 包，然后执行上面的代码：
 
-![](./image/第73章—Node如何发邮件-9.png)
+![](./image/第73章-9.png)
 
 可以看到邮件发送成功了。
 
 我们在邮箱里看看：
 
-![](./image/第73章—Node如何发邮件-10.png)
+![](./image/第73章-10.png)
 
 确实收到了这个邮件：
 
-![](./image/第73章—Node如何发邮件-11.png)
+![](./image/第73章-11.png)
 
 这样我们就用 node 发送了第一个邮件！
 
 而且邮件是支持 html + css 的，比如把我之前写的一个 [3 只小鸟的 button 的 html](https://juejin.cn/post/7167355169934409758) 拿过来：
 
-![](./image/第73章—Node如何发邮件-12.png)
+![](./image/第73章-12.png)
 
 放到一个文件里，然后发邮件的时候读取这个文件：
 
-![](./image/第73章—Node如何发邮件-13.png)
+![](./image/第73章-13.png)
 
 然后再跑下：
 
-![](./image/第73章—Node如何发邮件-14.png)
+![](./image/第73章-14.png)
 
 收到的邮件也渲染出了这个 html，并且 css 动画也是正常的：
 
-![](./image/第73章—Node如何发邮件-15.png)
+![](./image/第73章-15.png)
 
 那是不是可以加一些 js 呢？
 
@@ -161,7 +161,7 @@ imap.connect();
 
 这里的 imap 服务器的信息也是在帮助中心里搜索：
 
-![](./image/第73章—Node如何发邮件-16.png)
+![](./image/第73章-16.png)
 
 search 的参数我们写了两个：
 
@@ -173,11 +173,11 @@ search 的参数我们写了两个：
 
 我们跑下试试：
 
-![](./image/第73章—Node如何发邮件-17.png)
+![](./image/第73章-17.png)
 
 可以看到打印了搜索出的符合条件的邮件的 id，然后我们来处理下这些 id：
 
-![](./image/第73章—Node如何发邮件-18.png)
+![](./image/第73章-18.png)
 
 ```javascript
 const { MailParser } =require('mailparser');
@@ -201,7 +201,7 @@ function handleResults(results) {
 ```
 这里用 imap.fetch 来请求这些 id 的内容，bodies 为 '' 是查询 header + body 的意思：
 
-![](./image/第73章—Node如何发邮件-19.png)
+![](./image/第73章-19.png)
 
 然后处理下 body 的内容，把结果保存到 info 对象里。
 
@@ -259,21 +259,21 @@ function handleResults(results) {
 
 可以看到，我们前面发的那两个邮件都取到了。
 
-![](./image/第73章—Node如何发邮件-20.png)
+![](./image/第73章-20.png)
 
 日期也确实都是 7 月 10 日的。
 
 我邮箱里有这样一个邮件：
 
-![](./image/第73章—Node如何发邮件-21.png)
+![](./image/第73章-21.png)
 
 可以看到，附件也下载到了 files 目录下：
 
-![](./image/第73章—Node如何发邮件-22.png)
+![](./image/第73章-22.png)
 
 我们把 html 的内容保存到本地文件里：
 
-![](./image/第73章—Node如何发邮件-23.png)
+![](./image/第73章-23.png)
 
 ```javascript
 const filePath = path.join(__dirname, 'mails', info.theme + '.html');
@@ -285,11 +285,11 @@ fs.writeFileSync(filePath, info.html || info.text)
 
 邮件内容和附件内容都保存了下来：
 
-![](./image/第73章—Node如何发邮件-24.png)
+![](./image/第73章-24.png)
 
 在邮箱里可以看到也是这些邮件：
 
-![](./image/第73章—Node如何发邮件-25.png)
+![](./image/第73章-25.png)
 
 我们打开这些 html 看看，起一个 http-server：
 
@@ -297,9 +297,9 @@ fs.writeFileSync(filePath, info.html || info.text)
 npx http-server .
 ```
 
-![](./image/第73章—Node如何发邮件-26.png)
+![](./image/第73章-26.png)
 
-![](./image/第73章—Node如何发邮件-27.png)
+![](./image/第73章-27.png)
 
 和在邮箱里看一模一样。
 

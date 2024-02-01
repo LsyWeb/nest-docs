@@ -12,17 +12,17 @@ create schema 或者 create database 都可以，一个意思。
 
 utf8 最多存 3 个字节的字符，而 utf8mb4 最多 4 个字符，可以存储一些 emoji 等特殊字符。
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-1.png)
+![](./image/第56章-1.png)
 
 刷新后就可以看到这个数据库了：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-2.png)
+![](./image/第56章-2.png)
 
 然后我们创建个 nest 项目：
 
     nest new login-and-register -p npm
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-3.png)
+![](./image/第56章-3.png)
 
 安装 typeorm 相关的包：
 
@@ -65,11 +65,11 @@ export class AppModule {}
 
     nest g resource user
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-4.png)
+![](./image/第56章-4.png)
 
 引入 User 的 entity：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-5.png)
+![](./image/第56章-5.png)
 
 然后给 User 添加一些属性：
 
@@ -127,23 +127,23 @@ createTime 是创建时间，updateTime 是更新时间。
 
 npm run start:dev 就是 nest start --watch：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-6.png)
+![](./image/第56章-6.png)
 
 可以看到打印了 create table 的建表 sql：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-7.png)
+![](./image/第56章-7.png)
 
 用 mysql workbench 可以看到生成的表是对的：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-8.png)
+![](./image/第56章-8.png)
 
 然后我们在 UserModule 引入 TypeOrm.forFeature 动态模块，传入 User 的 entity。
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-9.png)
+![](./image/第56章-9.png)
 
 这样模块内就可以注入 User 对应的 Repository 了：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-10.png)
+![](./image/第56章-10.png)
 
 然后就可以实现 User 的增删改查。
 
@@ -173,7 +173,7 @@ export class UserController {
 
 然后添加两个 dto：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-11.png)
+![](./image/第56章-11.png)
 
 ```javascript
 export class LoginDto {
@@ -191,21 +191,21 @@ export class RegisterDto {
 
 在 handler 里使用这两个 dto 来接收参数：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-12.png)
+![](./image/第56章-12.png)
 
 我们先在 postman 里测试下：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-13.png)
+![](./image/第56章-13.png)
 
 post 请求 /user/login 接口，body 传入用户信息。
 
 服务端打印了收到的 user：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-14.png)
+![](./image/第56章-14.png)
 
 然后 post 请求 /user/register：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-15.png)
+![](./image/第56章-15.png)
 
 也是一样的。
 
@@ -277,23 +277,23 @@ export class UserService {
 
 password 需要加密，这里使用 node 内置的 crypto 包来实现。
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-16.png)
+![](./image/第56章-16.png)
 
 我们测试下：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-17.png)
+![](./image/第56章-17.png)
 
 服务返回了注册成功，并且打印了 insert 的 sql：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-18.png)
+![](./image/第56章-18.png)
 
 可以看到，数据库 user 表插入了这个用户的信息，并且指定了 createTime 和 udpateTime。
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-19.png)
+![](./image/第56章-19.png)
 
 然后我们再次调用：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-20.png)
+![](./image/第56章-20.png)
 
 会提示用户已经存在。
 
@@ -339,18 +339,18 @@ async login(user: LoginDto) {
 
 用户名、密码正确：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-21.png)
+![](./image/第56章-21.png)
 
 用户名不存在：
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-22.png)
+![](./image/第56章-22.png)
 
 用户名存在但密码错误：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-23.png)
+![](./image/第56章-23.png)
 
 可以看到，服务端打印了 3 条 select 的 sql：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-24.png)
+![](./image/第56章-24.png)
 
 登录成功之后我们要把用户信息放在 jwt 或者 session 中一份，这样后面再请求就知道已经登录了。
 
@@ -362,13 +362,13 @@ npm install @nestjs/jwt
 
 在 AppModule 里引入 JwtModule：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-25.png)
+![](./image/第56章-25.png)
 
 global:true 声明为全局模块，这样就不用每个模块都引入它了，指定加密密钥，token 过期时间。
 
 在 UserController 里注入 JwtService：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-26.png)
+![](./image/第56章-26.png)
 
 然后在登录成功后，把 user 信息放到 jwt 通过 header 里返回。
 
@@ -391,13 +391,13 @@ async login(@Body() user: LoginDto,  @Res({passthrough: true}) res: Response) {
     }
 }
 ```
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-27.png)
+![](./image/第56章-27.png)
 
 再次访问：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-28.png)
+![](./image/第56章-28.png)
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-29.png)
+![](./image/第56章-29.png)
 
 登录成功之后返回了 jwt 的 token。
 
@@ -419,9 +419,9 @@ bbb() {
 
 现在不需要登录就可以访问：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-30.png)
+![](./image/第56章-30.png)
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-31.png)
+![](./image/第56章-31.png)
 
 我们可以加个 Guard 来限制访问：
 
@@ -485,24 +485,24 @@ bbb() {
 }
 ```
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-32.png)
+![](./image/第56章-32.png)
 
 我们先登录一下，拿到 token：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-33.png)
+![](./image/第56章-33.png)
 
 然后请求 /aaa 的时候通过 authorization 的 header 带上 token：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-34.png)
+![](./image/第56章-34.png)
 
 访问成功。
 
 如果不带 token，就失败了：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-35.png)
+![](./image/第56章-35.png)
 
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-36.png)
+![](./image/第56章-36.png)
 
 这样我们就实现了登录注册的流程。
 
@@ -516,7 +516,7 @@ npm install class-validator class-transformer
 
 然后给 /user/login 和 /user/register 接口添加 ValidationPipe：
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-37.png)
+![](./image/第56章-37.png)
 
 在 dto 里声明参数的约束：
 
@@ -556,21 +556,21 @@ export class LoginDto{
 我们测试下：
 
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-38.png)
+![](./image/第56章-38.png)
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-39.png)
+![](./image/第56章-39.png)
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-40.png)
+![](./image/第56章-40.png)
 
 ValidationPipe 生效了。
 
 这样，我们就实现了登录、注册和鉴权的完整功能。
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-41.png)
+![](./image/第56章-41.png)
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-42.png)
+![](./image/第56章-42.png)
 
-![](./image/第56章—MySQL+TypeORM+JWT实现登录注册-43.png)
+![](./image/第56章-43.png)
 
 案例代码在[小册仓库](https://github.com/QuarkGluonPlasma/nestjs-course-code/tree/main/login-and-register)。
 

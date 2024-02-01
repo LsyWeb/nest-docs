@@ -4,7 +4,7 @@
 
 先回忆下 TypeORM 的流程：
 
-![](./image/第50章—在Nest里集成TypeORM-1.png)
+![](./image/第50章-1.png)
 
 DataSource 里存放着数据库连接的配置，比如用户名、密码、驱动包、连接池配置等等。
 
@@ -91,17 +91,17 @@ export class UsersModule {}
 
     nest new nest-typeorm -p npm
 
-![](./image/第50章—在Nest里集成TypeORM-2.png)
+![](./image/第50章-2.png)
 
 然后创建一个 crud 的模块：
 
     nest g resource user
 
-![](./image/第50章—在Nest里集成TypeORM-3.png)
+![](./image/第50章-3.png)
 
 生成的 service 里的 crud 并没有真正实现：
 
-![](./image/第50章—在Nest里集成TypeORM-4.png)
+![](./image/第50章-4.png)
 
 我们引入 typeorm 来实现下：
 
@@ -111,7 +111,7 @@ typeorm、mysql2 的包我们很熟悉了，而 @nestjs/typeorm 就是把 typeor
 
 它提供了一个模块，我们在入口引入下：
 
-![](./image/第50章—在Nest里集成TypeORM-5.png)
+![](./image/第50章-5.png)
 
 连接配置和前几节一样，引入 User 的 Entity。
 
@@ -178,15 +178,15 @@ export class User {
 
 看到建表 sql 了没：
 
-![](./image/第50章—在Nest里集成TypeORM-6.png)
+![](./image/第50章-6.png)
 
 这部分和我们单独跑 typeorm 没啥区别：
 
-![](./image/第50章—在Nest里集成TypeORM-7.png)
+![](./image/第50章-7.png)
 
 然后是增删改查，我们可以注入 EntityManager：
 
-![](./image/第50章—在Nest里集成TypeORM-8.png)
+![](./image/第50章-8.png)
 
 用它来做增删改查：
 
@@ -237,65 +237,65 @@ export class UserService {
 
 发个 post 请求，带上要添加的数据：
 
-![](./image/第50章—在Nest里集成TypeORM-9.png)
+![](./image/第50章-9.png)
 
 服务端打印了 insert 的 sql 语句：
 
-![](./image/第50章—在Nest里集成TypeORM-10.png)
+![](./image/第50章-10.png)
 
 表里也可以看到这条数据了：
 
-![](./image/第50章—在Nest里集成TypeORM-11.png)
+![](./image/第50章-11.png)
 
 对应的是这个 handler：
 
-![](./image/第50章—在Nest里集成TypeORM-12.png)
+![](./image/第50章-12.png)
 
 然后再试下查询：
 
-![](./image/第50章—在Nest里集成TypeORM-13.png)
+![](./image/第50章-13.png)
 
-![](./image/第50章—在Nest里集成TypeORM-14.png)
+![](./image/第50章-14.png)
 
-![](./image/第50章—在Nest里集成TypeORM-15.png)
+![](./image/第50章-15.png)
 
 单个查询和全部查询都是可以的。
 
 再就是修改：
 
-![](./image/第50章—在Nest里集成TypeORM-16.png)
+![](./image/第50章-16.png)
 
 在 controller 里是接受 patch 的请求。
 
 
 在 postman 里发一下：
-![](./image/第50章—在Nest里集成TypeORM-17.png)
+![](./image/第50章-17.png)
 
 
 
 可以看到生成了 update 的 sql 语句：
 
-![](./image/第50章—在Nest里集成TypeORM-18.png)
+![](./image/第50章-18.png)
 
 数据库中的数据也被修改了：
 
-![](./image/第50章—在Nest里集成TypeORM-19.png)
+![](./image/第50章-19.png)
 
 再试试删除：
 
-![](./image/第50章—在Nest里集成TypeORM-20.png)
+![](./image/第50章-20.png)
 
 在 postman 里发送 delete 的请求：
 
-![](./image/第50章—在Nest里集成TypeORM-21.png)
+![](./image/第50章-21.png)
 
 可以看到生成了 delete 的 sql 语句：
 
-![](./image/第50章—在Nest里集成TypeORM-22.png)
+![](./image/第50章-22.png)
 
 数据库里的数据确实被删除了：
 
-![](./image/第50章—在Nest里集成TypeORM-23.png)
+![](./image/第50章-23.png)
 
 至此，我们就正式打通了从请求到数据库的整个流程！
 
@@ -305,29 +305,29 @@ export class UserService {
 
 直接用 EntityManager 的缺点是每个 api 都要带上对应的 Entity：
 
-![](./image/第50章—在Nest里集成TypeORM-24.png)
+![](./image/第50章-24.png)
 
 简便方法就是先 getRepository(User) 拿到 user 对应的 Repository 对象，再调用这些方法。
 
 比如这样：
 
-![](./image/第50章—在Nest里集成TypeORM-25.png)
+![](./image/第50章-25.png)
 
 那还不如直接注入 User 对应的 Respository 就好了。
 
 Nest 对这个做了封装，在 user 模块引入 TypeOrmModule.forFeature 对应的动态模块，传入 User 的 Entity：
 
-![](./image/第50章—在Nest里集成TypeORM-26.png)
+![](./image/第50章-26.png)
 
 就可以在模块里注入 Repository 了：
 
-![](./image/第50章—在Nest里集成TypeORM-27.png)
+![](./image/第50章-27.png)
 
 它有的方法和 EntityManager 一样，只是只能用来操作当前 Entity。
 
 此外，你还可以注入 DataSource：
 
-![](./image/第50章—在Nest里集成TypeORM-28.png)
+![](./image/第50章-28.png)
 
 不过这个不常用。
 
@@ -341,11 +341,11 @@ Nest 对这个做了封装，在 user 模块引入 TypeOrmModule.forFeature 对�
 
 首先，我们通过引入 TypeOrmModule.forRoot 的动态模块的时候：
 
-![](./image/第50章—在Nest里集成TypeORM-29.png)
+![](./image/第50章-29.png)
 
 它会引入 TypeOrmCoreModule.forRoot 的动态模块：
 
-![](./image/第50章—在Nest里集成TypeORM-30.png)
+![](./image/第50章-30.png)
 
 这里面根据 options 创建 DataSource 和 EntityManager 放到模块的 provider 里，并放到了 exports 里。
 
@@ -355,17 +355,17 @@ Nest 对这个做了封装，在 user 模块引入 TypeOrmModule.forFeature 对�
 
 上面那两个方法里，创建 DataSource 的过程就是传入参数，调用 intialize 方法：
 
-![](./image/第50章—在Nest里集成TypeORM-31.png)
+![](./image/第50章-31.png)
 
 而创建 entityManager，则是注入 dataSource 取 manager 属性就好了：
 
-![](./image/第50章—在Nest里集成TypeORM-32.png)
+![](./image/第50章-32.png)
 
 然后 TypeOrmModule.forFeature 则是通过全局的 dataSource.getRepository 拿到参数对应的 Repository 对象，作为模块内的 provider。
 
-![](./image/第50章—在Nest里集成TypeORM-33.png)
+![](./image/第50章-33.png)
 
-![](./image/第50章—在Nest里集成TypeORM-34.png)
+![](./image/第50章-34.png)
 
 这样引入这个动态模块的模块内就可以注入这些 Entity 对应的 Repository 了。
 

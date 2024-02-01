@@ -2,11 +2,11 @@
 
 登录认证通过之后，把用户信息放到 jwt 里返回：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-1.png)
+![](./image/第59章-1.png)
 
 访问接口的时候带上 jwt，在 Guard 里取出来判断是否有效，有效的话才能继续访问：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-2.png)
+![](./image/第59章-2.png)
 
 但是这样有个问题：
 
@@ -26,15 +26,15 @@ access_token 就是用来认证用户身份的，之前我们返回的就是这�
 
 登录成功之后，返回两个 token：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-3.png)
+![](./image/第59章-3.png)
 
 access_token 用来做登录鉴权：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-4.png)
+![](./image/第59章-4.png)
 
 而 refresh_token 用来刷新，拿到新 token：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-5.png)
+![](./image/第59章-5.png)
 
 access_token 设置 30 分钟过期，而 refresh_token 设置 7 天过期。
 
@@ -60,14 +60,14 @@ access_token 设置 30 分钟过期，而 refresh_token 设置 7 天过期。
 nest new access_token_and_refresh_token -p npm
 ```
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-6.png)
+![](./image/第59章-6.png)
 
 添加 user 模块：
 
 ```
 nest g resource user --no-spec
 ```
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-7.png)
+![](./image/第59章-7.png)
 
 安装 typeorm 的依赖：
 
@@ -113,9 +113,9 @@ export class AppModule {}
 CREATE DATABASE refresh_token_test DEFAULT CHARACTER SET utf8mb4;
 ```
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-8.png)
+![](./image/第59章-8.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-9.png)
+![](./image/第59章-9.png)
 
 然后新建 User 的 entity：
 
@@ -140,7 +140,7 @@ export class User {
 ```
 在 entities 里添加 User：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-10.png)
+![](./image/第59章-10.png)
 
 然后把服务跑起来：
 
@@ -149,11 +149,11 @@ npm run start:dev
 ```
 会生成建表 sql：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-11.png)
+![](./image/第59章-11.png)
 
 在 mysql workbench 里可以看到 user 表：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-12.png)
+![](./image/第59章-12.png)
 
 然后在 UserController 添加 login 的 post 接口：
 
@@ -174,9 +174,9 @@ export class LoginUserDto {
 ```
 测试下：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-13.png)
+![](./image/第59章-13.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-14.png)
+![](./image/第59章-14.png)
 
 然后实现下登录逻辑。
 
@@ -269,7 +269,7 @@ access_token 里存放 userId、username，refresh_token 里只存放 userId 就
 
 访问下试试：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-15.png)
+![](./image/第59章-15.png)
 
 接下来再实现 LoginGuard 来做登录鉴权：
 
@@ -277,7 +277,7 @@ access_token 里存放 userId、username，refresh_token 里只存放 userId 就
 nest g guard login --flat --no-spec
 ```
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-16.png)
+![](./image/第59章-16.png)
 
 登录鉴权逻辑和之前一样：
 
@@ -345,23 +345,23 @@ INSERT INTO `refresh_token_test`.`user` (`id`, `username`, `password`)
   VALUES ('1', 'guang', '123456');
 ```
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-17.png)
+![](./image/第59章-17.png)
 
 我们测试一下：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-18.png)
+![](./image/第59章-18.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-19.png)
+![](./image/第59章-19.png)
 
 鉴权逻辑生效了。
 
 然后我们登录下：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-20.png)
+![](./image/第59章-20.png)
 
 把 access_token 复制下来，加到 header 里再访问：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-21.png)
+![](./image/第59章-21.png)
 
 这样就能访问了。
 
@@ -418,11 +418,11 @@ async findUserById(userId: number) {
 
 带上有效的 refresh_token，能够拿到新的 access_token 和 refresh_token：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-22.png)
+![](./image/第59章-22.png)
 
 refresh_token 失效或者错误时，会返回 401 的响应码，提示需要重新登录：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-23.png)
+![](./image/第59章-23.png)
 
 这样，我们就实现了双 token 的登录鉴权机制。
 
@@ -436,7 +436,7 @@ refresh_token 失效或者错误时，会返回 401 的响应码，提示需要�
 npx create-react-app --template=typescript refresh_token_test
 ```
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-24.png)
+![](./image/第59章-24.png)
 
 安装 axios：
 
@@ -478,7 +478,7 @@ export default App;
 ```
 在服务端开启跨域支持：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-25.png)
+![](./image/第59章-25.png)
 
 把开发服务跑起来：
 
@@ -486,21 +486,21 @@ export default App;
 npm run start
 ```
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-26.png)
+![](./image/第59章-26.png)
 
 可以看到 /aaa 访问成功，返回了数据，/bbb 返回了 401
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-27.png)
+![](./image/第59章-27.png)
 
 这里请求两次是因为 index.tsx 里面有个 React.StrictMode，把它去掉就好了：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-28.png)
+![](./image/第59章-28.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-29.png)
+![](./image/第59章-29.png)
 
 我们先登录一下，拿到 access_token，然后在请求的时候带上：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-30.png)
+![](./image/第59章-30.png)
 
 ```javascript
 import axios from 'axios';
@@ -550,15 +550,15 @@ export default App;
 
 刷新下，可以看到现在请求了 3 个接口，bbb 也正确拿到了数据：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-31.png)
+![](./image/第59章-31.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-32.png)
+![](./image/第59章-32.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-33.png)
+![](./image/第59章-33.png)
 
 如果很多接口都要添加这个 header，可以把它放在 interceptors 里做：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-34.png)
+![](./image/第59章-34.png)
 
 ```javascript
 axios.interceptors.request.use(function (config) {
@@ -572,7 +572,7 @@ axios.interceptors.request.use(function (config) {
 ```
 测试下：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-35.png)
+![](./image/第59章-35.png)
 
 效果是一样的。
 
@@ -623,7 +623,7 @@ axios.interceptors.response.use(
 
 判断下如果没有 access_token 才登录：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-36.png)
+![](./image/第59章-36.png)
 ```javascript
 if(!localStorage.getItem('access_token')) {
   await login();
@@ -631,11 +631,11 @@ if(!localStorage.getItem('access_token')) {
 ```
 然后手动改下 access_token 的值，让它失效：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-37.png)
+![](./image/第59章-37.png)
 
 刷新下页面：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-38.png)
+![](./image/第59章-38.png)
 
 访问了 aaa、bbb 接口，bbb 接口 401 了，于是 refresh token，之后再次访问 bbb。
 
@@ -645,7 +645,7 @@ if(!localStorage.getItem('access_token')) {
 
 我们加个并发请求试一下：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-39.image#?w=1110&h=512&e=png&b=1f1f1f.png)
+![](./image/第59章-39.png)
 
 ```javascript
 await [
@@ -656,19 +656,19 @@ await [
 ```
 手动让 access_token 失效，然后刷新页面：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-40.image#?w=1526&h=508&e=png&b=fefefe.png)
+![](./image/第59章-40.png)
 
 确实刷新了多次，并发的 3 次，还有后面又访问了一次：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-41.image#?w=716&h=558&e=png&b=fafafa.png)
+![](./image/第59章-41.png)
 
 其实这样不处理也行，多刷几次也不影响功能。
 
 但做的完美点还是要处理下：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-42.image#?w=862&h=834&e=png&b=1f1f1f.png)
+![](./image/第59章-42.png)
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-43.image#?w=1162&h=826&e=png&b=1f1f1f.png)
+![](./image/第59章-43.png)
 
 加一个 refreshing 的标记，如果在刷新，那就返回一个 promise，并且把它的 resolve 方法还有 config 加到队列里。
 
@@ -727,15 +727,15 @@ axios.interceptors.response.use(
 
 手动让 access_token 失效然后刷新：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-44.image#?w=1376&h=424&e=png&b=fefefe.png)
+![](./image/第59章-44.png)
 
 现在就只刷新一次 token 了：
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-45.image#?w=788&h=422&e=png&b=fafafa.png)
+![](./image/第59章-45.png)
 
 最后，为什么说双 token 会更安全呢？
 
-![](./image/第59章—基于access_token和refresh_token实现无感刷新登录状态-46.png)
+![](./image/第59章-46.png)
 
 案例代码在小册仓库：
 

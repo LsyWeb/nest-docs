@@ -41,7 +41,7 @@ java 的 Spring 就实现了 IoC，Nest 也同样实现了。
 
 之前我们手动创建和组装对象不是很麻烦么，我能不能在 class 上声明依赖了啥，然后让工具去分析我声明的依赖关系，根据先后顺序自动把对象创建好了并组装起来呢？
 
-![](./image/第05章—IoC解决了什么痛点问题-1.image#?w=932&h=550&s=103716&e=png&b=1f1f1f.png)
+![](./image/第05章-1.png)
 
 比如这样声明 AppController 依赖了这两个 Service，然后让工具分析依赖自动帮我创建好这三个对象并设置依赖关系。
 
@@ -61,7 +61,7 @@ java 的 Spring 就实现了 IoC，Nest 也同样实现了。
 
 在 class 上声明依赖的方式，大家都选择了装饰器的方式（在 java 里这种语法叫做注解）。
 
-![](./image/第05章—IoC解决了什么痛点问题-2.image#?w=898&h=540&s=101458&e=png&b=1f1f1f.png)
+![](./image/第05章-2.png)
 
 比如上面就是声明这个 class 要放到 IOC 容器里，然后它的依赖是啥。
 
@@ -75,27 +75,27 @@ npx nest new nest-ioc
 
 执行上面的命令，它会创建一个 nest 项目：
 
-![](./image/第05章—IoC解决了什么痛点问题-3.png)
+![](./image/第05章-3.png)
 
 选择一个 npm 包管理工具，然后 nest cli 会自动创建项目结构并安装依赖：
 
-![](./image/第05章—IoC解决了什么痛点问题-4.png)
+![](./image/第05章-4.png)
 
 然后进入这个目录，执行 npm run start，把服务跑起来：
 
-![](./image/第05章—IoC解决了什么痛点问题-5.png)
+![](./image/第05章-5.png)
 
 浏览器访问 http://localhost:3000 就可以看到 nest 服务返回的 hello world：
 
-![](./image/第05章—IoC解决了什么痛点问题-6.png)
+![](./image/第05章-6.png)
 
 我们看看代码里它是怎么创建对象的：
 
-![](./image/第05章—IoC解决了什么痛点问题-7.png)
+![](./image/第05章-7.png)
 
 它有一个 AppService 声明了 @Injectable，代表这个 class 可注入，那么 nest 就会把它的对象放到 IOC 容器里。
 
-![](./image/第05章—IoC解决了什么痛点问题-8.png)
+![](./image/第05章-8.png)
 
 AppController 声明了 @Controller，代表这个 class 可以被注入，nest 也会把它放到 IoC 容器里。
 
@@ -103,7 +103,7 @@ AppController 的构造器参数依赖了 AppService。
 
 或者这样通过属性的方式声明依赖：
 
-![](./image/第05章—IoC解决了什么痛点问题-9.image#?w=586&h=392&s=58460&e=png&b=1f1f1f.png)
+![](./image/第05章-9.png)
 
 前者是构造器注入，后者是属性注入，两种都可以。
 
@@ -115,7 +115,7 @@ AppController 的构造器参数依赖了 AppService。
 
 然后在 AppModule 里引入：
 
-![](./image/第05章—IoC解决了什么痛点问题-10.png)
+![](./image/第05章-10.png)
 
 通过 @Module 声明模块，其中 controllers 是控制器，只能被注入。
 
@@ -123,15 +123,15 @@ providers 里可以被注入，也可以注入别的对象，比如这里的 App
 
 然后在入口模块里跑起来：
 
-![](./image/第05章—IoC解决了什么痛点问题-11.png)
+![](./image/第05章-11.png)
 
 那么 nest 就会从 AppModule 开始解析 class 上通过装饰器声明的依赖信息，自动创建和组装对象。
 
-![](./image/第05章—IoC解决了什么痛点问题-12.png)
+![](./image/第05章-12.png)
 
 所以 AppController 只是声明了对 AppService 的依赖，就可以调用它的方法了：
 
-![](./image/第05章—IoC解决了什么痛点问题-13.png)
+![](./image/第05章-13.png)
 
 nest 在背后自动做了对象创建和依赖注入的工作。
 
@@ -141,17 +141,17 @@ nest 还加了模块机制，可以把不同业务的 controller、service 等�
 nest g module other
 ```
 
-![](./image/第05章—IoC解决了什么痛点问题-14.image#?w=644&h=106&s=26693&e=png&b=191919.png)
+![](./image/第05章-14.png)
 
 会生成如下代码：
 
-![](./image/第05章—IoC解决了什么痛点问题-15.image#?w=1204&h=326&s=66266&e=png&b=1d1d1d.png)
+![](./image/第05章-15.png)
 
 用 nest cli 的 generate 命令生成一个模块。
 
 会在 AppModule 里自动 imports 这个模块：
 
-![](./image/第05章—IoC解决了什么痛点问题-16.image#?w=928&h=452&s=97333&e=png&b=1f1f1f.png)
+![](./image/第05章-16.png)
 
 当 import 别的模块后，那个模块 exports 的 provider 就可以在当前模块注入了。
 
@@ -160,27 +160,27 @@ nest g module other
 ```
 nest g service other
 ```
-![](./image/第05章—IoC解决了什么痛点问题-17.image#?w=752&h=138&s=34546&e=png&b=191919.png)
+![](./image/第05章-17.png)
 
 会生成 Service 的代码：
 
-![](./image/第05章—IoC解决了什么痛点问题-18.image#?w=802&h=254&s=39504&e=png&b=1f1f1f.png)
+![](./image/第05章-18.png)
 
 并自动添加到 OtherModule 的 providers 中：
 
-![](./image/第05章—IoC解决了什么痛点问题-19.image#?w=836&h=320&s=57692&e=png&b=1f1f1f.png)
+![](./image/第05章-19.png)
 
 我们改下 OtherService，添加一个方法：
 
-![](./image/第05章—IoC解决了什么痛点问题-20.image#?w=774&h=418&s=50522&e=png&b=1f1f1f.png)
+![](./image/第05章-20.png)
 
 然后在 OtherModule 里 exports：
 
-![](./image/第05章—IoC解决了什么痛点问题-21.image#?w=814&h=334&s=64784&e=png&b=1f1f1f.png)
+![](./image/第05章-21.png)
 
 那当 AppModule 引用了 OtherModule 之后，就可以注入它 exports 的 OtherService 了。
 
-![](./image/第05章—IoC解决了什么痛点问题-22.image#?w=1336&h=902&s=76285&e=png&b=fefaf9.png)
+![](./image/第05章-22.png)
 
 我们在 AppService 里注入下：
 
@@ -205,12 +205,12 @@ export class AppService {
 ```
 npm run start:dev
 ```
-![](./image/第05章—IoC解决了什么痛点问题-23.image#?w=1450&h=410&s=127228&e=png&b=181818.png)
+![](./image/第05章-23.png)
 
 
 浏览器访问下，可以看到 AppModule 的 AppService 调用 OtherModule 的 OtherService 成功了：
 
-![](./image/第05章—IoC解决了什么痛点问题-24.image#?w=560&h=222&s=18540&e=png&b=ffffff.png)
+![](./image/第05章-24.png)
 
 这就是 Nest 的 IoC 机制。
 
