@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 马上开始
-      link: /第01章—开篇词
+      link: /1. 开篇词
 
 features:
   - title: 🚀适宜人群
