@@ -31,7 +31,7 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
         const imgMatch = imgMatches[index];
         const imgSrc = imgMatch.match(/!\[.*?\]\((.*?)\)/)[1];
         const imgName =
-          `${mdFileName.replace(/第(\d+)章.*/, "第$1章")}-${index + 1}` +
+          `${mdFileName.replace(/(\d+).*/, "$1")}-${index + 1}` +
           ".png";
         const imgPath = path.join(downloadDir, imgName);
 
@@ -67,7 +67,7 @@ fs.readdir(rootFolder, (err, files) => {
   // 筛选出所有的MD文件
   const mdFiles = files.filter((file) => path.extname(file) === ".md");
   const customSort = (a, b) => {
-    const getChapterNumber = (str) => parseInt(str.match(/第(\d+)章/)[1], 10);
+    const getChapterNumber = (str) => parseInt(str.match(/(\d+)/)[1], 10);
 
     const chapterA = getChapterNumber(a);
     const chapterB = getChapterNumber(b);

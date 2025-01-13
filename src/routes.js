@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const customSort = (a, b) => {
-  const getChapterNumber = (str) => parseInt(str.match(/第(\d+)章/)[1], 10);
+  const getChapterNumber = (str) => parseInt(str.match(/(\d+)/)[1], 10);
 
   const chapterA = getChapterNumber(a);
   const chapterB = getChapterNumber(b);

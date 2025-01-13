@@ -8,7 +8,7 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
     // 读取MD文件内容
     let mdContent = fs.readFileSync(mdFilePath, "utf8");
   
-    mdContent = mdContent.replace(/(http:\/\/static.liushuaiyang.com)/g, '//liushuaiyang.oss-cn-shanghai.aliyuncs.com');
+    mdContent = mdContent.replace(/!\[\]\(\.\/(.*?)\)/g, '![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/$1)');
 
     fs.writeFileSync(mdFilePath, mdContent, "utf8");
   } catch (error) {
@@ -26,7 +26,7 @@ fs.readdir(rootFolder, (err, files) => {
   // 筛选出所有的MD文件
   const mdFiles = files.filter((file) => path.extname(file) === ".md");
   const customSort = (a, b) => {
-    const getChapterNumber = (str) => parseInt(str.match(/第(\d+)章/)[1], 10);
+    const getChapterNumber = (str) => parseInt(str.match(/(\d+)/)[1], 10);
 
     const chapterA = getChapterNumber(a);
     const chapterB = getChapterNumber(b);
