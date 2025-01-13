@@ -10,11 +10,40 @@ export default defineConfig({
       lazyLoading: true
     }
   },
+  locales: {
+    root: {
+      label: "中文",
+      lang: "zh-CN",
+    },
+    en: {
+      label: "English",
+      lang: "en",
+      link: "https://vitepress.dev/",
+    },
+  },
   // description: "最流行的 Node 企业级框架",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
       provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: "搜索"
+          },
+          modal: {
+            displayDetails: "显示详情",
+            resetButtonTitle: "重置",
+            backButtonTitle: "返回",
+            noResultsText: "未找到结果",
+            footer: {
+              selectText: "选择",
+              navigateText: "导航",
+              closeText: "关闭",
+            }
+          }
+        }
+      }
     },
 
     nav: [
@@ -30,6 +59,28 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/LsyWeb' }
-    ]
+    ],
+    
+    // 文章翻页
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇'
+    },
+
+    
+
+    // 移动端 - 外观
+    darkModeSwitchLabel: '外观',
+
+    // 移动端 - 返回顶部
+    returnToTopLabel: '返回顶部',
+
+    // 移动端 - menu
+    sidebarMenuLabel: '菜单',
+
+    // 侧边导航（右侧）
+    outline:{
+      label: '页面导航'
+    }
   }
 })
