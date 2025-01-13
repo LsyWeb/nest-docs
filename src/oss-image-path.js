@@ -8,7 +8,7 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
     // 读取MD文件内容
     let mdContent = fs.readFileSync(mdFilePath, "utf8");
   
-    mdContent = mdContent.replace(/!\[\]\(\.\/(.*?)\)/g, '![](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/$1)');
+    mdContent = mdContent.replace(/!\[(.*?)\]\(\.\/(.*?)\)/g, '![$1](//liushuaiyang.oss-cn-shanghai.aliyuncs.com/nest-docs/$2)');
 
     fs.writeFileSync(mdFilePath, mdContent, "utf8");
   } catch (error) {
