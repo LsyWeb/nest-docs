@@ -18,7 +18,7 @@ export default defineConfig({
     },
 
     nav: [
-      { text: '开始学习', link: '/第01章—开篇词' },
+      { text: '开始学习', link: '/1. 开篇词' },
     ],
 
     sidebar: [
