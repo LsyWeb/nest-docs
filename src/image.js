@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const axios = require("axios");
+// const axios = require("axios");
 
 const rootFolder = path.join(__dirname, "../docs"); // 替换为你的根文件夹路径
 const downloadDir = path.join(__dirname, "../docs/image"); // 替换为你想要保存图片的目录路径
