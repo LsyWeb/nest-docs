@@ -15,11 +15,6 @@ export default defineConfig({
       label: "中文",
       lang: "zh-CN",
     },
-    en: {
-      label: "English",
-      lang: "en",
-      link: "https://vitepress.dev/",
-    },
   },
   // description: "最流行的 Node 企业级框架",
   themeConfig: {
