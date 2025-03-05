@@ -68,8 +68,8 @@
     "link": "/17. Nest 和 Express 的关系，如何切到 fastify"
   },
   {
-    "text": "18. Nest 的 Middleware ",
-    "link": "/18. Nest 的 Middleware "
+    "text": "18. Nest 的 Middleware",
+    "link": "/18. Nest 的 Middleware"
   },
   {
     "text": "19. RxJS 和 Interceptor",
@@ -580,8 +580,8 @@
     "link": "/145. 基于 gRPC 实现跨语言的微服务通信"
   },
   {
-    "text": "146. 快速入门 ORM 框架 Prisma ",
-    "link": "/146. 快速入门 ORM 框架 Prisma "
+    "text": "146. 快速入门 ORM 框架 Prisma",
+    "link": "/146. 快速入门 ORM 框架 Prisma"
   },
   {
     "text": "147. Prisma 的全部命令",
