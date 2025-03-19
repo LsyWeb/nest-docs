@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-// const axios = require("axios");
+const axios = require("axios");
 
 const rootFolder = path.join(__dirname, "../docs"); // 替换为你的根文件夹路径
 const downloadDir = path.join(__dirname, "../docs/image"); // 替换为你想要保存图片的目录路径
@@ -12,7 +12,7 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
     let mdContent = fs.readFileSync(mdFilePath, "utf8");
 
     // 正则表达式用于匹配MD文件中的http/https图片链接
-    const imgRegex = /!\[.*?\]\((https?:\/\/[^\s\)]+)\)/g;
+    const imgRegex = /!\[.*?\]\((https?:\/\/[^\s\)]+)\)|!\[.*?\]\(<(https?:\/\/[^\s\)]+)>\)/g;
 
     // 获取所有匹配的图片链接
     const imgMatches = mdContent.match(imgRegex);
@@ -29,7 +29,8 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
       // 遍历图片链接并下载
       for (let index = 0; index < imgMatches.length; index++) {
         const imgMatch = imgMatches[index];
-        const imgSrc = imgMatch.match(/!\[.*?\]\((.*?)\)/)[1];
+        const imgSrcMatch = imgMatch.match(/!\[.*?\]\((https?:\/\/[^\s\)]+)\)|!\[.*?\]\(<(https?:\/\/[^\s\)]+)>\)/);
+        const imgSrc = imgSrcMatch[1] || imgSrcMatch[2]; // 获取链接，可能在第1组或第2组
         const imgName =
           `${mdFileName.replace(/(\d+).*/, "$1")}-${index + 1}` +
           ".png";
@@ -43,7 +44,9 @@ async function downloadAndReplaceImagesInMdFile(mdFilePath) {
         console.log(`File: ${mdFileName} Downloaded: ${imgPath}`);
 
         // 更新MD文件内容，将图片链接替换为相对路径
-        mdContent = mdContent.replace(imgSrc, "./image/" + imgName);
+        const escapedImgSrc = imgSrc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // 转义特殊字符
+        const imgRegexForReplace = new RegExp(`<${escapedImgSrc}>|${escapedImgSrc}`, "g");
+        mdContent = mdContent.replace(imgRegexForReplace, `./image/${imgName}`);
       }
 
       // 将更新后的MD文件内容保存回文件
